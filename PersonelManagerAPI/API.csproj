@@ -6,7 +6,9 @@
 
   <ItemGroup>
     <Folder Include="Business\Controller\" />
+    <Folder Include="Business\Logic\" />
     <Folder Include="Core\Logic\" />
+    <Folder Include="HR\Logic\" />
     <Folder Include="Payroll\Contoller\" />
     <Folder Include="Payroll\Logic\" />
   </ItemGroup>

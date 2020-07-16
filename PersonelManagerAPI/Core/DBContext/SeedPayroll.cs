@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace API.HR.Logic {
-    public class SeedHR {
+namespace API.Core.DBContext {
+    public class SeedPayroll {
     }
 }

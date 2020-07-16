@@ -10,18 +10,18 @@ namespace API.Core.DBContext {
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
-            modelBuilder.Entity<Credential>().HasData(
-                    new Credential() {
-                        Id = 1,
-                        CreatedBy = "Administrator",
-                        CreatedOn = DateTime.Now,
-                        Email = "Kowalski@wp.pl",
-                        FirstName = "Jan",
-                        LastName = "Kowalski",
-                        Hash = "WzX2#",
-                        IsActive = true
-                    }
-                );
+            modelBuilder.Entity<Credential>().HasData(SeedBusiness.GetDummyCredentials());
+            modelBuilder.Entity<ConfigurationPage>().HasData(SeedBusiness.GetConfigurationPages());
+
+            modelBuilder.Entity<Employee>().HasData(SeedHR.GetDummyEmployees());
+            modelBuilder.Entity<Location>().HasData(SeedHR.GetDummyLocation());
+            modelBuilder.Entity<Foreman>().HasData(SeedHR.GetDummyForemen());
+            modelBuilder.Entity<EmployeeAddress>().HasData(SeedHR.GetDummyEmployeeAddresses());
+            modelBuilder.Entity<EmployeeHistory>().HasData(SeedHR.GetDummyEmployeeHistories());
+            modelBuilder.Entity<MedicalCheckup>().HasData(SeedHR.GetDummyMedicalCheckups());
+            modelBuilder.Entity<SafetyTraining>().HasData(SeedHR.GetDummySafetyTrainings());
+
+
 
 
             //base.OnModelCreating(modelBuilder);

@@ -6,6 +6,10 @@ namespace API.HR.Models {
         public string LastName { get; set; }
         public string Profession { get; set; }
 
+        [ForeignKey("Employee")]
+        public int EmployeeId { get; set; }
+        public virtual Employee Employee { get; set; }
+
         [ForeignKey("Location")]
         public int? LocationId { get; set; }
         public virtual Location Location { get; set; }

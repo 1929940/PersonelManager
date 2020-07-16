@@ -3,8 +3,8 @@ using System;
 
 namespace API.Business.Models {
     public class ConfigurationPage : BaseEntity {
-        public DateTime BillingMonthStart{ get; set; }
-        public DateTime BillingMonthEnd { get; set; }
+        public int BillingMonthStart{ get; set; }
+        public int BillingMonthEnd { get; set; }
         public double PercentOfAdvancesAllowed { get; set; }
         public int MaximumLeaveTimeInDays { get; set; }
         public int WarningBeforeLeaveReachesLimit { get; set; }

@@ -26,11 +26,11 @@ namespace API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("BillingMonthEnd")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("BillingMonthEnd")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("BillingMonthStart")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("BillingMonthStart")
+                        .HasColumnType("int");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -68,6 +68,25 @@ namespace API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ConfigurationPage");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BillingMonthEnd = 25,
+                            BillingMonthStart = 26,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2020, 7, 16, 20, 39, 54, 90, DateTimeKind.Local).AddTicks(9052),
+                            MaximumLeaveTimeInDays = 90,
+                            PercentOfAdvancesAllowed = 75.0,
+                            WarningBeforeCertificateExpires = 30,
+                            WarningBeforeLeaveReachesLimit = 30,
+                            WarningBeforeMedicalCheckupExpires = 30,
+                            WarningBeforePassportExpires = 30,
+                            WarningBeforePermitExpires = 30,
+                            WarningBeforeSafetyTrainingExpires = 30,
+                            WarningBeforeVisaExpires = 30
+                        });
                 });
 
             modelBuilder.Entity("API.Business.Models.Credential", b =>
@@ -110,12 +129,36 @@ namespace API.Migrations
                         {
                             Id = 1,
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2020, 7, 16, 17, 44, 54, 346, DateTimeKind.Local).AddTicks(9868),
-                            Email = "Kowalski@wp.pl",
+                            CreatedOn = new DateTime(2020, 7, 16, 20, 39, 54, 86, DateTimeKind.Local).AddTicks(8151),
+                            Email = "Jan.Kowalski@PersonelManager.pl",
                             FirstName = "Jan",
-                            Hash = "WzX2#",
+                            Hash = "WWW",
                             IsActive = true,
                             LastName = "Kowalski",
+                            RequestedPasswordReset = false
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2020, 7, 16, 20, 39, 54, 89, DateTimeKind.Local).AddTicks(5596),
+                            Email = "Jan.Nowak@PersonelManager.pl",
+                            FirstName = "Jan",
+                            Hash = "YYY",
+                            IsActive = true,
+                            LastName = "Nowak",
+                            RequestedPasswordReset = true
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2020, 7, 16, 20, 39, 54, 89, DateTimeKind.Local).AddTicks(5658),
+                            Email = "Maria.Niziolek@PersonelManager.pl",
+                            FirstName = "Maria",
+                            Hash = "ZZZ",
+                            IsActive = false,
+                            LastName = "Niziolek",
                             RequestedPasswordReset = false
                         });
                 });
@@ -195,6 +238,60 @@ namespace API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Employee");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2019, 9, 20, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateOfBirth = new DateTime(1980, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FatherName = "Mariusz",
+                            FirstName = "Maciej",
+                            IsArchived = false,
+                            MotherName = "Mariola",
+                            Nationality = "Polska",
+                            Pesel = "80012100000"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2019, 11, 9, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateOfBirth = new DateTime(1997, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FatherName = "Vitalii",
+                            FirstName = "Dmyto",
+                            IsArchived = false,
+                            MotherName = "Svetlana",
+                            Nationality = "Ukraina",
+                            Pesel = ""
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2019, 11, 9, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateOfBirth = new DateTime(1993, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FatherName = "Oleksii",
+                            FirstName = "Oleksandr",
+                            IsArchived = false,
+                            MotherName = "Oleksandra",
+                            Nationality = "Ukraina",
+                            Pesel = ""
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2020, 2, 17, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateOfBirth = new DateTime(1997, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FatherName = "Maxim",
+                            FirstName = "Yevhenii",
+                            IsArchived = false,
+                            MotherName = "Zlata",
+                            Nationality = "Ukraina",
+                            Pesel = "97022012345"
+                        });
                 });
 
             modelBuilder.Entity("API.HR.Models.EmployeeAddress", b =>
@@ -216,12 +313,6 @@ namespace API.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Number")
                         .HasColumnType("nvarchar(max)");
 
@@ -236,9 +327,81 @@ namespace API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmployeeId");
-
                     b.ToTable("EmployeeAddress");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            City = "Kosokowo",
+                            Country = "Polska",
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2019, 9, 20, 20, 39, 54, 93, DateTimeKind.Local).AddTicks(7945),
+                            Number = "26C",
+                            Region = "Pomorze",
+                            Street = "Rzemieślnicza",
+                            Zip = "81-198"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            City = "Rumia",
+                            Country = "Polska",
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2019, 11, 9, 20, 39, 54, 93, DateTimeKind.Local).AddTicks(7996),
+                            Number = "20A",
+                            Region = "Pomorze",
+                            Street = "Świętopełka",
+                            Zip = "84-230"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            City = "Gdynia",
+                            Country = "Polska",
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2019, 11, 9, 20, 39, 54, 93, DateTimeKind.Local).AddTicks(8001),
+                            Number = "6",
+                            Region = "Pomorze",
+                            Street = "Spokojna",
+                            Zip = "81-549"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            City = "Gdańsk",
+                            Country = "Polska",
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2019, 12, 29, 20, 39, 54, 93, DateTimeKind.Local).AddTicks(8004),
+                            Number = "12",
+                            Region = "Pomorze",
+                            Street = "Ks. Mariana Góreckiego",
+                            Zip = "80-553"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            City = "Pogórze",
+                            Country = "Polska",
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2020, 2, 17, 20, 39, 54, 93, DateTimeKind.Local).AddTicks(8007),
+                            Number = "13",
+                            Region = "Pomorze",
+                            Street = "Wapienna",
+                            Zip = "81-198"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            City = "Gdańsk",
+                            Country = "Polska",
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2020, 4, 7, 20, 39, 54, 93, DateTimeKind.Local).AddTicks(8011),
+                            Number = "3-1",
+                            Region = "Pomorze",
+                            Street = "Nadmorski Dwór",
+                            Zip = "80-506"
+                        });
                 });
 
             modelBuilder.Entity("API.HR.Models.EmployeeHistory", b =>
@@ -257,7 +420,7 @@ namespace API.Migrations
                     b.Property<int?>("EmployeeAddressId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("EmployeeId")
+                    b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
                     b.Property<int?>("ForemanId")
@@ -283,6 +446,80 @@ namespace API.Migrations
                     b.HasIndex("LocationId");
 
                     b.ToTable("EmployeeHistory");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2019, 9, 20, 20, 39, 54, 94, DateTimeKind.Local).AddTicks(3272),
+                            EmployeeAddressId = 1,
+                            EmployeeId = 1,
+                            ForemanId = 1,
+                            LastName = "Maciejewski",
+                            LocationId = 1,
+                            Profession = "Monter Okrętowy"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2019, 11, 9, 20, 39, 54, 94, DateTimeKind.Local).AddTicks(5985),
+                            EmployeeAddressId = 2,
+                            EmployeeId = 2,
+                            ForemanId = 2,
+                            LastName = "Kravchuk",
+                            LocationId = 1,
+                            Profession = "Szlifierz Okrętowy"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2019, 11, 9, 20, 39, 54, 94, DateTimeKind.Local).AddTicks(6061),
+                            EmployeeAddressId = 3,
+                            EmployeeId = 3,
+                            ForemanId = 2,
+                            LastName = "Kuchna",
+                            LocationId = 1,
+                            Profession = "Szlifierz Okrętowy"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2019, 12, 29, 20, 39, 54, 94, DateTimeKind.Local).AddTicks(6066),
+                            EmployeeAddressId = 4,
+                            EmployeeId = 1,
+                            ForemanId = 3,
+                            LastName = "Maciejewski",
+                            LocationId = 2,
+                            Profession = "Spawacz Okrętowy"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2020, 2, 17, 20, 39, 54, 94, DateTimeKind.Local).AddTicks(6069),
+                            EmployeeAddressId = 1,
+                            EmployeeId = 1,
+                            ForemanId = 1,
+                            LastName = "Yushchenko",
+                            LocationId = 1,
+                            Profession = "Monter Okrętowy"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2020, 4, 7, 20, 39, 54, 94, DateTimeKind.Local).AddTicks(6072),
+                            EmployeeAddressId = 6,
+                            EmployeeId = 1,
+                            ForemanId = 3,
+                            LastName = "Maciejewski",
+                            LocationId = 2,
+                            Profession = "Spawacz Okrętowy"
+                        });
                 });
 
             modelBuilder.Entity("API.HR.Models.Foreman", b =>
@@ -318,6 +555,41 @@ namespace API.Migrations
                     b.HasIndex("LocationId");
 
                     b.ToTable("Foreman");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2019, 9, 20, 20, 39, 54, 93, DateTimeKind.Local).AddTicks(912),
+                            FirstName = "Grzegorz",
+                            LastName = "Grzegorczuk",
+                            LocationId = 1,
+                            Mail = "G.Grzegorczuk@StoczniaGdynia.pl",
+                            PhoneNo = "+58 608 385 512"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2019, 11, 9, 20, 39, 54, 93, DateTimeKind.Local).AddTicks(2994),
+                            FirstName = "Jakub",
+                            LastName = "Jakubczyk",
+                            LocationId = 1,
+                            Mail = "J.Jakubczyk@StoczniaGdynia.pl",
+                            PhoneNo = "+58 608 385 513"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2019, 12, 29, 20, 39, 54, 93, DateTimeKind.Local).AddTicks(3046),
+                            FirstName = "Filip",
+                            LastName = "Filipiak",
+                            LocationId = 2,
+                            Mail = "Filip.Filipiak@Remontowa.pl",
+                            PhoneNo = "+58 808 100 001"
+                        });
                 });
 
             modelBuilder.Entity("API.HR.Models.Leave", b =>
@@ -392,6 +664,34 @@ namespace API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Location");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            City = "Gdynia",
+                            Country = "Polska",
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2019, 9, 20, 20, 39, 54, 92, DateTimeKind.Local).AddTicks(5011),
+                            Name = "Stocznia Gdynia SA",
+                            Number = "3",
+                            Region = "Pomorze",
+                            Street = "Czechosłowacka",
+                            Zip = "81-336"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            City = "Gdańsk",
+                            Country = "Polska",
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2019, 11, 9, 20, 39, 54, 92, DateTimeKind.Local).AddTicks(7836),
+                            Name = "Stocznia Remontowa Gdańsk",
+                            Number = "8",
+                            Region = "Pomorze",
+                            Street = "Swojska",
+                            Zip = "80-958"
+                        });
                 });
 
             modelBuilder.Entity("API.HR.Models.MedicalCheckup", b =>
@@ -430,6 +730,56 @@ namespace API.Migrations
                     b.HasIndex("EmployeeId");
 
                     b.ToTable("MedicalCheckup");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2019, 9, 20, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(1249),
+                            EmployeeId = 1,
+                            IssuedBy = "Prywatna praktyka - Dr Kamiński",
+                            Number = "MD/016/19",
+                            Title = "Badanie lekarskie wstępne",
+                            ValidFrom = new DateTime(2018, 8, 14, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(2950),
+                            ValidTo = new DateTime(2020, 8, 14, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(3489)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2019, 11, 9, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(3958),
+                            EmployeeId = 2,
+                            IssuedBy = "DiamentMed sp. z o.o.",
+                            Number = "DM-076-19",
+                            Title = "Badanie lekarskie wstępne",
+                            ValidFrom = new DateTime(2018, 8, 15, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(4001),
+                            ValidTo = new DateTime(2020, 8, 15, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(4017)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2019, 11, 9, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(4025),
+                            EmployeeId = 2,
+                            IssuedBy = "DiamentMed sp. z o.o.",
+                            Number = "DM-177-19",
+                            Title = "Badanie lekarskie wstępne",
+                            ValidFrom = new DateTime(2018, 11, 8, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(4028),
+                            ValidTo = new DateTime(2020, 11, 8, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(4032)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2019, 11, 9, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(4035),
+                            EmployeeId = 2,
+                            IssuedBy = "DiamentMed sp. z o.o.",
+                            Number = "DM-178-19",
+                            Title = "Badanie lekarskie wstępne",
+                            ValidFrom = new DateTime(2019, 2, 16, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(4038),
+                            ValidTo = new DateTime(2021, 2, 16, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(4041)
+                        });
                 });
 
             modelBuilder.Entity("API.HR.Models.Passport", b =>
@@ -549,6 +899,68 @@ namespace API.Migrations
                     b.HasIndex("EmployeeId");
 
                     b.ToTable("SafetyTraining");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2019, 9, 20, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(8926),
+                            EmployeeId = 1,
+                            IssuedBy = "Dział BHP - Stocznia Gdynia",
+                            Number = "BHP/99/19",
+                            Title = "Szkolenie BHP - Stocznia Gdynia",
+                            ValidFrom = new DateTime(2019, 9, 20, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(8944),
+                            ValidTo = new DateTime(2021, 9, 19, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(8947)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2019, 11, 9, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(8966),
+                            EmployeeId = 2,
+                            IssuedBy = "Dział BHP - Stocznia Gdynia",
+                            Number = "BHP/339/19",
+                            Title = "Szkolenie BHP - Stocznia Gdynia",
+                            ValidFrom = new DateTime(2019, 11, 9, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(8969),
+                            ValidTo = new DateTime(2021, 11, 8, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(8972)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2019, 11, 9, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(8975),
+                            EmployeeId = 3,
+                            IssuedBy = "Dział BHP - Stocznia Gdynia",
+                            Number = "BHP/340/19",
+                            Title = "Szkolenie BHP - Stocznia Gdynia",
+                            ValidFrom = new DateTime(2019, 11, 9, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(8978),
+                            ValidTo = new DateTime(2021, 11, 8, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(8981)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2019, 12, 29, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(8984),
+                            EmployeeId = 1,
+                            IssuedBy = "Kierownik działu BHP - Ignacy Krasiński",
+                            Number = "BHP-940-19",
+                            Title = "Szkolenie Wstępne BHP - Stocznia Gdańsk",
+                            ValidFrom = new DateTime(2019, 12, 29, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(8987),
+                            ValidTo = new DateTime(2020, 12, 28, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(8990)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2019, 12, 29, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(8993),
+                            EmployeeId = 4,
+                            IssuedBy = "Dział BHP - Stocznia Gdynia",
+                            Number = "BHP/440/19",
+                            Title = "Szkolenie BHP - Stocznia Gdynia",
+                            ValidFrom = new DateTime(2020, 2, 17, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(8996),
+                            ValidTo = new DateTime(2022, 2, 16, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(8998)
+                        });
                 });
 
             modelBuilder.Entity("API.HR.Models.Visa", b =>
@@ -726,24 +1138,17 @@ namespace API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("API.HR.Models.EmployeeAddress", b =>
-                {
-                    b.HasOne("API.HR.Models.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("API.HR.Models.EmployeeHistory", b =>
                 {
                     b.HasOne("API.HR.Models.EmployeeAddress", "EmployeeAddress")
                         .WithMany()
                         .HasForeignKey("EmployeeAddressId");
 
-                    b.HasOne("API.HR.Models.Employee", null)
+                    b.HasOne("API.HR.Models.Employee", "Employee")
                         .WithMany("History")
-                        .HasForeignKey("EmployeeId");
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("API.HR.Models.Foreman", "Foreman")
                         .WithMany()
