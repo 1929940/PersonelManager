@@ -7,16 +7,12 @@
   <ItemGroup>
     <Folder Include="Business\Controller\" />
     <Folder Include="Business\Logic\" />
-    <Folder Include="Business\Models\" />
     <Folder Include="Core\DBContext\" />
-    <Folder Include="Core\Models\" />
     <Folder Include="Core\Logic\" />
     <Folder Include="HR\Controller\" />
     <Folder Include="HR\Logic\" />
-    <Folder Include="HR\Models\" />
     <Folder Include="Payroll\Contoller\" />
     <Folder Include="Payroll\Logic\" />
-    <Folder Include="Payroll\Models\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,11 +20,13 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.5.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.5.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="5.5.1" />
