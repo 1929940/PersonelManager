@@ -1,9 +1,6 @@
 ﻿using API.Core.Models;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace API.HR.Models {
     public abstract class PersonelDocumentEntity : BaseEntity{
@@ -14,7 +11,7 @@ namespace API.HR.Models {
         public string Number { get; set; }
 
         [ForeignKey("Employee")]
-        public string EmployeeId { get; set; }
+        public int EmployeeId { get; set; }
         public virtual Employee Employee { get; set; }
     }
 }

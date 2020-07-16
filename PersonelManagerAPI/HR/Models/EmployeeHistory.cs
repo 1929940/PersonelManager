@@ -7,15 +7,15 @@ namespace API.HR.Models {
         public string Profession { get; set; }
 
         [ForeignKey("Location")]
-        public int LocationId { get; set; }
+        public int? LocationId { get; set; }
         public virtual Location Location { get; set; }
 
         [ForeignKey("Foreman")]
-        public int ForemanId { get; set; }
+        public int? ForemanId { get; set; }
         public virtual Foreman Foreman { get; set; }
 
         [ForeignKey("EmployeeAddress")]
-        public int EmployeeAddressId { get; set; }
+        public int? EmployeeAddressId { get; set; }
         public virtual EmployeeAddress EmployeeAddress { get; set; }
     }
 }
