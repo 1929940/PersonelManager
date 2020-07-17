@@ -33,48 +33,6 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Credential",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedOn = table.Column<DateTime>(nullable: false),
-                    CreatedBy = table.Column<string>(nullable: true),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    Hash = table.Column<string>(nullable: true),
-                    Role = table.Column<string>(nullable: true),
-                    IsActive = table.Column<bool>(nullable: false),
-                    RequestedPasswordReset = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Credential", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Employee",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedOn = table.Column<DateTime>(nullable: false),
-                    CreatedBy = table.Column<string>(nullable: true),
-                    FirstName = table.Column<string>(nullable: true),
-                    DateOfBirth = table.Column<DateTime>(nullable: false),
-                    Pesel = table.Column<string>(nullable: true),
-                    FatherName = table.Column<string>(nullable: true),
-                    MotherName = table.Column<string>(nullable: true),
-                    Nationality = table.Column<string>(nullable: true),
-                    IsArchived = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Employee", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "EmployeeAddress",
                 columns: table => new
                 {
@@ -92,6 +50,27 @@ namespace API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_EmployeeAddress", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Employees",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(nullable: true),
+                    DateOfBirth = table.Column<DateTime>(nullable: false),
+                    Pesel = table.Column<string>(nullable: true),
+                    FatherName = table.Column<string>(nullable: true),
+                    MotherName = table.Column<string>(nullable: true),
+                    Nationality = table.Column<string>(nullable: true),
+                    IsArchived = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Employees", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -116,6 +95,27 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    Hash = table.Column<string>(nullable: true),
+                    Role = table.Column<string>(nullable: true),
+                    IsActive = table.Column<bool>(nullable: false),
+                    RequestedPasswordReset = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Certificate",
                 columns: table => new
                 {
@@ -134,9 +134,9 @@ namespace API.Migrations
                 {
                     table.PrimaryKey("PK_Certificate", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Certificate_Employee_EmployeeId",
+                        name: "FK_Certificate_Employees_EmployeeId",
                         column: x => x.EmployeeId,
-                        principalTable: "Employee",
+                        principalTable: "Employees",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -159,9 +159,9 @@ namespace API.Migrations
                 {
                     table.PrimaryKey("PK_Leave", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Leave_Employee_EmployeeId",
+                        name: "FK_Leave_Employees_EmployeeId",
                         column: x => x.EmployeeId,
-                        principalTable: "Employee",
+                        principalTable: "Employees",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -185,9 +185,9 @@ namespace API.Migrations
                 {
                     table.PrimaryKey("PK_MedicalCheckup", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_MedicalCheckup_Employee_EmployeeId",
+                        name: "FK_MedicalCheckup_Employees_EmployeeId",
                         column: x => x.EmployeeId,
-                        principalTable: "Employee",
+                        principalTable: "Employees",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -211,9 +211,9 @@ namespace API.Migrations
                 {
                     table.PrimaryKey("PK_Passport", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Passport_Employee_EmployeeId",
+                        name: "FK_Passport_Employees_EmployeeId",
                         column: x => x.EmployeeId,
-                        principalTable: "Employee",
+                        principalTable: "Employees",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -237,9 +237,9 @@ namespace API.Migrations
                 {
                     table.PrimaryKey("PK_SafetyTraining", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SafetyTraining_Employee_EmployeeId",
+                        name: "FK_SafetyTraining_Employees_EmployeeId",
                         column: x => x.EmployeeId,
-                        principalTable: "Employee",
+                        principalTable: "Employees",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -264,9 +264,9 @@ namespace API.Migrations
                 {
                     table.PrimaryKey("PK_Visa", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Visa_Employee_EmployeeId",
+                        name: "FK_Visa_Employees_EmployeeId",
                         column: x => x.EmployeeId,
-                        principalTable: "Employee",
+                        principalTable: "Employees",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -316,9 +316,9 @@ namespace API.Migrations
                 {
                     table.PrimaryKey("PK_Permit", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Permit_Employee_EmployeeId",
+                        name: "FK_Permit_Employees_EmployeeId",
                         column: x => x.EmployeeId,
-                        principalTable: "Employee",
+                        principalTable: "Employees",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -354,9 +354,9 @@ namespace API.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_EmployeeHistory_Employee_EmployeeId",
+                        name: "FK_EmployeeHistory_Employees_EmployeeId",
                         column: x => x.EmployeeId,
-                        principalTable: "Employee",
+                        principalTable: "Employees",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -410,7 +410,7 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Contract",
+                name: "Contracts",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -432,15 +432,15 @@ namespace API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Contract", x => x.Id);
+                    table.PrimaryKey("PK_Contracts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Contract_Employee_EmployeeId",
+                        name: "FK_Contracts_Employees_EmployeeId",
                         column: x => x.EmployeeId,
-                        principalTable: "Employee",
+                        principalTable: "Employees",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Contract_Payment_PaymentId",
+                        name: "FK_Contracts_Payment_PaymentId",
                         column: x => x.PaymentId,
                         principalTable: "Payment",
                         principalColumn: "Id",
@@ -450,41 +450,30 @@ namespace API.Migrations
             migrationBuilder.InsertData(
                 table: "ConfigurationPage",
                 columns: new[] { "Id", "BillingMonthEnd", "BillingMonthStart", "CreatedBy", "CreatedOn", "MaximumLeaveTimeInDays", "PercentOfAdvancesAllowed", "WarningBeforeCertificateExpires", "WarningBeforeLeaveReachesLimit", "WarningBeforeMedicalCheckupExpires", "WarningBeforePassportExpires", "WarningBeforePermitExpires", "WarningBeforeSafetyTrainingExpires", "WarningBeforeVisaExpires" },
-                values: new object[] { 1, 25, 26, "Administrator", new DateTime(2020, 7, 17, 19, 56, 4, 455, DateTimeKind.Local).AddTicks(178), 90, 75.0, 30, 60, 30, 30, 30, 30, 30 });
-
-            migrationBuilder.InsertData(
-                table: "Credential",
-                columns: new[] { "Id", "CreatedBy", "CreatedOn", "Email", "FirstName", "Hash", "IsActive", "LastName", "RequestedPasswordReset", "Role" },
-                values: new object[,]
-                {
-                    { 1, "Administrator", new DateTime(2020, 7, 17, 19, 56, 4, 450, DateTimeKind.Local).AddTicks(5309), "Jan.Kowalski@PersonelManager.pl", "Jan", "WWW", true, "Kowalski", false, "Kierownik" },
-                    { 2, "Administrator", new DateTime(2020, 7, 17, 19, 56, 4, 453, DateTimeKind.Local).AddTicks(5035), "Jan.Nowak@PersonelManager.pl", "Jan", "YYY", true, "Nowak", true, "Pracownik" },
-                    { 3, "Administrator", new DateTime(2020, 7, 17, 19, 56, 4, 453, DateTimeKind.Local).AddTicks(5114), "Maria.Niziolek@PersonelManager.pl", "Maria", "ZZZ", false, "Niziolek", false, "Pracownik" },
-                    { 4, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Administrator", "Administrator", "WSX_09", true, "", false, "Administrator" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Employee",
-                columns: new[] { "Id", "CreatedBy", "CreatedOn", "DateOfBirth", "FatherName", "FirstName", "IsArchived", "MotherName", "Nationality", "Pesel" },
-                values: new object[,]
-                {
-                    { 3, "Administrator", new DateTime(2019, 11, 10, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(1993, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Oleksii", "Oleksandr", false, "Oleksandra", "Ukraina", "" },
-                    { 4, "Administrator", new DateTime(2020, 2, 18, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(1997, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Maxim", "Yevhenii", false, "Zlata", "Ukraina", "97022012345" },
-                    { 1, "Administrator", new DateTime(2019, 9, 21, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(1980, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "Mariusz", "Maciej", false, "Mariola", "Polska", "80012100000" },
-                    { 2, "Administrator", new DateTime(2019, 11, 10, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(1997, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Vitalii", "Dmyto", false, "Svetlana", "Ukraina", "" }
-                });
+                values: new object[] { 1, 25, 26, "Administrator", new DateTime(2020, 7, 17, 21, 58, 43, 727, DateTimeKind.Local).AddTicks(4168), 90, 75.0, 30, 60, 30, 30, 30, 30, 30 });
 
             migrationBuilder.InsertData(
                 table: "EmployeeAddress",
                 columns: new[] { "Id", "City", "Country", "CreatedBy", "CreatedOn", "Number", "Region", "Street", "Zip" },
                 values: new object[,]
                 {
-                    { 1, "Kosokowo", "Polska", "Administrator", new DateTime(2019, 9, 21, 19, 56, 4, 458, DateTimeKind.Local).AddTicks(154), "26C", "Pomorze", "Rzemieślnicza", "81-198" },
-                    { 2, "Rumia", "Polska", "Administrator", new DateTime(2019, 11, 10, 19, 56, 4, 458, DateTimeKind.Local).AddTicks(190), "20A", "Pomorze", "Świętopełka", "84-230" },
-                    { 3, "Gdynia", "Polska", "Administrator", new DateTime(2019, 11, 10, 19, 56, 4, 458, DateTimeKind.Local).AddTicks(194), "6", "Pomorze", "Spokojna", "81-549" },
-                    { 4, "Gdańsk", "Polska", "Administrator", new DateTime(2019, 12, 30, 19, 56, 4, 458, DateTimeKind.Local).AddTicks(198), "12", "Pomorze", "Ks. Mariana Góreckiego", "80-553" },
-                    { 5, "Pogórze", "Polska", "Administrator", new DateTime(2020, 2, 18, 19, 56, 4, 458, DateTimeKind.Local).AddTicks(201), "13", "Pomorze", "Wapienna", "81-198" },
-                    { 6, "Gdańsk", "Polska", "Administrator", new DateTime(2020, 4, 8, 19, 56, 4, 458, DateTimeKind.Local).AddTicks(204), "3-1", "Pomorze", "Nadmorski Dwór", "80-506" }
+                    { 6, "Gdańsk", "Polska", "Administrator", new DateTime(2020, 4, 8, 21, 58, 43, 730, DateTimeKind.Local).AddTicks(494), "3-1", "Pomorze", "Nadmorski Dwór", "80-506" },
+                    { 5, "Pogórze", "Polska", "Administrator", new DateTime(2020, 2, 18, 21, 58, 43, 730, DateTimeKind.Local).AddTicks(490), "13", "Pomorze", "Wapienna", "81-198" },
+                    { 4, "Gdańsk", "Polska", "Administrator", new DateTime(2019, 12, 30, 21, 58, 43, 730, DateTimeKind.Local).AddTicks(487), "12", "Pomorze", "Ks. Mariana Góreckiego", "80-553" },
+                    { 3, "Gdynia", "Polska", "Administrator", new DateTime(2019, 11, 10, 21, 58, 43, 730, DateTimeKind.Local).AddTicks(483), "6", "Pomorze", "Spokojna", "81-549" },
+                    { 2, "Rumia", "Polska", "Administrator", new DateTime(2019, 11, 10, 21, 58, 43, 730, DateTimeKind.Local).AddTicks(479), "20A", "Pomorze", "Świętopełka", "84-230" },
+                    { 1, "Kosokowo", "Polska", "Administrator", new DateTime(2019, 9, 21, 21, 58, 43, 730, DateTimeKind.Local).AddTicks(447), "26C", "Pomorze", "Rzemieślnicza", "81-198" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Employees",
+                columns: new[] { "Id", "CreatedBy", "CreatedOn", "DateOfBirth", "FatherName", "FirstName", "IsArchived", "MotherName", "Nationality", "Pesel" },
+                values: new object[,]
+                {
+                    { 4, "Administrator", new DateTime(2020, 2, 18, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(1997, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Maxim", "Yevhenii", false, "Zlata", "Ukraina", "97022012345" },
+                    { 2, "Administrator", new DateTime(2019, 11, 10, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(1997, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Vitalii", "Dmyto", false, "Svetlana", "Ukraina", "" },
+                    { 1, "Administrator", new DateTime(2019, 9, 21, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(1980, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "Mariusz", "Maciej", false, "Mariola", "Polska", "80012100000" },
+                    { 3, "Administrator", new DateTime(2019, 11, 10, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(1993, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Oleksii", "Oleksandr", false, "Oleksandra", "Ukraina", "" }
                 });
 
             migrationBuilder.InsertData(
@@ -492,8 +481,19 @@ namespace API.Migrations
                 columns: new[] { "Id", "City", "Country", "CreatedBy", "CreatedOn", "Name", "Number", "Region", "Street", "Zip" },
                 values: new object[,]
                 {
-                    { 1, "Gdynia", "Polska", "Administrator", new DateTime(2019, 9, 21, 19, 56, 4, 456, DateTimeKind.Local).AddTicks(6733), "Stocznia Gdynia SA", "3", "Pomorze", "Czechosłowacka", "81-336" },
-                    { 2, "Gdańsk", "Polska", "Administrator", new DateTime(2019, 11, 10, 19, 56, 4, 456, DateTimeKind.Local).AddTicks(9580), "Stocznia Remontowa Gdańsk", "8", "Pomorze", "Swojska", "80-958" }
+                    { 1, "Gdynia", "Polska", "Administrator", new DateTime(2019, 9, 21, 21, 58, 43, 728, DateTimeKind.Local).AddTicks(8089), "Stocznia Gdynia SA", "3", "Pomorze", "Czechosłowacka", "81-336" },
+                    { 2, "Gdańsk", "Polska", "Administrator", new DateTime(2019, 11, 10, 21, 58, 43, 729, DateTimeKind.Local).AddTicks(955), "Stocznia Remontowa Gdańsk", "8", "Pomorze", "Swojska", "80-958" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "CreatedBy", "CreatedOn", "Email", "FirstName", "Hash", "IsActive", "LastName", "RequestedPasswordReset", "Role" },
+                values: new object[,]
+                {
+                    { 4, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Administrator", "Administrator", "WSX_09", true, "", false, "Administrator" },
+                    { 3, "Administrator", new DateTime(2020, 7, 17, 21, 58, 43, 726, DateTimeKind.Local).AddTicks(1753), "Maria.Niziolek@PersonelManager.pl", "Maria", "ZZZ", false, "Niziolek", false, "Pracownik" },
+                    { 2, "Administrator", new DateTime(2020, 7, 17, 21, 58, 43, 726, DateTimeKind.Local).AddTicks(1680), "Jan.Nowak@PersonelManager.pl", "Jan", "YYY", true, "Nowak", true, "Pracownik" },
+                    { 1, "Administrator", new DateTime(2020, 7, 17, 21, 58, 43, 723, DateTimeKind.Local).AddTicks(1349), "Jan.Kowalski@PersonelManager.pl", "Jan", "WWW", true, "Kowalski", false, "Kierownik" }
                 });
 
             migrationBuilder.InsertData(
@@ -501,35 +501,35 @@ namespace API.Migrations
                 columns: new[] { "Id", "CreatedBy", "CreatedOn", "EmployeeId", "IssuedBy", "Number", "Title", "ValidFrom", "ValidTo" },
                 values: new object[,]
                 {
-                    { 1, "Administrator", new DateTime(2019, 9, 21, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(4031), 1, "Szkółka monterów Jastrząb", "PS/34/20", "Kurs palenia i szczepiania palnikiem gazowym", new DateTime(2018, 7, 17, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(4048), new DateTime(2023, 7, 17, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(4053) },
-                    { 2, "Administrator", new DateTime(2019, 12, 30, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(4096), 1, "DNV", "DNV/086/2020", "Placówka szkoleniowa spawaczy - Stocznia Gdańsk", new DateTime(2019, 12, 30, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(4100), new DateTime(2022, 12, 29, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(4103) },
-                    { 3, "Administrator", new DateTime(2020, 2, 18, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(4106), 4, "Zakład szkolenia monterów w Harkowie", "HR/127/20", "Kurs palenia i szczepiania palnikiem gazowym", new DateTime(2016, 2, 18, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(4109), new DateTime(2020, 8, 15, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(4112) }
+                    { 1, "Administrator", new DateTime(2019, 9, 21, 21, 58, 43, 732, DateTimeKind.Local).AddTicks(5978), 1, "Szkółka monterów Jastrząb", "PS/34/20", "Kurs palenia i szczepiania palnikiem gazowym", new DateTime(2018, 7, 17, 21, 58, 43, 732, DateTimeKind.Local).AddTicks(5998), new DateTime(2023, 7, 17, 21, 58, 43, 732, DateTimeKind.Local).AddTicks(6003) },
+                    { 2, "Administrator", new DateTime(2019, 12, 30, 21, 58, 43, 732, DateTimeKind.Local).AddTicks(6046), 1, "DNV", "DNV/086/2020", "Placówka szkoleniowa spawaczy - Stocznia Gdańsk", new DateTime(2019, 12, 30, 21, 58, 43, 732, DateTimeKind.Local).AddTicks(6049), new DateTime(2022, 12, 29, 21, 58, 43, 732, DateTimeKind.Local).AddTicks(6052) },
+                    { 3, "Administrator", new DateTime(2020, 2, 18, 21, 58, 43, 732, DateTimeKind.Local).AddTicks(6056), 4, "Zakład szkolenia monterów w Harkowie", "HR/127/20", "Kurs palenia i szczepiania palnikiem gazowym", new DateTime(2016, 2, 18, 21, 58, 43, 732, DateTimeKind.Local).AddTicks(6059), new DateTime(2020, 8, 15, 21, 58, 43, 732, DateTimeKind.Local).AddTicks(6062) }
                 });
 
             migrationBuilder.InsertData(
-                table: "Contract",
+                table: "Contracts",
                 columns: new[] { "Id", "ContractSubject", "CreatedBy", "CreatedOn", "EmployeeId", "HourlySalary", "IsRealized", "IssuedBy", "Number", "PaymentId", "TaxPercent", "Title", "ValidFrom", "ValidTo", "Value" },
                 values: new object[,]
                 {
-                    { 19, "Montaż barierek ochronnych na jednostce NB231", "Administrator", new DateTime(2020, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 20m, false, null, "3/07/2020", null, 14.0m, "Umowa za lipiec", new DateTime(2020, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 8, 16, 19, 56, 4, 466, DateTimeKind.Local).AddTicks(9181), 4000m },
-                    { 16, "Montaż barierek ochronnych na jednostce NB231", "Administrator", new DateTime(2020, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 20m, true, null, "3/06/2020", null, 14.0m, "Umowa za czerwiec", new DateTime(2020, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 7, 16, 19, 56, 4, 466, DateTimeKind.Local).AddTicks(9126), 4000m },
-                    { 13, "Montaż trapu na jednostce NB231", "Administrator", new DateTime(2020, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 20m, true, null, "3/05/2020", null, 14.0m, "Umowa za maj", new DateTime(2020, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 6, 16, 19, 56, 4, 466, DateTimeKind.Local).AddTicks(9066), 4000m },
-                    { 10, "Montaż trapu na jednostce NB230", "Administrator", new DateTime(2020, 3, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 20m, true, null, "3/04/2020", null, 14.0m, "Umowa za kwiecień", new DateTime(2020, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 5, 16, 19, 56, 4, 466, DateTimeKind.Local).AddTicks(9007), 4000m },
-                    { 7, "Wypalenie otworu technicznego 23 na jednostce NB230", "Administrator", new DateTime(2020, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 20m, true, null, "3/03/2020", null, 14.0m, "Umowa za marzec", new DateTime(2020, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 4, 16, 19, 56, 4, 466, DateTimeKind.Local).AddTicks(8949), 4000m },
-                    { 9, "Oszlifowanie wręgów 11-201 na jednostce NB230", "Administrator", new DateTime(2020, 3, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 15m, true, null, "2/04/2020", null, 14.0m, "Umowa za kwiecień", new DateTime(2020, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 5, 16, 19, 56, 4, 466, DateTimeKind.Local).AddTicks(8988), 3000m },
-                    { 6, "Oszlifowanie schodów na jednostce NB230", "Administrator", new DateTime(2020, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 15m, true, null, "2/03/2020", null, 14.0m, "Umowa za marzec", new DateTime(2020, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 4, 16, 19, 56, 4, 466, DateTimeKind.Local).AddTicks(8929), 3000m },
-                    { 4, "Oszlifowanie zbiornika ZL15", "Administrator", new DateTime(2020, 1, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 15m, true, null, "3/02/2020", null, 14.0m, "Umowa za luty", new DateTime(2020, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 3, 16, 19, 56, 4, 466, DateTimeKind.Local).AddTicks(8770), 3000m },
-                    { 18, "Oszlifowanie wręgów zbiorników wody pitnej P12-P32", "Administrator", new DateTime(2020, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 15m, false, null, "2/07/2020", null, 14.0m, "Umowa za lipiec", new DateTime(2020, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 8, 16, 19, 56, 4, 466, DateTimeKind.Local).AddTicks(9163), 3000m },
-                    { 15, "Oszlifowanie wręgów zbiorników wody pitnej P12-P32", "Administrator", new DateTime(2020, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 15m, true, null, "2/06/2020", null, 14.0m, "Umowa za czerwiec", new DateTime(2020, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 7, 16, 19, 56, 4, 466, DateTimeKind.Local).AddTicks(9106), 3000m },
-                    { 3, "Oszlifowanie trapa na jednostce NB230", "Administrator", new DateTime(2020, 1, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 15m, true, null, "2/02/2020", null, 14.0m, "Umowa za luty", new DateTime(2020, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 3, 16, 19, 56, 4, 466, DateTimeKind.Local).AddTicks(8747), 3000m },
-                    { 12, "Oszlifowanie wręgów 11-201 na jednostce NB231", "Administrator", new DateTime(2020, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 15m, true, null, "2/05/2020", null, 14.0m, "Umowa za maj", new DateTime(2020, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 6, 16, 19, 56, 4, 466, DateTimeKind.Local).AddTicks(9047), 3000m },
-                    { 5, "Przyspawanie wręgów 201-421 na jednostce WZ211", "Administrator", new DateTime(2020, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 25m, true, null, "1/03/2020", null, 14.0m, "Umowa za marzec", new DateTime(2020, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 4, 16, 19, 56, 4, 466, DateTimeKind.Local).AddTicks(8910), 5000m },
-                    { 1, "Montaż obarierowania ochronnego na jednostce NB230", "Administrator", new DateTime(2019, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 20m, true, null, "1/01/2020", null, 14.0m, "Umowa za styczeń", new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 2, 16, 19, 56, 4, 466, DateTimeKind.Local).AddTicks(7381), 4000m },
-                    { 2, "Przyspawanie wręgów 11-201 na jednostce WZ211", "Administrator", new DateTime(2020, 1, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 25m, true, null, "1/02/2020", null, 14.0m, "Umowa za luty", new DateTime(2020, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 3, 16, 19, 56, 4, 466, DateTimeKind.Local).AddTicks(8709), 5000m },
-                    { 8, "Przyspawanie haków technocznych do płatu P11", "Administrator", new DateTime(2020, 3, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 25m, true, null, "1/04/2020", null, 14.0m, "Umowa za kwiecień", new DateTime(2020, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 5, 16, 19, 56, 4, 466, DateTimeKind.Local).AddTicks(8969), 5000m },
-                    { 11, "Przyspawanie haków technocznych do płatu P12", "Administrator", new DateTime(2020, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 25m, true, null, "1/05/2020", null, 14.0m, "Umowa za maj", new DateTime(2020, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 6, 16, 19, 56, 4, 466, DateTimeKind.Local).AddTicks(9028), 5000m },
-                    { 14, "Przyspawanie sekcji okętowych NW23-NW24", "Administrator", new DateTime(2020, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 25m, true, null, "1/06/2020", null, 14.0m, "Umowa za czerwiec", new DateTime(2020, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 7, 16, 19, 56, 4, 466, DateTimeKind.Local).AddTicks(9086), 5000m },
-                    { 17, "Przyspawanie sekcji okętowych NW23-NW24", "Administrator", new DateTime(2020, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 25m, false, null, "1/07/2020", null, 14.0m, "Umowa za lipiec", new DateTime(2020, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 8, 16, 19, 56, 4, 466, DateTimeKind.Local).AddTicks(9145), 5000m }
+                    { 19, "Montaż barierek ochronnych na jednostce NB231", "Administrator", new DateTime(2020, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 20m, false, null, "3/07/2020", null, 14.0m, "Umowa za lipiec", new DateTime(2020, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 8, 16, 21, 58, 43, 739, DateTimeKind.Local).AddTicks(831), 4000m },
+                    { 16, "Montaż barierek ochronnych na jednostce NB231", "Administrator", new DateTime(2020, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 20m, true, null, "3/06/2020", null, 14.0m, "Umowa za czerwiec", new DateTime(2020, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 7, 16, 21, 58, 43, 739, DateTimeKind.Local).AddTicks(776), 4000m },
+                    { 13, "Montaż trapu na jednostce NB231", "Administrator", new DateTime(2020, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 20m, true, null, "3/05/2020", null, 14.0m, "Umowa za maj", new DateTime(2020, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 6, 16, 21, 58, 43, 739, DateTimeKind.Local).AddTicks(717), 4000m },
+                    { 10, "Montaż trapu na jednostce NB230", "Administrator", new DateTime(2020, 3, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 20m, true, null, "3/04/2020", null, 14.0m, "Umowa za kwiecień", new DateTime(2020, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 5, 16, 21, 58, 43, 739, DateTimeKind.Local).AddTicks(658), 4000m },
+                    { 7, "Wypalenie otworu technicznego 23 na jednostce NB230", "Administrator", new DateTime(2020, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 20m, true, null, "3/03/2020", null, 14.0m, "Umowa za marzec", new DateTime(2020, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 4, 16, 21, 58, 43, 739, DateTimeKind.Local).AddTicks(598), 4000m },
+                    { 9, "Oszlifowanie wręgów 11-201 na jednostce NB230", "Administrator", new DateTime(2020, 3, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 15m, true, null, "2/04/2020", null, 14.0m, "Umowa za kwiecień", new DateTime(2020, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 5, 16, 21, 58, 43, 739, DateTimeKind.Local).AddTicks(638), 3000m },
+                    { 6, "Oszlifowanie schodów na jednostce NB230", "Administrator", new DateTime(2020, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 15m, true, null, "2/03/2020", null, 14.0m, "Umowa za marzec", new DateTime(2020, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 4, 16, 21, 58, 43, 739, DateTimeKind.Local).AddTicks(578), 3000m },
+                    { 4, "Oszlifowanie zbiornika ZL15", "Administrator", new DateTime(2020, 1, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 15m, true, null, "3/02/2020", null, 14.0m, "Umowa za luty", new DateTime(2020, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 3, 16, 21, 58, 43, 739, DateTimeKind.Local).AddTicks(538), 3000m },
+                    { 18, "Oszlifowanie wręgów zbiorników wody pitnej P12-P32", "Administrator", new DateTime(2020, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 15m, false, null, "2/07/2020", null, 14.0m, "Umowa za lipiec", new DateTime(2020, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 8, 16, 21, 58, 43, 739, DateTimeKind.Local).AddTicks(813), 3000m },
+                    { 15, "Oszlifowanie wręgów zbiorników wody pitnej P12-P32", "Administrator", new DateTime(2020, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 15m, true, null, "2/06/2020", null, 14.0m, "Umowa za czerwiec", new DateTime(2020, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 7, 16, 21, 58, 43, 739, DateTimeKind.Local).AddTicks(757), 3000m },
+                    { 3, "Oszlifowanie trapa na jednostce NB230", "Administrator", new DateTime(2020, 1, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 15m, true, null, "2/02/2020", null, 14.0m, "Umowa za luty", new DateTime(2020, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 3, 16, 21, 58, 43, 739, DateTimeKind.Local).AddTicks(517), 3000m },
+                    { 12, "Oszlifowanie wręgów 11-201 na jednostce NB231", "Administrator", new DateTime(2020, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 15m, true, null, "2/05/2020", null, 14.0m, "Umowa za maj", new DateTime(2020, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 6, 16, 21, 58, 43, 739, DateTimeKind.Local).AddTicks(697), 3000m },
+                    { 5, "Przyspawanie wręgów 201-421 na jednostce WZ211", "Administrator", new DateTime(2020, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 25m, true, null, "1/03/2020", null, 14.0m, "Umowa za marzec", new DateTime(2020, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 4, 16, 21, 58, 43, 739, DateTimeKind.Local).AddTicks(558), 5000m },
+                    { 1, "Montaż obarierowania ochronnego na jednostce NB230", "Administrator", new DateTime(2019, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 20m, true, null, "1/01/2020", null, 14.0m, "Umowa za styczeń", new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 2, 16, 21, 58, 43, 738, DateTimeKind.Local).AddTicks(9162), 4000m },
+                    { 2, "Przyspawanie wręgów 11-201 na jednostce WZ211", "Administrator", new DateTime(2020, 1, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 25m, true, null, "1/02/2020", null, 14.0m, "Umowa za luty", new DateTime(2020, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 3, 16, 21, 58, 43, 739, DateTimeKind.Local).AddTicks(481), 5000m },
+                    { 8, "Przyspawanie haków technocznych do płatu P11", "Administrator", new DateTime(2020, 3, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 25m, true, null, "1/04/2020", null, 14.0m, "Umowa za kwiecień", new DateTime(2020, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 5, 16, 21, 58, 43, 739, DateTimeKind.Local).AddTicks(618), 5000m },
+                    { 11, "Przyspawanie haków technocznych do płatu P12", "Administrator", new DateTime(2020, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 25m, true, null, "1/05/2020", null, 14.0m, "Umowa za maj", new DateTime(2020, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 6, 16, 21, 58, 43, 739, DateTimeKind.Local).AddTicks(677), 5000m },
+                    { 14, "Przyspawanie sekcji okętowych NW23-NW24", "Administrator", new DateTime(2020, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 25m, true, null, "1/06/2020", null, 14.0m, "Umowa za czerwiec", new DateTime(2020, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 7, 16, 21, 58, 43, 739, DateTimeKind.Local).AddTicks(737), 5000m },
+                    { 17, "Przyspawanie sekcji okętowych NW23-NW24", "Administrator", new DateTime(2020, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 25m, false, null, "1/07/2020", null, 14.0m, "Umowa za lipiec", new DateTime(2020, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 8, 16, 21, 58, 43, 739, DateTimeKind.Local).AddTicks(795), 5000m }
                 });
 
             migrationBuilder.InsertData(
@@ -537,9 +537,9 @@ namespace API.Migrations
                 columns: new[] { "Id", "CreatedBy", "CreatedOn", "FirstName", "LastName", "LocationId", "Mail", "PhoneNo" },
                 values: new object[,]
                 {
-                    { 2, "Administrator", new DateTime(2019, 11, 10, 19, 56, 4, 457, DateTimeKind.Local).AddTicks(5477), "Jakub", "Jakubczyk", 1, "J.Jakubczyk@StoczniaGdynia.pl", "+58 608 385 513" },
-                    { 1, "Administrator", new DateTime(2019, 9, 21, 19, 56, 4, 457, DateTimeKind.Local).AddTicks(3303), "Grzegorz", "Grzegorczuk", 1, "G.Grzegorczuk@StoczniaGdynia.pl", "+58 608 385 512" },
-                    { 3, "Administrator", new DateTime(2019, 12, 30, 19, 56, 4, 457, DateTimeKind.Local).AddTicks(5537), "Filip", "Filipiak", 2, "Filip.Filipiak@Remontowa.pl", "+58 808 100 001" }
+                    { 2, "Administrator", new DateTime(2019, 11, 10, 21, 58, 43, 729, DateTimeKind.Local).AddTicks(6027), "Jakub", "Jakubczyk", 1, "J.Jakubczyk@StoczniaGdynia.pl", "+58 608 385 513" },
+                    { 1, "Administrator", new DateTime(2019, 9, 21, 21, 58, 43, 729, DateTimeKind.Local).AddTicks(3919), "Grzegorz", "Grzegorczuk", 1, "G.Grzegorczuk@StoczniaGdynia.pl", "+58 608 385 512" },
+                    { 3, "Administrator", new DateTime(2019, 12, 30, 21, 58, 43, 729, DateTimeKind.Local).AddTicks(6101), "Filip", "Filipiak", 2, "Filip.Filipiak@Remontowa.pl", "+58 808 100 001" }
                 });
 
             migrationBuilder.InsertData(
@@ -547,9 +547,9 @@ namespace API.Migrations
                 columns: new[] { "Id", "Comment", "CreatedBy", "CreatedOn", "EmployeeId", "From", "To", "Type" },
                 values: new object[,]
                 {
-                    { 1, "Urlop wypoczynkowy, 14 dni", "Administrator", new DateTime(2019, 11, 10, 19, 56, 4, 462, DateTimeKind.Local).AddTicks(1225), 1, new DateTime(2019, 11, 26, 19, 56, 4, 462, DateTimeKind.Local).AddTicks(1746), new DateTime(2019, 12, 10, 19, 56, 4, 462, DateTimeKind.Local).AddTicks(2242), "Wypoczynkowy" },
-                    { 3, "Obecność nieusprawiedliwiona", "Administrator", new DateTime(2020, 5, 17, 19, 56, 4, 462, DateTimeKind.Local).AddTicks(3741), 1, new DateTime(2020, 5, 17, 19, 56, 4, 462, DateTimeKind.Local).AddTicks(3744), null, "Nieusprawiedliwiony" },
-                    { 2, "Urlop Administracyjny, wymiana paszporty, wizy", "Administrator", new DateTime(2020, 2, 11, 19, 56, 4, 462, DateTimeKind.Local).AddTicks(3691), 2, new DateTime(2020, 2, 18, 19, 56, 4, 462, DateTimeKind.Local).AddTicks(3712), new DateTime(2020, 4, 28, 19, 56, 4, 462, DateTimeKind.Local).AddTicks(3721), "Administracyjny" }
+                    { 1, "Urlop wypoczynkowy, 14 dni", "Administrator", new DateTime(2019, 11, 10, 21, 58, 43, 734, DateTimeKind.Local).AddTicks(3544), 1, new DateTime(2019, 11, 26, 21, 58, 43, 734, DateTimeKind.Local).AddTicks(4032), new DateTime(2019, 12, 10, 21, 58, 43, 734, DateTimeKind.Local).AddTicks(4530), "Wypoczynkowy" },
+                    { 3, "Obecność nieusprawiedliwiona", "Administrator", new DateTime(2020, 5, 17, 21, 58, 43, 734, DateTimeKind.Local).AddTicks(6047), 1, new DateTime(2020, 5, 17, 21, 58, 43, 734, DateTimeKind.Local).AddTicks(6050), null, "Nieusprawiedliwiony" },
+                    { 2, "Urlop Administracyjny, wymiana paszporty, wizy", "Administrator", new DateTime(2020, 2, 11, 21, 58, 43, 734, DateTimeKind.Local).AddTicks(5995), 2, new DateTime(2020, 2, 18, 21, 58, 43, 734, DateTimeKind.Local).AddTicks(6018), new DateTime(2020, 4, 28, 21, 58, 43, 734, DateTimeKind.Local).AddTicks(6027), "Administracyjny" }
                 });
 
             migrationBuilder.InsertData(
@@ -557,10 +557,10 @@ namespace API.Migrations
                 columns: new[] { "Id", "CreatedBy", "CreatedOn", "EmployeeId", "IssuedBy", "Number", "Title", "ValidFrom", "ValidTo" },
                 values: new object[,]
                 {
-                    { 2, "Administrator", new DateTime(2019, 11, 10, 19, 56, 4, 459, DateTimeKind.Local).AddTicks(5361), 2, "DiamentMed sp. z o.o.", "DM-076-19", "Badanie lekarskie wstępne", new DateTime(2018, 8, 16, 19, 56, 4, 459, DateTimeKind.Local).AddTicks(5397), new DateTime(2020, 8, 16, 19, 56, 4, 459, DateTimeKind.Local).AddTicks(5412) },
-                    { 4, "Administrator", new DateTime(2019, 11, 10, 19, 56, 4, 459, DateTimeKind.Local).AddTicks(5434), 2, "DiamentMed sp. z o.o.", "DM-178-19", "Badanie lekarskie wstępne", new DateTime(2019, 2, 17, 19, 56, 4, 459, DateTimeKind.Local).AddTicks(5437), new DateTime(2021, 2, 17, 19, 56, 4, 459, DateTimeKind.Local).AddTicks(5440) },
-                    { 1, "Administrator", new DateTime(2019, 9, 21, 19, 56, 4, 459, DateTimeKind.Local).AddTicks(2644), 1, "Prywatna praktyka - Dr Kamiński", "MD/016/19", "Badanie lekarskie wstępne", new DateTime(2018, 8, 15, 19, 56, 4, 459, DateTimeKind.Local).AddTicks(4348), new DateTime(2020, 8, 15, 19, 56, 4, 459, DateTimeKind.Local).AddTicks(4893) },
-                    { 3, "Administrator", new DateTime(2019, 11, 10, 19, 56, 4, 459, DateTimeKind.Local).AddTicks(5423), 2, "DiamentMed sp. z o.o.", "DM-177-19", "Badanie lekarskie wstępne", new DateTime(2018, 11, 9, 19, 56, 4, 459, DateTimeKind.Local).AddTicks(5426), new DateTime(2020, 11, 9, 19, 56, 4, 459, DateTimeKind.Local).AddTicks(5430) }
+                    { 2, "Administrator", new DateTime(2019, 11, 10, 21, 58, 43, 731, DateTimeKind.Local).AddTicks(5734), 2, "DiamentMed sp. z o.o.", "DM-076-19", "Badanie lekarskie wstępne", new DateTime(2018, 8, 16, 21, 58, 43, 731, DateTimeKind.Local).AddTicks(5772), new DateTime(2020, 8, 16, 21, 58, 43, 731, DateTimeKind.Local).AddTicks(5788) },
+                    { 4, "Administrator", new DateTime(2019, 11, 10, 21, 58, 43, 731, DateTimeKind.Local).AddTicks(5821), 2, "DiamentMed sp. z o.o.", "DM-178-19", "Badanie lekarskie wstępne", new DateTime(2019, 2, 17, 21, 58, 43, 731, DateTimeKind.Local).AddTicks(5824), new DateTime(2021, 2, 17, 21, 58, 43, 731, DateTimeKind.Local).AddTicks(5827) },
+                    { 1, "Administrator", new DateTime(2019, 9, 21, 21, 58, 43, 731, DateTimeKind.Local).AddTicks(3049), 1, "Prywatna praktyka - Dr Kamiński", "MD/016/19", "Badanie lekarskie wstępne", new DateTime(2018, 8, 15, 21, 58, 43, 731, DateTimeKind.Local).AddTicks(4746), new DateTime(2020, 8, 15, 21, 58, 43, 731, DateTimeKind.Local).AddTicks(5274) },
+                    { 3, "Administrator", new DateTime(2019, 11, 10, 21, 58, 43, 731, DateTimeKind.Local).AddTicks(5810), 2, "DiamentMed sp. z o.o.", "DM-177-19", "Badanie lekarskie wstępne", new DateTime(2018, 11, 9, 21, 58, 43, 731, DateTimeKind.Local).AddTicks(5814), new DateTime(2020, 11, 9, 21, 58, 43, 731, DateTimeKind.Local).AddTicks(5817) }
                 });
 
             migrationBuilder.InsertData(
@@ -568,10 +568,10 @@ namespace API.Migrations
                 columns: new[] { "Id", "CreatedBy", "CreatedOn", "EmployeeId", "IssuedBy", "Number", "Title", "ValidFrom", "ValidTo" },
                 values: new object[,]
                 {
-                    { 1, "Administrator", new DateTime(2019, 11, 10, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(8012), 2, "Biuro Paszportowe w Kijowie", "UKR090909", "Paszport Ukraina", new DateTime(2010, 2, 17, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(8028), new DateTime(2020, 2, 18, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(8032) },
-                    { 3, "Administrator", new DateTime(2020, 2, 18, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(8059), 4, "Biuro Paszportowe w Lwowie", "LWR12309", "Paszport Ukraina", new DateTime(2010, 8, 15, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(8062), new DateTime(2049, 7, 17, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(8065) },
-                    { 2, "Administrator", new DateTime(2019, 11, 10, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(8049), 3, "Biuro Paszportowe w Harkowie", "HKR05409", "Paszport Ukraina", new DateTime(2019, 7, 17, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(8052), new DateTime(2029, 7, 17, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(8055) },
-                    { 4, "Administrator", new DateTime(2020, 4, 28, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(8068), 2, "Biuro Paszportowe w Kijowie", "UKR191919", "Paszport Ukraina", new DateTime(2020, 4, 8, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(8071), new DateTime(2030, 4, 8, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(8073) }
+                    { 1, "Administrator", new DateTime(2019, 11, 10, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(204), 2, "Biuro Paszportowe w Kijowie", "UKR090909", "Paszport Ukraina", new DateTime(2010, 2, 17, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(229), new DateTime(2020, 2, 18, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(234) },
+                    { 3, "Administrator", new DateTime(2020, 2, 18, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(267), 4, "Biuro Paszportowe w Lwowie", "LWR12309", "Paszport Ukraina", new DateTime(2010, 8, 15, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(270), new DateTime(2049, 7, 17, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(273) },
+                    { 2, "Administrator", new DateTime(2019, 11, 10, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(256), 3, "Biuro Paszportowe w Harkowie", "HKR05409", "Paszport Ukraina", new DateTime(2019, 7, 17, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(259), new DateTime(2029, 7, 17, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(263) },
+                    { 4, "Administrator", new DateTime(2020, 4, 28, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(276), 2, "Biuro Paszportowe w Kijowie", "UKR191919", "Paszport Ukraina", new DateTime(2020, 4, 8, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(279), new DateTime(2030, 4, 8, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(282) }
                 });
 
             migrationBuilder.InsertData(
@@ -579,10 +579,10 @@ namespace API.Migrations
                 columns: new[] { "Id", "CreatedBy", "CreatedOn", "EmployeeId", "IssuedBy", "LocationId", "Number", "Title", "ValidFrom", "ValidTo" },
                 values: new object[,]
                 {
-                    { 4, "Administrator", new DateTime(2020, 4, 8, 19, 56, 4, 461, DateTimeKind.Local).AddTicks(7581), 2, "Urząd wojewódzki w Gdańsku, wydział ds. cudzoziemców", 1, "A/216/2020", "Zezwolenie na pracę typ A", new DateTime(2020, 4, 8, 19, 56, 4, 461, DateTimeKind.Local).AddTicks(7584), new DateTime(2023, 4, 8, 19, 56, 4, 461, DateTimeKind.Local).AddTicks(7586) },
-                    { 2, "Administrator", new DateTime(2020, 2, 18, 19, 56, 4, 461, DateTimeKind.Local).AddTicks(7554), 3, "Urząd wojewódzki w Gdańsku, wydział ds. cudzoziemców", 1, "KP/55/2020", "Karta Pobytu", new DateTime(2020, 2, 18, 19, 56, 4, 461, DateTimeKind.Local).AddTicks(7563), new DateTime(2025, 2, 17, 19, 56, 4, 461, DateTimeKind.Local).AddTicks(7566) },
-                    { 3, "Administrator", new DateTime(2020, 2, 18, 19, 56, 4, 461, DateTimeKind.Local).AddTicks(7571), 4, "Urząd wojewódzki w Gdańsku, wydział ds. cudzoziemców", 1, "A/196/2020", "Zezwolenie na pracę typ A", new DateTime(2019, 8, 15, 19, 56, 4, 461, DateTimeKind.Local).AddTicks(7574), new DateTime(2020, 8, 15, 19, 56, 4, 461, DateTimeKind.Local).AddTicks(7578) },
-                    { 1, "Administrator", new DateTime(2019, 11, 10, 19, 56, 4, 461, DateTimeKind.Local).AddTicks(7038), 2, "Panśtwowy Urząd Pracy w Gdyni", 1, "OSW/575/2019", "Oświadczenie o zamiarze powierzenia pracy", new DateTime(2019, 11, 10, 19, 56, 4, 461, DateTimeKind.Local).AddTicks(7523), new DateTime(2020, 2, 18, 19, 56, 4, 461, DateTimeKind.Local).AddTicks(7536) }
+                    { 4, "Administrator", new DateTime(2020, 4, 8, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(9918), 2, "Urząd wojewódzki w Gdańsku, wydział ds. cudzoziemców", 1, "A/216/2020", "Zezwolenie na pracę typ A", new DateTime(2020, 4, 8, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(9921), new DateTime(2023, 4, 8, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(9924) },
+                    { 2, "Administrator", new DateTime(2020, 2, 18, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(9892), 3, "Urząd wojewódzki w Gdańsku, wydział ds. cudzoziemców", 1, "KP/55/2020", "Karta Pobytu", new DateTime(2020, 2, 18, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(9900), new DateTime(2025, 2, 17, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(9903) },
+                    { 3, "Administrator", new DateTime(2020, 2, 18, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(9908), 4, "Urząd wojewódzki w Gdańsku, wydział ds. cudzoziemców", 1, "A/196/2020", "Zezwolenie na pracę typ A", new DateTime(2019, 8, 15, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(9912), new DateTime(2020, 8, 15, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(9915) },
+                    { 1, "Administrator", new DateTime(2019, 11, 10, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(9363), 2, "Panśtwowy Urząd Pracy w Gdyni", 1, "OSW/575/2019", "Oświadczenie o zamiarze powierzenia pracy", new DateTime(2019, 11, 10, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(9860), new DateTime(2020, 2, 18, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(9873) }
                 });
 
             migrationBuilder.InsertData(
@@ -590,11 +590,11 @@ namespace API.Migrations
                 columns: new[] { "Id", "CreatedBy", "CreatedOn", "EmployeeId", "IssuedBy", "Number", "Title", "ValidFrom", "ValidTo" },
                 values: new object[,]
                 {
-                    { 2, "Administrator", new DateTime(2019, 11, 10, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(383), 2, "Dział BHP - Stocznia Gdynia", "BHP/339/19", "Szkolenie BHP - Stocznia Gdynia", new DateTime(2019, 11, 10, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(386), new DateTime(2021, 11, 9, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(389) },
-                    { 5, "Administrator", new DateTime(2019, 12, 30, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(410), 4, "Dział BHP - Stocznia Gdynia", "BHP/440/19", "Szkolenie BHP - Stocznia Gdynia", new DateTime(2020, 2, 18, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(412), new DateTime(2022, 2, 17, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(415) },
-                    { 4, "Administrator", new DateTime(2019, 12, 30, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(401), 1, "Kierownik działu BHP - Ignacy Krasiński", "BHP-940-19", "Szkolenie Wstępne BHP - Stocznia Gdańsk", new DateTime(2019, 12, 30, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(404), new DateTime(2020, 12, 29, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(406) },
-                    { 1, "Administrator", new DateTime(2019, 9, 21, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(342), 1, "Dział BHP - Stocznia Gdynia", "BHP/99/19", "Szkolenie BHP - Stocznia Gdynia", new DateTime(2019, 9, 21, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(360), new DateTime(2021, 9, 20, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(363) },
-                    { 3, "Administrator", new DateTime(2019, 11, 10, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(392), 3, "Dział BHP - Stocznia Gdynia", "BHP/340/19", "Szkolenie BHP - Stocznia Gdynia", new DateTime(2019, 11, 10, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(395), new DateTime(2021, 11, 9, 19, 56, 4, 460, DateTimeKind.Local).AddTicks(398) }
+                    { 2, "Administrator", new DateTime(2019, 11, 10, 21, 58, 43, 732, DateTimeKind.Local).AddTicks(2032), 2, "Dział BHP - Stocznia Gdynia", "BHP/339/19", "Szkolenie BHP - Stocznia Gdynia", new DateTime(2019, 11, 10, 21, 58, 43, 732, DateTimeKind.Local).AddTicks(2036), new DateTime(2021, 11, 9, 21, 58, 43, 732, DateTimeKind.Local).AddTicks(2039) },
+                    { 5, "Administrator", new DateTime(2019, 12, 30, 21, 58, 43, 732, DateTimeKind.Local).AddTicks(2060), 4, "Dział BHP - Stocznia Gdynia", "BHP/440/19", "Szkolenie BHP - Stocznia Gdynia", new DateTime(2020, 2, 18, 21, 58, 43, 732, DateTimeKind.Local).AddTicks(2062), new DateTime(2022, 2, 17, 21, 58, 43, 732, DateTimeKind.Local).AddTicks(2065) },
+                    { 4, "Administrator", new DateTime(2019, 12, 30, 21, 58, 43, 732, DateTimeKind.Local).AddTicks(2051), 1, "Kierownik działu BHP - Ignacy Krasiński", "BHP-940-19", "Szkolenie Wstępne BHP - Stocznia Gdańsk", new DateTime(2019, 12, 30, 21, 58, 43, 732, DateTimeKind.Local).AddTicks(2054), new DateTime(2020, 12, 29, 21, 58, 43, 732, DateTimeKind.Local).AddTicks(2056) },
+                    { 1, "Administrator", new DateTime(2019, 9, 21, 21, 58, 43, 732, DateTimeKind.Local).AddTicks(1978), 1, "Dział BHP - Stocznia Gdynia", "BHP/99/19", "Szkolenie BHP - Stocznia Gdynia", new DateTime(2019, 9, 21, 21, 58, 43, 732, DateTimeKind.Local).AddTicks(2007), new DateTime(2021, 9, 20, 21, 58, 43, 732, DateTimeKind.Local).AddTicks(2009) },
+                    { 3, "Administrator", new DateTime(2019, 11, 10, 21, 58, 43, 732, DateTimeKind.Local).AddTicks(2042), 3, "Dział BHP - Stocznia Gdynia", "BHP/340/19", "Szkolenie BHP - Stocznia Gdynia", new DateTime(2019, 11, 10, 21, 58, 43, 732, DateTimeKind.Local).AddTicks(2045), new DateTime(2021, 11, 9, 21, 58, 43, 732, DateTimeKind.Local).AddTicks(2048) }
                 });
 
             migrationBuilder.InsertData(
@@ -602,10 +602,10 @@ namespace API.Migrations
                 columns: new[] { "Id", "CreatedBy", "CreatedOn", "EmployeeId", "IssuedBy", "Number", "Title", "Type", "ValidFrom", "ValidTo" },
                 values: new object[,]
                 {
-                    { 3, "Administrator", new DateTime(2020, 2, 18, 19, 56, 4, 461, DateTimeKind.Local).AddTicks(2957), 4, "Konsul w Kijowie", "PL053452", "Wiza krajowa", "D", new DateTime(2019, 8, 15, 19, 56, 4, 461, DateTimeKind.Local).AddTicks(2960), new DateTime(2020, 8, 15, 19, 56, 4, 461, DateTimeKind.Local).AddTicks(2963) },
-                    { 1, "Administrator", new DateTime(2019, 11, 10, 19, 56, 4, 461, DateTimeKind.Local).AddTicks(2900), 2, "Konsul w Kijowie", "PL053452", "Wiza krajowa", "D", new DateTime(2019, 2, 17, 19, 56, 4, 461, DateTimeKind.Local).AddTicks(2931), new DateTime(2020, 2, 18, 19, 56, 4, 461, DateTimeKind.Local).AddTicks(2937) },
-                    { 2, "Administrator", new DateTime(2020, 2, 18, 19, 56, 4, 461, DateTimeKind.Local).AddTicks(2948), 3, "Konsul w Kijowie", "PL053452", "Wiza krajowa", "D", new DateTime(2020, 2, 18, 19, 56, 4, 461, DateTimeKind.Local).AddTicks(2951), new DateTime(2021, 2, 17, 19, 56, 4, 461, DateTimeKind.Local).AddTicks(2953) },
-                    { 4, "Administrator", new DateTime(2020, 4, 28, 19, 56, 4, 461, DateTimeKind.Local).AddTicks(2966), 2, "Konsul w Kijowie", "PL053452", "Wiza krajowa", "D", new DateTime(2020, 4, 8, 19, 56, 4, 461, DateTimeKind.Local).AddTicks(2969), new DateTime(2021, 4, 8, 19, 56, 4, 461, DateTimeKind.Local).AddTicks(2971) }
+                    { 3, "Administrator", new DateTime(2020, 2, 18, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(5186), 4, "Konsul w Kijowie", "PL053452", "Wiza krajowa", "D", new DateTime(2019, 8, 15, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(5189), new DateTime(2020, 8, 15, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(5193) },
+                    { 1, "Administrator", new DateTime(2019, 11, 10, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(5129), 2, "Konsul w Kijowie", "PL053452", "Wiza krajowa", "D", new DateTime(2019, 2, 17, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(5160), new DateTime(2020, 2, 18, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(5166) },
+                    { 2, "Administrator", new DateTime(2020, 2, 18, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(5176), 3, "Konsul w Kijowie", "PL053452", "Wiza krajowa", "D", new DateTime(2020, 2, 18, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(5179), new DateTime(2021, 2, 17, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(5182) },
+                    { 4, "Administrator", new DateTime(2020, 4, 28, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(5196), 2, "Konsul w Kijowie", "PL053452", "Wiza krajowa", "D", new DateTime(2020, 4, 8, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(5199), new DateTime(2021, 4, 8, 21, 58, 43, 733, DateTimeKind.Local).AddTicks(5201) }
                 });
 
             migrationBuilder.InsertData(
@@ -626,12 +626,12 @@ namespace API.Migrations
                 columns: new[] { "Id", "CreatedBy", "CreatedOn", "EmployeeAddressId", "EmployeeId", "ForemanId", "LastName", "LocationId", "Profession" },
                 values: new object[,]
                 {
-                    { 6, "Administrator", new DateTime(2020, 4, 8, 19, 56, 4, 458, DateTimeKind.Local).AddTicks(7929), 6, 1, 3, "Maciejewski", 2, "Spawacz Okrętowy" },
-                    { 5, "Administrator", new DateTime(2020, 2, 18, 19, 56, 4, 458, DateTimeKind.Local).AddTicks(7926), 5, 4, 2, "Yushchenko", 1, "Monter Okrętowy" },
-                    { 3, "Administrator", new DateTime(2019, 11, 10, 19, 56, 4, 458, DateTimeKind.Local).AddTicks(7918), 3, 3, 2, "Kuchna", 1, "Szlifierz Okrętowy" },
-                    { 2, "Administrator", new DateTime(2019, 11, 10, 19, 56, 4, 458, DateTimeKind.Local).AddTicks(7865), 2, 2, 2, "Kravchuk", 1, "Szlifierz Okrętowy" },
-                    { 4, "Administrator", new DateTime(2019, 12, 30, 19, 56, 4, 458, DateTimeKind.Local).AddTicks(7922), 4, 1, 3, "Maciejewski", 2, "Spawacz Okrętowy" },
-                    { 1, "Administrator", new DateTime(2019, 9, 21, 19, 56, 4, 458, DateTimeKind.Local).AddTicks(5217), 1, 1, 1, "Maciejewski", 1, "Monter Okrętowy" }
+                    { 6, "Administrator", new DateTime(2020, 4, 8, 21, 58, 43, 730, DateTimeKind.Local).AddTicks(8314), 6, 1, 3, "Maciejewski", 2, "Spawacz Okrętowy" },
+                    { 5, "Administrator", new DateTime(2020, 2, 18, 21, 58, 43, 730, DateTimeKind.Local).AddTicks(8311), 5, 4, 2, "Yushchenko", 1, "Monter Okrętowy" },
+                    { 3, "Administrator", new DateTime(2019, 11, 10, 21, 58, 43, 730, DateTimeKind.Local).AddTicks(8303), 3, 3, 2, "Kuchna", 1, "Szlifierz Okrętowy" },
+                    { 2, "Administrator", new DateTime(2019, 11, 10, 21, 58, 43, 730, DateTimeKind.Local).AddTicks(8250), 2, 2, 2, "Kravchuk", 1, "Szlifierz Okrętowy" },
+                    { 4, "Administrator", new DateTime(2019, 12, 30, 21, 58, 43, 730, DateTimeKind.Local).AddTicks(8307), 4, 1, 3, "Maciejewski", 2, "Spawacz Okrętowy" },
+                    { 1, "Administrator", new DateTime(2019, 9, 21, 21, 58, 43, 730, DateTimeKind.Local).AddTicks(5556), 1, 1, 1, "Maciejewski", 1, "Monter Okrętowy" }
                 });
 
             migrationBuilder.InsertData(
@@ -658,13 +658,13 @@ namespace API.Migrations
                 column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Contract_EmployeeId",
-                table: "Contract",
+                name: "IX_Contracts_EmployeeId",
+                table: "Contracts",
                 column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Contract_PaymentId",
-                table: "Contract",
+                name: "IX_Contracts_PaymentId",
+                table: "Contracts",
                 column: "PaymentId");
 
             migrationBuilder.CreateIndex(
@@ -733,18 +733,18 @@ namespace API.Migrations
                 column: "EmployeeId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Advances_Contract_ContractId",
+                name: "FK_Advances_Contracts_ContractId",
                 table: "Advances",
                 column: "ContractId",
-                principalTable: "Contract",
+                principalTable: "Contracts",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Payment_Contract_ContractId",
+                name: "FK_Payment_Contracts_ContractId",
                 table: "Payment",
                 column: "ContractId",
-                principalTable: "Contract",
+                principalTable: "Contracts",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
         }
@@ -752,7 +752,7 @@ namespace API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Payment_Contract_ContractId",
+                name: "FK_Payment_Contracts_ContractId",
                 table: "Payment");
 
             migrationBuilder.DropTable(
@@ -763,9 +763,6 @@ namespace API.Migrations
 
             migrationBuilder.DropTable(
                 name: "ConfigurationPage");
-
-            migrationBuilder.DropTable(
-                name: "Credential");
 
             migrationBuilder.DropTable(
                 name: "EmployeeHistory");
@@ -786,6 +783,9 @@ namespace API.Migrations
                 name: "SafetyTraining");
 
             migrationBuilder.DropTable(
+                name: "Users");
+
+            migrationBuilder.DropTable(
                 name: "Visa");
 
             migrationBuilder.DropTable(
@@ -798,10 +798,10 @@ namespace API.Migrations
                 name: "Location");
 
             migrationBuilder.DropTable(
-                name: "Contract");
+                name: "Contracts");
 
             migrationBuilder.DropTable(
-                name: "Employee");
+                name: "Employees");
 
             migrationBuilder.DropTable(
                 name: "Payment");

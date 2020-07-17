@@ -10,7 +10,7 @@ namespace API.Core.DBContext {
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
-            modelBuilder.Entity<Credential>().HasData(SeedBusiness.GetDummyCredentials());
+            modelBuilder.Entity<User>().HasData(SeedBusiness.GetDummyUsers());
             modelBuilder.Entity<ConfigurationPage>().HasData(SeedBusiness.GetConfigurationPages());
 
             modelBuilder.Entity<Employee>().HasData(SeedHR.GetDummyEmployees());
@@ -31,9 +31,9 @@ namespace API.Core.DBContext {
             modelBuilder.Entity<Payment>().HasData(SeedPayroll.GetDummyPayment());
         }
 
-        public DbSet<Employee> Employee { get; set; }
-        public DbSet<Contract> Contract { get; set; }
-        public DbSet<Credential> Credential { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<Contract> Contracts { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<ConfigurationPage> ConfigurationPage { get; set; }
 
     }

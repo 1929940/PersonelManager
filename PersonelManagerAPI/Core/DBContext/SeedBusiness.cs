@@ -5,8 +5,8 @@ using System.Collections.Generic;
 
 namespace API.Core.DBContext {
     public static class SeedBusiness {
-        public static IEnumerable<Credential> GetDummyCredentials() => new Credential[] {
-            new Credential() {
+        public static IEnumerable<User> GetDummyUsers() => new User[] {
+            new User() {
                 Id = 1,
                 FirstName = "Jan",
                 LastName = "Kowalski",
@@ -18,7 +18,7 @@ namespace API.Core.DBContext {
                 IsActive = true,
                 RequestedPasswordReset = false
             },
-            new Credential() {
+            new User() {
                 Id = 2,
                 FirstName = "Jan",
                 LastName = "Nowak",
@@ -30,7 +30,7 @@ namespace API.Core.DBContext {
                 IsActive = true,
                 RequestedPasswordReset = true
             },
-            new Credential() {
+            new User() {
                 Id = 3,
                 FirstName = "Maria",
                 LastName = "Niziolek",
@@ -42,7 +42,7 @@ namespace API.Core.DBContext {
                 IsActive = false,
                 RequestedPasswordReset = false
             },
-            new Credential() {
+            new User() {
                 Id = 4, 
                 FirstName = "Administrator",
                 LastName = string.Empty,
