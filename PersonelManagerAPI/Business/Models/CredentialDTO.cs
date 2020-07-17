@@ -6,7 +6,6 @@
         public string Email { get; set; }
         public string Role { get; set; }
         public bool IsActive { get; set; }
-        public bool RequestedPasswordReset { get; set; }
 
         public CredentialDTO(Credential credential) {
             Id = credential.Id;
@@ -15,7 +14,9 @@
             Email = credential.Email;
             Role = credential.Role;
             IsActive = credential.IsActive;
-            RequestedPasswordReset = credential.RequestedPasswordReset;
+        }
+
+        public CredentialDTO() {
         }
     }
 }

@@ -11,6 +11,7 @@ using API.Business.Logic;
 using Microsoft.Extensions.Options;
 using API.Business.Helpers;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace API.Business.Controller {
     [Route("api/[controller]")]
@@ -24,49 +25,52 @@ namespace API.Business.Controller {
             _appSettings = appSettings.Value;
         }
 
-        [HttpPost]
-        public async Task<ActionResult<Credential>> PostCredential(AuthenticationRequest request) {
-            Credential credential = await _context.Credential.FirstOrDefaultAsync(x => x.Email == request.Login);
 
-            if (credential == null)
-                return Unauthorized();
-
-            string Token = TokenManager.GenerateJwtToken(credential, _appSettings);
-
-            return Ok(Token);
-        }
-
-
-
-        // GET: api/Credentials
-        [Authorize(Roles = "Manager,Administrator")]
+        //[Authorize(Roles = "Manager,Administrator")]
         [HttpGet]
+        [Route("Get")]
         public async Task<ActionResult<IEnumerable<CredentialDTO>>> GetCredential() {
             return await _context.Credential.Select(x => new CredentialDTO(x)).ToListAsync();
         }
 
-        // GET: api/Credentials/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Credential>> GetCredential(int id) {
-        //    var credential = await _context.Credential.FindAsync(id);
 
-        //    if (credential == null) {
-        //        return NotFound();
-        //    }
+        [HttpPost("Create")]
+        public async Task<ActionResult<CredentialDTO>> CreateCredential(CredentialDTO dto) {
+            string user = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
 
-        //    return credential;
-        //}
+            Credential credential = new Credential() {
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
+                Email = dto.LastName,
+                Role = dto.Role,
+                CreatedOn = DateTime.Now,
+                CreatedBy = user,
+                IsActive = true,
+                RequestedPasswordReset = true,
+            };
 
-        // PUT: api/Credentials/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutCredential(int id, CredentialDTO credential) {
-            if (id != credential.Id) {
+            _context.Credential.Add(credential);
+            await _context.SaveChangesAsync();
+
+            return Created(string.Empty, new CredentialDTO(credential));
+        }
+
+
+
+        //[Authorize(Roles = "Manager,Administrator")]
+        [HttpPut]
+        [Route("Update")]
+        public async Task<IActionResult> PutCredential(int id, CredentialDTO dto) {
+            if (id != dto.Id) {
                 return BadRequest();
             }
+            Credential credential = await _context.Credential.FindAsync(id);
 
-            //TODO: UPDATE ONLY THOSE FIELDS FROM DTO
+            credential.FirstName = dto.FirstName;
+            credential.LastName = dto.LastName;
+            credential.Email = dto.Email;
+            credential.Role = dto.Role;
+            credential.IsActive = dto.IsActive;
 
             _context.Entry(credential).State = EntityState.Modified;
 
@@ -83,10 +87,24 @@ namespace API.Business.Controller {
             return NoContent();
         }
 
+        //[Authorize(Roles = "Manager,Administrator")]
+        [HttpPost]
+        [Route("Login")]
+        public async Task<ActionResult<AuthenticationReponse>> PostCredential(AuthenticationRequest request) {
+            Credential credential = await _context.Credential.FirstOrDefaultAsync(x => x.Email == request.Login);
+
+            if (credential == null)
+                return Unauthorized();
+
+            string token = TokenManager.GenerateJwtToken(credential, _appSettings);
+
+            return Ok(new AuthenticationReponse() { Token = token});
+        }
 
 
-        // DELETE: api/Credentials/5
-        [HttpDelete("{id}")]
+        //[Authorize(Roles = "Manager,Administrator")]
+        [HttpDelete]
+        [Route("Delete")]
         public async Task<ActionResult<Credential>> DeleteCredential(int id) {
             var credential = await _context.Credential.FindAsync(id);
             if (credential == null) {
@@ -103,8 +121,41 @@ namespace API.Business.Controller {
             return _context.Credential.Any(e => e.Id == id);
         }
 
-        //ADD PATCH TO UPDATE PASSWORD
+        //[Authorize(Roles = "Manager,Administrator")]
+        [HttpPatch]
+        [Route("RequestPasswordReset")]
+        public async Task<IActionResult> RequestPasswordReset(int id) {
+            Credential credential = await _context.Credential.FindAsync(id);
+            if (credential == null)
+                return NotFound();
 
-        //ADD PATCH TO RESET PASSWORD
+            credential.RequestedPasswordReset = true;
+            _context.Credential.Attach(credential);
+            _context.Entry(credential).Property(x => x.RequestedPasswordReset).IsModified = true;
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        //[Authorize(Roles = "Manager,Administrator")]
+        [HttpPatch]
+        [Route("UpdatePassword")]
+        public async Task<IActionResult> UpdatePassword(int id, string hash) {
+            Credential credential = await _context.Credential.FindAsync(id);
+            if (credential == null)
+                return NotFound();
+
+            credential.Hash = hash;
+            credential.RequestedPasswordReset = false;
+
+            _context.Credential.Attach(credential);
+            _context.Entry(credential).Property(x => x.RequestedPasswordReset).IsModified = true;
+            _context.Entry(credential).Property(x => x.Hash).IsModified = true;
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
     }
 }
