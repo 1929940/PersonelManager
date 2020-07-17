@@ -50,7 +50,7 @@ namespace API.Core.DBContext {
                 BillingMonthEnd = 25,
                 PercentOfAdvancesAllowed = 75,
                 MaximumLeaveTimeInDays = 90,
-                WarningBeforeLeaveReachesLimit = 30,
+                WarningBeforeLeaveReachesLimit = 60,
                 WarningBeforeCertificateExpires = 30,
                 WarningBeforeMedicalCheckupExpires = 30,
                 WarningBeforePassportExpires = 30,

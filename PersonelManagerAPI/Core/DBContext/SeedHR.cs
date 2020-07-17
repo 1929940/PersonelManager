@@ -52,8 +52,6 @@ namespace API.Core.DBContext {
                 Pesel = "97022012345",
             },
         };
-
-
         public static IEnumerable<Location> GetDummyLocation() => new Location[] {
             new Location() {
                 Id = 1,
@@ -354,12 +352,245 @@ namespace API.Core.DBContext {
 
         //Certificates
 
+        public static IEnumerable<Certificate> GetDummyCertificates() => new Certificate[]{
+            new Certificate() {
+                Id = 1,
+                CreatedBy = "Administrator",
+                CreatedOn = DateTime.Now.AddDays(-300),
+                EmployeeId = 1,
+                Title = "Kurs palenia i szczepiania palnikiem gazowym",
+                IssuedBy = "Szkółka monterów Jastrząb",
+                Number = "PS/34/20",
+                ValidFrom = DateTime.Now.AddYears(-2),
+                ValidTo = DateTime.Now.AddYears(3)
+            },
+            new Certificate() {
+                Id = 2,
+                CreatedBy = "Administrator",
+                CreatedOn = DateTime.Now.AddDays(-200),
+                EmployeeId = 1,
+                Title = "Placówka szkoleniowa spawaczy - Stocznia Gdańsk",
+                IssuedBy = "DNV",
+                Number = "DNV/086/2020",
+                ValidFrom = DateTime.Now.AddDays(-200),
+                ValidTo = DateTime.Now.AddYears(3).AddDays(-200)
+            },
+            new Certificate() {
+                Id = 3,
+                CreatedBy = "Administrator",
+                CreatedOn = DateTime.Now.AddDays(-150),
+                EmployeeId = 4,
+                Title = "Kurs palenia i szczepiania palnikiem gazowym",
+                IssuedBy = "Zakład szkolenia monterów w Harkowie",
+                Number = "HR/127/20",
+                ValidFrom = DateTime.Now.AddYears(-4).AddDays(-150),
+                ValidTo = DateTime.Now.AddDays(29)
+            }
+        };
+
         //Passports
+
+        public static IEnumerable<Passport> GetDummyPassports() => new Passport[] {
+            new Passport() {
+                Id = 1,
+                CreatedBy = "Administrator",
+                CreatedOn = DateTime.Now.AddDays(-250),
+                EmployeeId = 2,
+                IssuedBy = "Biuro Paszportowe w Kijowie",
+                Number = "UKR090909",
+                Title = "Paszport Ukraina",
+                ValidFrom = DateTime.Now.AddYears(-10).AddDays(-150),
+                ValidTo = DateTime.Now.AddDays(-150)
+            },
+            new Passport() {
+                Id = 2,
+                CreatedBy = "Administrator",
+                CreatedOn = DateTime.Now.AddDays(-250),
+                EmployeeId = 3,
+                IssuedBy = "Biuro Paszportowe w Harkowie",
+                Number = "HKR05409",
+                Title = "Paszport Ukraina",
+                ValidFrom = DateTime.Now.AddYears(-1),
+                ValidTo = DateTime.Now.AddYears(9)
+            },
+            new Passport() {
+                Id = 3,
+                CreatedBy = "Administrator",
+                CreatedOn = DateTime.Now.AddDays(-150),
+                EmployeeId = 4,
+                IssuedBy = "Biuro Paszportowe w Lwowie",
+                Number = "LWR12309",
+                Title = "Paszport Ukraina",
+                ValidFrom = DateTime.Now.AddYears(-10).AddDays(29),
+                ValidTo = DateTime.Now.AddYears(29)
+            },
+            new Passport() {
+                Id = 4,
+                CreatedBy = "Administrator",
+                CreatedOn = DateTime.Now.AddDays(-80),
+                EmployeeId = 2,
+                IssuedBy = "Biuro Paszportowe w Kijowie",
+                Number = "UKR191919",
+                Title = "Paszport Ukraina",
+                ValidFrom = DateTime.Now.AddDays(-100),
+                ValidTo = DateTime.Now.AddYears(10).AddDays(-100)
+            },
+        };
 
         //Wizas
 
+        public static IEnumerable<Visa> GetDummyVisas() => new Visa[] {
+            new Visa() {
+                Id = 1,
+                CreatedBy = "Administrator",
+                CreatedOn = DateTime.Now.AddDays(-250),
+                EmployeeId = 2,
+                IssuedBy = "Konsul w Kijowie",
+                Title = "Wiza krajowa",
+                Type = "D",
+                Number = "PL053452",
+                ValidFrom = DateTime.Now.AddYears(-1).AddDays(-150),
+                ValidTo = DateTime.Now.AddDays(-150),
+            },
+            new Visa() {
+                Id = 2,
+                CreatedBy = "Administrator",
+                CreatedOn = DateTime.Now.AddDays(-150),
+                EmployeeId = 3,
+                IssuedBy = "Konsul w Kijowie",
+                Title = "Wiza krajowa",
+                Type = "D",
+                Number = "PL053452",
+                ValidFrom = DateTime.Now.AddDays(-150),
+                ValidTo = DateTime.Now.AddYears(1).AddDays(-150),
+            },
+            new Visa() {
+                Id = 3,
+                CreatedBy = "Administrator",
+                CreatedOn = DateTime.Now.AddDays(-150),
+                EmployeeId = 4,
+                IssuedBy = "Konsul w Kijowie",
+                Title = "Wiza krajowa",
+                Type = "D",
+                Number = "PL053452",
+                ValidFrom = DateTime.Now.AddYears(-1).AddDays(29),
+                ValidTo = DateTime.Now.AddDays(29),
+            },
+            new Visa() {
+                Id = 4,
+                CreatedBy = "Administrator",
+                CreatedOn = DateTime.Now.AddDays(-80),
+                EmployeeId = 2,
+                IssuedBy = "Konsul w Kijowie",
+                Title = "Wiza krajowa",
+                Type = "D",
+                Number = "PL053452",
+                ValidFrom = DateTime.Now.AddDays(-100),
+                ValidTo = DateTime.Now.AddYears(1).AddDays(-100),
+            },
+        };
+
+
+        //2 needs to visas, one till -150, other from -100
+        //EXP 1 YEAR
+        //3 VISA EXPIRES WITH PASSPORT - +29 days
+
         //Permits
 
+        public static IEnumerable<Permit> GetDummyPermits() => new Permit[] {
+            new Permit() {
+                Id = 1,
+                CreatedBy = "Administrator",
+                CreatedOn = DateTime.Now.AddDays(-250),
+                EmployeeId = 2,
+                LocationId = 1,
+                IssuedBy = "Panśtwowy Urząd Pracy w Gdyni",
+                Number = "OSW/575/2019",
+                Title = "Oświadczenie o zamiarze powierzenia pracy",
+                ValidFrom = DateTime.Now.AddDays(-250),
+                ValidTo = DateTime.Now.AddDays(-150),
+            },
+            new Permit() {
+                Id = 2,
+                CreatedBy = "Administrator",
+                CreatedOn = DateTime.Now.AddDays(-150),
+                EmployeeId = 3,
+                LocationId = 1,
+                IssuedBy = "Urząd wojewódzki w Gdańsku, wydział ds. cudzoziemców",
+                Number = "KP/55/2020",
+                Title = "Karta Pobytu",
+                ValidFrom = DateTime.Now.AddDays(-150),
+                ValidTo = DateTime.Now.AddYears(5).AddDays(-150),
+            },
+            new Permit() {
+                Id = 3,
+                CreatedBy = "Administrator",
+                CreatedOn = DateTime.Now.AddDays(-150),
+                EmployeeId = 4,
+                LocationId = 1,
+                IssuedBy = "Urząd wojewódzki w Gdańsku, wydział ds. cudzoziemców",
+                Number = "A/196/2020",
+                Title = "Zezwolenie na pracę typ A",
+                ValidFrom = DateTime.Now.AddYears(-1).AddDays(29),
+                ValidTo = DateTime.Now.AddDays(29),
+            },
+            new Permit() {
+                Id = 4,
+                CreatedBy = "Administrator",
+                CreatedOn = DateTime.Now.AddDays(-100),
+                EmployeeId = 2,
+                LocationId = 1,
+                IssuedBy = "Urząd wojewódzki w Gdańsku, wydział ds. cudzoziemców",
+                Number = "A/216/2020",
+                Title = "Zezwolenie na pracę typ A",
+                ValidFrom = DateTime.Now.AddDays(-100),
+                ValidTo = DateTime.Now.AddYears(3).AddDays(-100),
+            },
+        };
+
+        //2 HAS TWO PERMITS: ONE TILL -250 to -150 (oswiadczenie wojewodzkie), other from -80 (oswiadczenie)
+        //3 TYPU A
+        //4 KARTA POBYTU
+
         //Leaves
+
+        public static IEnumerable<Leave> GetDummyLeaves() => new Leave[] {
+            new Leave() {
+                Id = 1,
+                CreatedBy = "Administrator",
+                CreatedOn = DateTime.Now.AddDays(-250),
+                EmployeeId = 1,
+                From = DateTime.Now.AddDays(-234),
+                To = DateTime.Now.AddDays(-220),
+                Type = "Wypoczynkowy",
+                Comment = "Urlop wypoczynkowy, 14 dni"
+            },
+            new Leave() {
+                Id = 2,
+                CreatedBy = "Administrator",
+                CreatedOn = DateTime.Now.AddDays(-157),
+                EmployeeId = 2,
+                From = DateTime.Now.AddDays(-150),
+                To = DateTime.Now.AddDays(-80),
+                Type = "Administracyjny",
+                Comment = "Urlop Administracyjny, wymiana paszporty, wizy"
+            },
+            new Leave() {
+                Id = 3,
+                CreatedBy = "Administrator",
+                CreatedOn = DateTime.Now.AddDays(-61),
+                EmployeeId = 1,
+                From = DateTime.Now.AddDays(-61),
+                To = null,
+                Type = "Nieusprawiedliwiony",
+                Comment = "Obecność nieusprawiedliwiona"
+            },
+        };
+
+
+            //1 jakis urlop
+            //2 has been gone till days -150 to -80 aka 70 days. ON LEGAL
+            //3 bumelka od -61 dni
+        
     }
 }

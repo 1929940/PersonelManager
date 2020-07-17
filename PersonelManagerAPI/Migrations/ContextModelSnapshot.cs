@@ -76,11 +76,11 @@ namespace API.Migrations
                             BillingMonthEnd = 25,
                             BillingMonthStart = 26,
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2020, 7, 16, 20, 39, 54, 90, DateTimeKind.Local).AddTicks(9052),
+                            CreatedOn = new DateTime(2020, 7, 17, 12, 0, 26, 134, DateTimeKind.Local).AddTicks(4336),
                             MaximumLeaveTimeInDays = 90,
                             PercentOfAdvancesAllowed = 75.0,
                             WarningBeforeCertificateExpires = 30,
-                            WarningBeforeLeaveReachesLimit = 30,
+                            WarningBeforeLeaveReachesLimit = 60,
                             WarningBeforeMedicalCheckupExpires = 30,
                             WarningBeforePassportExpires = 30,
                             WarningBeforePermitExpires = 30,
@@ -129,7 +129,7 @@ namespace API.Migrations
                         {
                             Id = 1,
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2020, 7, 16, 20, 39, 54, 86, DateTimeKind.Local).AddTicks(8151),
+                            CreatedOn = new DateTime(2020, 7, 17, 12, 0, 26, 130, DateTimeKind.Local).AddTicks(4978),
                             Email = "Jan.Kowalski@PersonelManager.pl",
                             FirstName = "Jan",
                             Hash = "WWW",
@@ -141,7 +141,7 @@ namespace API.Migrations
                         {
                             Id = 2,
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2020, 7, 16, 20, 39, 54, 89, DateTimeKind.Local).AddTicks(5596),
+                            CreatedOn = new DateTime(2020, 7, 17, 12, 0, 26, 133, DateTimeKind.Local).AddTicks(2081),
                             Email = "Jan.Nowak@PersonelManager.pl",
                             FirstName = "Jan",
                             Hash = "YYY",
@@ -153,7 +153,7 @@ namespace API.Migrations
                         {
                             Id = 3,
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2020, 7, 16, 20, 39, 54, 89, DateTimeKind.Local).AddTicks(5658),
+                            CreatedOn = new DateTime(2020, 7, 17, 12, 0, 26, 133, DateTimeKind.Local).AddTicks(2144),
                             Email = "Maria.Niziolek@PersonelManager.pl",
                             FirstName = "Maria",
                             Hash = "ZZZ",
@@ -199,6 +199,44 @@ namespace API.Migrations
                     b.HasIndex("EmployeeId");
 
                     b.ToTable("Certificate");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2019, 9, 21, 12, 0, 26, 139, DateTimeKind.Local).AddTicks(3102),
+                            EmployeeId = 1,
+                            IssuedBy = "Szkółka monterów Jastrząb",
+                            Number = "PS/34/20",
+                            Title = "Kurs palenia i szczepiania palnikiem gazowym",
+                            ValidFrom = new DateTime(2018, 7, 17, 12, 0, 26, 139, DateTimeKind.Local).AddTicks(3119),
+                            ValidTo = new DateTime(2023, 7, 17, 12, 0, 26, 139, DateTimeKind.Local).AddTicks(3123)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2019, 12, 30, 12, 0, 26, 139, DateTimeKind.Local).AddTicks(3141),
+                            EmployeeId = 1,
+                            IssuedBy = "DNV",
+                            Number = "DNV/086/2020",
+                            Title = "Placówka szkoleniowa spawaczy - Stocznia Gdańsk",
+                            ValidFrom = new DateTime(2019, 12, 30, 12, 0, 26, 139, DateTimeKind.Local).AddTicks(3144),
+                            ValidTo = new DateTime(2022, 12, 29, 12, 0, 26, 139, DateTimeKind.Local).AddTicks(3147)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2020, 2, 18, 12, 0, 26, 139, DateTimeKind.Local).AddTicks(3151),
+                            EmployeeId = 4,
+                            IssuedBy = "Zakład szkolenia monterów w Harkowie",
+                            Number = "HR/127/20",
+                            Title = "Kurs palenia i szczepiania palnikiem gazowym",
+                            ValidFrom = new DateTime(2016, 2, 18, 12, 0, 26, 139, DateTimeKind.Local).AddTicks(3154),
+                            ValidTo = new DateTime(2020, 8, 15, 12, 0, 26, 139, DateTimeKind.Local).AddTicks(3157)
+                        });
                 });
 
             modelBuilder.Entity("API.HR.Models.Employee", b =>
@@ -244,7 +282,7 @@ namespace API.Migrations
                         {
                             Id = 1,
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2019, 9, 20, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatedOn = new DateTime(2019, 9, 21, 0, 0, 0, 0, DateTimeKind.Local),
                             DateOfBirth = new DateTime(1980, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FatherName = "Mariusz",
                             FirstName = "Maciej",
@@ -257,7 +295,7 @@ namespace API.Migrations
                         {
                             Id = 2,
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2019, 11, 9, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatedOn = new DateTime(2019, 11, 10, 0, 0, 0, 0, DateTimeKind.Local),
                             DateOfBirth = new DateTime(1997, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FatherName = "Vitalii",
                             FirstName = "Dmyto",
@@ -270,7 +308,7 @@ namespace API.Migrations
                         {
                             Id = 3,
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2019, 11, 9, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatedOn = new DateTime(2019, 11, 10, 0, 0, 0, 0, DateTimeKind.Local),
                             DateOfBirth = new DateTime(1993, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FatherName = "Oleksii",
                             FirstName = "Oleksandr",
@@ -283,7 +321,7 @@ namespace API.Migrations
                         {
                             Id = 4,
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2020, 2, 17, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatedOn = new DateTime(2020, 2, 18, 0, 0, 0, 0, DateTimeKind.Local),
                             DateOfBirth = new DateTime(1997, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FatherName = "Maxim",
                             FirstName = "Yevhenii",
@@ -336,7 +374,7 @@ namespace API.Migrations
                             City = "Kosokowo",
                             Country = "Polska",
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2019, 9, 20, 20, 39, 54, 93, DateTimeKind.Local).AddTicks(7945),
+                            CreatedOn = new DateTime(2019, 9, 21, 12, 0, 26, 137, DateTimeKind.Local).AddTicks(834),
                             Number = "26C",
                             Region = "Pomorze",
                             Street = "Rzemieślnicza",
@@ -348,7 +386,7 @@ namespace API.Migrations
                             City = "Rumia",
                             Country = "Polska",
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2019, 11, 9, 20, 39, 54, 93, DateTimeKind.Local).AddTicks(7996),
+                            CreatedOn = new DateTime(2019, 11, 10, 12, 0, 26, 137, DateTimeKind.Local).AddTicks(866),
                             Number = "20A",
                             Region = "Pomorze",
                             Street = "Świętopełka",
@@ -360,7 +398,7 @@ namespace API.Migrations
                             City = "Gdynia",
                             Country = "Polska",
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2019, 11, 9, 20, 39, 54, 93, DateTimeKind.Local).AddTicks(8001),
+                            CreatedOn = new DateTime(2019, 11, 10, 12, 0, 26, 137, DateTimeKind.Local).AddTicks(871),
                             Number = "6",
                             Region = "Pomorze",
                             Street = "Spokojna",
@@ -372,7 +410,7 @@ namespace API.Migrations
                             City = "Gdańsk",
                             Country = "Polska",
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2019, 12, 29, 20, 39, 54, 93, DateTimeKind.Local).AddTicks(8004),
+                            CreatedOn = new DateTime(2019, 12, 30, 12, 0, 26, 137, DateTimeKind.Local).AddTicks(874),
                             Number = "12",
                             Region = "Pomorze",
                             Street = "Ks. Mariana Góreckiego",
@@ -384,7 +422,7 @@ namespace API.Migrations
                             City = "Pogórze",
                             Country = "Polska",
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2020, 2, 17, 20, 39, 54, 93, DateTimeKind.Local).AddTicks(8007),
+                            CreatedOn = new DateTime(2020, 2, 18, 12, 0, 26, 137, DateTimeKind.Local).AddTicks(877),
                             Number = "13",
                             Region = "Pomorze",
                             Street = "Wapienna",
@@ -396,7 +434,7 @@ namespace API.Migrations
                             City = "Gdańsk",
                             Country = "Polska",
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2020, 4, 7, 20, 39, 54, 93, DateTimeKind.Local).AddTicks(8011),
+                            CreatedOn = new DateTime(2020, 4, 8, 12, 0, 26, 137, DateTimeKind.Local).AddTicks(880),
                             Number = "3-1",
                             Region = "Pomorze",
                             Street = "Nadmorski Dwór",
@@ -452,7 +490,7 @@ namespace API.Migrations
                         {
                             Id = 1,
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2019, 9, 20, 20, 39, 54, 94, DateTimeKind.Local).AddTicks(3272),
+                            CreatedOn = new DateTime(2019, 9, 21, 12, 0, 26, 137, DateTimeKind.Local).AddTicks(5631),
                             EmployeeAddressId = 1,
                             EmployeeId = 1,
                             ForemanId = 1,
@@ -464,7 +502,7 @@ namespace API.Migrations
                         {
                             Id = 2,
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2019, 11, 9, 20, 39, 54, 94, DateTimeKind.Local).AddTicks(5985),
+                            CreatedOn = new DateTime(2019, 11, 10, 12, 0, 26, 137, DateTimeKind.Local).AddTicks(8138),
                             EmployeeAddressId = 2,
                             EmployeeId = 2,
                             ForemanId = 2,
@@ -476,7 +514,7 @@ namespace API.Migrations
                         {
                             Id = 3,
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2019, 11, 9, 20, 39, 54, 94, DateTimeKind.Local).AddTicks(6061),
+                            CreatedOn = new DateTime(2019, 11, 10, 12, 0, 26, 137, DateTimeKind.Local).AddTicks(8204),
                             EmployeeAddressId = 3,
                             EmployeeId = 3,
                             ForemanId = 2,
@@ -488,7 +526,7 @@ namespace API.Migrations
                         {
                             Id = 4,
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2019, 12, 29, 20, 39, 54, 94, DateTimeKind.Local).AddTicks(6066),
+                            CreatedOn = new DateTime(2019, 12, 30, 12, 0, 26, 137, DateTimeKind.Local).AddTicks(8208),
                             EmployeeAddressId = 4,
                             EmployeeId = 1,
                             ForemanId = 3,
@@ -500,10 +538,10 @@ namespace API.Migrations
                         {
                             Id = 5,
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2020, 2, 17, 20, 39, 54, 94, DateTimeKind.Local).AddTicks(6069),
-                            EmployeeAddressId = 1,
-                            EmployeeId = 1,
-                            ForemanId = 1,
+                            CreatedOn = new DateTime(2020, 2, 18, 12, 0, 26, 137, DateTimeKind.Local).AddTicks(8212),
+                            EmployeeAddressId = 5,
+                            EmployeeId = 4,
+                            ForemanId = 2,
                             LastName = "Yushchenko",
                             LocationId = 1,
                             Profession = "Monter Okrętowy"
@@ -512,7 +550,7 @@ namespace API.Migrations
                         {
                             Id = 6,
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2020, 4, 7, 20, 39, 54, 94, DateTimeKind.Local).AddTicks(6072),
+                            CreatedOn = new DateTime(2020, 4, 8, 12, 0, 26, 137, DateTimeKind.Local).AddTicks(8215),
                             EmployeeAddressId = 6,
                             EmployeeId = 1,
                             ForemanId = 3,
@@ -561,7 +599,7 @@ namespace API.Migrations
                         {
                             Id = 1,
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2019, 9, 20, 20, 39, 54, 93, DateTimeKind.Local).AddTicks(912),
+                            CreatedOn = new DateTime(2019, 9, 21, 12, 0, 26, 136, DateTimeKind.Local).AddTicks(4703),
                             FirstName = "Grzegorz",
                             LastName = "Grzegorczuk",
                             LocationId = 1,
@@ -572,7 +610,7 @@ namespace API.Migrations
                         {
                             Id = 2,
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2019, 11, 9, 20, 39, 54, 93, DateTimeKind.Local).AddTicks(2994),
+                            CreatedOn = new DateTime(2019, 11, 10, 12, 0, 26, 136, DateTimeKind.Local).AddTicks(6729),
                             FirstName = "Jakub",
                             LastName = "Jakubczyk",
                             LocationId = 1,
@@ -583,7 +621,7 @@ namespace API.Migrations
                         {
                             Id = 3,
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2019, 12, 29, 20, 39, 54, 93, DateTimeKind.Local).AddTicks(3046),
+                            CreatedOn = new DateTime(2019, 12, 30, 12, 0, 26, 136, DateTimeKind.Local).AddTicks(6773),
                             FirstName = "Filip",
                             LastName = "Filipiak",
                             LocationId = 2,
@@ -614,7 +652,7 @@ namespace API.Migrations
                     b.Property<DateTime>("From")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("To")
+                    b.Property<DateTime?>("To")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Type")
@@ -625,6 +663,40 @@ namespace API.Migrations
                     b.HasIndex("EmployeeId");
 
                     b.ToTable("Leave");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Comment = "Urlop wypoczynkowy, 14 dni",
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2019, 11, 10, 12, 0, 26, 140, DateTimeKind.Local).AddTicks(9485),
+                            EmployeeId = 1,
+                            From = new DateTime(2019, 11, 26, 12, 0, 26, 140, DateTimeKind.Local).AddTicks(9937),
+                            To = new DateTime(2019, 12, 10, 12, 0, 26, 141, DateTimeKind.Local).AddTicks(391),
+                            Type = "Wypoczynkowy"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Comment = "Urlop Administracyjny, wymiana paszporty, wizy",
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2020, 2, 11, 12, 0, 26, 141, DateTimeKind.Local).AddTicks(1743),
+                            EmployeeId = 2,
+                            From = new DateTime(2020, 2, 18, 12, 0, 26, 141, DateTimeKind.Local).AddTicks(1763),
+                            To = new DateTime(2020, 4, 28, 12, 0, 26, 141, DateTimeKind.Local).AddTicks(1772),
+                            Type = "Administracyjny"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Comment = "Obecność nieusprawiedliwiona",
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2020, 5, 17, 12, 0, 26, 141, DateTimeKind.Local).AddTicks(1792),
+                            EmployeeId = 1,
+                            From = new DateTime(2020, 5, 17, 12, 0, 26, 141, DateTimeKind.Local).AddTicks(1794),
+                            Type = "Nieusprawiedliwiony"
+                        });
                 });
 
             modelBuilder.Entity("API.HR.Models.Location", b =>
@@ -672,7 +744,7 @@ namespace API.Migrations
                             City = "Gdynia",
                             Country = "Polska",
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2019, 9, 20, 20, 39, 54, 92, DateTimeKind.Local).AddTicks(5011),
+                            CreatedOn = new DateTime(2019, 9, 21, 12, 0, 26, 135, DateTimeKind.Local).AddTicks(9320),
                             Name = "Stocznia Gdynia SA",
                             Number = "3",
                             Region = "Pomorze",
@@ -685,7 +757,7 @@ namespace API.Migrations
                             City = "Gdańsk",
                             Country = "Polska",
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2019, 11, 9, 20, 39, 54, 92, DateTimeKind.Local).AddTicks(7836),
+                            CreatedOn = new DateTime(2019, 11, 10, 12, 0, 26, 136, DateTimeKind.Local).AddTicks(1947),
                             Name = "Stocznia Remontowa Gdańsk",
                             Number = "8",
                             Region = "Pomorze",
@@ -736,49 +808,49 @@ namespace API.Migrations
                         {
                             Id = 1,
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2019, 9, 20, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(1249),
+                            CreatedOn = new DateTime(2019, 9, 21, 12, 0, 26, 138, DateTimeKind.Local).AddTicks(2792),
                             EmployeeId = 1,
                             IssuedBy = "Prywatna praktyka - Dr Kamiński",
                             Number = "MD/016/19",
                             Title = "Badanie lekarskie wstępne",
-                            ValidFrom = new DateTime(2018, 8, 14, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(2950),
-                            ValidTo = new DateTime(2020, 8, 14, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(3489)
+                            ValidFrom = new DateTime(2018, 8, 15, 12, 0, 26, 138, DateTimeKind.Local).AddTicks(4367),
+                            ValidTo = new DateTime(2020, 8, 15, 12, 0, 26, 138, DateTimeKind.Local).AddTicks(4856)
                         },
                         new
                         {
                             Id = 2,
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2019, 11, 9, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(3958),
+                            CreatedOn = new DateTime(2019, 11, 10, 12, 0, 26, 138, DateTimeKind.Local).AddTicks(5289),
                             EmployeeId = 2,
                             IssuedBy = "DiamentMed sp. z o.o.",
                             Number = "DM-076-19",
                             Title = "Badanie lekarskie wstępne",
-                            ValidFrom = new DateTime(2018, 8, 15, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(4001),
-                            ValidTo = new DateTime(2020, 8, 15, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(4017)
+                            ValidFrom = new DateTime(2018, 8, 16, 12, 0, 26, 138, DateTimeKind.Local).AddTicks(5327),
+                            ValidTo = new DateTime(2020, 8, 16, 12, 0, 26, 138, DateTimeKind.Local).AddTicks(5341)
                         },
                         new
                         {
                             Id = 3,
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2019, 11, 9, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(4025),
+                            CreatedOn = new DateTime(2019, 11, 10, 12, 0, 26, 138, DateTimeKind.Local).AddTicks(5350),
                             EmployeeId = 2,
                             IssuedBy = "DiamentMed sp. z o.o.",
                             Number = "DM-177-19",
                             Title = "Badanie lekarskie wstępne",
-                            ValidFrom = new DateTime(2018, 11, 8, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(4028),
-                            ValidTo = new DateTime(2020, 11, 8, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(4032)
+                            ValidFrom = new DateTime(2018, 11, 9, 12, 0, 26, 138, DateTimeKind.Local).AddTicks(5354),
+                            ValidTo = new DateTime(2020, 11, 9, 12, 0, 26, 138, DateTimeKind.Local).AddTicks(5357)
                         },
                         new
                         {
                             Id = 4,
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2019, 11, 9, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(4035),
+                            CreatedOn = new DateTime(2019, 11, 10, 12, 0, 26, 138, DateTimeKind.Local).AddTicks(5361),
                             EmployeeId = 2,
                             IssuedBy = "DiamentMed sp. z o.o.",
                             Number = "DM-178-19",
                             Title = "Badanie lekarskie wstępne",
-                            ValidFrom = new DateTime(2019, 2, 16, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(4038),
-                            ValidTo = new DateTime(2021, 2, 16, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(4041)
+                            ValidFrom = new DateTime(2019, 2, 17, 12, 0, 26, 138, DateTimeKind.Local).AddTicks(5363),
+                            ValidTo = new DateTime(2021, 2, 17, 12, 0, 26, 138, DateTimeKind.Local).AddTicks(5366)
                         });
                 });
 
@@ -818,6 +890,56 @@ namespace API.Migrations
                     b.HasIndex("EmployeeId");
 
                     b.ToTable("Passport");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2019, 11, 10, 12, 0, 26, 139, DateTimeKind.Local).AddTicks(6945),
+                            EmployeeId = 2,
+                            IssuedBy = "Biuro Paszportowe w Kijowie",
+                            Number = "UKR090909",
+                            Title = "Paszport Ukraina",
+                            ValidFrom = new DateTime(2010, 2, 17, 12, 0, 26, 139, DateTimeKind.Local).AddTicks(6974),
+                            ValidTo = new DateTime(2020, 2, 18, 12, 0, 26, 139, DateTimeKind.Local).AddTicks(6979)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2019, 11, 10, 12, 0, 26, 139, DateTimeKind.Local).AddTicks(6996),
+                            EmployeeId = 3,
+                            IssuedBy = "Biuro Paszportowe w Harkowie",
+                            Number = "HKR05409",
+                            Title = "Paszport Ukraina",
+                            ValidFrom = new DateTime(2019, 7, 17, 12, 0, 26, 139, DateTimeKind.Local).AddTicks(6999),
+                            ValidTo = new DateTime(2029, 7, 17, 12, 0, 26, 139, DateTimeKind.Local).AddTicks(7002)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2020, 2, 18, 12, 0, 26, 139, DateTimeKind.Local).AddTicks(7006),
+                            EmployeeId = 4,
+                            IssuedBy = "Biuro Paszportowe w Lwowie",
+                            Number = "LWR12309",
+                            Title = "Paszport Ukraina",
+                            ValidFrom = new DateTime(2010, 8, 15, 12, 0, 26, 139, DateTimeKind.Local).AddTicks(7009),
+                            ValidTo = new DateTime(2049, 7, 17, 12, 0, 26, 139, DateTimeKind.Local).AddTicks(7012)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2020, 4, 28, 12, 0, 26, 139, DateTimeKind.Local).AddTicks(7015),
+                            EmployeeId = 2,
+                            IssuedBy = "Biuro Paszportowe w Kijowie",
+                            Number = "UKR191919",
+                            Title = "Paszport Ukraina",
+                            ValidFrom = new DateTime(2020, 4, 8, 12, 0, 26, 139, DateTimeKind.Local).AddTicks(7018),
+                            ValidTo = new DateTime(2030, 4, 8, 12, 0, 26, 139, DateTimeKind.Local).AddTicks(7020)
+                        });
                 });
 
             modelBuilder.Entity("API.HR.Models.Permit", b =>
@@ -861,6 +983,60 @@ namespace API.Migrations
                     b.HasIndex("LocationId");
 
                     b.ToTable("Permit");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2019, 11, 10, 12, 0, 26, 140, DateTimeKind.Local).AddTicks(5632),
+                            EmployeeId = 2,
+                            IssuedBy = "Panśtwowy Urząd Pracy w Gdyni",
+                            LocationId = 1,
+                            Number = "OSW/575/2019",
+                            Title = "Oświadczenie o zamiarze powierzenia pracy",
+                            ValidFrom = new DateTime(2019, 11, 10, 12, 0, 26, 140, DateTimeKind.Local).AddTicks(6085),
+                            ValidTo = new DateTime(2020, 2, 18, 12, 0, 26, 140, DateTimeKind.Local).AddTicks(6098)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2020, 2, 18, 12, 0, 26, 140, DateTimeKind.Local).AddTicks(6114),
+                            EmployeeId = 3,
+                            IssuedBy = "Urząd wojewódzki w Gdańsku, wydział ds. cudzoziemców",
+                            LocationId = 1,
+                            Number = "KP/55/2020",
+                            Title = "Karta Pobytu",
+                            ValidFrom = new DateTime(2020, 2, 18, 12, 0, 26, 140, DateTimeKind.Local).AddTicks(6123),
+                            ValidTo = new DateTime(2025, 2, 17, 12, 0, 26, 140, DateTimeKind.Local).AddTicks(6126)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2020, 2, 18, 12, 0, 26, 140, DateTimeKind.Local).AddTicks(6131),
+                            EmployeeId = 4,
+                            IssuedBy = "Urząd wojewódzki w Gdańsku, wydział ds. cudzoziemców",
+                            LocationId = 1,
+                            Number = "A/196/2020",
+                            Title = "Zezwolenie na pracę typ A",
+                            ValidFrom = new DateTime(2019, 8, 15, 12, 0, 26, 140, DateTimeKind.Local).AddTicks(6134),
+                            ValidTo = new DateTime(2020, 8, 15, 12, 0, 26, 140, DateTimeKind.Local).AddTicks(6137)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2020, 4, 8, 12, 0, 26, 140, DateTimeKind.Local).AddTicks(6140),
+                            EmployeeId = 2,
+                            IssuedBy = "Urząd wojewódzki w Gdańsku, wydział ds. cudzoziemców",
+                            LocationId = 1,
+                            Number = "A/216/2020",
+                            Title = "Zezwolenie na pracę typ A",
+                            ValidFrom = new DateTime(2020, 4, 8, 12, 0, 26, 140, DateTimeKind.Local).AddTicks(6143),
+                            ValidTo = new DateTime(2023, 4, 8, 12, 0, 26, 140, DateTimeKind.Local).AddTicks(6145)
+                        });
                 });
 
             modelBuilder.Entity("API.HR.Models.SafetyTraining", b =>
@@ -905,61 +1081,61 @@ namespace API.Migrations
                         {
                             Id = 1,
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2019, 9, 20, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(8926),
+                            CreatedOn = new DateTime(2019, 9, 21, 12, 0, 26, 138, DateTimeKind.Local).AddTicks(9849),
                             EmployeeId = 1,
                             IssuedBy = "Dział BHP - Stocznia Gdynia",
                             Number = "BHP/99/19",
                             Title = "Szkolenie BHP - Stocznia Gdynia",
-                            ValidFrom = new DateTime(2019, 9, 20, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(8944),
-                            ValidTo = new DateTime(2021, 9, 19, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(8947)
+                            ValidFrom = new DateTime(2019, 9, 21, 12, 0, 26, 138, DateTimeKind.Local).AddTicks(9866),
+                            ValidTo = new DateTime(2021, 9, 20, 12, 0, 26, 138, DateTimeKind.Local).AddTicks(9869)
                         },
                         new
                         {
                             Id = 2,
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2019, 11, 9, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(8966),
+                            CreatedOn = new DateTime(2019, 11, 10, 12, 0, 26, 138, DateTimeKind.Local).AddTicks(9886),
                             EmployeeId = 2,
                             IssuedBy = "Dział BHP - Stocznia Gdynia",
                             Number = "BHP/339/19",
                             Title = "Szkolenie BHP - Stocznia Gdynia",
-                            ValidFrom = new DateTime(2019, 11, 9, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(8969),
-                            ValidTo = new DateTime(2021, 11, 8, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(8972)
+                            ValidFrom = new DateTime(2019, 11, 10, 12, 0, 26, 138, DateTimeKind.Local).AddTicks(9890),
+                            ValidTo = new DateTime(2021, 11, 9, 12, 0, 26, 138, DateTimeKind.Local).AddTicks(9892)
                         },
                         new
                         {
                             Id = 3,
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2019, 11, 9, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(8975),
+                            CreatedOn = new DateTime(2019, 11, 10, 12, 0, 26, 138, DateTimeKind.Local).AddTicks(9896),
                             EmployeeId = 3,
                             IssuedBy = "Dział BHP - Stocznia Gdynia",
                             Number = "BHP/340/19",
                             Title = "Szkolenie BHP - Stocznia Gdynia",
-                            ValidFrom = new DateTime(2019, 11, 9, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(8978),
-                            ValidTo = new DateTime(2021, 11, 8, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(8981)
+                            ValidFrom = new DateTime(2019, 11, 10, 12, 0, 26, 138, DateTimeKind.Local).AddTicks(9899),
+                            ValidTo = new DateTime(2021, 11, 9, 12, 0, 26, 138, DateTimeKind.Local).AddTicks(9901)
                         },
                         new
                         {
                             Id = 4,
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2019, 12, 29, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(8984),
+                            CreatedOn = new DateTime(2019, 12, 30, 12, 0, 26, 138, DateTimeKind.Local).AddTicks(9905),
                             EmployeeId = 1,
                             IssuedBy = "Kierownik działu BHP - Ignacy Krasiński",
                             Number = "BHP-940-19",
                             Title = "Szkolenie Wstępne BHP - Stocznia Gdańsk",
-                            ValidFrom = new DateTime(2019, 12, 29, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(8987),
-                            ValidTo = new DateTime(2020, 12, 28, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(8990)
+                            ValidFrom = new DateTime(2019, 12, 30, 12, 0, 26, 138, DateTimeKind.Local).AddTicks(9908),
+                            ValidTo = new DateTime(2020, 12, 29, 12, 0, 26, 138, DateTimeKind.Local).AddTicks(9910)
                         },
                         new
                         {
                             Id = 5,
                             CreatedBy = "Administrator",
-                            CreatedOn = new DateTime(2019, 12, 29, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(8993),
+                            CreatedOn = new DateTime(2019, 12, 30, 12, 0, 26, 138, DateTimeKind.Local).AddTicks(9913),
                             EmployeeId = 4,
                             IssuedBy = "Dział BHP - Stocznia Gdynia",
                             Number = "BHP/440/19",
                             Title = "Szkolenie BHP - Stocznia Gdynia",
-                            ValidFrom = new DateTime(2020, 2, 17, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(8996),
-                            ValidTo = new DateTime(2022, 2, 16, 20, 39, 54, 95, DateTimeKind.Local).AddTicks(8998)
+                            ValidFrom = new DateTime(2020, 2, 18, 12, 0, 26, 138, DateTimeKind.Local).AddTicks(9916),
+                            ValidTo = new DateTime(2022, 2, 17, 12, 0, 26, 138, DateTimeKind.Local).AddTicks(9919)
                         });
                 });
 
@@ -1002,6 +1178,60 @@ namespace API.Migrations
                     b.HasIndex("EmployeeId");
 
                     b.ToTable("Visa");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2019, 11, 10, 12, 0, 26, 140, DateTimeKind.Local).AddTicks(1497),
+                            EmployeeId = 2,
+                            IssuedBy = "Konsul w Kijowie",
+                            Number = "PL053452",
+                            Title = "Wiza krajowa",
+                            Type = "D",
+                            ValidFrom = new DateTime(2019, 2, 17, 12, 0, 26, 140, DateTimeKind.Local).AddTicks(1527),
+                            ValidTo = new DateTime(2020, 2, 18, 12, 0, 26, 140, DateTimeKind.Local).AddTicks(1532)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2020, 2, 18, 12, 0, 26, 140, DateTimeKind.Local).AddTicks(1563),
+                            EmployeeId = 3,
+                            IssuedBy = "Konsul w Kijowie",
+                            Number = "PL053452",
+                            Title = "Wiza krajowa",
+                            Type = "D",
+                            ValidFrom = new DateTime(2020, 2, 18, 12, 0, 26, 140, DateTimeKind.Local).AddTicks(1567),
+                            ValidTo = new DateTime(2021, 2, 17, 12, 0, 26, 140, DateTimeKind.Local).AddTicks(1569)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2020, 2, 18, 12, 0, 26, 140, DateTimeKind.Local).AddTicks(1573),
+                            EmployeeId = 4,
+                            IssuedBy = "Konsul w Kijowie",
+                            Number = "PL053452",
+                            Title = "Wiza krajowa",
+                            Type = "D",
+                            ValidFrom = new DateTime(2019, 8, 15, 12, 0, 26, 140, DateTimeKind.Local).AddTicks(1576),
+                            ValidTo = new DateTime(2020, 8, 15, 12, 0, 26, 140, DateTimeKind.Local).AddTicks(1579)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedBy = "Administrator",
+                            CreatedOn = new DateTime(2020, 4, 28, 12, 0, 26, 140, DateTimeKind.Local).AddTicks(1582),
+                            EmployeeId = 2,
+                            IssuedBy = "Konsul w Kijowie",
+                            Number = "PL053452",
+                            Title = "Wiza krajowa",
+                            Type = "D",
+                            ValidFrom = new DateTime(2020, 4, 8, 12, 0, 26, 140, DateTimeKind.Local).AddTicks(1585),
+                            ValidTo = new DateTime(2021, 4, 8, 12, 0, 26, 140, DateTimeKind.Local).AddTicks(1587)
+                        });
                 });
 
             modelBuilder.Entity("API.Payroll.Models.Advances", b =>

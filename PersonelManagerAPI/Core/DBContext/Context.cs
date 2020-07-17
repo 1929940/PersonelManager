@@ -20,11 +20,12 @@ namespace API.Core.DBContext {
             modelBuilder.Entity<EmployeeHistory>().HasData(SeedHR.GetDummyEmployeeHistories());
             modelBuilder.Entity<MedicalCheckup>().HasData(SeedHR.GetDummyMedicalCheckups());
             modelBuilder.Entity<SafetyTraining>().HasData(SeedHR.GetDummySafetyTrainings());
+            modelBuilder.Entity<Certificate>().HasData(SeedHR.GetDummyCertificates());
+            modelBuilder.Entity<Passport>().HasData(SeedHR.GetDummyPassports());
+            modelBuilder.Entity<Visa>().HasData(SeedHR.GetDummyVisas());
+            modelBuilder.Entity<Permit>().HasData(SeedHR.GetDummyPermits());
+            modelBuilder.Entity<Leave>().HasData(SeedHR.GetDummyLeaves());
 
-
-
-
-            //base.OnModelCreating(modelBuilder);
 
         }
 
@@ -32,8 +33,6 @@ namespace API.Core.DBContext {
         public DbSet<Contract> Contract { get; set; }
         public DbSet<Credential> Credential { get; set; }
         public DbSet<ConfigurationPage> ConfigurationPage { get; set; }
-
-
 
     }
 }
