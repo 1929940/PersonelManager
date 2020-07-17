@@ -6,6 +6,7 @@ namespace API.Business.Models {
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Hash { get; set; }
+        public int Role { get; set; }
         public bool IsActive { get; set; }
         public bool RequestedPasswordReset { get; set; }
     }

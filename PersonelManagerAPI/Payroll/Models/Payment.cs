@@ -5,10 +5,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace API.Payroll.Models {
     public class Payment : BaseEntity {
 
-        public DateTime PaidOn { get; set; }
-        public decimal TotalAmount { get; set; }
-        public decimal PaidAmount { get; set; }
-        public decimal TaxAmount { get; set; }
+        public DateTime? PaidOn { get; set; }
+        public decimal GrossAmount { get; set; }
+        public decimal NetAmount { get; set; }
 
         [ForeignKey("Contract")]
         public int ContractId { get; set; }

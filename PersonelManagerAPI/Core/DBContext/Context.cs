@@ -26,7 +26,9 @@ namespace API.Core.DBContext {
             modelBuilder.Entity<Permit>().HasData(SeedHR.GetDummyPermits());
             modelBuilder.Entity<Leave>().HasData(SeedHR.GetDummyLeaves());
 
-
+            modelBuilder.Entity<Contract>().HasData(SeedPayroll.GetDummyContracts());
+            modelBuilder.Entity<Advances>().HasData(SeedPayroll.GetDummyAdvances());
+            modelBuilder.Entity<Payment>().HasData(SeedPayroll.GetDummyPayment());
         }
 
         public DbSet<Employee> Employee { get; set; }

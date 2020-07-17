@@ -349,9 +349,6 @@ namespace API.Core.DBContext {
                 ValidTo = DateTime.Now.AddYears(2).AddDays(-150),
             },
         };
-
-        //Certificates
-
         public static IEnumerable<Certificate> GetDummyCertificates() => new Certificate[]{
             new Certificate() {
                 Id = 1,
@@ -387,9 +384,6 @@ namespace API.Core.DBContext {
                 ValidTo = DateTime.Now.AddDays(29)
             }
         };
-
-        //Passports
-
         public static IEnumerable<Passport> GetDummyPassports() => new Passport[] {
             new Passport() {
                 Id = 1,
@@ -436,9 +430,6 @@ namespace API.Core.DBContext {
                 ValidTo = DateTime.Now.AddYears(10).AddDays(-100)
             },
         };
-
-        //Wizas
-
         public static IEnumerable<Visa> GetDummyVisas() => new Visa[] {
             new Visa() {
                 Id = 1,
