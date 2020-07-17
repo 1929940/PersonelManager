@@ -1,8 +1,7 @@
 ﻿using API.Business.Models;
+using API.Business.Resx;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace API.Core.DBContext {
     public static class SeedBusiness {
@@ -15,7 +14,7 @@ namespace API.Core.DBContext {
                 CreatedOn = DateTime.Now,
                 Email = "Jan.Kowalski@PersonelManager.pl",
                 Hash = "WWW",
-                Role = 6,
+                Role = Roles.MANAGER,
                 IsActive = true,
                 RequestedPasswordReset = false
             },
@@ -27,7 +26,7 @@ namespace API.Core.DBContext {
                 CreatedOn = DateTime.Now,
                 Email = "Jan.Nowak@PersonelManager.pl",
                 Hash = "YYY",
-                Role = 2,
+                Role = Roles.EMPLOYEE,
                 IsActive = true,
                 RequestedPasswordReset = true
             },
@@ -39,7 +38,7 @@ namespace API.Core.DBContext {
                 CreatedOn = DateTime.Now,
                 Email = "Maria.Niziolek@PersonelManager.pl",
                 Hash = "ZZZ",
-                Role = 2,
+                Role = Roles.EMPLOYEE,
                 IsActive = false,
                 RequestedPasswordReset = false
             },
@@ -47,9 +46,9 @@ namespace API.Core.DBContext {
                 Id = 4, 
                 FirstName = "Administrator",
                 LastName = string.Empty,
-                Email = string.Empty,
-                Hash = "pol<>",
-                Role = 14,
+                Email = "Administrator",
+                Hash = "WSX_09",
+                Role = Roles.ADMIN,
                 IsActive = true
             }
 

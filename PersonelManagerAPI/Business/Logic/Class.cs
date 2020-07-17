@@ -22,5 +22,8 @@ namespace API.Business.Logic {
          * 
          * THEN JWT - CLAIM HOLDS ROLES, NAME,
          */
+
+
+        //Claims are in HttpContext.User.Claim
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
 namespace API.Business.Models {
-    public class AuthenticateRequest {
+    public class AuthenticationRequest {
         [Required]
         public string Login { get; set; }
 

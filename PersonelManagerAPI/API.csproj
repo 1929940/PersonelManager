@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>7aea8b13-f709-415c-b482-74e5db8a67ca</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Business\Controller\" />
     <Folder Include="HR\Logic\" />
     <Folder Include="Payroll\Contoller\" />
     <Folder Include="Payroll\Logic\" />
