@@ -75,7 +75,6 @@ namespace PersonelManagerAPI {
                 .AllowAnyMethod()
                 .AllowAnyHeader());
 
-
             app.UseHttpsRedirection();
 
             app.UseRouting();
