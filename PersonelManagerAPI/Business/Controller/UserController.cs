@@ -30,7 +30,7 @@ namespace API.Business.Controller {
         [HttpGet]
         [Route("Get")]
         public async Task<ActionResult<IEnumerable<UserDTO>>> GetUsers() {
-            return await _context.Users.Select(x => new UserDTO(x)).ToListAsync();
+            return await _context.Users.Select(x => UserManager.CreateDto(x)).ToListAsync();
         }
 
         //[Authorize(Roles = "Manager,Administrator")]
@@ -38,21 +38,13 @@ namespace API.Business.Controller {
         public async Task<ActionResult<UserDTO>> CreateUser(UserDTO dto) {
             string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
 
-            User user = new User() {
-                FirstName = dto.FirstName,
-                LastName = dto.LastName,
-                Email = dto.LastName,
-                Role = dto.Role,
-                CreatedOn = DateTime.Now,
-                CreatedBy = requestAuthor,
-                IsActive = true,
-                RequestedPasswordReset = true,
-            };
+            User user = UserManager.CreateUser(dto);
+            user.CreatedBy = requestAuthor;
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return Created(string.Empty, new UserDTO(user));
+            return Created(string.Empty, UserManager.CreateDto(user));
         }
 
 
@@ -98,7 +90,7 @@ namespace API.Business.Controller {
 
             string token = TokenManager.GenerateJwtToken(user, _appSettings);
 
-            return Ok(new AuthenticationReponse() { Token = token});
+            return Ok(new AuthenticationReponse() { Token = token });
         }
 
 
