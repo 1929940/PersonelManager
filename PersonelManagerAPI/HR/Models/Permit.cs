@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 
 namespace API.HR.Models {
     public class Permit : PersonelDocumentEntity {
-        //TODO: LOCATION
-
         [ForeignKey("Location")]
         public int LocationId { get; set; }
         public virtual Location Location { get; set; }

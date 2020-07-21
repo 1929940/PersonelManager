@@ -9,6 +9,10 @@ namespace API.Core.DBContext {
         public Context(DbContextOptions<Context> options) : base(options) {
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
+            optionsBuilder.UseLazyLoadingProxies();
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             modelBuilder.Entity<User>().HasData(SeedBusiness.GetDummyUsers());
             modelBuilder.Entity<ConfigurationPage>().HasData(SeedBusiness.GetConfigurationPages());
@@ -27,7 +31,7 @@ namespace API.Core.DBContext {
             modelBuilder.Entity<Leave>().HasData(SeedHR.GetDummyLeaves());
 
             modelBuilder.Entity<Contract>().HasData(SeedPayroll.GetDummyContracts());
-            modelBuilder.Entity<Advances>().HasData(SeedPayroll.GetDummyAdvances());
+            modelBuilder.Entity<Advance>().HasData(SeedPayroll.GetDummyAdvances());
             modelBuilder.Entity<Payment>().HasData(SeedPayroll.GetDummyPayment());
         }
 
@@ -35,6 +39,8 @@ namespace API.Core.DBContext {
         public DbSet<Contract> Contracts { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<ConfigurationPage> ConfigurationPage { get; set; }
+        public DbSet<API.Payroll.Models.Payment> Payment { get; set; }
+        public DbSet<API.Payroll.Models.Advance> Advances { get; set; }
 
     }
 }

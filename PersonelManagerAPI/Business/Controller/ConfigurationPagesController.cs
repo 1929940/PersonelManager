@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using API.Business.Models;
 using API.Core.DBContext;
+using API.Business.Logic;
+using System.Security.Claims;
 
 namespace API.Business.Controller {
     [Route("api/[controller]")]
@@ -30,8 +32,13 @@ namespace API.Business.Controller {
         //[Authorize(Roles = "Manager,Administrator")]
         [HttpPut]
         public async Task<IActionResult> PutConfigurationPage(ConfigurationPage configurationPage) {
+            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
 
+            ConfigurationPageManager.WriteUpdateTags(requestAuthor, ref configurationPage);
+            configurationPage.Id = 1;
             _context.Entry(configurationPage).State = EntityState.Modified;
+            _context.Entry(configurationPage).Property(x => x.CreatedOn).IsModified = false;
+            _context.Entry(configurationPage).Property(x => x.CreatedBy).IsModified = false;
 
             try {
                 await _context.SaveChangesAsync();

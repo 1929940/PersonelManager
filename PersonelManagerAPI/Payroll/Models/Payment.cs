@@ -11,6 +11,8 @@ namespace API.Payroll.Models {
 
         [ForeignKey("Contract")]
         public int ContractId { get; set; }
-        public Contract Contract { get; set; }
+        [Newtonsoft.Json.JsonIgnore]
+        [System.Text.Json.Serialization.JsonIgnore]
+        public virtual Contract Contract { get; set; }
     }
 }

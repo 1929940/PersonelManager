@@ -16,6 +16,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using API.Business.Helpers;
+using Newtonsoft.Json;
 
 namespace PersonelManagerAPI {
     public class Startup {
@@ -30,6 +31,12 @@ namespace PersonelManagerAPI {
             services.AddControllers();
             services.AddSwaggerGen();
             services.AddCors();
+
+            //Circular reference
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            );
 
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);

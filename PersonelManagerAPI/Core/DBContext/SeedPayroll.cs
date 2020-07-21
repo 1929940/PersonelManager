@@ -20,7 +20,7 @@ namespace API.Core.DBContext {
         public static IEnumerable<Contract> GetDummyContracts() => new Contract[] {
             new Contract() {
                 Id = 1,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddMonths(-6).FirstDayOfTheMonth().AddDays(-10),
                 EmployeeId = 1,
                 ContractSubject = "Montaż obarierowania ochronnego na jednostce NB230",
@@ -36,7 +36,7 @@ namespace API.Core.DBContext {
             //Month -5
             new Contract() {
                 Id = 2,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddMonths(-5).FirstDayOfTheMonth().AddDays(-10),
                 EmployeeId = 1,
                 ContractSubject = "Przyspawanie wręgów 11-201 na jednostce WZ211",
@@ -51,7 +51,7 @@ namespace API.Core.DBContext {
             },
             new Contract() {
                 Id = 3,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddMonths(-5).FirstDayOfTheMonth().AddDays(-10),
                 EmployeeId = 2,
                 ContractSubject = "Oszlifowanie trapa na jednostce NB230",
@@ -66,7 +66,7 @@ namespace API.Core.DBContext {
             },
             new Contract() {
                 Id = 4,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddMonths(-5).FirstDayOfTheMonth().AddDays(-10),
                 EmployeeId = 3,
                 ContractSubject = "Oszlifowanie zbiornika ZL15",
@@ -82,7 +82,7 @@ namespace API.Core.DBContext {
             // Month -4
             new Contract() {
                 Id = 5,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddMonths(-4).FirstDayOfTheMonth().AddDays(-10),
                 EmployeeId = 1,
                 ContractSubject = "Przyspawanie wręgów 201-421 na jednostce WZ211",
@@ -97,7 +97,7 @@ namespace API.Core.DBContext {
             },
             new Contract() {
                 Id = 6,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddMonths(-4).FirstDayOfTheMonth().AddDays(-10),
                 EmployeeId = 3,
                 ContractSubject = "Oszlifowanie schodów na jednostce NB230",
@@ -112,7 +112,7 @@ namespace API.Core.DBContext {
             },
             new Contract() {
                 Id = 7,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddMonths(-4).FirstDayOfTheMonth().AddDays(-10),
                 EmployeeId = 4,
                 ContractSubject = "Wypalenie otworu technicznego 23 na jednostce NB230",
@@ -128,7 +128,7 @@ namespace API.Core.DBContext {
             //month 3
                 new Contract() {
                 Id = 8,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddMonths(-3).FirstDayOfTheMonth().AddDays(-10),
                 EmployeeId = 1,
                 ContractSubject = "Przyspawanie haków technocznych do płatu P11",
@@ -143,7 +143,7 @@ namespace API.Core.DBContext {
             },
             new Contract() {
                 Id = 9,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddMonths(-3).FirstDayOfTheMonth().AddDays(-10),
                 EmployeeId = 3,
                 ContractSubject = "Oszlifowanie wręgów 11-201 na jednostce NB230",
@@ -158,7 +158,7 @@ namespace API.Core.DBContext {
             },
             new Contract() {
                 Id = 10,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddMonths(-3).FirstDayOfTheMonth().AddDays(-10),
                 EmployeeId = 4,
                 ContractSubject = "Montaż trapu na jednostce NB230",
@@ -174,9 +174,10 @@ namespace API.Core.DBContext {
             //Month 2
             new Contract() {
                 Id = 11,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddMonths(-2).FirstDayOfTheMonth().AddDays(-10),
                 EmployeeId = 1,
+                //PaymentId = 1,
                 ContractSubject = "Przyspawanie haków technocznych do płatu P12",
                 HourlySalary = 25,
                 Value = 5000,
@@ -189,9 +190,10 @@ namespace API.Core.DBContext {
             },
             new Contract() {
                 Id = 12,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddMonths(-2).FirstDayOfTheMonth().AddDays(-10),
                 EmployeeId = 2,
+                //PaymentId = 2,
                 ContractSubject = "Oszlifowanie wręgów 11-201 na jednostce NB231",
                 HourlySalary = 15,
                 Value = 3000,
@@ -204,9 +206,10 @@ namespace API.Core.DBContext {
             },
             new Contract() {
                 Id = 13,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddMonths(-2).FirstDayOfTheMonth().AddDays(-10),
                 EmployeeId = 4,
+                //PaymentId = 3,
                 ContractSubject = "Montaż trapu na jednostce NB231",
                 HourlySalary = 20,
                 Value = 4000,
@@ -220,9 +223,10 @@ namespace API.Core.DBContext {
             //Month 1
             new Contract() {
                 Id = 14,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddMonths(-1).FirstDayOfTheMonth().AddDays(-10),
                 EmployeeId = 1,
+                //PaymentId = 4,
                 ContractSubject = "Przyspawanie sekcji okętowych NW23-NW24",
                 HourlySalary = 25,
                 Value = 5000,
@@ -235,9 +239,10 @@ namespace API.Core.DBContext {
             },
             new Contract() {
                 Id = 15,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddMonths(-1).FirstDayOfTheMonth().AddDays(-10),
                 EmployeeId = 2,
+                //PaymentId = 5,
                 ContractSubject = "Oszlifowanie wręgów zbiorników wody pitnej P12-P32",
                 HourlySalary = 15,
                 Value = 3000,
@@ -250,9 +255,10 @@ namespace API.Core.DBContext {
             },
             new Contract() {
                 Id = 16,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddMonths(-1).FirstDayOfTheMonth().AddDays(-10),
                 EmployeeId = 4,
+                //PaymentId = 6,
                 ContractSubject = "Montaż barierek ochronnych na jednostce NB231",
                 HourlySalary = 20,
                 Value = 4000,
@@ -266,7 +272,7 @@ namespace API.Core.DBContext {
             //NOW
             new Contract() {
                 Id = 17,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddMonths(-1).FirstDayOfTheMonth().AddDays(-10),
                 EmployeeId = 1,
                 ContractSubject = "Przyspawanie sekcji okętowych NW23-NW24",
@@ -281,7 +287,7 @@ namespace API.Core.DBContext {
             },
             new Contract() {
                 Id = 18,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddMonths(-1).FirstDayOfTheMonth().AddDays(-10),
                 EmployeeId = 2,
                 ContractSubject = "Oszlifowanie wręgów zbiorników wody pitnej P12-P32",
@@ -296,7 +302,7 @@ namespace API.Core.DBContext {
             },
             new Contract() {
                 Id = 19,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddMonths(-1).FirstDayOfTheMonth().AddDays(-10),
                 EmployeeId = 4,
                 ContractSubject = "Montaż barierek ochronnych na jednostce NB231",
@@ -312,120 +318,120 @@ namespace API.Core.DBContext {
 
 
         };
-        public static IEnumerable<Advances> GetDummyAdvances() => new Advances[] {
+        public static IEnumerable<Advance> GetDummyAdvances() => new Advance[] {
             //month 1
-            new Advances() {
+            new Advance() {
                 Id = 1,
-                CreatedBy = "Administrator",
-                CreatedOn = DateTime.Today.AddMonths(-1).FirstDayOfTheMonth().AddDays(12),
+                CreatedBy = "Initial",
+                CreatedOn = DateTime.Now.AddMonths(-1).FirstDayOfTheMonth().AddDays(12),
                 ContractId = 14,
                 Amount = 1100,
                 WorkedHours = 70,
-                PaidOn = DateTime.Today.AddMonths(-1).FirstDayOfTheMonth().AddDays(15),
+                PaidOn = DateTime.Now.AddMonths(-1).FirstDayOfTheMonth().AddDays(15),
             },
-            new Advances() {
+            new Advance() {
                 Id = 2,
-                CreatedBy = "Administrator",
-                CreatedOn = DateTime.Today.AddMonths(-1).FirstDayOfTheMonth().AddDays(13),
+                CreatedBy = "Initial",
+                CreatedOn = DateTime.Now.AddMonths(-1).FirstDayOfTheMonth().AddDays(13),
                 ContractId = 15,
                 Amount = 900,
                 WorkedHours = 80,
-                PaidOn = DateTime.Today.AddMonths(-1).FirstDayOfTheMonth().AddDays(15),
+                PaidOn = DateTime.Now.AddMonths(-1).FirstDayOfTheMonth().AddDays(15),
             },
-            new Advances() {
+            new Advance() {
                 Id = 3,
-                CreatedBy = "Administrator",
-                CreatedOn = DateTime.Today.AddMonths(-1).FirstDayOfTheMonth().AddDays(14),
+                CreatedBy = "Initial",
+                CreatedOn = DateTime.Now.AddMonths(-1).FirstDayOfTheMonth().AddDays(14),
                 ContractId = 16,
                 Amount = 1000,
                 WorkedHours = 86,
-                PaidOn = DateTime.Today.AddMonths(-1).FirstDayOfTheMonth().AddDays(18),
+                PaidOn = DateTime.Now.AddMonths(-1).FirstDayOfTheMonth().AddDays(18),
             },
             //month 0 
-            new Advances() {
+            new Advance() {
                 Id = 4,
-                CreatedBy = "Administrator",
-                CreatedOn = DateTime.Today,
+                CreatedBy = "Initial",
+                CreatedOn = DateTime.Now,
                 ContractId = 17,
                 Amount = 2000,
                 WorkedHours = 10,
                 PaidOn = null,
             },
-            new Advances() {
+            new Advance() {
                 Id = 5,
-                CreatedBy = "Administrator",
-                CreatedOn = DateTime.Today,
+                CreatedBy = "Initial",
+                CreatedOn = DateTime.Now,
                 ContractId = 18,
                 Amount = 2500,
                 WorkedHours = 10,
                 PaidOn = null,
             },
-            new Advances() {
+            new Advance() {
                 Id = 6,
-                CreatedBy = "Administrator",
-                CreatedOn = DateTime.Today,
+                CreatedBy = "Initial",
+                CreatedOn = DateTime.Now,
                 ContractId = 19,
                 Amount = 500,
                 WorkedHours = 16,
-                PaidOn = DateTime.Today
+                PaidOn = DateTime.Now
             },
         };
         public static IEnumerable<Payment> GetDummyPayment() => new Payment[] {
             //month 2
             new Payment() {
                 Id = 1,
-                CreatedBy = "Administrator",
-                CreatedOn = DateTime.Today.AddMonths(-1).FirstDayOfTheMonth().AddDays(10),
+                CreatedBy = "Initial",
+                CreatedOn = DateTime.Now.AddMonths(-1).FirstDayOfTheMonth().AddDays(10),
                 ContractId = 11,
                 GrossAmount = 5000,
                 NetAmount = 5000 * 0.86m,
-                PaidOn = DateTime.Today.AddMonths(-1).FirstDayOfTheMonth().AddDays(10),
+                PaidOn = DateTime.Now.AddMonths(-1).FirstDayOfTheMonth().AddDays(10),
             },
             new Payment() {
                 Id = 2,
-                CreatedBy = "Administrator",
-                CreatedOn = DateTime.Today.AddMonths(-1).FirstDayOfTheMonth().AddDays(10),
+                CreatedBy = "Initial",
+                CreatedOn = DateTime.Now.AddMonths(-1).FirstDayOfTheMonth().AddDays(10),
                 ContractId = 12,
                 GrossAmount = 3000,
                 NetAmount = 3000 * 0.86m,
-                PaidOn = DateTime.Today.AddMonths(-1).FirstDayOfTheMonth().AddDays(10),
+                PaidOn = DateTime.Now.AddMonths(-1).FirstDayOfTheMonth().AddDays(10),
             },
             new Payment() {
                 Id = 3,
-                CreatedBy = "Administrator",
-                CreatedOn = DateTime.Today.AddMonths(-1).FirstDayOfTheMonth().AddDays(10),
+                CreatedBy = "Initial",
+                CreatedOn = DateTime.Now.AddMonths(-1).FirstDayOfTheMonth().AddDays(10),
                 ContractId = 13,
                 GrossAmount = 4000,
                 NetAmount = 4000 * 0.86m,
-                PaidOn = DateTime.Today.AddMonths(-1).FirstDayOfTheMonth().AddDays(10),
+                PaidOn = DateTime.Now.AddMonths(-1).FirstDayOfTheMonth().AddDays(10),
             },
             //month 1
             new Payment() {
                 Id = 4,
-                CreatedBy = "Administrator",
-                CreatedOn = DateTime.Today.FirstDayOfTheMonth().AddDays(10),
+                CreatedBy = "Initial",
+                CreatedOn = DateTime.Now.FirstDayOfTheMonth().AddDays(10),
                 ContractId = 14,
                 GrossAmount = 5000,
                 NetAmount = 5000 * 0.86m,
-                PaidOn = DateTime.Today.FirstDayOfTheMonth().AddDays(10),
+                PaidOn = DateTime.Now.FirstDayOfTheMonth().AddDays(10),
             },
             new Payment() {
                 Id = 5,
-                CreatedBy = "Administrator",
-                CreatedOn = DateTime.Today.FirstDayOfTheMonth().AddDays(10),
+                CreatedBy = "Initial",
+                CreatedOn = DateTime.Now.FirstDayOfTheMonth().AddDays(10),
                 ContractId = 15,
                 GrossAmount = 3000,
                 NetAmount = 3000 * 0.86m,
-                PaidOn = DateTime.Today.FirstDayOfTheMonth().AddDays(10),
+                PaidOn = DateTime.Now.FirstDayOfTheMonth().AddDays(10),
             },
             new Payment() {
                 Id = 6,
-                CreatedBy = "Administrator",
-                CreatedOn = DateTime.Today.FirstDayOfTheMonth().AddDays(10),
+                CreatedBy = "Initial",
+                CreatedOn = DateTime.Now.FirstDayOfTheMonth().AddDays(10),
                 ContractId = 16,
                 GrossAmount = 4000,
                 NetAmount = 4000 * 0.86m,
-                PaidOn = DateTime.Today.FirstDayOfTheMonth().AddDays(10),
+                PaidOn = DateTime.Now.FirstDayOfTheMonth().AddDays(10),
             }
         };
 

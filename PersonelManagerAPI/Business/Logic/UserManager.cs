@@ -1,8 +1,9 @@
 ﻿using API.Business.Models;
+using API.Core.Logic;
 using System;
 
 namespace API.Business.Logic {
-    public class UserManager {
+    public class UserManager : BaseEntityManager {
         public static User CreateUser(UserDTO dto) => new User() {
             FirstName = dto.FirstName,
             LastName = dto.LastName,
@@ -14,7 +15,7 @@ namespace API.Business.Logic {
         };
 
 
-        public static UserDTO CreateDto(User user) => new UserDTO() {
+        public static UserDTO CreateDTO(User user) => new UserDTO() {
             Id = user.Id,
             FirstName = user.FirstName,
             LastName = user.LastName,

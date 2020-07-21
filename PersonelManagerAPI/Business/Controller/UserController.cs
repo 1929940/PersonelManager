@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -30,7 +29,8 @@ namespace API.Business.Controller {
         [HttpGet]
         [Route("Get")]
         public async Task<ActionResult<IEnumerable<UserDTO>>> GetUsers() {
-            return await _context.Users.Select(x => UserManager.CreateDto(x)).ToListAsync();
+            List<User> list = await _context.Users.ToListAsync();
+            return Ok(list.Select(x => UserManager.CreateDTO(x)));
         }
 
         //[Authorize(Roles = "Manager,Administrator")]
@@ -39,24 +39,25 @@ namespace API.Business.Controller {
             string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
 
             User user = UserManager.CreateUser(dto);
-            user.CreatedBy = requestAuthor;
+            UserManager.WriteCreationTags(requestAuthor, ref user);
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return Created(string.Empty, UserManager.CreateDto(user));
+            return Created(string.Empty, UserManager.CreateDTO(user));
         }
-
-
 
         //[Authorize(Roles = "Manager,Administrator")]
         [HttpPut]
         [Route("Update")]
         public async Task<IActionResult> UpdateUser(int id, UserDTO dto) {
-            if (id != dto.Id) {
+            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
+
+            if (id != dto.Id) 
                 return BadRequest();
-            }
+
             User user = await _context.Users.FindAsync(id);
+            UserManager.WriteUpdateTags(requestAuthor, ref user);
 
             user.FirstName = dto.FirstName;
             user.LastName = dto.LastName;

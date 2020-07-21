@@ -1,5 +1,4 @@
 ﻿using API.Core.Models;
-using System;
 
 namespace API.Business.Models {
     public class ConfigurationPage : BaseEntity {

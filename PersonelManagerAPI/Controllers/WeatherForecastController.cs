@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
 
 namespace PersonelManagerAPI.Controllers {
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Initial")]
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase {

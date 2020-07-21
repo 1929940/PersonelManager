@@ -9,8 +9,8 @@ namespace API.Core.DBContext {
         public static IEnumerable<Employee> GetDummyEmployees() => new Employee[] {
             new Employee() {
                 Id = 1,
-                CreatedBy = "Administrator",
-                CreatedOn = DateTime.Today.AddDays(-300),
+                CreatedBy = "Initial",
+                CreatedOn = DateTime.Now.AddDays(-300),
                 FirstName = "Maciej",
                 DateOfBirth = new DateTime(1980, 1, 21),
                 MotherName = "Mariola",
@@ -20,8 +20,8 @@ namespace API.Core.DBContext {
             },
             new Employee() {
                 Id = 2,
-                CreatedBy = "Administrator",
-                CreatedOn = DateTime.Today.AddDays(-250),
+                CreatedBy = "Initial",
+                CreatedOn = DateTime.Now.AddDays(-250),
                 FirstName = "Dmyto",
                 DateOfBirth = new DateTime(1997, 2, 20),
                 MotherName = "Svetlana",
@@ -31,8 +31,8 @@ namespace API.Core.DBContext {
             },
             new Employee() {
                 Id = 3,
-                CreatedBy = "Administrator",
-                CreatedOn = DateTime.Today.AddDays(-250),
+                CreatedBy = "Initial",
+                CreatedOn = DateTime.Now.AddDays(-250),
                 FirstName = "Oleksandr",
                 DateOfBirth = new DateTime(1993, 12, 10),
                 MotherName = "Oleksandra",
@@ -42,8 +42,8 @@ namespace API.Core.DBContext {
             },
              new Employee() {
                 Id = 4,
-                CreatedBy = "Administrator",
-                CreatedOn = DateTime.Today.AddDays(-150),
+                CreatedBy = "Initial",
+                CreatedOn = DateTime.Now.AddDays(-150),
                 FirstName = "Yevhenii",
                 DateOfBirth = new DateTime(1997, 2, 20),
                 MotherName = "Zlata",
@@ -55,7 +55,7 @@ namespace API.Core.DBContext {
         public static IEnumerable<Location> GetDummyLocation() => new Location[] {
             new Location() {
                 Id = 1,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-300),
                 Name = "Stocznia Gdynia SA",
                 Country = "Polska",
@@ -67,7 +67,7 @@ namespace API.Core.DBContext {
             },
             new Location() {
                 Id = 2,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-250),
                 Name = "Stocznia Remontowa Gdańsk",
                 Country = "Polska",
@@ -81,7 +81,7 @@ namespace API.Core.DBContext {
         public static IEnumerable<Foreman> GetDummyForemen() => new Foreman[] {
             new Foreman() {
                 Id = 1,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-300),
                 FirstName = "Grzegorz",
                 LastName = "Grzegorczuk",
@@ -91,7 +91,7 @@ namespace API.Core.DBContext {
             },
             new Foreman() {
                 Id = 2,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-250),
                 FirstName = "Jakub",
                 LastName = "Jakubczyk",
@@ -101,7 +101,7 @@ namespace API.Core.DBContext {
             },
             new Foreman() {
                 Id = 3,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-200),
                 FirstName = "Filip",
                 LastName = "Filipiak",
@@ -113,7 +113,7 @@ namespace API.Core.DBContext {
         public static IEnumerable<EmployeeAddress> GetDummyEmployeeAddresses() => new EmployeeAddress[] {
             new EmployeeAddress() {
                 Id = 1,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-300),
                 Country = "Polska",
                 Region = "Pomorze",
@@ -124,7 +124,7 @@ namespace API.Core.DBContext {
             },
                 new EmployeeAddress() {
                 Id = 2,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-250),
                 Country = "Polska",
                 Region = "Pomorze",
@@ -135,7 +135,7 @@ namespace API.Core.DBContext {
             },
                 new EmployeeAddress() {
                 Id = 3,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-250),
                 Country = "Polska",
                 Region = "Pomorze",
@@ -146,7 +146,7 @@ namespace API.Core.DBContext {
             },
                 new EmployeeAddress() {
                 Id = 4,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-200),
                 Country = "Polska",
                 Region = "Pomorze",
@@ -157,7 +157,7 @@ namespace API.Core.DBContext {
             },
                 new EmployeeAddress() {
                 Id = 5,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-150),
                 Country = "Polska",
                 Region = "Pomorze",
@@ -168,7 +168,7 @@ namespace API.Core.DBContext {
             },
             new EmployeeAddress() {
                 Id = 6,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-100),
                 Country = "Polska",
                 Region = "Pomorze",
@@ -181,7 +181,7 @@ namespace API.Core.DBContext {
         public static IEnumerable<EmployeeHistory> GetDummyEmployeeHistories() => new EmployeeHistory[] {
             new EmployeeHistory() {
                 Id = 1,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-300),
                 LastName = "Maciejewski",
                 Profession = "Monter Okrętowy",
@@ -192,7 +192,7 @@ namespace API.Core.DBContext {
             },
             new EmployeeHistory() {
                 Id = 2,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-250),
                 LastName = "Kravchuk",
                 Profession = "Szlifierz Okrętowy",
@@ -203,7 +203,7 @@ namespace API.Core.DBContext {
             },
             new EmployeeHistory() {
                 Id = 3,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-250),
                 LastName = "Kuchna",
                 Profession = "Szlifierz Okrętowy",
@@ -214,7 +214,7 @@ namespace API.Core.DBContext {
             },
             new EmployeeHistory() {
                 Id = 4,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-200),
                 LastName = "Maciejewski",
                 Profession = "Spawacz Okrętowy",
@@ -225,7 +225,7 @@ namespace API.Core.DBContext {
             },
             new EmployeeHistory() {
                 Id = 5,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-150),
                 LastName = "Yushchenko",
                 Profession = "Monter Okrętowy",
@@ -236,7 +236,7 @@ namespace API.Core.DBContext {
             },
             new EmployeeHistory() {
                 Id = 6,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-100),
                 LastName = "Maciejewski",
                 Profession = "Spawacz Okrętowy",
@@ -249,7 +249,7 @@ namespace API.Core.DBContext {
         public static IEnumerable<MedicalCheckup> GetDummyMedicalCheckups() => new MedicalCheckup[]{
             new MedicalCheckup() {
                 Id = 1,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-300),
                 EmployeeId = 1,
                 IssuedBy = "Prywatna praktyka - Dr Kamiński",
@@ -260,7 +260,7 @@ namespace API.Core.DBContext {
             },
             new MedicalCheckup() {
                 Id = 2,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-250),
                 EmployeeId = 2,
                 IssuedBy = "DiamentMed sp. z o.o.",
@@ -271,7 +271,7 @@ namespace API.Core.DBContext {
             },
             new MedicalCheckup() {
                 Id = 3,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-250),
                 EmployeeId = 2,
                 IssuedBy = "DiamentMed sp. z o.o.",
@@ -282,7 +282,7 @@ namespace API.Core.DBContext {
             },
             new MedicalCheckup() {
                 Id = 4,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-250),
                 EmployeeId = 2,
                 IssuedBy = "DiamentMed sp. z o.o.",
@@ -295,7 +295,7 @@ namespace API.Core.DBContext {
         public static IEnumerable<SafetyTraining> GetDummySafetyTrainings() => new SafetyTraining[] {
             new SafetyTraining() {
                 Id = 1,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-300),
                 EmployeeId = 1,
                 Title = "Szkolenie BHP - Stocznia Gdynia",
@@ -306,7 +306,7 @@ namespace API.Core.DBContext {
             },
             new SafetyTraining() {
                 Id = 2,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-250),
                 EmployeeId = 2,
                 Title = "Szkolenie BHP - Stocznia Gdynia",
@@ -317,7 +317,7 @@ namespace API.Core.DBContext {
             },
             new SafetyTraining() {
                 Id = 3,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-250),
                 EmployeeId = 3,
                 Title = "Szkolenie BHP - Stocznia Gdynia",
@@ -328,7 +328,7 @@ namespace API.Core.DBContext {
             },
             new SafetyTraining() {
                 Id = 4,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-200),
                 EmployeeId = 1,
                 Title = "Szkolenie Wstępne BHP - Stocznia Gdańsk",
@@ -339,7 +339,7 @@ namespace API.Core.DBContext {
             },
             new SafetyTraining() {
                 Id = 5,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-200),
                 EmployeeId = 4,
                 Title = "Szkolenie BHP - Stocznia Gdynia",
@@ -352,7 +352,7 @@ namespace API.Core.DBContext {
         public static IEnumerable<Certificate> GetDummyCertificates() => new Certificate[]{
             new Certificate() {
                 Id = 1,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-300),
                 EmployeeId = 1,
                 Title = "Kurs palenia i szczepiania palnikiem gazowym",
@@ -363,7 +363,7 @@ namespace API.Core.DBContext {
             },
             new Certificate() {
                 Id = 2,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-200),
                 EmployeeId = 1,
                 Title = "Placówka szkoleniowa spawaczy - Stocznia Gdańsk",
@@ -374,7 +374,7 @@ namespace API.Core.DBContext {
             },
             new Certificate() {
                 Id = 3,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-150),
                 EmployeeId = 4,
                 Title = "Kurs palenia i szczepiania palnikiem gazowym",
@@ -387,7 +387,7 @@ namespace API.Core.DBContext {
         public static IEnumerable<Passport> GetDummyPassports() => new Passport[] {
             new Passport() {
                 Id = 1,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-250),
                 EmployeeId = 2,
                 IssuedBy = "Biuro Paszportowe w Kijowie",
@@ -398,7 +398,7 @@ namespace API.Core.DBContext {
             },
             new Passport() {
                 Id = 2,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-250),
                 EmployeeId = 3,
                 IssuedBy = "Biuro Paszportowe w Harkowie",
@@ -409,7 +409,7 @@ namespace API.Core.DBContext {
             },
             new Passport() {
                 Id = 3,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-150),
                 EmployeeId = 4,
                 IssuedBy = "Biuro Paszportowe w Lwowie",
@@ -420,7 +420,7 @@ namespace API.Core.DBContext {
             },
             new Passport() {
                 Id = 4,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-80),
                 EmployeeId = 2,
                 IssuedBy = "Biuro Paszportowe w Kijowie",
@@ -433,7 +433,7 @@ namespace API.Core.DBContext {
         public static IEnumerable<Visa> GetDummyVisas() => new Visa[] {
             new Visa() {
                 Id = 1,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-250),
                 EmployeeId = 2,
                 IssuedBy = "Konsul w Kijowie",
@@ -445,7 +445,7 @@ namespace API.Core.DBContext {
             },
             new Visa() {
                 Id = 2,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-150),
                 EmployeeId = 3,
                 IssuedBy = "Konsul w Kijowie",
@@ -457,7 +457,7 @@ namespace API.Core.DBContext {
             },
             new Visa() {
                 Id = 3,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-150),
                 EmployeeId = 4,
                 IssuedBy = "Konsul w Kijowie",
@@ -469,7 +469,7 @@ namespace API.Core.DBContext {
             },
             new Visa() {
                 Id = 4,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-80),
                 EmployeeId = 2,
                 IssuedBy = "Konsul w Kijowie",
@@ -491,7 +491,7 @@ namespace API.Core.DBContext {
         public static IEnumerable<Permit> GetDummyPermits() => new Permit[] {
             new Permit() {
                 Id = 1,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-250),
                 EmployeeId = 2,
                 LocationId = 1,
@@ -503,7 +503,7 @@ namespace API.Core.DBContext {
             },
             new Permit() {
                 Id = 2,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-150),
                 EmployeeId = 3,
                 LocationId = 1,
@@ -515,7 +515,7 @@ namespace API.Core.DBContext {
             },
             new Permit() {
                 Id = 3,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-150),
                 EmployeeId = 4,
                 LocationId = 1,
@@ -527,7 +527,7 @@ namespace API.Core.DBContext {
             },
             new Permit() {
                 Id = 4,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-100),
                 EmployeeId = 2,
                 LocationId = 1,
@@ -548,7 +548,7 @@ namespace API.Core.DBContext {
         public static IEnumerable<Leave> GetDummyLeaves() => new Leave[] {
             new Leave() {
                 Id = 1,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-250),
                 EmployeeId = 1,
                 From = DateTime.Now.AddDays(-234),
@@ -558,7 +558,7 @@ namespace API.Core.DBContext {
             },
             new Leave() {
                 Id = 2,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-157),
                 EmployeeId = 2,
                 From = DateTime.Now.AddDays(-150),
@@ -568,7 +568,7 @@ namespace API.Core.DBContext {
             },
             new Leave() {
                 Id = 3,
-                CreatedBy = "Administrator",
+                CreatedBy = "Initial",
                 CreatedOn = DateTime.Now.AddDays(-61),
                 EmployeeId = 1,
                 From = DateTime.Now.AddDays(-61),
