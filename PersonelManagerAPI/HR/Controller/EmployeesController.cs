@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -7,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using API.Core.DBContext;
 using API.HR.Models;
-using System.Globalization;
 using API.HR.Logic;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
@@ -42,14 +40,24 @@ namespace API.HR.Controller {
         }
 
         //[Authorize]
+        [Route("GetEmployeesHistory")]
+        [HttpGet]
+        public async Task<ActionResult<EmployeeHistory>> GetEmployeesHistory(int id) {
+            var histories = await _context.EmployeesHistory.Where(x => x.EmployeeId == id).ToListAsync();
+
+            return Ok(histories);
+        }
+
+
+        //[Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEmployee(int id, EmployeeDTO dto) {
-            if (id != dto.Id) 
+            if (id != dto.Id)
                 return BadRequest();
-            
-            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
 
-            Employee employee = new Employee();
+            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
+            var employee = await _context.Employees.FindAsync(id);
+
             EmployeeManager.UpdateWithDTO(dto, ref employee);
             EmployeeManager.WriteUpdateTags(requestAuthor, ref employee);
             _context.Entry(employee).State = EntityState.Modified;
@@ -58,9 +66,8 @@ namespace API.HR.Controller {
             EmployeeHistory newHistory = EmployeeManager.CreateEmployeeHistoryEntry(dto, last);
             if (newHistory != null) {
                 EmployeeManager.WriteCreationTags(requestAuthor, ref newHistory);
-                //_context.Employees.
+                _context.EmployeesHistory.Add(newHistory);
             }
-
 
             try {
                 await _context.SaveChangesAsync();
@@ -75,18 +82,31 @@ namespace API.HR.Controller {
             return NoContent();
         }
 
-        // POST: api/Employees
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        //[Authorize]
         [HttpPost]
-        public async Task<ActionResult<Employee>> PostEmployee(Employee employee) {
+        public async Task<ActionResult<EmployeeDTO>> PostEmployee(EmployeeDTO dto) {
+            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
+            //TODO: TEST 
+
+            Employee employee = new Employee();
+            EmployeeManager.UpdateWithDTO(dto, ref employee);
+            EmployeeManager.WriteCreationTags(requestAuthor, ref employee);
+
             _context.Employees.Add(employee);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEmployee", new { id = employee.Id }, employee);
+            EmployeeHistory newHistory = EmployeeManager.CreateEmployeeHistoryEntry(dto);
+            newHistory.Id = employee.Id;
+            EmployeeManager.WriteCreationTags(requestAuthor, ref newHistory);
+            _context.EmployeesHistory.Add(newHistory);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+
+            //return CreatedAtAction("GetEmployee", new { id = employee.Id }, EmployeeManager.CreateDTO(employee));
         }
 
-        // DELETE: api/Employees/5
+        //[Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Employee>> DeleteEmployee(int id) {
             var employee = await _context.Employees.FindAsync(id);
@@ -98,6 +118,21 @@ namespace API.HR.Controller {
             await _context.SaveChangesAsync();
 
             return employee;
+        }
+
+        //[Authorize]
+        [HttpPatch]
+        public async Task<ActionResult> PatchIsArchived(int id, bool isArchived) {
+            var employee = await _context.Employees.FindAsync(id);
+            if (employee == null) {
+                return NotFound();
+            }
+            employee.IsArchived = isArchived;
+
+            _context.Employees.Attach(employee);
+            _context.Entry(employee).Property(x => x.IsArchived).IsModified = true;
+
+            return NoContent();
         }
 
         private bool EmployeeExists(int id) {

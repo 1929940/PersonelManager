@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using API.HR.Models;
 using API.Payroll.Models;
 using API.Business.Models;
@@ -35,10 +34,27 @@ namespace API.Core.DBContext {
             modelBuilder.Entity<Payment>().HasData(SeedPayroll.GetDummyPayment());
         }
 
-        public DbSet<Employee> Employees { get; set; }
-        public DbSet<Contract> Contracts { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<ConfigurationPage> ConfigurationPage { get; set; }
+
+
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<EmployeeHistory> EmployeesHistory { get; set; }
+        public DbSet<EmployeeAddress> EmployeeAddresses { get; set; }
+
+        public DbSet<Certificate> Certificates { get; set; }
+        public DbSet<Foreman> Foremen { get; set; }
+        public DbSet<Leave> Leaves { get; set; }
+        public DbSet<Location> Locations { get; set; }
+        public DbSet<MedicalCheckup> MedicalCheckups { get; set; }
+        public DbSet<SafetyTraining> SafetyTrainings { get; set; }
+
+        public DbSet<Passport> Passports { get; set; }
+        public DbSet<Permit> Permits { get; set; }
+        public DbSet<Visa> Visas { get; set; }
+
+
+        public DbSet<Contract> Contracts { get; set; }
         public DbSet<Payment> Payment { get; set; }
         public DbSet<Advance> Advances { get; set; }
 

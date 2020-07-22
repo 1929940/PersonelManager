@@ -27,7 +27,7 @@ namespace API.HR.Logic {
                 Profession = current.Profession,
                 AddressId = current.EmployeeAddressId,
                 FullAddress = string.Format(
-                    $"{current.EmployeeAddress.City} {current.EmployeeAddress.Zip} {current.EmployeeAddress.Street} {current.EmployeeAddress.Number}"),
+                    $"{current.EmployeeAddress.Zip} {current.EmployeeAddress.City}, {current.EmployeeAddress.Street} {current.EmployeeAddress.Number}"),
                 ForemanId = current.ForemanId,
                 ForemanFullName = string.Format(
                     $"{current.Foreman.FirstName} {current.Foreman.LastName}"),
@@ -51,9 +51,9 @@ namespace API.HR.Logic {
             CopyTags(dto, ref employee);
         }
 
-        public static EmployeeHistory CreateEmployeeHistoryEntry(EmployeeDTO dto, EmployeeHistory current) {
+        public static EmployeeHistory CreateEmployeeHistoryEntry(EmployeeDTO dto, EmployeeHistory current = null) {
 
-            if (IsEqual(dto, current))
+            if (! IsEqual(dto, current))
                 return new EmployeeHistory() {
                     LastName = dto.LastName,
                     PhoneNo = dto.PhoneNo,
@@ -67,6 +67,7 @@ namespace API.HR.Logic {
         }
 
         private static bool IsEqual(EmployeeDTO dto, EmployeeHistory history) =>
+            history != null &&
             history.EmployeeId == dto.Id &&
             history.LastName == dto.LastName &&
             history.PhoneNo == dto.PhoneNo &&
