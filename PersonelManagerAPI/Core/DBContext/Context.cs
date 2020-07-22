@@ -39,8 +39,8 @@ namespace API.Core.DBContext {
         public DbSet<Contract> Contracts { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<ConfigurationPage> ConfigurationPage { get; set; }
-        public DbSet<API.Payroll.Models.Payment> Payment { get; set; }
-        public DbSet<API.Payroll.Models.Advance> Advances { get; set; }
+        public DbSet<Payment> Payment { get; set; }
+        public DbSet<Advance> Advances { get; set; }
 
     }
 }

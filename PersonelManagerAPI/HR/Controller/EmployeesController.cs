@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using API.Core.DBContext;
 using API.HR.Models;
 using System.Globalization;
+using API.HR.Logic;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace API.HR.Controller {
     [Route("api/[controller]")]
@@ -19,34 +22,45 @@ namespace API.HR.Controller {
             _context = context;
         }
 
-        // GET: api/Employees
+        //[Authorize]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployee() {
-            return await _context.Employees.ToListAsync();
+        public async Task<ActionResult<IEnumerable<EmployeeDTO>>> GetEmployee() {
+            var collection = await _context.Employees.ToListAsync();
+            return Ok(collection.Select(x => EmployeeManager.CreateDTO(x)));
         }
 
-        // GET: api/Employees/5
+        //[Authorize]
         [HttpGet("{id}")]
-        public async Task<ActionResult<Employee>> GetEmployee(int id) {
+        public async Task<ActionResult<EmployeeDTO>> GetEmployee(int id) {
             var employee = await _context.Employees.FindAsync(id);
 
             if (employee == null) {
                 return NotFound();
             }
 
-            return employee;
+            return EmployeeManager.CreateDTO(employee);
         }
 
-        // PUT: api/Employees/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        //[Authorize]
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEmployee(int id, Employee employee) {
-            if (id != employee.Id) {
+        public async Task<IActionResult> PutEmployee(int id, EmployeeDTO dto) {
+            if (id != dto.Id) 
                 return BadRequest();
+            
+            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
+
+            Employee employee = new Employee();
+            EmployeeManager.UpdateWithDTO(dto, ref employee);
+            EmployeeManager.WriteUpdateTags(requestAuthor, ref employee);
+            _context.Entry(employee).State = EntityState.Modified;
+
+            EmployeeHistory last = employee.History.Last();
+            EmployeeHistory newHistory = EmployeeManager.CreateEmployeeHistoryEntry(dto, last);
+            if (newHistory != null) {
+                EmployeeManager.WriteCreationTags(requestAuthor, ref newHistory);
+                //_context.Employees.
             }
 
-            _context.Entry(employee).State = EntityState.Modified;
 
             try {
                 await _context.SaveChangesAsync();
