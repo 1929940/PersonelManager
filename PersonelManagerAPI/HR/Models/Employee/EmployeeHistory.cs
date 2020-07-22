@@ -1,11 +1,7 @@
-﻿using API.Core.Models;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API.HR.Models {
     public class EmployeeHistory : EmployeeHistoryBase {
-        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        //public new int Id { get; set; }
-
         [ForeignKey("Employee")]
         public int EmployeeId { get; set; }
         [Newtonsoft.Json.JsonIgnore]

@@ -86,7 +86,6 @@ namespace API.HR.Controller {
         [HttpPost]
         public async Task<ActionResult<EmployeeDTO>> PostEmployee(EmployeeDTO dto) {
             string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
-            //TODO: TEST 
 
             Employee employee = new Employee();
             EmployeeManager.UpdateWithDTO(dto, ref employee);
@@ -96,14 +95,12 @@ namespace API.HR.Controller {
             await _context.SaveChangesAsync();
 
             EmployeeHistory newHistory = EmployeeManager.CreateEmployeeHistoryEntry(dto);
-            newHistory.Id = employee.Id;
+            newHistory.EmployeeId = employee.Id;
             EmployeeManager.WriteCreationTags(requestAuthor, ref newHistory);
             _context.EmployeesHistory.Add(newHistory);
             await _context.SaveChangesAsync();
 
-            return Ok();
-
-            //return CreatedAtAction("GetEmployee", new { id = employee.Id }, EmployeeManager.CreateDTO(employee));
+            return CreatedAtAction("GetEmployee", new { id = employee.Id }, EmployeeManager.CreateDTO(employee));
         }
 
         //[Authorize]
@@ -121,6 +118,7 @@ namespace API.HR.Controller {
         }
 
         //[Authorize]
+        [Route("ArchiveEmployee")]
         [HttpPatch]
         public async Task<ActionResult> PatchIsArchived(int id, bool isArchived) {
             var employee = await _context.Employees.FindAsync(id);
@@ -131,6 +129,8 @@ namespace API.HR.Controller {
 
             _context.Employees.Attach(employee);
             _context.Entry(employee).Property(x => x.IsArchived).IsModified = true;
+
+            await _context.SaveChangesAsync();
 
             return NoContent();
         }
