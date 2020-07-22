@@ -27,12 +27,12 @@ namespace API.HR.Logic {
                 Profession = current.Profession,
                 AddressId = current.EmployeeAddressId,
                 FullAddress = string.Format(
-                    $"{current.EmployeeAddress.Zip} {current.EmployeeAddress.City}, {current.EmployeeAddress.Street} {current.EmployeeAddress.Number}"),
+                    $"{current.EmployeeAddress?.Zip} {current.EmployeeAddress?.City}, {current.EmployeeAddress?.Street} {current.EmployeeAddress?.Number}"),
                 ForemanId = current.ForemanId,
                 ForemanFullName = string.Format(
-                    $"{current.Foreman.FirstName} {current.Foreman.LastName}"),
+                    $"{current.Foreman?.FirstName} {current.Foreman?.LastName}"),
                 LocationId = current.LocationId,
-                LocationName = current.Location.Name
+                LocationName = current.Location?.Name
             };
 
             CopyTags(employee, ref dto);

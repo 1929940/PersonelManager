@@ -61,6 +61,8 @@ namespace API.HR.Controller {
             EmployeeManager.UpdateWithDTO(dto, ref employee);
             EmployeeManager.WriteUpdateTags(requestAuthor, ref employee);
             _context.Entry(employee).State = EntityState.Modified;
+            _context.Entry(employee).Property(x => x.CreatedOn).IsModified = false;
+            _context.Entry(employee).Property(x => x.CreatedBy).IsModified = false;
 
             EmployeeHistory last = employee.History.Last();
             EmployeeHistory newHistory = EmployeeManager.CreateEmployeeHistoryEntry(dto, last);
@@ -99,6 +101,11 @@ namespace API.HR.Controller {
             EmployeeManager.WriteCreationTags(requestAuthor, ref newHistory);
             _context.EmployeesHistory.Add(newHistory);
             await _context.SaveChangesAsync();
+            employee = await _context.Employees.FindAsync(employee.Id);
+            newHistory = await _context.EmployeesHistory.FindAsync(newHistory.Id);
+            await _context.Foremen.FindAsync(newHistory.ForemanId);
+            await _context.Locations.FindAsync(newHistory.LocationId);
+            await _context.EmployeeAddresses.FindAsync(newHistory.EmployeeAddressId);
 
             return CreatedAtAction("GetEmployee", new { id = employee.Id }, EmployeeManager.CreateDTO(employee));
         }
