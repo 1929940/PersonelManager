@@ -39,6 +39,15 @@ namespace API.Payroll.Contoller {
         }
 
         //[Authorize]
+        [Route("EmployeeContracts")]
+        [HttpGet]
+        public async Task<ActionResult<Advance>> GetEmployeeContracts(int id) {
+            var contracts = await _context.Contracts.Where(x => x.EmployeeId == id).ToListAsync();
+            return Ok(contracts.Select(x =>ContractManager.CreateDTO(x)));
+        }
+
+
+        //[Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutContract(int id, ContractDTO dto) {
             if (id != dto.Id) {

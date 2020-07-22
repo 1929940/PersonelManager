@@ -27,7 +27,7 @@ namespace API.Payroll.Contoller {
             return await _context.Advances.ToListAsync();
         }
 
-        // GET: api/Advances/5
+        //[Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<Advance>> GetAdvance(int id) {
             var advances = await _context.Advances.FindAsync(id);
@@ -38,6 +38,18 @@ namespace API.Payroll.Contoller {
 
             return advances;
         }
+
+        //[Authorize]
+        //TODO: This should return contract title, number, isrealized, 
+        [Route("EmployeeAdvances")]
+        [HttpGet]
+        public async Task<ActionResult<Advance>> GetEmployeeAdvances(int id) {
+            var contracts = await _context.Contracts.Where(x => x.EmployeeId == id && x.Advances.Any()).ToListAsync();
+            var advances = contracts.Select(x => x.Advances);
+
+            return Ok(advances);
+        }
+
 
         //TODO: Allows changing ContractId
         //[Authorize]

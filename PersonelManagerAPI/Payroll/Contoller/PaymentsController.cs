@@ -36,6 +36,17 @@ namespace API.Payroll.Contoller {
             return payment;
         }
 
+        //[Authorize]
+        [Route("EmployeesPayments")]
+        [HttpGet]
+        public async Task<ActionResult<Advance>> GetEmployeePayments(int id) {
+            var contracts = await _context.Contracts.Where(x => x.EmployeeId == id && x.Payment != null).ToListAsync();
+            var payments = contracts.Select(x => x.Payment);
+
+            return Ok(payments);
+        }
+
+
         //TODO: Allows changing ContractId
         //[Authorize]
         [HttpPut("{id}")]
