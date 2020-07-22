@@ -135,6 +135,19 @@ namespace API.HR.Controller {
             return NoContent();
         }
 
+        ////[Authorize]
+        //[Route("GetAddresses")]
+        //[HttpGet]
+        //public async Task<ActionResult<EmployeeAddress>> GetAddresses(int id) {
+        //    var employee = await _context.Employees.FindAsync(id);
+        //    if (employee == null) {
+        //        return NotFound();
+        //    }
+
+        //THIS NEEDS ITS OWN CONTROLLER CRUD OPERATION ARE NESSESARY
+
+        //}
+
         private bool EmployeeExists(int id) {
             return _context.Employees.Any(e => e.Id == id);
         }

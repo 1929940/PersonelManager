@@ -1,10 +1,10 @@
 ﻿using API.Core.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace API.Payroll.Models {
     public class AdvanceBase : BaseEntity {
+        public int WorkedHours { get; set; }
+        public decimal Amount { get; set; }
+        public DateTime? PaidOn { get; set; }
     }
 }

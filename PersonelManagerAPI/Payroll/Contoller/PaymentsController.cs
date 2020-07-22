@@ -22,26 +22,27 @@ namespace API.Payroll.Contoller {
         //[Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Payment>>> GetPayment() {
-            return await _context.Payment.ToListAsync();
+            var payments = await _context.Payment.ToListAsync();
+            return Ok(payments.Select(x => PaymentManager.CreateDTO(x)));
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Payment>> GetPayment(int id) {
+        public async Task<ActionResult<PaymentDTO>> GetPayment(int id) {
             var payment = await _context.Payment.FindAsync(id);
 
             if (payment == null) {
                 return NotFound();
             }
 
-            return payment;
+            return PaymentManager.CreateDTO(payment);
         }
 
         //[Authorize]
         [Route("EmployeesPayments")]
         [HttpGet]
-        public async Task<ActionResult<Advance>> GetEmployeePayments(int id) {
+        public async Task<ActionResult<AdvanceDTO>> GetEmployeePayments(int id) {
             var contracts = await _context.Contracts.Where(x => x.EmployeeId == id && x.Payment != null).ToListAsync();
-            var payments = contracts.Select(x => x.Payment);
+            var payments = contracts.Select(x => PaymentManager.CreateDTO(x.Payment));
 
             return Ok(payments);
         }
@@ -50,12 +51,14 @@ namespace API.Payroll.Contoller {
         //TODO: Allows changing ContractId
         //[Authorize]
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPayment(int id, Payment payment) {
-            if (id != payment.Id) {
+        public async Task<IActionResult> PutPayment(int id, PaymentDTO dto) {
+            if (id != dto.Id) {
                 return BadRequest();
             }
 
             string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
+            var payment = await _context.Payment.FindAsync(id);
+            PaymentManager.UpdateWithDTO(dto, ref payment);
             PaymentManager.WriteUpdateTags(requestAuthor, ref payment);
 
             _context.Entry(payment).State = EntityState.Modified;
@@ -77,14 +80,17 @@ namespace API.Payroll.Contoller {
 
         //[Authorize]
         [HttpPost]
-        public async Task<ActionResult<Payment>> PostPayment(Payment payment) {
+        public async Task<ActionResult<PaymentDTO>> PostPayment(PaymentDTO dto) {
             string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
+            Payment payment = new Payment();
+            PaymentManager.UpdateWithDTO(dto, ref payment);
             PaymentManager.WriteCreationTags(requestAuthor, ref payment);
 
             _context.Payment.Add(payment);
             await _context.SaveChangesAsync();
+            await _context.Entry(payment).Reference(x => x.Contract).LoadAsync();
 
-            return CreatedAtAction("GetPayment", new { id = payment.Id }, payment);
+            return CreatedAtAction("GetPayment", new { id = payment.Id }, PaymentManager.CreateDTO(payment));
         }
 
         //[Authorize]

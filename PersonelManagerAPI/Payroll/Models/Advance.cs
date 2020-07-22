@@ -1,13 +1,7 @@
-﻿using API.Core.Models;
-using System;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API.Payroll.Models {
-    public class Advance : BaseEntity {
-        public int WorkedHours { get; set; }
-        public decimal Amount { get; set; }
-        public DateTime? PaidOn { get; set; }
-
+    public class Advance : AdvanceBase {
         [ForeignKey("Contract")]
         public int ContractId { get; set; }
         [Newtonsoft.Json.JsonIgnore]

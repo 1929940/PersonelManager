@@ -1,6 +1,8 @@
 ﻿using API.Core.Logic;
 using API.HR.Logic;
 using API.Payroll.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace API.Payroll.Logic {
     public class ContractManager : BaseEntityManager {
@@ -17,11 +19,22 @@ namespace API.Payroll.Logic {
                 TaxPercent = contract.TaxPercent,
                 IsRealized = contract.IsRealized,
                 Payment = contract.Payment,
-                Advances = contract.Advances,
+                Advances = contract.Advances
             };
             CopyTags(contract, ref dto);
 
             return dto;
+        }
+
+        public static ContractSimplifiedDTO CreateSimplifiedDTO(Contract contract) {
+            return new ContractSimplifiedDTO() {
+                Id = contract.Id,
+                Title = contract.Title,
+                Number = contract.Number,
+                ValidFrom = contract.ValidFrom,
+                ValidTo = contract.ValidTo,
+                IsRealized = contract.IsRealized
+            };
         }
 
         public static void UpdateWithDTO(ContractDTO dto, ref Contract contract) {

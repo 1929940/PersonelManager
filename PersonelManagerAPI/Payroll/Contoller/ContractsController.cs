@@ -22,15 +22,15 @@ namespace API.Payroll.Contoller {
         //[Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ContractDTO>>> GetContracts() {
-            List<Contract> list = await _context.Contracts.ToListAsync();
-            return Ok(list.Select(x => ContractManager.CreateDTO(x)));
+            List<Contract> contracts = await _context.Contracts.ToListAsync();
+            return Ok(contracts.Select(x => ContractManager.CreateDTO(x)));
         }
 
         //[Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<ContractDTO>> GetContract(int id) {
             var contract = await _context.Contracts.FindAsync(id);
-
+            
             if (contract == null) {
                 return NotFound();
             }
