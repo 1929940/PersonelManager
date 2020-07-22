@@ -2,10 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API.HR.Models {
-    public class EmployeeHistory : BaseEntity {
-        public string LastName { get; set; }
-        public string Profession { get; set; }
-
+    public class EmployeeHistory : EmployeeHistoryBase {
         [ForeignKey("Employee")]
         public int EmployeeId { get; set; }
         public virtual Employee Employee { get; set; }
