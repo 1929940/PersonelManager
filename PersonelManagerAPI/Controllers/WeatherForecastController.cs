@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
 
 namespace PersonelManagerAPI.Controllers {
-    [Authorize(Roles = "Initial")]
+    //[Authorize(Roles = "Initial")]
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase {
@@ -27,6 +27,9 @@ namespace PersonelManagerAPI.Controllers {
 
         [HttpGet]
         public IEnumerable<WeatherForecast> Get() {
+
+            //PasswordResetHandler.Sent();
+
             //TODO: This is how to read claims
             var ww = HttpContext.User.Claims.Where(x => x.Type == ClaimTypes.Role);
 
@@ -37,7 +40,7 @@ namespace PersonelManagerAPI.Controllers {
             var wwz = HttpContext.Request.Body;
             //HttpContext.User.
             Request.Headers.TryGetValue("Authorization", out StringValues wzw);
-            var token = wzw.FirstOrDefault().Substring(7);
+            //var token = wzw.FirstOrDefault().Substring(7);
 
 
 

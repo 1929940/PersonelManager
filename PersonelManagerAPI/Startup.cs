@@ -38,15 +38,24 @@ namespace PersonelManagerAPI {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             );
 
-            var appSettingsSection = Configuration.GetSection("AppSettings");
-            services.Configure<AppSettings>(appSettingsSection);
+            //var appSettingsSection = Configuration.GetSection("AppSettings");
+            //services.Configure<AppSettings>(appSettingsSection);
+
+            var appSecretsSection = Configuration.GetSection("AppSecrets");
+            services.Configure<AppSecrets>(appSecretsSection);
+
+            string emailPw = Configuration["Secrets:Password"];
 
             services.AddDbContext<Context>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("PersonelManagerDB")));
 
-            var appSettings = appSettingsSection.Get<AppSettings>();
-            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
-            var issuer = appSettings.Issuer;
+            //var appSettings = appSettingsSection.Get<AppSettings>();
+            //var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+            //var issuer = appSettings.Issuer;
+
+            var appSecrets = appSecretsSection.Get<AppSecrets>();
+            var key = Encoding.ASCII.GetBytes(appSecrets.AuthSecret);
+            var issuer = appSecrets.Issuer;
 
             services.AddAuthentication(x => {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

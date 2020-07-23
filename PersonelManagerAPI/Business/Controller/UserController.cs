@@ -17,13 +17,12 @@ namespace API.Business.Controller {
     [ApiController]
     public class UserController : ControllerBase {
         private readonly Context _context;
-        private readonly AppSettings _appSettings;
+        private readonly AppSecrets _appSecrets;
 
-        public UserController(Context context, IOptions<AppSettings> appSettings) {
+        public UserController(Context context, IOptions<AppSecrets> appSecrets) {
             _context = context;
-            _appSettings = appSettings.Value;
+            _appSecrets = appSecrets.Value;
         }
-
 
         //[Authorize(Roles = "Manager,Administrator")]
         [HttpGet]
@@ -89,7 +88,7 @@ namespace API.Business.Controller {
             if (user == null)
                 return Unauthorized();
 
-            string token = TokenManager.GenerateJwtToken(user, _appSettings);
+            string token = TokenManager.GenerateJwtToken(user, _appSecrets);
 
             return Ok(new AuthenticationReponse() { Token = token });
         }
@@ -122,9 +121,14 @@ namespace API.Business.Controller {
             if (user == null)
                 return NotFound();
 
+            PasswordResetHandler.Sent(_appSecrets, null, "1234");
+
             user.RequestedPasswordReset = true;
+            user.Hash = "1234";
             _context.Users.Attach(user);
             _context.Entry(user).Property(x => x.RequestedPasswordReset).IsModified = true;
+            _context.Entry(user).Property(x => x.Hash).IsModified = true;
+
 
             await _context.SaveChangesAsync();
 

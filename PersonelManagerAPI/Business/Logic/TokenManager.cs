@@ -9,11 +9,12 @@ using System.Text;
 namespace API.Business.Logic {
 
     public static class TokenManager {
-        public static string GenerateJwtToken(User user, AppSettings settings) {
+        //public static string GenerateJwtToken(User user, AppSettings settings) {
+        public static string GenerateJwtToken(User user, AppSecrets secrets) {
 
             var tokenHandler = new JwtSecurityTokenHandler();
 
-            var key = Encoding.ASCII.GetBytes(settings.Secret);
+            var key = Encoding.ASCII.GetBytes(secrets.AuthSecret);
 
             var tokenDescriptor = new SecurityTokenDescriptor {
                 Subject = new ClaimsIdentity(new Claim[]{
@@ -21,7 +22,7 @@ namespace API.Business.Logic {
                     new Claim(ClaimTypes.Name, string.Format("{0} {1}", user.FirstName, user.LastName)),
                 }),
                 Expires = DateTime.UtcNow.AddHours(12),
-                Issuer = settings.Issuer,
+                Issuer = secrets.Issuer,
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
