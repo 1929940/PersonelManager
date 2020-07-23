@@ -15,9 +15,5 @@ namespace API.HR.Models {
         [ForeignKey("Foreman")]
         public int? ForemanId { get; set; }
         public virtual Foreman Foreman { get; set; }
-
-        [ForeignKey("EmployeeAddress")]
-        public int? EmployeeAddressId { get; set; }
-        public virtual EmployeeAddress EmployeeAddress { get; set; }
     }
 }

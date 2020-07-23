@@ -110,6 +110,7 @@ namespace API.Core.DBContext {
                 PhoneNo = "+58 808 100 001"
             }
         };
+        /*
         public static IEnumerable<EmployeeAddress> GetDummyEmployeeAddresses() => new EmployeeAddress[] {
             new EmployeeAddress() {
                 Id = 1,
@@ -178,6 +179,7 @@ namespace API.Core.DBContext {
                 Number = "3-1",
             },
         };
+        */
         public static IEnumerable<EmployeeHistory> GetDummyEmployeeHistories() => new EmployeeHistory[] {
             new EmployeeHistory() {
                 Id = 1,
@@ -186,8 +188,13 @@ namespace API.Core.DBContext {
                 LastName = "Maciejewski",
                 Profession = "Monter Okrętowy",
                 PhoneNo = "608 767 878",
+                Country = "Polska",
+                Region = "Pomorze",
+                City = "Kosokowo",
+                Zip = "81-198",
+                Street = "Rzemieślnicza",
+                Number = "26C",
                 EmployeeId = 1,
-                EmployeeAddressId = 1,
                 ForemanId = 1,
                 LocationId = 1
             },
@@ -198,8 +205,13 @@ namespace API.Core.DBContext {
                 LastName = "Kravchuk",
                 Profession = "Szlifierz Okrętowy",
                 PhoneNo = "982 280 556",
+                Country = "Polska",
+                Region = "Pomorze",
+                City = "Rumia",
+                Zip = "84-230",
+                Street = "Świętopełka",
+                Number = "20A",
                 EmployeeId = 2,
-                EmployeeAddressId = 2,
                 ForemanId = 2,
                 LocationId = 1
             },
@@ -210,8 +222,13 @@ namespace API.Core.DBContext {
                 LastName = "Kuchna",
                 Profession = "Szlifierz Okrętowy",
                 PhoneNo = "777 090 210",
+                Country = "Polska",
+                Region = "Pomorze",
+                City = "Gdynia",
+                Zip = "81-549",
+                Street = "Spokojna",
+                Number = "6",
                 EmployeeId = 3,
-                EmployeeAddressId = 3,
                 ForemanId = 2,
                 LocationId = 1
             },
@@ -221,8 +238,13 @@ namespace API.Core.DBContext {
                 CreatedOn = DateTime.Now.AddDays(-200),
                 LastName = "Maciejewski",
                 Profession = "Spawacz Okrętowy",
+                Country = "Polska",
+                Region = "Pomorze",
+                City = "Gdańsk",
+                Zip = "80-553",
+                Street = "Ks. Mariana Góreckiego",
+                Number = "12",
                 EmployeeId = 1,
-                EmployeeAddressId = 4,
                 ForemanId = 3,
                 LocationId = 2
             },
@@ -233,8 +255,13 @@ namespace API.Core.DBContext {
                 LastName = "Yushchenko",
                 Profession = "Monter Okrętowy",
                 PhoneNo = "606 852 298",
+                Country = "Polska",
+                Region = "Pomorze",
+                City = "Pogórze",
+                Zip = "81-198",
+                Street = "Wapienna",
+                Number = "13",
                 EmployeeId = 4,
-                EmployeeAddressId = 5,
                 ForemanId = 2,
                 LocationId = 1
             },
@@ -245,8 +272,13 @@ namespace API.Core.DBContext {
                 LastName = "Maciejewski",
                 Profession = "Spawacz Okrętowy",
                 PhoneNo = "608 767 878",
+                Country = "Polska",
+                Region = "Pomorze",
+                City = "Gdańsk",
+                Zip = "80-506",
+                Street = "Nadmorski Dwór",
+                Number = "3-1",
                 EmployeeId = 1,
-                EmployeeAddressId = 6,
                 ForemanId = 3,
                 LocationId = 2
             },
@@ -584,9 +616,9 @@ namespace API.Core.DBContext {
         };
 
 
-            //1 jakis urlop
-            //2 has been gone till days -150 to -80 aka 70 days. ON LEGAL
-            //3 bumelka od -61 dni
-        
+        //1 jakis urlop
+        //2 has been gone till days -150 to -80 aka 70 days. ON LEGAL
+        //3 bumelka od -61 dni
+
     }
 }

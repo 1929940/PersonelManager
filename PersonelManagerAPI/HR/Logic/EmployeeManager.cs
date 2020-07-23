@@ -25,9 +25,12 @@ namespace API.HR.Logic {
                 Pesel = employee.Pesel,
                 PhoneNo = current.PhoneNo,
                 Profession = current.Profession,
-                AddressId = current.EmployeeAddressId,
-                FullAddress = string.Format(
-                    $"{current.EmployeeAddress?.Zip} {current.EmployeeAddress?.City}, {current.EmployeeAddress?.Street} {current.EmployeeAddress?.Number}"),
+                Country = current.Country,
+                Region = current.Region,
+                City = current.City,
+                Zip = current.Zip,
+                Street = current.Street,
+                Number = current.Number,
                 ForemanId = current.ForemanId,
                 ForemanFullName = string.Format(
                     $"{current.Foreman?.FirstName} {current.Foreman?.LastName}"),
@@ -61,7 +64,12 @@ namespace API.HR.Logic {
                     EmployeeId = dto.Id,
                     ForemanId = dto.ForemanId,
                     LocationId = dto.LocationId,
-                    EmployeeAddressId = dto.AddressId
+                    Country = dto.Country,
+                    Region = dto.Region,
+                    City = dto.City,
+                    Zip = dto.Zip,
+                    Street = dto.Street,
+                    Number = dto.Number,
                 };
             return null;
         }
@@ -74,6 +82,11 @@ namespace API.HR.Logic {
             history.Profession == dto.Profession &&
             history.LocationId == dto.LocationId &&
             history.ForemanId == dto.ForemanId &&
-            history.EmployeeAddressId == dto.AddressId;
+            history.Country == dto.Country &&
+            history.Region == dto.Region &&
+            history.City == dto.City &&
+            history.Zip == dto.Zip &&
+            history.Street == dto.Street &&
+            history.Number == dto.Number;
     }
 }

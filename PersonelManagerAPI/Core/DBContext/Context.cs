@@ -19,7 +19,6 @@ namespace API.Core.DBContext {
             modelBuilder.Entity<Employee>().HasData(SeedHR.GetDummyEmployees());
             modelBuilder.Entity<Location>().HasData(SeedHR.GetDummyLocation());
             modelBuilder.Entity<Foreman>().HasData(SeedHR.GetDummyForemen());
-            modelBuilder.Entity<EmployeeAddress>().HasData(SeedHR.GetDummyEmployeeAddresses());
             modelBuilder.Entity<EmployeeHistory>().HasData(SeedHR.GetDummyEmployeeHistories());
             modelBuilder.Entity<MedicalCheckup>().HasData(SeedHR.GetDummyMedicalCheckups());
             modelBuilder.Entity<SafetyTraining>().HasData(SeedHR.GetDummySafetyTrainings());
@@ -40,7 +39,6 @@ namespace API.Core.DBContext {
 
         public DbSet<Employee> Employees { get; set; }
         public DbSet<EmployeeHistory> EmployeesHistory { get; set; }
-        public DbSet<EmployeeAddress> EmployeeAddresses { get; set; }
 
         public DbSet<Certificate> Certificates { get; set; }
         public DbSet<Foreman> Foremen { get; set; }

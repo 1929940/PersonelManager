@@ -105,7 +105,6 @@ namespace API.HR.Controller {
             newHistory = await _context.EmployeesHistory.FindAsync(newHistory.Id);
             await _context.Foremen.FindAsync(newHistory.ForemanId);
             await _context.Locations.FindAsync(newHistory.LocationId);
-            await _context.EmployeeAddresses.FindAsync(newHistory.EmployeeAddressId);
 
             return CreatedAtAction("GetEmployee", new { id = employee.Id }, EmployeeManager.CreateDTO(employee));
         }
