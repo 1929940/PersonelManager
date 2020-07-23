@@ -3,12 +3,7 @@ using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API.HR.Models {
-    public class Leave : BaseEntity {
-        public DateTime From { get; set; }
-        public DateTime? To { get; set; }
-        public string Type { get; set; }
-        public string Comment { get; set; }
-
+    public class Leave : LeaveBase {
         [ForeignKey("Employee")]
         public int EmployeeId { get; set; }
         public virtual Employee Employee { get; set; }

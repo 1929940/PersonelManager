@@ -1,6 +1,4 @@
 ﻿using API.Core.Models;
-using Newtonsoft.Json;
-using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API.HR.Models {
