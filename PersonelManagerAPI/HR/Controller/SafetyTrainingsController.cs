@@ -5,34 +5,33 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authorization;
 using API.Core.DBContext;
 using API.HR.Models;
 using API.HR.Helpers;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.HR.Controller {
     [Route("api/[controller]")]
     [ApiController]
-    public class CertificatesController : ControllerBase {
+    public class SafetyTrainingsController : ControllerBase {
         private readonly Context _context;
-        private readonly DbSet<Certificate> _set;
+        private readonly DbSet<SafetyTraining> _set;
 
-        public CertificatesController(Context context) {
+        public SafetyTrainingsController(Context context) {
             _context = context;
-            _set = context.Certificates;
+            _set = context.SafetyTrainings;
         }
 
         //[Authorize]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<DocumentDTO>>> GetCertificates() {
+        public async Task<ActionResult<IEnumerable<DocumentDTO>>> GetSafetyTrainings() {
             return Ok(await DocumentControllerHelper.GetAllDocuments(_set));
         }
 
-
         //[Authorize]
         [HttpGet("{id}")]
-        public async Task<ActionResult<DocumentDTO>> GetCertificate(int id) {
+        public async Task<ActionResult<DocumentDTO>> GetSafetyTraining(int id) {
             var document = await DocumentControllerHelper.GetDocument(_set, id);
 
             if (document == null) {
@@ -43,15 +42,15 @@ namespace API.HR.Controller {
         }
 
         //[Authorize]
-        [Route("GetEmployeeCertificates")]
+        [Route("GetEmployeeSafetyTrainings")]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<DocumentDTO>>> GetEmployeeCertificates(int id) {
+        public async Task<ActionResult<IEnumerable<DocumentDTO>>> GetEmployeeSafetyTrainings(int id) {
             return Ok(await DocumentControllerHelper.GetEmployeesDocuments(_set, id));
         }
 
         //[Authorize]
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCertificate(int id, DocumentDTO dto) {
+        public async Task<IActionResult> PutSafetyTraining(int id, DocumentDTO dto) {
             if (id != dto.Id) {
                 return BadRequest();
             }
@@ -61,7 +60,7 @@ namespace API.HR.Controller {
             try {
                 await _context.SaveChangesAsync();
             } catch (DbUpdateConcurrencyException) {
-                if (!CertificateExists(id)) {
+                if (!SafetyTrainingExists(id)) {
                     return NotFound();
                 } else {
                     throw;
@@ -73,29 +72,29 @@ namespace API.HR.Controller {
 
         //[Authorize]
         [HttpPost]
-        public async Task<ActionResult<DocumentDTO>> PostCertificate(DocumentDTO dto) {
+        public async Task<ActionResult<DocumentDTO>> PostSafetyTraining(DocumentDTO dto) {
             string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
             DocumentDTO result = await DocumentControllerHelper.PostDocument(_context, _set, dto, requestAuthor);
 
-            return CreatedAtAction("GetCertificate", new { id = result.Id }, result);
+            return CreatedAtAction("GetSafetyTraining", new { id = result.Id }, result);
         }
 
         //[Authorize]
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Certificate>> DeleteCertificate(int id) {
-            var certificate = await _context.Certificates.FindAsync(id);
-            if (certificate == null) {
+        public async Task<ActionResult<SafetyTraining>> DeleteSafetyTraining(int id) {
+            var safetyTraining = await _context.SafetyTrainings.FindAsync(id);
+            if (safetyTraining == null) {
                 return NotFound();
             }
 
-            _context.Certificates.Remove(certificate);
+            _context.SafetyTrainings.Remove(safetyTraining);
             await _context.SaveChangesAsync();
 
-            return certificate;
+            return safetyTraining;
         }
 
-        private bool CertificateExists(int id) {
-            return _context.Certificates.Any(e => e.Id == id);
+        private bool SafetyTrainingExists(int id) {
+            return _context.SafetyTrainings.Any(e => e.Id == id);
         }
     }
 }

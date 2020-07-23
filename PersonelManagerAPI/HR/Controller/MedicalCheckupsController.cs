@@ -14,25 +14,25 @@ using System.Security.Claims;
 namespace API.HR.Controller {
     [Route("api/[controller]")]
     [ApiController]
-    public class CertificatesController : ControllerBase {
+    public class MedicalCheckupsController : ControllerBase {
         private readonly Context _context;
-        private readonly DbSet<Certificate> _set;
+        private readonly DbSet<MedicalCheckup> _set;
 
-        public CertificatesController(Context context) {
+        public MedicalCheckupsController(Context context) {
             _context = context;
-            _set = context.Certificates;
+            _set = context.MedicalCheckups;
         }
 
         //[Authorize]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<DocumentDTO>>> GetCertificates() {
+        public async Task<ActionResult<IEnumerable<DocumentDTO>>> GetMedicalCheckups() {
             return Ok(await DocumentControllerHelper.GetAllDocuments(_set));
         }
 
 
         //[Authorize]
         [HttpGet("{id}")]
-        public async Task<ActionResult<DocumentDTO>> GetCertificate(int id) {
+        public async Task<ActionResult<DocumentDTO>> GetMedicalCheckup(int id) {
             var document = await DocumentControllerHelper.GetDocument(_set, id);
 
             if (document == null) {
@@ -43,15 +43,15 @@ namespace API.HR.Controller {
         }
 
         //[Authorize]
-        [Route("GetEmployeeCertificates")]
+        [Route("GetEmployeeMedicalCheckups")]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<DocumentDTO>>> GetEmployeeCertificates(int id) {
+        public async Task<ActionResult<IEnumerable<DocumentDTO>>> GetEmployeeMedicalCheckups(int id) {
             return Ok(await DocumentControllerHelper.GetEmployeesDocuments(_set, id));
         }
 
         //[Authorize]
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCertificate(int id, DocumentDTO dto) {
+        public async Task<IActionResult> PutMedicalCheckup(int id, DocumentDTO dto) {
             if (id != dto.Id) {
                 return BadRequest();
             }
@@ -61,7 +61,7 @@ namespace API.HR.Controller {
             try {
                 await _context.SaveChangesAsync();
             } catch (DbUpdateConcurrencyException) {
-                if (!CertificateExists(id)) {
+                if (!MedicalCheckupExists(id)) {
                     return NotFound();
                 } else {
                     throw;
@@ -73,29 +73,29 @@ namespace API.HR.Controller {
 
         //[Authorize]
         [HttpPost]
-        public async Task<ActionResult<DocumentDTO>> PostCertificate(DocumentDTO dto) {
+        public async Task<ActionResult<DocumentDTO>> PostMedicalCheckup(DocumentDTO dto) {
             string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
             DocumentDTO result = await DocumentControllerHelper.PostDocument(_context, _set, dto, requestAuthor);
 
-            return CreatedAtAction("GetCertificate", new { id = result.Id }, result);
+            return CreatedAtAction("GetMedicalCheckup", new { id = result.Id }, result);
         }
 
         //[Authorize]
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Certificate>> DeleteCertificate(int id) {
-            var certificate = await _context.Certificates.FindAsync(id);
-            if (certificate == null) {
+        public async Task<ActionResult<MedicalCheckup>> DeleteMedicalCheckup(int id) {
+            var medicalCheckup = await _context.MedicalCheckups.FindAsync(id);
+            if (medicalCheckup == null) {
                 return NotFound();
             }
 
-            _context.Certificates.Remove(certificate);
+            _context.MedicalCheckups.Remove(medicalCheckup);
             await _context.SaveChangesAsync();
 
-            return certificate;
+            return medicalCheckup;
         }
 
-        private bool CertificateExists(int id) {
-            return _context.Certificates.Any(e => e.Id == id);
+        private bool MedicalCheckupExists(int id) {
+            return _context.MedicalCheckups.Any(e => e.Id == id);
         }
     }
 }
