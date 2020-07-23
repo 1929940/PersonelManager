@@ -1,8 +1,6 @@
 ﻿using API.Core.Logic;
 using API.HR.Logic;
 using API.Payroll.Models;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace API.Payroll.Logic {
     public class ContractManager : BaseEntityManager {

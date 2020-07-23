@@ -7,8 +7,8 @@ namespace API.HR.Logic {
         public static EmployeeSimplifiedDTO CreateSimplifiedDTO(Employee employee) => new EmployeeSimplifiedDTO() {
             Id = employee.Id,
             FirstName = employee.FirstName,
-            LastName = employee.History.FirstOrDefault().LastName,
-            Profession = employee.History.FirstOrDefault().Profession
+            LastName = employee.History.Last().LastName,
+            Profession = employee.History.Last().Profession
         };
 
         public static EmployeeDTO CreateDTO(Employee employee) {
@@ -62,8 +62,8 @@ namespace API.HR.Logic {
                     PhoneNo = dto.PhoneNo,
                     Profession = dto.Profession,
                     EmployeeId = dto.Id,
-                    ForemanId = dto.ForemanId,
-                    LocationId = dto.LocationId,
+                    ForemanId = (dto.ForemanId == 0) ? null : dto.ForemanId,
+                    LocationId = (dto.LocationId == 0) ? null : dto.LocationId,
                     Country = dto.Country,
                     Region = dto.Region,
                     City = dto.City,

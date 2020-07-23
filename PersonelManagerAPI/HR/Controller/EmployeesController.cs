@@ -13,7 +13,7 @@ using System.Security.Claims;
 namespace API.HR.Controller {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmployeesController : ControllerBase {
+    public class EmployeesController<T> : ControllerBase {
         private readonly Context _context;
 
         public EmployeesController(Context context) {
