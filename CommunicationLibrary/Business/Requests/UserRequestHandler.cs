@@ -1,6 +1,6 @@
 ﻿using CommunicationLibrary.Business.Models;
-using CommunicationLibrary.Core;
-using CommunicationLibrary.Core.Helpers;
+using CommunicationLibrary.Core.Logic;
+using CommunicationLibrary.Core.Resx;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,37 +10,105 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CommunicationLibrary.Business.Requests {
-    public class UserRequestHandler {
+    public class UserRequestHandler : BaseRequestHandler<User> {
 
-        //Users Get()
-
-        public async Task<IEnumerable<User>> Get() {
-            List<User> reservationList = new List<User>();
-            using (var httpClient = new HttpClient()) {
-                //TODO: Does this set token?
-                RequestHelper.SetToken(httpClient);
-
-                string path = string.Format($"{Settings.Url}{"Endpoints.GetOne"}{"id"}");
-
-                using (var response = await httpClient.GetAsync(Settings.Url)) {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    reservationList = JsonConvert.DeserializeObject<List<User>>(apiResponse);
-                }
-            }
-            return reservationList;
+        public UserRequestHandler() {
+            _controllerName = "User";
         }
 
+        //Login
 
-        //User Create(User)
+        public AuthenticationReponse Login(string login, string password) {
 
-        //void Update(id, User);
+            AuthenticationReponse output = null;
+            var input = new AuthenticationRequest() { Login = login, Password = password };
 
-        //void Delete(id);
+            using (var httpClient = new HttpClient()) {
 
-        //bool string Login(request);
+                string requestUri = GetUri(_controllerName, RouteVerbs.LOGIN);
 
-        //void RequestPasswordReset(id)
+                using (var response = httpClient.PostAsync(requestUri, CreateStringContent(input)).Result) {
+                    string apiResponse = response.Content.ReadAsStringAsync().Result;
+                    output = JsonConvert.DeserializeObject<AuthenticationReponse>(apiResponse);
+                }
+            }
+            return output;
+        }
 
-        //void UpdatePassword(id, hash);
+        public async Task<AuthenticationReponse> LoginAsync(string login, string password) {
+
+            AuthenticationReponse output = null;
+            var input = new AuthenticationRequest() { Login = login, Password = password };
+
+            using (var httpClient = new HttpClient()) {
+
+                string requestUri = GetUri(_controllerName, RouteVerbs.LOGIN);
+
+                using (var response = await httpClient.PostAsync(requestUri, CreateStringContent(input))) {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    output = JsonConvert.DeserializeObject<AuthenticationReponse>(apiResponse);
+                }
+            }
+            return output;
+        }
+
+        //RequestPasswordReset
+
+        public void RequestPasswordReset(int id) {
+
+            using (var httpClient = new HttpClient()) {
+                SetToken(httpClient);
+
+                string requestUri = GetUri(_controllerName, RouteVerbs.REQUEST_PASSWORD_RESET, id);
+                var stringContent = new StringContent(string.Empty);
+
+                using (var response = httpClient.PutAsync(requestUri, stringContent).Result) {
+                    string apiResponse = response.Content.ReadAsStringAsync().Result;
+                }
+            }
+        }
+
+        public async Task RequestPasswordResetAsync(int id) {
+
+            using (var httpClient = new HttpClient()) {
+                SetToken(httpClient);
+
+                string requestUri = GetUri(_controllerName, RouteVerbs.REQUEST_PASSWORD_RESET, id);
+
+                using (var response = await httpClient.PutAsync(requestUri, null)) {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                }
+            }
+        }
+
+        //UpdatePassword
+
+        public void UpdatePassword(int id, string password) {
+
+            using (var httpClient = new HttpClient()) {
+
+                SetToken(httpClient);
+                string requestUri = GetUri(_controllerName, RouteVerbs.UPDATE_PASSWORD, id);
+
+                using (var response = httpClient.PutAsync(requestUri, CreateStringContent(password)).Result) {
+                    string apiResponse = response.Content.ReadAsStringAsync().Result;
+                }
+            }
+        }
+
+        public async Task UpdatePasswordAsync(int id, string password) {
+
+            using (var httpClient = new HttpClient()) {
+
+                SetToken(httpClient);
+                string requestUri = GetUri(_controllerName, RouteVerbs.UPDATE_PASSWORD, id);
+
+                using (var response = await httpClient.PutAsync(requestUri, CreateStringContent(password))) {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                }
+            }
+        }
     }
 }
+
+

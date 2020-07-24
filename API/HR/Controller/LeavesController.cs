@@ -52,7 +52,7 @@ namespace API.HR.Controller {
 
         [HttpPut("Update/{id}")]
         public async Task<IActionResult> PutLeave(int id, LeaveDTO dto) {
-            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
+            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value.ToString();
             if (id != dto.Id) {
                 return BadRequest();
             }
@@ -77,9 +77,9 @@ namespace API.HR.Controller {
             return NoContent();
         }
 
-        [HttpPost("Create/{id}")]
+        [HttpPost("Create")]
         public async Task<ActionResult<LeaveDTO>> PostLeave(LeaveDTO dto) {
-            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
+            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value.ToString();
 
             Leave leave = new Leave();
             LeaveManager.UpdateWithDTO(dto, ref leave);

@@ -7,7 +7,7 @@ namespace API.Business.Logic {
         public static User CreateUser(UserDTO dto) => new User() {
             FirstName = dto.FirstName,
             LastName = dto.LastName,
-            Email = dto.LastName,
+            Email = dto.Email,
             Role = dto.Role,
             CreatedOn = DateTime.Now,
             IsActive = true,

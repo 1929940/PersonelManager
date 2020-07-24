@@ -13,7 +13,8 @@ using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 
 namespace API.Business.Controller {
-    //[Authorize(Roles = "Manager,Administrator")]
+
+    [Authorize(Roles = "Kierownik,Administrator")]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase {
@@ -42,9 +43,9 @@ namespace API.Business.Controller {
             return UserManager.CreateDTO(user);
         }
 
-        [HttpPost("Create/{id}")]
+        [HttpPost("Create")]
         public async Task<ActionResult<UserDTO>> CreateUser(UserDTO dto) {
-            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
+            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value.ToString();
 
             User user = UserManager.CreateUser(dto);
             UserManager.WriteCreationTags(requestAuthor, ref user);
@@ -52,14 +53,20 @@ namespace API.Business.Controller {
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
+            string password = PasswordResetHandler.GeneratePassword(4);
+            user.Hash = password;
+            _context.Entry(user).Property(x => x.Hash).IsModified = true;
+            await _context.SaveChangesAsync();
+            await PasswordResetHandler.Sent(_appSettings, user.Email, password);
+
             return Created(string.Empty, UserManager.CreateDTO(user));
         }
 
         [HttpPut("Update/{id}")]
         public async Task<IActionResult> UpdateUser(int id, UserDTO dto) {
-            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
+            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value.ToString();
 
-            if (id != dto.Id) 
+            if (id != dto.Id)
                 return BadRequest();
 
             User user = await _context.Users.FindAsync(id);
@@ -104,7 +111,7 @@ namespace API.Business.Controller {
         public async Task<ActionResult<AuthenticationReponse>> AuthenticateUser(AuthenticationRequest request) {
             User user = await _context.Users.FirstOrDefaultAsync(x => x.Email == request.Login && x.Hash == request.Password);
 
-            if (user == null)
+            if (user == null || user.IsActive == false)
                 return Unauthorized();
 
             string token = TokenManager.GenerateJwtToken(user, _appSettings);
@@ -117,7 +124,7 @@ namespace API.Business.Controller {
             return _context.Users.Any(e => e.Id == id);
         }
 
-        [HttpPatch("RequestPasswordReset/{id}")]
+        [HttpPut("RequestPasswordReset/{id}")]
         public async Task<IActionResult> RequestPasswordReset(int id) {
             User user = await _context.Users.FindAsync(id);
             if (user == null)
@@ -138,11 +145,17 @@ namespace API.Business.Controller {
             return NoContent();
         }
 
-        [HttpPatch("PatchPassword/{id}")]
-        public async Task<IActionResult> PatchPassword(int id, string hash) {
+        [HttpPut("UpdatePassword/{id}")]
+        public async Task<IActionResult> UpdatePassword(int id, [FromBody]string hash) {
             User user = await _context.Users.FindAsync(id);
             if (user == null)
                 return NotFound();
+
+            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value.ToString();
+            string userFullName = string.Format($"{user.FirstName} {user.LastName}");
+            if (requestAuthor != userFullName) {
+                return Forbid();
+            }
 
             user.Hash = hash;
             user.RequestedPasswordReset = false;

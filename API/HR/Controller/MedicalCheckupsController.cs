@@ -51,7 +51,7 @@ namespace API.HR.Controller {
             if (id != dto.Id) {
                 return BadRequest();
             }
-            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
+            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value.ToString();
             await DocumentControllerHelper.PutDocument(_context, _set, id, dto, requestAuthor);
 
             try {
@@ -67,9 +67,9 @@ namespace API.HR.Controller {
             return NoContent();
         }
 
-        [HttpPost("Create/{id}")]
+        [HttpPost("Create")]
         public async Task<ActionResult<DocumentDTO>> PostMedicalCheckup(DocumentDTO dto) {
-            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
+            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value.ToString();
             DocumentDTO result = await DocumentControllerHelper.PostDocument(_context, _set, dto, requestAuthor);
 
             return CreatedAtAction("GetMedicalCheckup", new { id = result.Id }, result);

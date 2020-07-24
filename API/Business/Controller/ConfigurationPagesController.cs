@@ -9,7 +9,7 @@ using System.Security.Claims;
 using API.Core.Logic;
 
 namespace API.Business.Controller {
-    //[Authorize(Roles = "Manager,Administrator")]
+    //[Authorize(Roles = "Kierownik,Administrator")]
     [Route("api/[controller]")]
     [ApiController]
     public class ConfigurationPagesController : ControllerBase {
@@ -24,7 +24,7 @@ namespace API.Business.Controller {
             var configurationPage = await _context.ConfigurationPage.FindAsync(1);
 
             if (configurationPage == null) {
-                string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
+                string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value.ToString();
 
                 configurationPage = new ConfigurationPage();
                 BaseEntityManager.WriteCreationTags(requestAuthor, ref configurationPage);
@@ -37,7 +37,7 @@ namespace API.Business.Controller {
 
         [HttpPut("Update/{id}")]
         public async Task<IActionResult> PutConfigurationPage(ConfigurationPage configurationPage) {
-            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
+            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value.ToString();
 
             ConfigurationPageManager.WriteUpdateTags(requestAuthor, ref configurationPage);
             configurationPage.Id = 1;

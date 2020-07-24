@@ -55,7 +55,7 @@ namespace API.HR.Controller {
             if (id != foreman.Id) {
                 return BadRequest();
             }
-            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
+            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value.ToString();
             BaseEntityManager.WriteUpdateTags(requestAuthor, ref foreman);
             _context.Entry(foreman).State = EntityState.Modified;
 
@@ -76,9 +76,9 @@ namespace API.HR.Controller {
             return NoContent();
         }
 
-        [HttpPost("Create/{id}")]
+        [HttpPost("Create")]
         public async Task<ActionResult<Foreman>> PostForeman(Foreman foreman) {
-            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
+            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value.ToString();
             EmployeeManager.WriteCreationTags(requestAuthor, ref foreman);
 
             _context.Foremen.Add(foreman);

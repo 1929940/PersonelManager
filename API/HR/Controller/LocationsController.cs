@@ -56,7 +56,7 @@ namespace API.HR.Controller {
                 return BadRequest();
             }
 
-            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
+            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value.ToString();
             BaseEntityManager.WriteUpdateTags(requestAuthor, ref location);
             _context.Entry(location).State = EntityState.Modified;
 
@@ -76,9 +76,9 @@ namespace API.HR.Controller {
             return NoContent();
         }
 
-        [HttpPost("Create/{id}")]
+        [HttpPost("Create")]
         public async Task<ActionResult<Location>> PostLocation(Location location) {
-            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
+            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value.ToString();
             EmployeeManager.WriteCreationTags(requestAuthor, ref location);
 
             _context.Locations.Add(location);

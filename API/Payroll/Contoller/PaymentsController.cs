@@ -51,7 +51,7 @@ namespace API.Payroll.Contoller {
                 return BadRequest();
             }
 
-            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
+            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value.ToString();
             var payment = await _context.Payment.FindAsync(id);
             PaymentManager.UpdateWithDTO(dto, ref payment);
             PaymentManager.WriteUpdateTags(requestAuthor, ref payment);
@@ -73,9 +73,9 @@ namespace API.Payroll.Contoller {
             return NoContent();
         }
 
-        [HttpPost("Create/{id}")]
+        [HttpPost("Create")]
         public async Task<ActionResult<PaymentDTO>> PostPayment(PaymentDTO dto) {
-            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
+            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value.ToString();
             Payment payment = new Payment();
             PaymentManager.UpdateWithDTO(dto, ref payment);
             PaymentManager.WriteCreationTags(requestAuthor, ref payment);

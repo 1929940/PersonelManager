@@ -15,7 +15,6 @@ namespace API.Business.Logic {
             for (int i = 0; i < noDigits; i++) {
                 password += rng.Next(0, 10);
             }
-
             return password;
         }
 

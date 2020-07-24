@@ -6,7 +6,7 @@
         internal const string DELETE = "Delete";
         internal const string LOGIN = "Login";
         internal const string REQUEST_PASSWORD_RESET = "RequestPasswordReset";
-        internal const string PATCH_PASSWORD = "PatchPassword";
+        internal const string UPDATE_PASSWORD = "UpdatePassword";
 
         internal const string ARCHIVE_EMPLOYEE = "ArchiveEmployee";
         internal const string GET_EMPLOYEE_CERTIFICATES = "GetEmployeeCertificates";

@@ -60,7 +60,7 @@ namespace API.Payroll.Contoller {
             if (id != dto.Id) {
                 return BadRequest();
             }
-            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
+            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value.ToString();
             var advance = await _context.Advances.FindAsync(id);
 
             AdvanceManager.UpdateWithDTO(dto, ref advance);
@@ -83,9 +83,9 @@ namespace API.Payroll.Contoller {
             return NoContent();
         }
 
-        [HttpPost("Create/{id}")]
+        [HttpPost("Create")]
         public async Task<ActionResult<AdvanceDTO>> PostAdvances(AdvanceDTO dto) {
-            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
+            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value.ToString();
 
             Advance advance = new Advance();
             AdvanceManager.UpdateWithDTO(dto, ref advance);

@@ -51,7 +51,7 @@ namespace API.Payroll.Contoller {
             }
             var contract = await _context.Contracts.FindAsync(id);
 
-            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
+            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value.ToString();
             ContractManager.UpdateWithDTO(dto, ref contract);
             ContractManager.WriteUpdateTags(requestAuthor, ref contract);
 
@@ -72,9 +72,9 @@ namespace API.Payroll.Contoller {
             return NoContent();
         }
 
-        [HttpPost("Create/{id}")]
+        [HttpPost("Create")]
         public async Task<ActionResult<ContractDTO>> PostContract(ContractDTO dto) {
-            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
+            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value.ToString();
 
             Contract contract = new Contract();
             ContractManager.UpdateWithDTO(dto, ref contract);

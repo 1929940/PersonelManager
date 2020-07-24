@@ -38,9 +38,9 @@ namespace API.HR.Controller {
             return EmployeeManager.CreateDTO(employee);
         }
 
-        [Route("GetEmployeesHistory")]
+        [Route("GetEmployeeHistory")]
         [HttpGet("Get")]
-        public async Task<ActionResult<EmployeeHistory>> GetEmployeesHistory(int id) {
+        public async Task<ActionResult<EmployeeHistory>> GetEmployeeHistory(int id) {
             var histories = await _context.EmployeesHistory.Where(x => x.EmployeeId == id).ToListAsync();
 
             return Ok(histories);
@@ -52,7 +52,7 @@ namespace API.HR.Controller {
             if (id != dto.Id)
                 return BadRequest();
 
-            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
+            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value.ToString();
             var employee = await _context.Employees.FindAsync(id);
 
             EmployeeManager.UpdateWithDTO(dto, ref employee);
@@ -81,9 +81,9 @@ namespace API.HR.Controller {
             return NoContent();
         }
 
-        [HttpPost("Create/{id}")]
+        [HttpPost("Create")]
         public async Task<ActionResult<EmployeeDTO>> PostEmployee(EmployeeDTO dto) {
-            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
+            string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value.ToString();
 
             Employee employee = new Employee();
             EmployeeManager.UpdateWithDTO(dto, ref employee);
@@ -118,8 +118,7 @@ namespace API.HR.Controller {
             return employee;
         }
 
-        [Route("ArchiveEmployee/{id}")]
-        [HttpPatch]
+        [HttpPut("ArchiveEmployee/{id}")]
         public async Task<ActionResult> PatchIsArchived(int id, bool isArchived) {
             var employee = await _context.Employees.FindAsync(id);
             if (employee == null) {
