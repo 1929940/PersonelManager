@@ -38,22 +38,20 @@ namespace PersonelManagerAPI {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             );
 
-            //var appSettingsSection = Configuration.GetSection("AppSettings");
-            //services.Configure<AppSettings>(appSettingsSection);
+            IConfiguration appSecretsSection = null;
 
-            var appSecretsSection = Configuration.GetSection("AppSecrets");
-            services.Configure<AppSecrets>(appSecretsSection);
-
-            string emailPw = Configuration["Secrets:Password"];
+            if (AppSettingsHelper.IsSecretsEmpty(Configuration)) {
+                appSecretsSection = Configuration.GetSection("AppSettings");
+                services.Configure<AppSettings>(appSecretsSection);
+            } else {
+                appSecretsSection = Configuration.GetSection("AppSecrets");
+                services.Configure<AppSettings>(appSecretsSection);
+            }
 
             services.AddDbContext<Context>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("PersonelManagerDB")));
 
-            //var appSettings = appSettingsSection.Get<AppSettings>();
-            //var key = Encoding.ASCII.GetBytes(appSettings.Secret);
-            //var issuer = appSettings.Issuer;
-
-            var appSecrets = appSecretsSection.Get<AppSecrets>();
+            var appSecrets = appSecretsSection.Get<AppSettings>();
             var key = Encoding.ASCII.GetBytes(appSecrets.AuthSecret);
             var issuer = appSecrets.Issuer;
 

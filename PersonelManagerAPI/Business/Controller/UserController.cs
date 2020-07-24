@@ -13,20 +13,20 @@ using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 
 namespace API.Business.Controller {
+    //[Authorize(Roles = "Manager,Administrator")]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase {
         private readonly Context _context;
-        private readonly AppSecrets _appSecrets;
+        private readonly AppSettings _appSettings;
 
-        public UserController(Context context, IOptions<AppSecrets> appSecrets) {
+        public UserController(Context context, IOptions<AppSettings> appSettings) {
             _context = context;
-            _appSecrets = appSecrets.Value;
+            _appSettings = appSettings.Value;
         }
 
         //[Authorize(Roles = "Manager,Administrator")]
-        [HttpGet]
-        [Route("Get")]
+        [HttpGet("Get")]
         public async Task<ActionResult<IEnumerable<UserDTO>>> GetUsers() {
             List<User> list = await _context.Users.ToListAsync();
             return Ok(list.Select(x => UserManager.CreateDTO(x)));
@@ -88,7 +88,7 @@ namespace API.Business.Controller {
             if (user == null)
                 return Unauthorized();
 
-            string token = TokenManager.GenerateJwtToken(user, _appSecrets);
+            string token = TokenManager.GenerateJwtToken(user, _appSettings);
 
             return Ok(new AuthenticationReponse() { Token = token });
         }
@@ -113,7 +113,6 @@ namespace API.Business.Controller {
             return _context.Users.Any(e => e.Id == id);
         }
 
-        //[Authorize(Roles = "Manager,Administrator")]
         [HttpPatch]
         [Route("RequestPasswordReset")]
         public async Task<IActionResult> RequestPasswordReset(int id) {
@@ -121,10 +120,11 @@ namespace API.Business.Controller {
             if (user == null)
                 return NotFound();
 
-            PasswordResetHandler.Sent(_appSecrets, null, "1234");
+            string password = PasswordResetHandler.GeneratePassword(4);
+            await PasswordResetHandler.Sent(_appSettings, user.Email, password);
 
             user.RequestedPasswordReset = true;
-            user.Hash = "1234";
+            user.Hash = password;
             _context.Users.Attach(user);
             _context.Entry(user).Property(x => x.RequestedPasswordReset).IsModified = true;
             _context.Entry(user).Property(x => x.Hash).IsModified = true;

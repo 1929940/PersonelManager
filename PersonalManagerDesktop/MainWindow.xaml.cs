@@ -20,6 +20,11 @@ namespace PersonalManagerDesktop {
     public partial class MainWindow : Window {
         public MainWindow() {
             InitializeComponent();
+
+            //var req = new req();
+            //var result = req.Get();
+
+            //Configuration.Url = "";
         }
     }
 }
