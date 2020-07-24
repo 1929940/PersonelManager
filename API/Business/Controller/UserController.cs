@@ -50,6 +50,8 @@ namespace API.Business.Controller {
             User user = UserManager.CreateUser(dto);
             UserManager.WriteCreationTags(requestAuthor, ref user);
 
+            
+
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 

@@ -2,6 +2,7 @@
 using MailKit.Net.Smtp;
 using MimeKit;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 namespace API.Business.Logic {
@@ -18,7 +19,10 @@ namespace API.Business.Logic {
             return password;
         }
 
+        //TODO: Try catch, return bool, if false dont do anything?
         public static async Task Sent(AppSettings appSettings, string emailTo, string newPassword) {
+            if (!IsValidEmailAddress(emailTo))
+                return;
 
             var mailMessage = new MimeMessage();
             mailMessage.From.Add(new MailboxAddress("PersonalManager - NoReply", appSettings.EmailAddress));
@@ -38,5 +42,6 @@ namespace API.Business.Logic {
                 smtpClient.Disconnect(true);
             }
         }
+        private static bool IsValidEmailAddress(string address) => address != null && new EmailAddressAttribute().IsValid(address);
     }
 }

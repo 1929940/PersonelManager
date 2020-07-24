@@ -12,16 +12,16 @@ namespace API.Business.Controller {
     //[Authorize(Roles = "Kierownik,Administrator")]
     [Route("api/[controller]")]
     [ApiController]
-    public class ConfigurationPagesController : ControllerBase {
+    public class ConfigurationPageController : ControllerBase {
         private readonly Context _context;
 
-        public ConfigurationPagesController(Context context) {
+        public ConfigurationPageController(Context context) {
             _context = context;
         }
 
-        [HttpGet("Get")]
-        public async Task<ActionResult<ConfigurationPage>> GetConfigurationPage() {
-            var configurationPage = await _context.ConfigurationPage.FindAsync(1);
+        [HttpGet("Get/{id}")]
+        public async Task<ActionResult<ConfigurationPage>> GetConfigurationPage(int id) {
+            var configurationPage = await _context.ConfigurationPage.FindAsync(id);
 
             if (configurationPage == null) {
                 string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value.ToString();

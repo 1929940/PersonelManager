@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using CommunicationLibrary.Business.Models;
 using CommunicationLibrary.Core;
 using CommunicationLibrary.Core.Logic;
+using CommunicationLibrary.Business.Requests;
 
 namespace PersonalManagerDesktop {
     /// <summary>
@@ -41,10 +42,34 @@ namespace PersonalManagerDesktop {
 
 
 
+
+
             var requestHandler = new CommunicationLibrary.Business.Requests.UserRequestHandler();
 
-            var login = requestHandler.Login("Jan.Kowalski@PersonelManager.pl", "1234");
-            Settings.Token = login.Token;
+            var configRequestHandler = new ConfigurationPageRequestHandler();
+
+
+            //var login = requestHandler.Login("Jan.Kowalski@PersonelManager.pl", "Macko");
+            //Settings.Token = login.Token;
+
+            //var getpage = configRequestHandler.Get(1);
+            //configRequestHandler.Update(1, new ConfigurationPage() {
+            //    Id = 1,
+            //    BillingMonthEnd = 14,
+            //    BillingMonthStart = 15,
+            //    MaximumLeaveTimeInDays = 15,
+            //    PercentOfAdvancesAllowed = 10,
+            //    WarningBeforeCertificateExpires = 35,
+            //    WarningBeforeLeaveReachesLimit = 60,
+            //    WarningBeforeMedicalCheckupExpires = 30,
+            //});
+
+
+            //var getpage2 = configRequestHandler.Get();
+
+
+
+
 
             //var createOne = requestHandler.Create(new User() {
             //    Email = "wnuda@wp.pl",
@@ -57,26 +82,26 @@ namespace PersonalManagerDesktop {
             //var login2 = requestHandler.Login("wnuda@wp.pl", "macko15");
             //Settings.Token = login2.Token;
 
-            requestHandler.Update(6, new User() {
-                Id = 6,
-                Email = "ZIOM@32.pl"
-            });
-
-            //Put with no body generates problems
-
-            requestHandler.RequestPasswordReset(1);
-
-            requestHandler.UpdatePassword(1, "Macko");
+            //requestHandler.Update(6, new User() {
+            //    Id = 6,
+            //    Email = "ZIOM@32.pl"
+            //});
 
 
-            requestHandler.UpdatePassword(15, PasswordManager.EncryptPassword("Macko"));
+            //requestHandler.RequestPasswordReset(1);
+
+            //requestHandler.UpdatePassword(1, "Macko");
 
 
-            var login3 = requestHandler.Login("wnuda@wp.pl", "Macko");
+            //requestHandler.UpdatePassword(15, PasswordManager.EncryptPassword("Macko"));
+
+
+            //TODO: IF NOT EMAIL - THROWS AN ERROR
+            var login3 = requestHandler.Login("wnuda@wp.pl", "1234");
             Settings.Token = login3.Token;
 
             var createAnother = requestHandler.Create(new User() {
-                Email = "KOSMOS@ww.pl",
+                Email = "KOSMOSWZ",
                 FirstName = "eloszka",
                 LastName = "michalina",
                 IsActive = true,
