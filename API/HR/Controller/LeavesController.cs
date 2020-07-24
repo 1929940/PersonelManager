@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 
 namespace API.HR.Controller {
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class LeavesController : ControllerBase {
@@ -21,15 +22,13 @@ namespace API.HR.Controller {
             _context = context;
         }
 
-        //[Authorize]
-        [HttpGet]
+        [HttpGet("Get")]
         public async Task<ActionResult<IEnumerable<LeaveDTO>>> GetLeaves() {
             var leaves = await _context.Leaves.ToListAsync();
             return Ok(leaves.Select(x => LeaveManager.CreateDTO(x)));
         }
 
-        //[Authorize]
-        [HttpGet("{id}")]
+        [HttpGet("Get/{id}")]
         public async Task<ActionResult<LeaveDTO>> GetLeave(int id) {
             var leave = await _context.Leaves.FindAsync(id);
 
@@ -40,9 +39,7 @@ namespace API.HR.Controller {
             return LeaveManager.CreateDTO(leave);
         }
 
-        //[Authorize]
-        [Route("GetEmployeeLeaves")]
-        [HttpGet]
+        [HttpGet("GetEmployeeLeaves/{id}")]
         public async Task<ActionResult<LeaveDTO>> GetEmployeeLeaves(int id) {
             var employee = await _context.Employees.FindAsync(id);
 
@@ -53,8 +50,7 @@ namespace API.HR.Controller {
             return Ok(employee.Leaves.Select(x => LeaveManager.CreateDTO(x)));
         }
 
-        //[Authorize]
-        [HttpPut("{id}")]
+        [HttpPut("Update/{id}")]
         public async Task<IActionResult> PutLeave(int id, LeaveDTO dto) {
             string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
             if (id != dto.Id) {
@@ -81,7 +77,7 @@ namespace API.HR.Controller {
             return NoContent();
         }
 
-        [HttpPost]
+        [HttpPost("Create/{id}")]
         public async Task<ActionResult<LeaveDTO>> PostLeave(LeaveDTO dto) {
             string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
 
@@ -96,7 +92,7 @@ namespace API.HR.Controller {
             return CreatedAtAction("GetLeave", new { id = leave.Id }, LeaveManager.CreateDTO(leave));
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete/{id}")]
         public async Task<ActionResult<Leave>> DeleteLeave(int id) {
             var leave = await _context.Leaves.FindAsync(id);
             if (leave == null) {

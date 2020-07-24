@@ -13,6 +13,7 @@ using System.Security.Claims;
 using API.HR.Logic;
 
 namespace API.HR.Controller {
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ForemenController : ControllerBase {
@@ -22,17 +23,12 @@ namespace API.HR.Controller {
             _context = context;
         }
 
-        //TODO: FILL UPDATE AND CREATION DATA
-        //PREVENT UNNESESARY OVERRIDE
-
-        //[Authorize]
-        [HttpGet]
+        [HttpGet("Get")]
         public async Task<ActionResult<IEnumerable<Foreman>>> GetForemen() {
             return await _context.Foremen.ToListAsync();
         }
 
-        //[Authorize]
-        [HttpGet("{id}")]
+        [HttpGet("Get/{id}")]
         public async Task<ActionResult<Foreman>> GetForeman(int id) {
             var foreman = await _context.Foremen.FindAsync(id);
 
@@ -43,10 +39,8 @@ namespace API.HR.Controller {
             return foreman;
         }
 
-        //[Authorize]
-        [HttpGet]
-        [Route("GetEmployeesForemen")]
-        public async Task<ActionResult<IEnumerable<Foreman>>> GetEmployeesForemen(int id) {
+        [HttpGet("GetEmployeeForemen/{id}")]
+        public async Task<ActionResult<IEnumerable<Foreman>>> GetEmployeeForemen(int id) {
             var employee = await _context.Employees.FindAsync(id);
 
             if (employee == null) {
@@ -56,8 +50,7 @@ namespace API.HR.Controller {
             return Ok(employee.History.Select(x => x.Foreman).Distinct());
         }
 
-        //[Authorize]
-        [HttpPut("{id}")]
+        [HttpPut("Update/{id}")]
         public async Task<IActionResult> PutForeman(int id, Foreman foreman) {
             if (id != foreman.Id) {
                 return BadRequest();
@@ -83,8 +76,7 @@ namespace API.HR.Controller {
             return NoContent();
         }
 
-        //[Authorize]
-        [HttpPost]
+        [HttpPost("Create/{id}")]
         public async Task<ActionResult<Foreman>> PostForeman(Foreman foreman) {
             string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
             EmployeeManager.WriteCreationTags(requestAuthor, ref foreman);
@@ -95,8 +87,7 @@ namespace API.HR.Controller {
             return CreatedAtAction("GetForeman", new { id = foreman.Id }, foreman);
         }
 
-        //[Authorize]
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete/{id}")]
         public async Task<ActionResult<Foreman>> DeleteForeman(int id) {
             var foreman = await _context.Foremen.FindAsync(id);
             if (foreman == null) {

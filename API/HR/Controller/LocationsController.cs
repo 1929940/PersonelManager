@@ -13,6 +13,7 @@ using API.Core.Logic;
 using API.HR.Logic;
 
 namespace API.HR.Controller {
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class LocationsController : ControllerBase {
@@ -22,14 +23,12 @@ namespace API.HR.Controller {
             _context = context;
         }
 
-        //[Authorize]
-        [HttpGet]
+        [HttpGet("Get")]
         public async Task<ActionResult<IEnumerable<Location>>> GetLocations() {
             return await _context.Locations.ToListAsync();
         }
 
-        //[Authorize]
-        [HttpGet("{id}")]
+        [HttpGet("Get/{id}")]
         public async Task<ActionResult<Location>> GetLocation(int id) {
             var location = await _context.Locations.FindAsync(id);
 
@@ -40,9 +39,7 @@ namespace API.HR.Controller {
             return location;
         }
 
-        //[Authorize]
-        [HttpGet]
-        [Route("GetEmployeeLocations")]
+        [HttpGet("GetEmployeeLocations/{id}")]
         public async Task<ActionResult<IEnumerable<Foreman>>> GetEmployeeLocations(int id) {
             var employee = await _context.Employees.FindAsync(id);
 
@@ -53,8 +50,7 @@ namespace API.HR.Controller {
             return Ok(employee.History.Select(x => x.Location).Distinct());
         }
 
-        //[Authorize]
-        [HttpPut("{id}")]
+        [HttpPut("Update/{id}")]
         public async Task<IActionResult> PutLocation(int id, Location location) {
             if (id != location.Id) {
                 return BadRequest();
@@ -80,8 +76,7 @@ namespace API.HR.Controller {
             return NoContent();
         }
 
-        //[Authorize]
-        [HttpPost]
+        [HttpPost("Create/{id}")]
         public async Task<ActionResult<Location>> PostLocation(Location location) {
             string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
             EmployeeManager.WriteCreationTags(requestAuthor, ref location);
@@ -92,8 +87,7 @@ namespace API.HR.Controller {
             return CreatedAtAction("GetLocation", new { id = location.Id }, location);
         }
 
-        [Authorize]
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete/{id}")]
         public async Task<ActionResult<Location>> DeleteLocation(int id) {
             var location = await _context.Locations.FindAsync(id);
             if (location == null) {

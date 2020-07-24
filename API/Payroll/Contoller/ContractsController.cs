@@ -10,6 +10,7 @@ using API.Payroll.Logic;
 using System.Security.Claims;
 
 namespace API.Payroll.Contoller {
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ContractsController : ControllerBase {
@@ -19,18 +20,16 @@ namespace API.Payroll.Contoller {
             _context = context;
         }
 
-        //[Authorize]
-        [HttpGet]
+        [HttpGet("Get")]
         public async Task<ActionResult<IEnumerable<ContractDTO>>> GetContracts() {
             List<Contract> contracts = await _context.Contracts.ToListAsync();
             return Ok(contracts.Select(x => ContractManager.CreateDTO(x)));
         }
 
-        //[Authorize]
-        [HttpGet("{id}")]
+        [HttpGet("Get/{id}")]
         public async Task<ActionResult<ContractDTO>> GetContract(int id) {
             var contract = await _context.Contracts.FindAsync(id);
-            
+
             if (contract == null) {
                 return NotFound();
             }
@@ -38,17 +37,14 @@ namespace API.Payroll.Contoller {
             return ContractManager.CreateDTO(contract);
         }
 
-        //[Authorize]
-        [Route("EmployeeContracts")]
-        [HttpGet]
-        public async Task<ActionResult<Advance>> GetEmployeeContracts(int id) {
+        [HttpGet("GetEmployeeContracts/{id}")]
+        public async Task<ActionResult<ContractDTO>> GetEmployeeContracts(int id) {
             var contracts = await _context.Contracts.Where(x => x.EmployeeId == id).ToListAsync();
-            return Ok(contracts.Select(x =>ContractManager.CreateDTO(x)));
+            return Ok(contracts.Select(x => ContractManager.CreateDTO(x)));
         }
 
 
-        //[Authorize]
-        [HttpPut("{id}")]
+        [HttpPut("Update/{id}")]
         public async Task<IActionResult> PutContract(int id, ContractDTO dto) {
             if (id != dto.Id) {
                 return BadRequest();
@@ -76,8 +72,7 @@ namespace API.Payroll.Contoller {
             return NoContent();
         }
 
-        //[Authorize]
-        [HttpPost]
+        [HttpPost("Create/{id}")]
         public async Task<ActionResult<ContractDTO>> PostContract(ContractDTO dto) {
             string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
 
@@ -91,8 +86,7 @@ namespace API.Payroll.Contoller {
             return CreatedAtAction("GetContract", new { id = contract.Id }, ContractManager.CreateDTO(contract));
         }
 
-        //[Authorize]
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete/{id}")]
         public async Task<ActionResult<Contract>> DeleteContract(int id) {
             var contract = await _context.Contracts.FindAsync(id);
             if (contract == null) {

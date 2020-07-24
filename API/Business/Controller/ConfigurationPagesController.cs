@@ -6,8 +6,10 @@ using API.Business.Models;
 using API.Core.DBContext;
 using API.Business.Logic;
 using System.Security.Claims;
+using API.Core.Logic;
 
 namespace API.Business.Controller {
+    //[Authorize(Roles = "Manager,Administrator")]
     [Route("api/[controller]")]
     [ApiController]
     public class ConfigurationPagesController : ControllerBase {
@@ -17,20 +19,23 @@ namespace API.Business.Controller {
             _context = context;
         }
 
-        //[Authorize(Roles = "Manager,Administrator")]
-        [HttpGet]
+        [HttpGet("Get")]
         public async Task<ActionResult<ConfigurationPage>> GetConfigurationPage() {
             var configurationPage = await _context.ConfigurationPage.FindAsync(1);
 
             if (configurationPage == null) {
-                return NotFound();
+                string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
+
+                configurationPage = new ConfigurationPage();
+                BaseEntityManager.WriteCreationTags(requestAuthor, ref configurationPage);
+                _context.ConfigurationPage.Add(configurationPage);
+                await _context.SaveChangesAsync();
             }
 
             return configurationPage;
         }
 
-        //[Authorize(Roles = "Manager,Administrator")]
-        [HttpPut]
+        [HttpPut("Update/{id}")]
         public async Task<IActionResult> PutConfigurationPage(ConfigurationPage configurationPage) {
             string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
 

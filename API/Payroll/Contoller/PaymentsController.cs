@@ -12,6 +12,7 @@ using System.Security.Claims;
 namespace API.Payroll.Contoller {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize]
     public class PaymentsController : ControllerBase {
         private readonly Context _context;
 
@@ -19,14 +20,13 @@ namespace API.Payroll.Contoller {
             _context = context;
         }
 
-        //[Authorize]
-        [HttpGet]
+        [HttpGet("Get")]
         public async Task<ActionResult<IEnumerable<Payment>>> GetPayment() {
             var payments = await _context.Payment.ToListAsync();
             return Ok(payments.Select(x => PaymentManager.CreateDTO(x)));
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("Get/{id}")]
         public async Task<ActionResult<PaymentDTO>> GetPayment(int id) {
             var payment = await _context.Payment.FindAsync(id);
 
@@ -37,9 +37,7 @@ namespace API.Payroll.Contoller {
             return PaymentManager.CreateDTO(payment);
         }
 
-        //[Authorize]
-        [Route("EmployeesPayments")]
-        [HttpGet]
+        [HttpGet("GetEmployeesPayments/{id}")]
         public async Task<ActionResult<AdvanceDTO>> GetEmployeePayments(int id) {
             var contracts = await _context.Contracts.Where(x => x.EmployeeId == id && x.Payment != null).ToListAsync();
             var payments = contracts.Select(x => PaymentManager.CreateDTO(x.Payment));
@@ -47,10 +45,7 @@ namespace API.Payroll.Contoller {
             return Ok(payments);
         }
 
-
-        //TODO: Allows changing ContractId
-        //[Authorize]
-        [HttpPut("{id}")]
+        [HttpPut("Update/{id}")]
         public async Task<IActionResult> PutPayment(int id, PaymentDTO dto) {
             if (id != dto.Id) {
                 return BadRequest();
@@ -78,8 +73,7 @@ namespace API.Payroll.Contoller {
             return NoContent();
         }
 
-        //[Authorize]
-        [HttpPost]
+        [HttpPost("Create/{id}")]
         public async Task<ActionResult<PaymentDTO>> PostPayment(PaymentDTO dto) {
             string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
             Payment payment = new Payment();
@@ -93,8 +87,7 @@ namespace API.Payroll.Contoller {
             return CreatedAtAction("GetPayment", new { id = payment.Id }, PaymentManager.CreateDTO(payment));
         }
 
-        //[Authorize]
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete/{id}")]
         public async Task<ActionResult<Payment>> DeletePayment(int id) {
             var payment = await _context.Payment.FindAsync(id);
             if (payment == null) {

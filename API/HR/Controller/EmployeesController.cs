@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 
 namespace API.HR.Controller {
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class EmployeesController<T> : ControllerBase {
@@ -20,15 +21,13 @@ namespace API.HR.Controller {
             _context = context;
         }
 
-        //[Authorize]
-        [HttpGet]
+        [HttpGet("Get")]
         public async Task<ActionResult<IEnumerable<EmployeeDTO>>> GetEmployee() {
             var collection = await _context.Employees.ToListAsync();
             return Ok(collection.Select(x => EmployeeManager.CreateDTO(x)));
         }
 
-        //[Authorize]
-        [HttpGet("{id}")]
+        [HttpGet("Get/{id}")]
         public async Task<ActionResult<EmployeeDTO>> GetEmployee(int id) {
             var employee = await _context.Employees.FindAsync(id);
 
@@ -39,9 +38,8 @@ namespace API.HR.Controller {
             return EmployeeManager.CreateDTO(employee);
         }
 
-        //[Authorize]
         [Route("GetEmployeesHistory")]
-        [HttpGet]
+        [HttpGet("Get")]
         public async Task<ActionResult<EmployeeHistory>> GetEmployeesHistory(int id) {
             var histories = await _context.EmployeesHistory.Where(x => x.EmployeeId == id).ToListAsync();
 
@@ -49,8 +47,7 @@ namespace API.HR.Controller {
         }
 
 
-        //[Authorize]
-        [HttpPut("{id}")]
+        [HttpPut("Update/{id}")]
         public async Task<IActionResult> PutEmployee(int id, EmployeeDTO dto) {
             if (id != dto.Id)
                 return BadRequest();
@@ -84,8 +81,7 @@ namespace API.HR.Controller {
             return NoContent();
         }
 
-        //[Authorize]
-        [HttpPost]
+        [HttpPost("Create/{id}")]
         public async Task<ActionResult<EmployeeDTO>> PostEmployee(EmployeeDTO dto) {
             string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
 
@@ -109,8 +105,7 @@ namespace API.HR.Controller {
             return CreatedAtAction("GetEmployee", new { id = employee.Id }, EmployeeManager.CreateDTO(employee));
         }
 
-        //[Authorize]
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete/{id}")]
         public async Task<ActionResult<Employee>> DeleteEmployee(int id) {
             var employee = await _context.Employees.FindAsync(id);
             if (employee == null) {
@@ -123,8 +118,7 @@ namespace API.HR.Controller {
             return employee;
         }
 
-        //[Authorize]
-        [Route("ArchiveEmployee")]
+        [Route("ArchiveEmployee/{id}")]
         [HttpPatch]
         public async Task<ActionResult> PatchIsArchived(int id, bool isArchived) {
             var employee = await _context.Employees.FindAsync(id);
@@ -140,19 +134,6 @@ namespace API.HR.Controller {
 
             return NoContent();
         }
-
-        ////[Authorize]
-        //[Route("GetAddresses")]
-        //[HttpGet]
-        //public async Task<ActionResult<EmployeeAddress>> GetAddresses(int id) {
-        //    var employee = await _context.Employees.FindAsync(id);
-        //    if (employee == null) {
-        //        return NotFound();
-        //    }
-
-        //THIS NEEDS ITS OWN CONTROLLER CRUD OPERATION ARE NESSESARY
-
-        //}
 
         private bool EmployeeExists(int id) {
             return _context.Employees.Any(e => e.Id == id);

@@ -11,6 +11,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 
 namespace API.HR.Controller {
+        //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class SafetyTrainingsController : ControllerBase {
@@ -22,14 +23,12 @@ namespace API.HR.Controller {
             _set = context.SafetyTrainings;
         }
 
-        //[Authorize]
-        [HttpGet]
+        [HttpGet("Get")]
         public async Task<ActionResult<IEnumerable<DocumentDTO>>> GetSafetyTrainings() {
             return Ok(await DocumentControllerHelper.GetAllDocuments(_set));
         }
 
-        //[Authorize]
-        [HttpGet("{id}")]
+        [HttpGet("Get/{id}")]
         public async Task<ActionResult<DocumentDTO>> GetSafetyTraining(int id) {
             var document = await DocumentControllerHelper.GetDocument(_set, id);
 
@@ -40,15 +39,13 @@ namespace API.HR.Controller {
             return document;
         }
 
-        //[Authorize]
-        [Route("GetEmployeeSafetyTrainings")]
-        [HttpGet]
+        [HttpGet("GetEmployeeSafetyTrainings/{id}")]
         public async Task<ActionResult<IEnumerable<DocumentDTO>>> GetEmployeeSafetyTrainings(int id) {
             return Ok(await DocumentControllerHelper.GetEmployeesDocuments(_set, id));
         }
 
         //[Authorize]
-        [HttpPut("{id}")]
+        [HttpPut("Update/{id}")]
         public async Task<IActionResult> PutSafetyTraining(int id, DocumentDTO dto) {
             if (id != dto.Id) {
                 return BadRequest();
@@ -69,8 +66,7 @@ namespace API.HR.Controller {
             return NoContent();
         }
 
-        //[Authorize]
-        [HttpPost]
+        [HttpPost("Create/{id}")]
         public async Task<ActionResult<DocumentDTO>> PostSafetyTraining(DocumentDTO dto) {
             string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
             DocumentDTO result = await DocumentControllerHelper.PostDocument(_context, _set, dto, requestAuthor);
@@ -78,8 +74,7 @@ namespace API.HR.Controller {
             return CreatedAtAction("GetSafetyTraining", new { id = result.Id }, result);
         }
 
-        //[Authorize]
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete/{id}")]
         public async Task<ActionResult<SafetyTraining>> DeleteSafetyTraining(int id) {
             var safetyTraining = await _context.SafetyTrainings.FindAsync(id);
             if (safetyTraining == null) {

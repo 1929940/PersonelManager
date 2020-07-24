@@ -12,6 +12,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 
 namespace API.Payroll.Contoller {
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AdvanceController : ControllerBase {
@@ -21,15 +22,13 @@ namespace API.Payroll.Contoller {
             _context = context;
         }
 
-        //[Authorize]
-        [HttpGet]
+        [HttpGet("Get")]
         public async Task<ActionResult<IEnumerable<AdvanceDTO>>> GetAdvances() {
             var advances = await _context.Advances.ToListAsync();
             return Ok(advances.Select(x => AdvanceManager.CreateDTO(x)));
         }
 
-        //[Authorize]
-        [HttpGet("{id}")]
+        [HttpGet("Get/{id}")]
         public async Task<ActionResult<AdvanceDTO>> GetAdvance(int id) {
             var advance = await _context.Advances.FindAsync(id);
 
@@ -40,10 +39,7 @@ namespace API.Payroll.Contoller {
             return AdvanceManager.CreateDTO(advance);
         }
 
-        //[Authorize]
-        //TODO: This should return contract title, number, isrealized, 
-        [Route("EmployeeAdvances")]
-        [HttpGet]
+        [HttpGet("GetEmployeeAdvances/{id}")]
         public async Task<ActionResult<AdvanceDTO>> GetEmployeeAdvances(int id) {
             var contracts = await _context.Contracts.Where(x => x.EmployeeId == id && x.Advances.Any()).ToListAsync();
             var advances = contracts.SelectMany(x => x.Advances).Select(x => AdvanceManager.CreateDTO(x));
@@ -51,10 +47,15 @@ namespace API.Payroll.Contoller {
             return Ok(advances);
         }
 
+        [HttpGet("GetContractAdvances/{id}")]
+        public async Task<ActionResult<AdvanceDTO>> GetContractAdvances(int id) {
+            var contract = await _context.Contracts.FindAsync(id);
+            var advances = contract.Advances.Select(x => AdvanceManager.CreateDTO(x));
 
-        //TODO: Allows changing ContractId
-        //[Authorize]
-        [HttpPut("{id}")]
+            return Ok(advances);
+        }
+
+        [HttpPut("Update/{id}")]
         public async Task<IActionResult> PutAdvance(int id, AdvanceDTO dto) {
             if (id != dto.Id) {
                 return BadRequest();
@@ -82,8 +83,7 @@ namespace API.Payroll.Contoller {
             return NoContent();
         }
 
-        //[Authorize]
-        [HttpPost]
+        [HttpPost("Create/{id}")]
         public async Task<ActionResult<AdvanceDTO>> PostAdvances(AdvanceDTO dto) {
             string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
 
@@ -99,8 +99,7 @@ namespace API.Payroll.Contoller {
             return CreatedAtAction("GetAdvances", new { id = advance.Id }, AdvanceManager.CreateDTO(advance));
         }
 
-        //[Authorize]
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete/{id}")]
         public async Task<ActionResult<Advance>> DeleteAdvances(int id) {
             var advances = await _context.Advances.FindAsync(id);
             if (advances == null) {

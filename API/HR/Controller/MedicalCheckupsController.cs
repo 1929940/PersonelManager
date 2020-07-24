@@ -12,6 +12,7 @@ using API.HR.Helpers;
 using System.Security.Claims;
 
 namespace API.HR.Controller {
+        //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class MedicalCheckupsController : ControllerBase {
@@ -23,15 +24,13 @@ namespace API.HR.Controller {
             _set = context.MedicalCheckups;
         }
 
-        //[Authorize]
-        [HttpGet]
+        [HttpGet("Get")]
         public async Task<ActionResult<IEnumerable<DocumentDTO>>> GetMedicalCheckups() {
             return Ok(await DocumentControllerHelper.GetAllDocuments(_set));
         }
 
 
-        //[Authorize]
-        [HttpGet("{id}")]
+        [HttpGet("Get/{id}")]
         public async Task<ActionResult<DocumentDTO>> GetMedicalCheckup(int id) {
             var document = await DocumentControllerHelper.GetDocument(_set, id);
 
@@ -42,15 +41,12 @@ namespace API.HR.Controller {
             return document;
         }
 
-        //[Authorize]
-        [Route("GetEmployeeMedicalCheckups")]
-        [HttpGet]
+        [HttpGet("GetEmployeeMedicalCheckups/{id}")]
         public async Task<ActionResult<IEnumerable<DocumentDTO>>> GetEmployeeMedicalCheckups(int id) {
             return Ok(await DocumentControllerHelper.GetEmployeesDocuments(_set, id));
         }
 
-        //[Authorize]
-        [HttpPut("{id}")]
+        [HttpPut("Update/{id}")]
         public async Task<IActionResult> PutMedicalCheckup(int id, DocumentDTO dto) {
             if (id != dto.Id) {
                 return BadRequest();
@@ -71,8 +67,7 @@ namespace API.HR.Controller {
             return NoContent();
         }
 
-        //[Authorize]
-        [HttpPost]
+        [HttpPost("Create/{id}")]
         public async Task<ActionResult<DocumentDTO>> PostMedicalCheckup(DocumentDTO dto) {
             string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
             DocumentDTO result = await DocumentControllerHelper.PostDocument(_context, _set, dto, requestAuthor);
@@ -80,8 +75,7 @@ namespace API.HR.Controller {
             return CreatedAtAction("GetMedicalCheckup", new { id = result.Id }, result);
         }
 
-        //[Authorize]
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete/{id}")]
         public async Task<ActionResult<MedicalCheckup>> DeleteMedicalCheckup(int id) {
             var medicalCheckup = await _context.MedicalCheckups.FindAsync(id);
             if (medicalCheckup == null) {

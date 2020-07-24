@@ -25,15 +25,24 @@ namespace API.Business.Controller {
             _appSettings = appSettings.Value;
         }
 
-        //[Authorize(Roles = "Manager,Administrator")]
         [HttpGet("Get")]
         public async Task<ActionResult<IEnumerable<UserDTO>>> GetUsers() {
             List<User> list = await _context.Users.ToListAsync();
             return Ok(list.Select(x => UserManager.CreateDTO(x)));
         }
 
-        //[Authorize(Roles = "Manager,Administrator")]
-        [HttpPost("Create")]
+        [HttpGet("Get/{id}")]
+        public async Task<ActionResult<UserDTO>> GetUser(int id) {
+            var user = await _context.Users.FindAsync(id);
+
+            if (user == null) {
+                return NotFound();
+            }
+
+            return UserManager.CreateDTO(user);
+        }
+
+        [HttpPost("Create/{id}")]
         public async Task<ActionResult<UserDTO>> CreateUser(UserDTO dto) {
             string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
 
@@ -46,9 +55,7 @@ namespace API.Business.Controller {
             return Created(string.Empty, UserManager.CreateDTO(user));
         }
 
-        //[Authorize(Roles = "Manager,Administrator")]
-        [HttpPut]
-        [Route("Update")]
+        [HttpPut("Update/{id}")]
         public async Task<IActionResult> UpdateUser(int id, UserDTO dto) {
             string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.ToString();
 
@@ -79,24 +86,7 @@ namespace API.Business.Controller {
             return NoContent();
         }
 
-        [AllowAnonymous]
-        [HttpPost]
-        [Route("Login")]
-        public async Task<ActionResult<AuthenticationReponse>> AuthenticateUser(AuthenticationRequest request) {
-            User user = await _context.Users.FirstOrDefaultAsync(x => x.Email == request.Login);
-
-            if (user == null)
-                return Unauthorized();
-
-            string token = TokenManager.GenerateJwtToken(user, _appSettings);
-
-            return Ok(new AuthenticationReponse() { Token = token });
-        }
-
-
-        //[Authorize(Roles = "Manager,Administrator")]
-        [HttpDelete]
-        [Route("Delete")]
+        [HttpDelete("Delete/{id}")]
         public async Task<ActionResult<User>> DeleteUser(int id) {
             var user = await _context.Users.FindAsync(id);
             if (user == null) {
@@ -109,12 +99,25 @@ namespace API.Business.Controller {
             return user;
         }
 
+        [AllowAnonymous]
+        [HttpPost("Login")]
+        public async Task<ActionResult<AuthenticationReponse>> AuthenticateUser(AuthenticationRequest request) {
+            User user = await _context.Users.FirstOrDefaultAsync(x => x.Email == request.Login && x.Hash == request.Password);
+
+            if (user == null)
+                return Unauthorized();
+
+            string token = TokenManager.GenerateJwtToken(user, _appSettings);
+
+            return Ok(new AuthenticationReponse() { Token = token });
+        }
+
+
         private bool UserExists(int id) {
             return _context.Users.Any(e => e.Id == id);
         }
 
-        [HttpPatch]
-        [Route("RequestPasswordReset")]
+        [HttpPatch("RequestPasswordReset/{id}")]
         public async Task<IActionResult> RequestPasswordReset(int id) {
             User user = await _context.Users.FindAsync(id);
             if (user == null)
@@ -135,10 +138,8 @@ namespace API.Business.Controller {
             return NoContent();
         }
 
-        //[Authorize(Roles = "Manager,Administrator")]
-        [HttpPatch]
-        [Route("UpdatePassword")]
-        public async Task<IActionResult> UpdatePassword(int id, string hash) {
+        [HttpPatch("PatchPassword/{id}")]
+        public async Task<IActionResult> PatchPassword(int id, string hash) {
             User user = await _context.Users.FindAsync(id);
             if (user == null)
                 return NotFound();
