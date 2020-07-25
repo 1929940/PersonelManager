@@ -8,15 +8,7 @@ using System.Threading.Tasks;
 
 namespace API.Core.DBContext {
     public static class SeedPayroll {
-        /*
-         *                        HIRED     BREAK
-         * 1. PL    MONTER        -300  
-         * 1. PL    SPAWACZ       -200
-         * 2. UKR   SZLIFIERZ     -250      -150 -80
-         * 3. UKR   SZLIFIERZ     -250      -61
-         * 4. UKR   MONTER        -150  
 
-        */
         public static IEnumerable<Contract> GetDummyContracts() => new Contract[] {
             new Contract() {
                 Id = 1,

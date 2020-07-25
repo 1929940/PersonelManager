@@ -23,9 +23,6 @@ namespace API.Core.DBContext {
             modelBuilder.Entity<MedicalCheckup>().HasData(SeedHR.GetDummyMedicalCheckups());
             modelBuilder.Entity<SafetyTraining>().HasData(SeedHR.GetDummySafetyTrainings());
             modelBuilder.Entity<Certificate>().HasData(SeedHR.GetDummyCertificates());
-            modelBuilder.Entity<Passport>().HasData(SeedHR.GetDummyPassports());
-            modelBuilder.Entity<Visa>().HasData(SeedHR.GetDummyVisas());
-            modelBuilder.Entity<Permit>().HasData(SeedHR.GetDummyPermits());
             modelBuilder.Entity<Leave>().HasData(SeedHR.GetDummyLeaves());
 
             modelBuilder.Entity<Contract>().HasData(SeedPayroll.GetDummyContracts());
@@ -46,11 +43,6 @@ namespace API.Core.DBContext {
         public DbSet<Location> Locations { get; set; }
         public DbSet<MedicalCheckup> MedicalCheckups { get; set; }
         public DbSet<SafetyTraining> SafetyTrainings { get; set; }
-
-        public DbSet<Passport> Passports { get; set; }
-        public DbSet<Permit> Permits { get; set; }
-        public DbSet<Visa> Visas { get; set; }
-
 
         public DbSet<Contract> Contracts { get; set; }
         public DbSet<Payment> Payment { get; set; }
