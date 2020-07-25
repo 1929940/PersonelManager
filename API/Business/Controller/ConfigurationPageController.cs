@@ -7,9 +7,10 @@ using API.Core.DBContext;
 using API.Business.Logic;
 using System.Security.Claims;
 using API.Core.Logic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Business.Controller {
-    //[Authorize(Roles = "Kierownik,Administrator")]
+    [Authorize(Roles = "Kierownik,Administrator")]
     [Route("api/[controller]")]
     [ApiController]
     public class ConfigurationPageController : ControllerBase {

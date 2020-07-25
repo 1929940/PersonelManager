@@ -33,12 +33,12 @@ namespace PersonalManagerDesktop {
 
             Settings.Url = @"https://localhost:44345";
 
-            string en1 = CommunicationLibrary.Core.Logic.PasswordManager.EncryptPassword(s1);
-            string en1_1 = CommunicationLibrary.Core.Logic.PasswordManager.EncryptPassword(s1);
+            string en1 = PasswordManager.EncryptPassword(s1);
+            string en1_1 = PasswordManager.EncryptPassword(s1);
 
-            string en2 = CommunicationLibrary.Core.Logic.PasswordManager.EncryptPassword(s2);
+            string en2 = PasswordManager.EncryptPassword(s2);
 
-            string en1_2 = CommunicationLibrary.Core.Logic.PasswordManager.EncryptPassword(s1);
+            string en1_2 = PasswordManager.EncryptPassword(s1);
 
 
 
@@ -97,15 +97,15 @@ namespace PersonalManagerDesktop {
 
 
             //TODO: IF NOT EMAIL - THROWS AN ERROR
-            var login3 = requestHandler.Login("wnuda@wp.pl", "1234");
-            Settings.Token = login3.Token;
+            //var login3 = requestHandler.Login("wnuda@wp.pl", "1234");
+            //Settings.Token = login3.Token;
 
-            var createAnother = requestHandler.Create(new User() {
-                Email = "KOSMOSWZ",
-                FirstName = "eloszka",
-                LastName = "michalina",
-                IsActive = true,
-            });
+            //var createAnother = requestHandler.Create(new User() {
+            //    Email = "KOSMOSWZ",
+            //    FirstName = "eloszka",
+            //    LastName = "michalina",
+            //    IsActive = true,
+            //});
 
             //var task = Task.Run(async () => await requestHandler.LoginAsync("Jan.Kowalski@PersonelManager.pl", "3026"));
             //var result = task.Result;

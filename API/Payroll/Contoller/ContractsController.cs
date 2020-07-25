@@ -8,9 +8,10 @@ using API.Core.DBContext;
 using API.Payroll.Models;
 using API.Payroll.Logic;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Payroll.Contoller {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ContractsController : ControllerBase {

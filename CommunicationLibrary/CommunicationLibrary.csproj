@@ -9,8 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="HR\" />
-    <Folder Include="Payroll\" />
+    <Folder Include="HR\Requests\" />
   </ItemGroup>
 
 </Project>

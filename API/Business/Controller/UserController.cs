@@ -50,8 +50,6 @@ namespace API.Business.Controller {
             User user = UserManager.CreateUser(dto);
             UserManager.WriteCreationTags(requestAuthor, ref user);
 
-            
-
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
@@ -126,6 +124,7 @@ namespace API.Business.Controller {
             return _context.Users.Any(e => e.Id == id);
         }
 
+        [Authorize]
         [HttpPut("RequestPasswordReset/{id}")]
         public async Task<IActionResult> RequestPasswordReset(int id) {
             User user = await _context.Users.FindAsync(id);
@@ -147,6 +146,7 @@ namespace API.Business.Controller {
             return NoContent();
         }
 
+        [Authorize]
         [HttpPut("UpdatePassword/{id}")]
         public async Task<IActionResult> UpdatePassword(int id, [FromBody]string hash) {
             User user = await _context.Users.FindAsync(id);

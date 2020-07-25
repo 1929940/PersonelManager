@@ -10,9 +10,9 @@ using API.Payroll.Logic;
 using System.Security.Claims;
 
 namespace API.Payroll.Contoller {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
     public class PaymentsController : ControllerBase {
         private readonly Context _context;
 

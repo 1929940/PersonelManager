@@ -12,7 +12,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 
 namespace API.Payroll.Contoller {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AdvanceController : ControllerBase {
