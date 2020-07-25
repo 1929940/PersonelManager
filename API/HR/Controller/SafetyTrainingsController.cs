@@ -11,7 +11,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 
 namespace API.HR.Controller {
-        //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class SafetyTrainingsController : ControllerBase {

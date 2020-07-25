@@ -13,7 +13,7 @@ using API.Core.Logic;
 using API.HR.Logic;
 
 namespace API.HR.Controller {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class LocationsController : ControllerBase {

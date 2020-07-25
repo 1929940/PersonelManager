@@ -13,7 +13,7 @@ namespace CommunicationLibrary.Business.Requests {
     public class UserRequestHandler : BaseRequestHandler<User> {
 
         public UserRequestHandler() {
-            _controllerName = "User";
+            _controllerName = "Users";
         }
 
         //Login

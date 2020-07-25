@@ -6,7 +6,7 @@ namespace API.Payroll.Logic {
 
         public static PaymentDTO CreateDTO(Payment payment) {
             PaymentDTO dto = new PaymentDTO() {
-                ContractSimplified = ContractManager.CreateSimplifiedDTO(payment.Contract),
+                Contract = ContractManager.CreateSimplifiedDTO(payment.Contract),
                 Id = payment.Id,
                 GrossAmount = payment.GrossAmount,
                 NetAmount = payment.NetAmount,
@@ -21,7 +21,7 @@ namespace API.Payroll.Logic {
             payment.NetAmount = dto.NetAmount;
             payment.GrossAmount = dto.GrossAmount;
             payment.PaidOn = dto.PaidOn;
-            payment.ContractId = dto.ContractSimplified.Id;
+            payment.ContractId = dto.Contract.Id;
 
             CopyTags(dto, ref payment);
         }

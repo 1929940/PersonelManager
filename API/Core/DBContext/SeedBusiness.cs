@@ -13,7 +13,7 @@ namespace API.Core.DBContext {
                 CreatedBy = "Initial",
                 CreatedOn = DateTime.Now,
                 Email = "Jan.Kowalski@PersonelManager.pl",
-                Hash = "WWW",
+                Hash = "1111",
                 Role = Roles.MANAGER,
                 IsActive = true,
                 RequestedPasswordReset = false
@@ -47,7 +47,7 @@ namespace API.Core.DBContext {
                 FirstName = "Administrator",
                 LastName = string.Empty,
                 Email = "Administrator",
-                Hash = "WSX_09",
+                Hash = "QWER",
                 Role = Roles.ADMIN,
                 IsActive = true
             }

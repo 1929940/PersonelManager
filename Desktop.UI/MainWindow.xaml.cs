@@ -40,6 +40,9 @@ namespace PersonalManagerDesktop {
 
             string en1_2 = PasswordManager.EncryptPassword(s1);
 
+            string enc_Pw = PasswordManager.EncryptPassword("Macko");
+
+
 
 
 
@@ -49,8 +52,9 @@ namespace PersonalManagerDesktop {
             var configRequestHandler = new ConfigurationPageRequestHandler();
 
 
-            //var login = requestHandler.Login("Jan.Kowalski@PersonelManager.pl", "Macko");
-            //Settings.Token = login.Token;
+            var login = requestHandler.Login("Jan.Kowalski@PersonelManager.pl", "Macko");
+            Settings.Token = login.Token;
+
 
             //var getpage = configRequestHandler.Get(1);
             //configRequestHandler.Update(1, new ConfigurationPage() {

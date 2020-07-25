@@ -5,7 +5,7 @@ namespace API.Payroll.Logic {
     public class AdvanceManager : BaseEntityManager {
         public static AdvanceDTO CreateDTO(Advance advance) {
             AdvanceDTO dto = new AdvanceDTO() {
-                ContractSimplified = ContractManager.CreateSimplifiedDTO(advance.Contract),
+                Contract = ContractManager.CreateSimplifiedDTO(advance.Contract),
                 Id = advance.Id,
                 Amount = advance.Amount,
                 PaidOn = advance.PaidOn,
@@ -20,7 +20,7 @@ namespace API.Payroll.Logic {
             advance.Amount = dto.Amount;
             advance.PaidOn = dto.PaidOn;
             advance.WorkedHours = dto.WorkedHours;
-            advance.ContractId = dto.ContractSimplified.Id;
+            advance.ContractId = dto.Contract.Id;
 
             CopyTags(dto, ref advance);
         }

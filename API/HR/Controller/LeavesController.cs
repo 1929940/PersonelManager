@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 
 namespace API.HR.Controller {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class LeavesController : ControllerBase {

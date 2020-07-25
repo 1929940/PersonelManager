@@ -6,7 +6,7 @@ namespace API.Payroll.Logic {
     public class ContractManager : BaseEntityManager {
         public static ContractDTO CreateDTO(Contract contract) {
             ContractDTO dto = new ContractDTO() {
-                EmployeeSimplified = EmployeeManager.CreateSimplifiedDTO(contract.Employee),
+                Employee = EmployeeManager.CreateSimplifiedDTO(contract.Employee),
                 Title = contract.Title,
                 Number = contract.Number,
                 ValidFrom = contract.ValidFrom,
@@ -36,7 +36,7 @@ namespace API.Payroll.Logic {
         }
 
         public static void UpdateWithDTO(ContractDTO dto, ref Contract contract) {
-            contract.EmployeeId = dto.EmployeeSimplified.Id;
+            contract.EmployeeId = dto.Employee.Id;
             contract.Title = dto.Title;
             contract.Number = dto.Number;
             contract.ValidFrom = dto.ValidFrom;

@@ -13,7 +13,7 @@ using System.Security.Claims;
 using API.HR.Logic;
 
 namespace API.HR.Controller {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ForemenController : ControllerBase {
