@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CommunicationLibrary.HR.Requests {
-    public class LocationRequestHandler : BaseRequestHandler<Location> {
+    public class LocationsRequestHandler : BaseRequestHandler<Location> {
 
-        public LocationRequestHandler() {
-            _controllerName = "Location";
+        public LocationsRequestHandler() {
+            _controllerName = "Locations";
         }
 
         public IEnumerable<Location> GetEmployeeLocations(int id) {

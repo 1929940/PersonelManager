@@ -15,10 +15,10 @@ namespace API.Payroll.Contoller {
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class AdvanceController : ControllerBase {
+    public class AdvancesController : ControllerBase {
         private readonly Context _context;
 
-        public AdvanceController(Context context) {
+        public AdvancesController(Context context) {
             _context = context;
         }
 

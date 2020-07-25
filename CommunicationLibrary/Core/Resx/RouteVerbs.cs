@@ -19,7 +19,7 @@
 
         internal const string GET_EMPLOYEE_ADVANCES = "GetEmployeeAdvances";
         internal const string GET_EMPLOYEE_CONTRACTS = "GetEmployeeContracts";
-        internal const string GET_EMPLOYEE_PAYMENTS = "GetEmployeesPayments";
+        internal const string GET_EMPLOYEE_PAYMENTS = "GetEmployeePayments";
         internal const string GET_CONTRACT_ADVANCES = "GetContractAdvances";
 
 

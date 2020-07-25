@@ -14,10 +14,10 @@ namespace API.HR.Controller {
     //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class EmployeeController : ControllerBase {
+    public class EmployeesController : ControllerBase {
         private readonly Context _context;
 
-        public EmployeeController(Context context) {
+        public EmployeesController(Context context) {
             _context = context;
         }
 

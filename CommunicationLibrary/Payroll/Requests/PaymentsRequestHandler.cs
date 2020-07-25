@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CommunicationLibrary.Payroll.Requests {
-    public class PaymentRequestHandler : BaseRequestHandler<Payment> {
+    public class PaymentsRequestHandler : BaseRequestHandler<Payment> {
 
-        public PaymentRequestHandler() {
-            _controllerName = "Payment";
+        public PaymentsRequestHandler() {
+            _controllerName = "Payments";
         }
 
         public IEnumerable<Payment> GetEmployeePayments(int id) {

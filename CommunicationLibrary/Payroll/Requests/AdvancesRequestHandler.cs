@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CommunicationLibrary.Payroll.Requests {
-    public class AdvanceRequestHandler : BaseRequestHandler<Advance> {
+    public class AdvancesRequestHandler : BaseRequestHandler<Advance> {
 
-        public AdvanceRequestHandler() {
-            _controllerName = "Advance";
+        public AdvancesRequestHandler() {
+            _controllerName = "Advances";
         }
 
         public IEnumerable<Advance> GetEmployeeAdvances(int id) {

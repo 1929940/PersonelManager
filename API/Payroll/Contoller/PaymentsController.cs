@@ -37,7 +37,7 @@ namespace API.Payroll.Contoller {
             return PaymentManager.CreateDTO(payment);
         }
 
-        [HttpGet("GetEmployeesPayments/{id}")]
+        [HttpGet("GetEmployeePayments/{id}")]
         public async Task<ActionResult<AdvanceDTO>> GetEmployeePayments(int id) {
             var contracts = await _context.Contracts.Where(x => x.EmployeeId == id && x.Payment != null).ToListAsync();
             var payments = contracts.Select(x => PaymentManager.CreateDTO(x.Payment));

@@ -15,11 +15,11 @@ namespace API.HR.Controller {
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class CertificateController : ControllerBase {
+    public class CertificatesController : ControllerBase {
         private readonly Context _context;
         private readonly DbSet<Certificate> _set;
 
-        public CertificateController(Context context) {
+        public CertificatesController(Context context) {
             _context = context;
             _set = context.Certificates;
         }

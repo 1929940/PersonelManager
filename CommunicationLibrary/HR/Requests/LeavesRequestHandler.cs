@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CommunicationLibrary.HR.Requests {
-    public class LeaveRequestHandler : BaseRequestHandler<Leave> {
+    public class LeavesRequestHandler : BaseRequestHandler<Leave> {
 
-        public LeaveRequestHandler() {
-            _controllerName = "Leave";
+        public LeavesRequestHandler() {
+            _controllerName = "Leaves";
         }
 
         public IEnumerable<Leave> GetEmployeeLeaves(int id) {

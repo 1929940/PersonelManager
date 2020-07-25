@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CommunicationLibrary.HR.Requests {
-    public class SafetyTrainingRequestHandler : BaseRequestHandler<PersonelDocument> {
+    public class SafetyTrainingsRequestHandler : BaseRequestHandler<PersonelDocument> {
 
-        public SafetyTrainingRequestHandler() {
-            _controllerName = "SafetyTraining";
+        public SafetyTrainingsRequestHandler() {
+            _controllerName = "SafetyTrainings";
         }
 
         public IEnumerable<PersonelDocument> GetEmployeeSafetyTrainings(int id) {

@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CommunicationLibrary.Payroll.Requests {
-    public class ContractRequestHandler : BaseRequestHandler<Contract>{
+    public class ContractsRequestHandler : BaseRequestHandler<Contract>{
 
-        public ContractRequestHandler() {
-            _controllerName = "Contract";
+        public ContractsRequestHandler() {
+            _controllerName = "Contracts";
         }
 
         public IEnumerable<Contract> GetEmployeeContracts(int id) {

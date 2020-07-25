@@ -7,9 +7,9 @@ using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace CommunicationLibrary.HR.Requests {
-    public class EmployeeRequestHandler : BaseRequestHandler<Employee> {
-        public EmployeeRequestHandler() {
-            _controllerName = "Employee";
+    public class EmployeesRequestHandler : BaseRequestHandler<Employee> {
+        public EmployeesRequestHandler() {
+            _controllerName = "Employees";
         }
 
         //history

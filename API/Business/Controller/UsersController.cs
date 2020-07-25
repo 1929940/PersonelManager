@@ -17,11 +17,11 @@ namespace API.Business.Controller {
     [Authorize(Roles = "Kierownik,Administrator")]
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase {
+    public class UsersController : ControllerBase {
         private readonly Context _context;
         private readonly AppSettings _appSettings;
 
-        public UserController(Context context, IOptions<AppSettings> appSettings) {
+        public UsersController(Context context, IOptions<AppSettings> appSettings) {
             _context = context;
             _appSettings = appSettings.Value;
         }

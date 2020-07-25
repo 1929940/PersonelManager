@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CommunicationLibrary.HR.Requests {
-    public class CertificateRequestHandler : BaseRequestHandler<PersonelDocument> {
+    public class CertificatesRequestHandler : BaseRequestHandler<PersonelDocument> {
 
-        public CertificateRequestHandler() {
-            _controllerName = "Certificate";
+        public CertificatesRequestHandler() {
+            _controllerName = "Certificates";
         }
 
         public IEnumerable<PersonelDocument> GetEmployeeCertificates(int id) {

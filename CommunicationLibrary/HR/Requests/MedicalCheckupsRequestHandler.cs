@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CommunicationLibrary.HR.Requests {
-    public class MedicalCheckupRequestHandler : BaseRequestHandler<PersonelDocument> {
+    public class MedicalCheckupsRequestHandler : BaseRequestHandler<PersonelDocument> {
 
-        public MedicalCheckupRequestHandler() {
-            _controllerName = "MedicalCheckup";
+        public MedicalCheckupsRequestHandler() {
+            _controllerName = "MedicalCheckups";
         }
 
         public IEnumerable<PersonelDocument> GetEmployeeMedicalCheckups(int id) {
