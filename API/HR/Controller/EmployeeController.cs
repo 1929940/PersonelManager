@@ -14,7 +14,7 @@ namespace API.HR.Controller {
     //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class EmployeeController<T> : ControllerBase {
+    public class EmployeeController : ControllerBase {
         private readonly Context _context;
 
         public EmployeeController(Context context) {
@@ -38,8 +38,7 @@ namespace API.HR.Controller {
             return EmployeeManager.CreateDTO(employee);
         }
 
-        [Route("GetEmployeeHistory")]
-        [HttpGet("Get")]
+        [HttpGet("GetEmployeeHistory")]
         public async Task<ActionResult<EmployeeHistory>> GetEmployeeHistory(int id) {
             var histories = await _context.EmployeesHistory.Where(x => x.EmployeeId == id).ToListAsync();
 
