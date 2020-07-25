@@ -15,6 +15,7 @@
         internal const string GET_EMPLOYEE_LOCATIONS = "GetEmployeeLocations";
         internal const string GET_EMPLOYEE_MEDICAL_CHECKUPS = "GetEmployeeMedicalCheckups";
         internal const string GET_EMPLOYEE_SAFETY_TRAININGS = "GetEmployeeSafetyTrainings";
+        internal const string GET_EMPLOYEE_HISTORY = "GetEmployeeHistory";
 
         internal const string GET_EMPLOYEE_ADVANCES = "GetEmployeeAdvances";
         internal const string GET_EMPLOYEE_CONTRACTS = "GetEmployeeContracts";

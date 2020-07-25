@@ -186,7 +186,7 @@ namespace CommunicationLibrary.Core.Logic {
             using (var httpClient = new HttpClient()) {
                 SetToken(httpClient);
 
-                string requestUri = GetUri(_controllerName, routeVerb);
+                string requestUri = GetUri(_controllerName, routeVerb, id);
 
                 using (var response = httpClient.GetAsync(requestUri).Result) {
                     string apiResponse = response.Content.ReadAsStringAsync().Result;
@@ -201,7 +201,7 @@ namespace CommunicationLibrary.Core.Logic {
             using (var httpClient = new HttpClient()) {
                 SetToken(httpClient);
 
-                string requestUri = GetUri(_controllerName, routeVerb);
+                string requestUri = GetUri(_controllerName, routeVerb, id);
 
                 using (var response = await httpClient.GetAsync(requestUri)) {
                     string apiResponse = await response.Content.ReadAsStringAsync();

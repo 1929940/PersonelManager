@@ -118,7 +118,7 @@ namespace API.HR.Controller {
         }
 
         [HttpPut("ArchiveEmployee/{id}")]
-        public async Task<ActionResult> PatchIsArchived(int id, bool isArchived) {
+        public async Task<ActionResult> PatchIsArchived(int id, [FromBody]bool isArchived) {
             var employee = await _context.Employees.FindAsync(id);
             if (employee == null) {
                 return NotFound();
