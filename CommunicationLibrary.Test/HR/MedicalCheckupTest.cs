@@ -10,7 +10,7 @@ using Xunit;
 namespace CommunicationLibrary.Test.HR {
     public class MedicalCheckupTest : BaseTest<PersonelDocument> {
         public MedicalCheckupTest() {
-            _requestHandler = new MedicalCheckupsRequestHandler();
+            _requestHandler = new MedicalCheckupRequestHandler();
             _comparer = new PersonelDocumentComperer();
 
             _baseRow = new PersonelDocument() {
@@ -34,7 +34,7 @@ namespace CommunicationLibrary.Test.HR {
 
         [Fact]
         public void GetEmployeeCertificates_ShouldPass() {
-            var employeeMedicalcheckups = (_requestHandler as MedicalCheckupsRequestHandler).GetEmployeeMedicalCheckups(1);
+            var employeeMedicalcheckups = (_requestHandler as MedicalCheckupRequestHandler).GetEmployeeMedicalCheckups(1);
             var medicalCheckups = _requestHandler.Get();
 
             Assert.Equal(employeeMedicalcheckups.Count(), medicalCheckups.Count(x => x.Employee.Id == 1));
@@ -42,7 +42,7 @@ namespace CommunicationLibrary.Test.HR {
 
         [Fact]
         public async Task GetEmployeeCertificatesAsync_ShouldPass() {
-            var employeeMedicalcheckups = await (_requestHandler as MedicalCheckupsRequestHandler).GetEmployeeMedicalCheckupsAsync(1);
+            var employeeMedicalcheckups = await (_requestHandler as MedicalCheckupRequestHandler).GetEmployeeMedicalCheckupsAsync(1);
             var medicalCheckups = _requestHandler.Get();
 
             Assert.Equal(employeeMedicalcheckups.Count(), medicalCheckups.Count(x => x.Employee.Id == 1));

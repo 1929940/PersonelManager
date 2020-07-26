@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CommunicationLibrary.HR.Requests {
-    public class LeavesRequestHandler : BaseRequestHandler<Leave> {
+    public class LeaveRequestHandler : BaseRequestHandler<Leave> {
 
-        public LeavesRequestHandler() {
+        public LeaveRequestHandler() {
             _controllerName = "Leaves";
         }
 

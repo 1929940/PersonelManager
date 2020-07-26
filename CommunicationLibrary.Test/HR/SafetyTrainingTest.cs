@@ -10,7 +10,7 @@ using Xunit;
 namespace CommunicationLibrary.Test.HR {
     public class SafetyTrainingTest : BaseTest<PersonelDocument> {
         public SafetyTrainingTest() {
-            _requestHandler = new SafetyTrainingsRequestHandler();
+            _requestHandler = new SafetyTrainingRequestHandler();
             _comparer = new PersonelDocumentComperer();
 
             _baseRow = new PersonelDocument() {
@@ -34,7 +34,7 @@ namespace CommunicationLibrary.Test.HR {
 
         [Fact]
         public void GetEmployeeCertificates_ShouldPass() {
-            var employeeSafetyTrainings = (_requestHandler as SafetyTrainingsRequestHandler).GetEmployeeSafetyTrainings(1);
+            var employeeSafetyTrainings = (_requestHandler as SafetyTrainingRequestHandler).GetEmployeeSafetyTrainings(1);
             var safetyTrainings = _requestHandler.Get();
 
             Assert.Equal(employeeSafetyTrainings.Count(), safetyTrainings.Count(x => x.Employee.Id == 1));
@@ -42,7 +42,7 @@ namespace CommunicationLibrary.Test.HR {
 
         [Fact]
         public async Task GetEmployeeCertificatesAsync_ShouldPass() {
-            var employeeSafetyTrainings = await (_requestHandler as SafetyTrainingsRequestHandler).GetEmployeeSafetyTrainingsAsync(1);
+            var employeeSafetyTrainings = await (_requestHandler as SafetyTrainingRequestHandler).GetEmployeeSafetyTrainingsAsync(1);
             var safetyTrainings = _requestHandler.Get();
 
             Assert.Equal(employeeSafetyTrainings.Count(), safetyTrainings.Count(x => x.Employee.Id == 1));

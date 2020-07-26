@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CommunicationLibrary.Payroll.Requests {
-    public class AdvancesRequestHandler : BaseRequestHandler<Advance> {
+    public class AdvanceRequestHandler : BaseRequestHandler<Advance> {
 
-        public AdvancesRequestHandler() {
+        public AdvanceRequestHandler() {
             _controllerName = "Advances";
         }
 

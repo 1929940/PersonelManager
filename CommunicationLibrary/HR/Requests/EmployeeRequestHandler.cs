@@ -7,12 +7,11 @@ using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace CommunicationLibrary.HR.Requests {
-    public class EmployeesRequestHandler : BaseRequestHandler<Employee> {
-        public EmployeesRequestHandler() {
+    public class EmployeeRequestHandler : BaseRequestHandler<Employee> {
+        public EmployeeRequestHandler() {
             _controllerName = "Employees";
         }
 
-        //history
         public IEnumerable<EmployeeHistory> GetEmployeeHistory(int id) {
             List<EmployeeHistory> output = new List<EmployeeHistory>();
             using (var httpClient = new HttpClient()) {
@@ -43,7 +42,7 @@ namespace CommunicationLibrary.HR.Requests {
             return output;
         }
 
-        //archive
+
         public void ArchiveEmployee(int id, bool input) {
             using (var httpClient = new HttpClient()) {
                 SetToken(httpClient);

@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CommunicationLibrary.Payroll.Requests {
-    public class PaymentsRequestHandler : BaseRequestHandler<Payment> {
+    public class PaymentRequestHandler : BaseRequestHandler<Payment> {
 
-        public PaymentsRequestHandler() {
+        public PaymentRequestHandler() {
             _controllerName = "Payments";
         }
 

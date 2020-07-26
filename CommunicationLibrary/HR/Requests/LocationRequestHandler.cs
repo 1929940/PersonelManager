@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CommunicationLibrary.HR.Requests {
-    public class LocationsRequestHandler : BaseRequestHandler<Location> {
+    public class LocationRequestHandler : BaseRequestHandler<Location> {
 
-        public LocationsRequestHandler() {
+        public LocationRequestHandler() {
             _controllerName = "Locations";
         }
 

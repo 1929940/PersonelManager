@@ -8,7 +8,7 @@ namespace CommunicationLibrary.Test.HR {
     public class ForemanTest : BaseTest<Foreman> {
 
         public ForemanTest() {
-            _requestHandler = new ForemenRequestHandler();
+            _requestHandler = new ForemanRequestHandler();
             _comparer = new ForemanComparer();
 
             _baseRow = new Foreman() {

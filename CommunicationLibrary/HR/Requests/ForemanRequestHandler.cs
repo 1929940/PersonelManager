@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CommunicationLibrary.HR.Requests {
-    public class ForemenRequestHandler : BaseRequestHandler<Foreman> {
+    public class ForemanRequestHandler : BaseRequestHandler<Foreman> {
 
-        public ForemenRequestHandler() {
+        public ForemanRequestHandler() {
             _controllerName = "Foremen";
         }
 

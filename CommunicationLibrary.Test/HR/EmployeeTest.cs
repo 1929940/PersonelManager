@@ -9,10 +9,10 @@ using Xunit;
 
 namespace CommunicationLibrary.Test.HR {
     public class EmployeeTest : BaseTest<Employee> {
-        private readonly EmployeesRequestHandler _employeesRequestHandler;
+        private readonly EmployeeRequestHandler _employeesRequestHandler;
 
         public EmployeeTest() {
-            _requestHandler = _employeesRequestHandler = new EmployeesRequestHandler();
+            _requestHandler = _employeesRequestHandler = new EmployeeRequestHandler();
             _comparer = new EmployeeComparer();
 
             _baseRow = new Employee() {

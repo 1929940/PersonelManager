@@ -7,7 +7,7 @@ namespace CommunicationLibrary.Test.HR {
     public class LocationTest : BaseTest<Location> {
 
         public LocationTest() {
-            _requestHandler = new LocationsRequestHandler();
+            _requestHandler = new LocationRequestHandler();
             _comparer = new LocationComparer();
 
             _baseRow = new Location() {

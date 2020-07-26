@@ -3,7 +3,6 @@ using CommunicationLibrary.Core;
 using CommunicationLibrary.Core.Logic;
 using CommunicationLibrary.Core.Models;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -12,7 +11,6 @@ namespace CommunicationLibrary.Test.Core {
         protected BaseRequestHandler<T> _requestHandler;
         protected T _baseRow;
         protected T _updatedRow;
-        protected int _rowCount;
         protected int _id;
         protected IEqualityComparer<T> _comparer;
         public BaseTest() {

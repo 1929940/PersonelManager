@@ -10,7 +10,7 @@ using Xunit;
 namespace CommunicationLibrary.Test.HR {
     public class CertificateTest : BaseTest<PersonelDocument> {
         public CertificateTest() {
-            _requestHandler = new CertificatesRequestHandler();
+            _requestHandler = new CertificateRequestHandler();
             _comparer = new PersonelDocumentComperer();
 
             _baseRow = new PersonelDocument() {
@@ -34,7 +34,7 @@ namespace CommunicationLibrary.Test.HR {
 
         [Fact]
         public void GetEmployeeCertificates_ShouldPass() {
-            var employeeCertificates = (_requestHandler as CertificatesRequestHandler).GetEmployeeCertificates(1);
+            var employeeCertificates = (_requestHandler as CertificateRequestHandler).GetEmployeeCertificates(1);
             var certificates = _requestHandler.Get();
 
             Assert.Equal(employeeCertificates.Count(), certificates.Count(x => x.Employee.Id == 1));
@@ -42,7 +42,7 @@ namespace CommunicationLibrary.Test.HR {
 
         [Fact]
         public async Task GetEmployeeCertificatesAsync_ShouldPass() {
-            var employeeCertificates = await (_requestHandler as CertificatesRequestHandler).GetEmployeeCertificatesAsync(1);
+            var employeeCertificates = await (_requestHandler as CertificateRequestHandler).GetEmployeeCertificatesAsync(1);
             var certificates = _requestHandler.Get();
 
             Assert.Equal(employeeCertificates.Count(), certificates.Count(x => x.Employee.Id == 1));

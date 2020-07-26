@@ -8,7 +8,7 @@ namespace CommunicationLibrary.Test.HR {
     public class LeaveTest : BaseTest<Leave> {
 
         public LeaveTest() {
-            _requestHandler = new LeavesRequestHandler();
+            _requestHandler = new LeaveRequestHandler();
             _comparer = new LeaveComparer();
 
             _baseRow = new Leave() {

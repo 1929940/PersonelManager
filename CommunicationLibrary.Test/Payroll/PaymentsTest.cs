@@ -12,7 +12,7 @@ namespace CommunicationLibrary.Test.Payroll {
         private readonly int employeeId;
 
         public PaymentsTest() : base() {
-            _requestHandler = new PaymentsRequestHandler();
+            _requestHandler = new PaymentRequestHandler();
             _comparer = new PaymentComparer();
             employeeId = 1;
 
@@ -34,7 +34,7 @@ namespace CommunicationLibrary.Test.Payroll {
         [Fact]
         public void GetEmployeePayments_ShouldPass() {
             var row = _requestHandler.Create(_baseRow);
-            var employeePayments = ((PaymentsRequestHandler)_requestHandler).GetEmployeePayments(employeeId);
+            var employeePayments = ((PaymentRequestHandler)_requestHandler).GetEmployeePayments(employeeId);
             _requestHandler.Delete(row.Id);
 
             Assert.Contains(row, employeePayments, _comparer);
@@ -43,7 +43,7 @@ namespace CommunicationLibrary.Test.Payroll {
         [Fact]
         public async Task GetEmployeePaymentsAsync_ShouldPass() {
             var row = await _requestHandler.CreateAsync(_baseRow);
-            var employeePayments = await ((PaymentsRequestHandler)_requestHandler).GetEmployeePaymentsAsync(employeeId);
+            var employeePayments = await ((PaymentRequestHandler)_requestHandler).GetEmployeePaymentsAsync(employeeId);
             await _requestHandler.DeleteAsync(row.Id);
 
             Assert.Contains(row, employeePayments, _comparer);

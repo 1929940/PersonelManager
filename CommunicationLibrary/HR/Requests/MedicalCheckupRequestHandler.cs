@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CommunicationLibrary.HR.Requests {
-    public class MedicalCheckupsRequestHandler : BaseRequestHandler<PersonelDocument> {
+    public class MedicalCheckupRequestHandler : BaseRequestHandler<PersonelDocument> {
 
-        public MedicalCheckupsRequestHandler() {
+        public MedicalCheckupRequestHandler() {
             _controllerName = "MedicalCheckups";
         }
 

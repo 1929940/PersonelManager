@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CommunicationLibrary.HR.Requests {
-    public class CertificatesRequestHandler : BaseRequestHandler<PersonelDocument> {
+    public class CertificateRequestHandler : BaseRequestHandler<PersonelDocument> {
 
-        public CertificatesRequestHandler() {
+        public CertificateRequestHandler() {
             _controllerName = "Certificates";
         }
 

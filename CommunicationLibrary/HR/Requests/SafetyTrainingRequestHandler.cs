@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CommunicationLibrary.HR.Requests {
-    public class SafetyTrainingsRequestHandler : BaseRequestHandler<PersonelDocument> {
+    public class SafetyTrainingRequestHandler : BaseRequestHandler<PersonelDocument> {
 
-        public SafetyTrainingsRequestHandler() {
+        public SafetyTrainingRequestHandler() {
             _controllerName = "SafetyTrainings";
         }
 
