@@ -44,7 +44,6 @@ namespace API.HR.Controller {
             return Ok(await DocumentControllerHelper.GetEmployeesDocuments(_set, id));
         }
 
-        //[Authorize]
         [HttpPut("Update/{id}")]
         public async Task<IActionResult> PutSafetyTraining(int id, DocumentDTO dto) {
             if (id != dto.Id) {

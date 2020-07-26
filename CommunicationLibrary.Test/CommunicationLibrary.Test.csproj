@@ -63,6 +63,13 @@
   <ItemGroup>
     <Compile Include="Business\UserTest.cs" />
     <Compile Include="Core\BaseTest.cs" />
+    <Compile Include="HR\CertificateTest.cs" />
+    <Compile Include="HR\EmployeeTest.cs" />
+    <Compile Include="HR\ForemanTest.cs" />
+    <Compile Include="HR\LeaveTest.cs" />
+    <Compile Include="HR\LocationTest.cs" />
+    <Compile Include="HR\MedicalCheckupTest.cs" />
+    <Compile Include="HR\SafetyTrainingTest.cs" />
     <Compile Include="Payroll\AdvancesTest.cs" />
     <Compile Include="Payroll\ContractsTest.cs" />
     <Compile Include="Payroll\PaymentsTest.cs" />
@@ -81,9 +88,7 @@
       <Name>CommunicationLibrary</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="HR\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

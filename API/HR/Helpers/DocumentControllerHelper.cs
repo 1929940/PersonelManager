@@ -17,7 +17,11 @@ namespace API.HR.Helpers {
         }
 
         public async static Task<DocumentDTO> GetDocument<T>(DbSet<T> set, int id) where T : PersonelDocumentEntity {
-            return PersonelDocumentManager.CreateDTO(await set.FindAsync(id));
+            T document = await set.FindAsync(id);
+            if (document == null)
+                return null;
+
+            return PersonelDocumentManager.CreateDTO(document);
         }
 
         public async static Task<IEnumerable<DocumentDTO>> GetEmployeesDocuments<T>(DbSet<T> set, int id) where T : PersonelDocumentEntity {

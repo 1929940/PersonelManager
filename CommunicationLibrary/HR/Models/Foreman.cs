@@ -9,7 +9,7 @@ namespace CommunicationLibrary.HR.Models {
         public string LastName { get; set; }
         public string PhoneNo { get; set; }
         public string Mail { get; set; }
-        //public int LocationId { get; set; }
+        public int LocationId { get; set; }
         public Location Location { get; set; }
     }
 }

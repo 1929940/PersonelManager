@@ -39,6 +39,7 @@ namespace API.HR.Controller {
             return location;
         }
 
+        //TODO: DO I NEED THIS?
         [HttpGet("GetEmployeeLocations/{id}")]
         public async Task<ActionResult<IEnumerable<Foreman>>> GetEmployeeLocations(int id) {
             var employee = await _context.Employees.FindAsync(id);
