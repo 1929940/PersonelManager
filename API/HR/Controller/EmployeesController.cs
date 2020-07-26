@@ -38,7 +38,7 @@ namespace API.HR.Controller {
             return EmployeeManager.CreateDTO(employee);
         }
 
-        [HttpGet("GetEmployeeHistory")]
+        [HttpGet("GetEmployeeHistory/{id}")]
         public async Task<ActionResult<EmployeeHistory>> GetEmployeeHistory(int id) {
             var histories = await _context.EmployeesHistory.Where(x => x.EmployeeId == id).ToListAsync();
 

@@ -15,9 +15,7 @@ namespace CommunicationLibrary.HR.Comparers {
             x.Profession == y.Profession &&
             x.PhoneNo == y.PhoneNo &&
             x.ForemanId == y.ForemanId &&
-            x.ForemanFullName == y.ForemanFullName &&
             x.LocationId == y.LocationId &&
-            x.LocationName == y.LocationName &&
             x.Country == y.Country &&
             x.Region == y.Region &&
             x.City == y.City &&
