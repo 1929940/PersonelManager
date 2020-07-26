@@ -65,10 +65,7 @@ namespace API.Core.DBContext {
                 WarningBeforeLeaveReachesLimit = 60,
                 WarningBeforeCertificateExpires = 30,
                 WarningBeforeMedicalCheckupExpires = 30,
-                WarningBeforePassportExpires = 30,
-                WarningBeforePermitExpires = 30,
                 WarningBeforeSafetyTrainingExpires = 30,
-                WarningBeforeVisaExpires = 30
             }
         };
     }

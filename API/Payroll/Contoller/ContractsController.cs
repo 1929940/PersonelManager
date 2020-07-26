@@ -83,6 +83,7 @@ namespace API.Payroll.Contoller {
 
             _context.Contracts.Add(contract);
             await _context.SaveChangesAsync();
+            await _context.Entry(contract).Reference(x => x.Employee).LoadAsync();
 
             return CreatedAtAction("GetContract", new { id = contract.Id }, ContractManager.CreateDTO(contract));
         }

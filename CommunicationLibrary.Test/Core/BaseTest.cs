@@ -24,10 +24,6 @@ namespace CommunicationLibrary.Test.Core {
             }
         }
 
-        //EVERY NEW TEST == NEW BaseTest is created!
-
-
-
         [Fact]
         public void CRUD_ShouldPass() {
             int id;
@@ -89,91 +85,5 @@ namespace CommunicationLibrary.Test.Core {
             row = await _requestHandler.GetAsync(id);
             Assert.NotEqual<T>(_updatedRow, row, _comparer);
         }
-
-
-        //[Fact]
-        //public void AddRow_ShouldPass() {
-        //    T rowCreated = _requestHandler.Create(_baseRow);
-        //    _id = rowCreated.Id;
-        //    Assert.Equal<T>(rowCreated, _baseRow, _comparer);
-        //}
-
-        //[Fact]
-        //public void GetRow_ShouldPass() {
-        //    T rowCreated = _requestHandler.Create(_baseRow);
-        //    T row = _requestHandler.Get(_baseRow.Id);
-        //    Assert.Equal<T>(row, _baseRow, _comparer);
-        //}
-
-        //[Fact]
-        //public void UpdateRow_ShouldPass() {
-        //    _requestHandler.Update(_updatedRow.Id, _updatedRow);
-        //    T updatedRow = _requestHandler.Get(_updatedRow.Id);
-        //    Assert.Equal(_updatedRow, updatedRow, _comparer);
-        //}
-
-        //[Fact]
-        //public void GetAll_ShouldPass() {
-        //    IEnumerable<T> rows = _requestHandler.Get();
-        //    _rowCount = rows.Count();
-        //    Assert.NotEmpty(rows);
-        //}
-
-        //[Fact]
-        //public void RemoveRow_ShouldPass() {
-        //    _requestHandler.Delete(_baseRow.Id);
-        //    T row = _requestHandler.Get(_baseRow.Id);
-        //    Assert.Null(row);
-        //}
-
-        //[Fact]
-        //public void RowCountChanged_ShouldPass() {
-        //    IEnumerable<T> rows = _requestHandler.Get();
-        //    Assert.NotEqual(rows.Count(), _rowCount);
-        //}
-        //#endregion
-        //#region Async
-
-        //[Fact]
-        //public async void AddRowAsync_ShouldPass() {
-        //    T rowCreated = await _requestHandler.CreateAsync(_baseRow);
-        //    _baseRow.Id = rowCreated.Id;
-        //    _updatedRow.Id = rowCreated.Id;
-        //    Assert.Equal<T>(rowCreated, _baseRow, _comparer);
-        //}
-
-        //[Fact]
-        //public async void GetRowAsync_ShouldPass() {
-        //    T row = await _requestHandler.GetAsync(_baseRow.Id);
-        //    Assert.Equal<T>(row, _baseRow, _comparer);
-        //}
-
-        //[Fact]
-        //public async void UpdateRowAsync_ShouldPass() {
-        //    await _requestHandler.UpdateAsync(_updatedRow.Id, _updatedRow);
-        //    T updatedRow = await _requestHandler.GetAsync(_updatedRow.Id);
-        //    Assert.Equal(_updatedRow, updatedRow, _comparer);
-        //}
-
-        //[Fact]
-        //public async void GetAllAsync_ShouldPass() {
-        //    IEnumerable<T> rows = await _requestHandler.GetAsync();
-        //    _rowCount = rows.Count();
-        //    Assert.NotEmpty(rows);
-        //}
-
-        //[Fact]
-        //public async void RemoveRowAsync_ShouldPass() {
-        //    await _requestHandler.DeleteAsync(_baseRow.Id);
-        //    T row = _requestHandler.Get(_baseRow.Id);
-        //    Assert.Null(row);
-        //}
-
-        //[Fact]
-        //public async void RowCountChangedAsync_ShouldPass() {
-        //    IEnumerable<T> rows = await _requestHandler.GetAsync();
-        //    Assert.NotEqual(rows.Count(), _rowCount);
-        //}
-        //#endregion
     }
 }

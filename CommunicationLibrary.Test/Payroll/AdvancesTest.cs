@@ -1,28 +1,52 @@
-﻿using CommunicationLibrary.Business.Requests;
-using CommunicationLibrary.Core;
+﻿using CommunicationLibrary.Payroll.Comparers;
+using CommunicationLibrary.Payroll.Models;
 using CommunicationLibrary.Payroll.Requests;
+using CommunicationLibrary.Test.Core;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace CommunicationLibrary.Test.Payroll {
-    public class AdvancesTest {
-        private readonly AdvancesRequestHandler _requestHandler;
-        public AdvancesTest() {
-            Settings.Url = @"https://localhost:44345";
-            _requestHandler = new AdvancesRequestHandler();
+    public class AdvancesTest : BaseTest<Advance>{
 
-            var login = new UserRequestHandler().Login("Jan.Kowalski@PersonelManager.pl", "Macko");
-            Settings.Token = login.Token;
+        private readonly int employeeId;
+
+        public AdvancesTest() {
+            _requestHandler = new AdvancesRequestHandler();
+            _comparer = new AdvanceComparer();
+            employeeId = 1;
+
+            _baseRow = new Advance() {
+                Contract = new ContractSimplified() { Id = 1 },
+                PaidOn = DateTime.Now.AddDays(-1),
+                Amount = 200,
+                WorkedHours = 10
+            };
+
+            _updatedRow = new Advance() {
+                Contract = new ContractSimplified() { Id = 1 },
+                PaidOn = DateTime.Now,
+                Amount = 300,
+                WorkedHours = 15
+            };
         }
 
         [Fact]
-        public void DownloadAllAdvances_ShouldPass() {
-            var advances = _requestHandler.Get();
-            Assert.NotEmpty(advances);
+        public void GetEmployeePayments_ShouldPass() {
+            var row = _requestHandler.Create(_baseRow);
+            var employeePayments = ((AdvancesRequestHandler)_requestHandler).GetEmployeeAdvances(employeeId);
+            _requestHandler.Delete(row.Id);
+
+            Assert.Contains(row, employeePayments, _comparer);
+        }
+
+        [Fact]
+        public async Task GetEmployeePaymentsAsync_ShouldPass() {
+            var row = await _requestHandler.CreateAsync(_baseRow);
+            var employeePayments = await ((AdvancesRequestHandler)_requestHandler).GetEmployeeAdvancesAsync(employeeId);
+            await _requestHandler.DeleteAsync(row.Id);
+
+            Assert.Contains(row, employeePayments, _comparer);
         }
 
     }

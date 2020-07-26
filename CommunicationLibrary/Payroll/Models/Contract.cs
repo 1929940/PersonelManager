@@ -1,11 +1,9 @@
 ﻿using CommunicationLibrary.Core.Models;
 using CommunicationLibrary.HR.Models;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace CommunicationLibrary.Payroll.Models {
-    public class Contract : BaseEntity {
+    public class Contract : DocumentEntity {
         public decimal Value { get; set; }
         public decimal HourlySalary { get; set; }
         public decimal TaxPercent { get; set; }

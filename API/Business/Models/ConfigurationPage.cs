@@ -10,8 +10,5 @@ namespace API.Business.Models {
         public int WarningBeforeMedicalCheckupExpires { get; set; }
         public int WarningBeforeSafetyTrainingExpires { get; set; }
         public int WarningBeforeCertificateExpires { get; set; }
-        public int WarningBeforeVisaExpires { get; set; }
-        public int WarningBeforePermitExpires { get; set; }
-        public int WarningBeforePassportExpires { get; set; }
     }
 }

@@ -61,9 +61,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\UserTest.cs" />
     <Compile Include="Core\BaseTest.cs" />
     <Compile Include="Payroll\AdvancesTest.cs" />
-    <Compile Include="Payroll\Helpers\PaymentComparer.cs" />
+    <Compile Include="Payroll\ContractsTest.cs" />
     <Compile Include="Payroll\PaymentsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -81,7 +82,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Business\" />
     <Folder Include="HR\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
