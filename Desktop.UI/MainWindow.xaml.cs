@@ -16,44 +16,71 @@ using CommunicationLibrary.Business.Models;
 using CommunicationLibrary.Core;
 using CommunicationLibrary.Core.Logic;
 using CommunicationLibrary.Business.Requests;
+using Desktop.UI.Business.Login;
 
 namespace PersonalManagerDesktop {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
+        public LoginWindow loginUI;
         public MainWindow() {
+
+            //void childWindow_MyEvent(object sender, EventArgs e) {
+            //    loginUI.Content = new ChangePasswordPage();
+            //}
+
+            ////LoginWindow loginUI = new LoginWindow();
+            ////bool? ww = loginUI.ShowDialog();
+
+            //loginUI = new LoginWindow();
+            ////LoginMainFrame loginUI = new LoginMainFrame();
+
+            //ChangePasswordPage changePage = new ChangePasswordPage();
+            //RequestResetPasswordPage requestPage = new RequestResetPasswordPage();
+            //LoginPage loginPage = new LoginPage(loginUI);
+            //loginPage.MyEvent += new EventHandler(childWindow_MyEvent);
+
+            //loginUI.Content = loginPage;
+
+            //loginUI.Content = changeUI;
+            //loginUI.Content = requestUI;
+            //loginUI.ShowDialog();
+
+
+
             InitializeComponent();
 
+            Console.WriteLine("h3h");
             //TODO: IF WRONG EMAIL ADDRESS CRASH
             //IF WRONG API CRASHED RESPONSE DESERIALIZATION WILL CRASH UI - INTERNAL SERVER ERRROR DOES
 
-            string s1 = "1232";
-            string s2 = "QWE";
+            //string s1 = "1232";
+            //string s2 = "QWE";
 
-            Settings.Url = @"https://localhost:44345";
+            //Settings.Url = @"https://localhost:44345";
 
-            string en1 = PasswordManager.EncryptPassword(s1);
-            string en1_1 = PasswordManager.EncryptPassword(s1);
+            //string en1 = PasswordManager.EncryptPassword(s1);
+            //string en1_1 = PasswordManager.EncryptPassword(s1);
 
-            string en2 = PasswordManager.EncryptPassword(s2);
+            //string en2 = PasswordManager.EncryptPassword(s2);
 
-            string en1_2 = PasswordManager.EncryptPassword(s1);
+            //string en1_2 = PasswordManager.EncryptPassword(s1);
 
-            string enc_Pw = PasswordManager.EncryptPassword("Macko");
-
-
+            //string enc_Pw = PasswordManager.EncryptPassword("Macko");
 
 
 
 
-            var requestHandler = new CommunicationLibrary.Business.Requests.UserRequestHandler();
-
-            var configRequestHandler = new ConfigurationPageRequestHandler();
 
 
-            var login = requestHandler.Login("Jan.Kowalski@PersonelManager.pl", "Macko");
-            Settings.Token = login.Token;
+            //var requestHandler = new CommunicationLibrary.Business.Requests.UserRequestHandler();
+
+            //var configRequestHandler = new ConfigurationPageRequestHandler();
+
+
+            //var login = requestHandler.Login("Jan.Kowalski@PersonelManager.pl", "Macko");
+            //Settings.Token = login.Token;
 
 
             //var getpage = configRequestHandler.Get(1);

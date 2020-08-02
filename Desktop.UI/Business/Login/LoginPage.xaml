@@ -1,0 +1,41 @@
+﻿<Page x:Class="Desktop.UI.Business.Login.LoginPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Desktop.UI.Business.Login"
+      mc:Ignorable="d"
+      d:DesignHeight="135" d:DesignWidth="300">
+    <!--Title="PersoelManager - Login" Height="125" Width="280"-->
+      
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Content="Login:"/>
+        <TextBox Name="LoginTxtBox" Grid.Row="0" Grid.Column="1" Margin="5" />
+
+        <Label Grid.Row="1" Grid.Column="0" Content="Hasło:"/>
+        <PasswordBox Name="PasswordBox" Grid.Row="1" Grid.Column="1" Margin="5"/>
+
+        <Label Name="ForgotPasswordLabel"
+            Grid.Row="2" Grid.Column="1" 
+            Content="Przypomnij hasło"
+            FontSize="10" FontWeight="UltraLight" FontStyle="Oblique" Foreground="Blue"
+            HorizontalAlignment="Right" VerticalAlignment="Top" Padding="0,0,10,10"
+            MouseLeftButtonDown="ForgotPasswordLabel_MouseLeftButtonDown"/>
+
+        <Button Name="LoginButton"
+            Grid.Row="3" Grid.Column="1" Content="Zaloguj" 
+            Margin="5" Width="100" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+            Click="LoginButton_Click"/>
+    </Grid>
+</Page>
