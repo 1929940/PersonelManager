@@ -16,14 +16,23 @@ using System.Windows.Shapes;
 namespace Desktop.UI.Business.Login {
     public partial class ChangePasswordPage : Page {
 
-        public EventHandler ChangePasswordEvent;
+        public EventHandler<LoginEventArgs> ChangePasswordEvent;
 
         public ChangePasswordPage() {
             InitializeComponent();
         }
 
         private void ChangeButton_Click(object sender, RoutedEventArgs e) {
-            ChangePasswordEvent(this, EventArgs.Empty);
+            if (PasswordBox.Password != PasswordBox2.Password)
+                return;
+
+
+            LoginEventArgs args = new LoginEventArgs() {
+                Password = PasswordBox.Password,
+                PasswordRepeat = PasswordBox2.Password
+            };
+
+            ChangePasswordEvent(this, args);
         }
     }
 }

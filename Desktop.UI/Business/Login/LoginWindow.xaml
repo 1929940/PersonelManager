@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Desktop.UI.Business.Login"
         mc:Ignorable="d"
-        Title="PersoelManager - Login" Height="165" Width="300"
+        Title="PersoelManager - Login" Height="185" Width="300"
         ResizeMode="NoResize">
     <Grid Margin="5">
         <Frame Name="LoginFrame" NavigationUIVisibility="Hidden"/>

@@ -14,34 +14,29 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Desktop.UI.Business.Login {
-    /// <summary>
-    /// Interaction logic for LoginPage.xaml
-    /// </summary>
     public partial class LoginPage : Page {
-        public string Login { get; set; }
-        public string Password { get; set; }
 
-        public EventHandler ResetPasswordEvent;
-        public EventHandler LoginEvent;
+        public EventHandler<LoginEventArgs> ResetPasswordEvent;
+        public EventHandler<LoginEventArgs> LoginEvent;
 
         public LoginPage() {
             InitializeComponent();
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e) {
-            //Login = LoginTxtBox.Text;
-            //Password = PasswordBox.Password;
-
-            //ChangePasswordPage page = new ChangePasswordPage();
-
-
-            //this.MyEvent(this, EventArgs.Empty);
-            this.LoginEvent(this, EventArgs.Empty);
-
+            LoginEventArgs args = new LoginEventArgs() {
+                Login = LoginBox.Text,
+                Password = PasswordBox.Password
+            };
+            this.LoginEvent(this, args);
         }
 
         private void ForgotPasswordLabel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
-            this.ResetPasswordEvent(this, EventArgs.Empty);
+            LoginEventArgs args = new LoginEventArgs() {
+                Login = LoginBox.Text,
+            };
+
+            this.ResetPasswordEvent(this, args);
         }
     }
 }
