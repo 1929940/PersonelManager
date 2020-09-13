@@ -19,9 +19,12 @@ namespace Desktop.UI.Business.Login {
     //TODO: I WANT LOGIC HERE FOR LOGIN
     public partial class LoginWindow : Window {
 
-        private readonly LoginPage _loginPage;
+        private LoginPage _loginPage;
         private readonly ChangePasswordPage _changePasswordPage;
-        private readonly RequestResetPasswordPage _requestResetPasswordPage;
+        //private readonly RequestResetPasswordPage _requestResetPasswordPage;
+        private RequestResetPasswordPage _requestResetPasswordPage;
+
+        private readonly UserRequestHandler _handler;
 
         public LoginWindow() {
             InitializeComponent();
@@ -29,56 +32,72 @@ namespace Desktop.UI.Business.Login {
             //This needs local memory, perhaps to a file? or xml file? 
             Settings.Url = @"https://localhost:44345";
 
+
             //need to check if url is empty, if empty pop a window user enters url
 
-            _loginPage = new LoginPage();
-            //_loginPage.LoginEvent += NavigateChangePasswordEvent;
-            _loginPage.LoginEvent += LaunchLoginEvent;
-            _loginPage.ResetPasswordEvent += NavigateRequestResetPasswordEvent;
+            _handler = new UserRequestHandler();
 
             _changePasswordPage = new ChangePasswordPage();
             _changePasswordPage.ChangePasswordEvent += StartMainWindow;
 
-            _requestResetPasswordPage = new RequestResetPasswordPage();
-            _requestResetPasswordPage.ResetPasswordEvent += NavigateLoginEvent;
-
             NavigateLoginEvent(this, LoginEventArgs.Empty);
         }
 
-        //Rename 'e' to args
-        void NavigateChangePasswordEvent(object sender, LoginEventArgs e) {
+        void NavigateChangePasswordEvent(object sender, LoginEventArgs args) {
             LoginFrame.Content = _changePasswordPage;
         }
 
-        void NavigateRequestResetPasswordEvent(object sender, LoginEventArgs e) {
-            _requestResetPasswordPage.LoginBox.Text = e.Login;
+        void NavigateRequestResetPasswordEvent(object sender, LoginEventArgs args) {
+            _requestResetPasswordPage = new RequestResetPasswordPage();
+            _requestResetPasswordPage.ResetPasswordEvent += RequestNewPasswordEvent;
+            _requestResetPasswordPage.NavigateToLoginEvent += NavigateLoginEvent;
+
+            _requestResetPasswordPage.LoginBox.Text = args.Login;
 
             LoginFrame.Content = _requestResetPasswordPage;
         }
 
-        void NavigateLoginEvent(object sender, LoginEventArgs e) {
+        void NavigateLoginEvent(object sender, LoginEventArgs args) {
+            _loginPage = new LoginPage();
+            _loginPage.LoginEvent += LaunchLoginEvent;
+            _loginPage.ResetPasswordEvent += NavigateRequestResetPasswordEvent;
+
+            _loginPage.LoginBox.Text = args.Login;
+            //_loginPage.Login = args.Login;
+
             LoginFrame.Content = _loginPage;
         }
 
-        void StartMainWindow(object sender, LoginEventArgs e) {
-            string pw1 = e.Password;
-            string pw2 = e.PasswordRepeat;
+        void RequestNewPasswordEvent(object sender, LoginEventArgs args) {
+            string login = args.Login;
+            //TODO: PASS LOGIN
+
+            try {
+                _handler.RequestPasswordReset(2);
+            } catch (Exception) {
+                MessageBox.Show("Wystapił bład, skontaktuj się z administratorem", "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        void StartMainWindow(object sender, LoginEventArgs args) {
+            string pw1 = args.Password;
+            string pw2 = args.ConfirmPassword;
 
             MainWindow main = new MainWindow();
             main.Show();
             this.Close();
         }
 
-        void LaunchLoginEvent(object sender, LoginEventArgs e) {
+        void LaunchLoginEvent(object sender, LoginEventArgs args) {
             //to nie powinno byc w evencie - metoda
 
             bool result = false;
             try {
-                result = Login(e.Login, e.Password);
+                result = Login(args.Login, args.Password);
                 if (result) {
                     StartMainWindow(this, LoginEventArgs.Empty);
                 } else {
-                    NavigateChangePasswordEvent(this, e);
+                    NavigateChangePasswordEvent(this, args);
                 }
 
             } catch (Exception ex) {

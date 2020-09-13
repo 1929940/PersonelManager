@@ -29,7 +29,7 @@ namespace Desktop.UI.Business.Login {
 
             LoginEventArgs args = new LoginEventArgs() {
                 Password = PasswordBox.Password,
-                PasswordRepeat = PasswordBox2.Password
+                ConfirmPassword = PasswordBox2.Password
             };
 
             ChangePasswordEvent(this, args);

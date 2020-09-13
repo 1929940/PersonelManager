@@ -1,36 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Desktop.UI.Business.Login {
-    /// <summary>
-    /// Interaction logic for RequestResetPasswordPage.xaml
-    /// </summary>
     public partial class RequestResetPasswordPage : Page {
 
         public EventHandler<LoginEventArgs> ResetPasswordEvent;
+        public EventHandler<LoginEventArgs> NavigateToLoginEvent;
+
+        public string Login { get; set; }
 
         public RequestResetPasswordPage() {
+            this.DataContext = this;
             InitializeComponent();
         }
 
         private void GenerateButton_Click(object sender, RoutedEventArgs e) {
-            ResetPasswordEvent(this, (LoginEventArgs)LoginEventArgs.Empty);
+            LoginBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+
+            if (Validation.GetHasError(LoginBox))
+                return;
+
+            ResetPasswordEvent(this, new LoginEventArgs() { Login = LoginBox.Text });
+            NavigateToLoginEvent(this, new LoginEventArgs() { Login = LoginBox.Text });
         }
 
         private void ReturnButton_Click(object sender, RoutedEventArgs e) {
-            ResetPasswordEvent(this, (LoginEventArgs)LoginEventArgs.Empty);
+
+            NavigateToLoginEvent(this, new LoginEventArgs() { Login = LoginBox.Text });
         }
     }
 }

@@ -1,0 +1,28 @@
+//TODO LIST
+
+1. Requests should return data wrapped in a class
+
+	ResponseWrapper<T>
+
+	string StatusCode
+	string Message
+	T Payload
+
+2. RequestResetPassword -> change to RequestNewPassword
+
+3. RequestResetPassword needs to pass Login (email) not ID...
+	
+	Update Tests
+	Update Controllers
+
+
+4. PASSWORD AND CONFIRM PASSWORD
+
+https://social.technet.microsoft.com/wiki/contents/articles/31422.wpf-passing-a-data-bound-value-to-a-validation-rule.aspx
+
+https://stackoverflow.com/questions/3862385/wpf-validationrule-with-dependency-property
+
+5. GUI REWORK
+
+6. Consider adding NOTIFY ON CHANGED to LOGIN TO AVOID PASSING LOGIN IN CTR
+//NO PASS ON PROPERTY CHANGED! GO EASY MAKE IT WORK

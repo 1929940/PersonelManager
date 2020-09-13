@@ -64,6 +64,7 @@ namespace CommunicationLibrary.Business.Requests {
 
                 using (var response = httpClient.PutAsync(requestUri, stringContent).Result) {
                     string apiResponse = response.Content.ReadAsStringAsync().Result;
+                    response.EnsureSuccessStatusCode();
                 }
             }
         }

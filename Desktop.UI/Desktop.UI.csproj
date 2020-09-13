@@ -96,6 +96,8 @@
     <Compile Include="Business\Login\RequestResetPasswordPage.xaml.cs">
       <DependentUpon>RequestResetPasswordPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Business\Validators\EmailValidator.cs" />
+    <Compile Include="Business\Validators\IsNotEmptyValidator.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

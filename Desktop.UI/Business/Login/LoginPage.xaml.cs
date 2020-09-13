@@ -19,15 +19,25 @@ namespace Desktop.UI.Business.Login {
         public EventHandler<LoginEventArgs> ResetPasswordEvent;
         public EventHandler<LoginEventArgs> LoginEvent;
 
+        public string Login { get; set; }
+
         public LoginPage() {
+            //Login = login;
+            this.DataContext = this;
             InitializeComponent();
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e) {
+            LoginBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+
+            if (Validation.GetHasError(LoginBox))
+                return;
+
             LoginEventArgs args = new LoginEventArgs() {
-                Login = LoginBox.Text,
+                Login = Login,
                 Password = PasswordBox.Password
             };
+
             this.LoginEvent(this, args);
         }
 
