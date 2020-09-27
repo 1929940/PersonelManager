@@ -26,7 +26,6 @@ namespace Desktop.UI.Business.Login {
             if (PasswordBox.Password != PasswordBox2.Password)
                 return;
 
-
             LoginEventArgs args = new LoginEventArgs() {
                 Password = PasswordBox.Password,
                 ConfirmPassword = PasswordBox2.Password

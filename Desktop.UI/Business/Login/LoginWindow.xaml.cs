@@ -20,9 +20,9 @@ namespace Desktop.UI.Business.Login {
     public partial class LoginWindow : Window {
 
         private LoginPage _loginPage;
-        private readonly ChangePasswordPage _changePasswordPage;
-        //private readonly RequestResetPasswordPage _requestResetPasswordPage;
+        private ChangePasswordPage _changePasswordPage;
         private RequestResetPasswordPage _requestResetPasswordPage;
+        //private readonly RequestResetPasswordPage _requestResetPasswordPage;
 
         private readonly UserRequestHandler _handler;
 
@@ -73,7 +73,7 @@ namespace Desktop.UI.Business.Login {
             //TODO: PASS LOGIN
 
             try {
-                _handler.RequestPasswordReset(2);
+                _handler.RequestPasswordReset(args.Login);
             } catch (Exception) {
                 MessageBox.Show("Wystapił bład, skontaktuj się z administratorem", "", MessageBoxButton.OK, MessageBoxImage.Error);
             }

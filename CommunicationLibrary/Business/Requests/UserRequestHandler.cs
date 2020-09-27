@@ -54,12 +54,12 @@ namespace CommunicationLibrary.Business.Requests {
 
         //RequestPasswordReset
 
-        public void RequestPasswordReset(int id) {
+        public void RequestPasswordReset(string login) {
 
             using (var httpClient = new HttpClient()) {
                 SetToken(httpClient);
 
-                string requestUri = GetUri(_controllerName, RouteVerbs.REQUEST_PASSWORD_RESET, id);
+                string requestUri = GetUri(_controllerName, RouteVerbs.REQUEST_PASSWORD_RESET, login);
                 var stringContent = new StringContent(string.Empty);
 
                 using (var response = httpClient.PutAsync(requestUri, stringContent).Result) {
@@ -69,15 +69,17 @@ namespace CommunicationLibrary.Business.Requests {
             }
         }
 
-        public async Task RequestPasswordResetAsync(int id) {
+        public async Task RequestPasswordResetAsync(string login) {
 
             using (var httpClient = new HttpClient()) {
                 SetToken(httpClient);
 
-                string requestUri = GetUri(_controllerName, RouteVerbs.REQUEST_PASSWORD_RESET, id);
+                string requestUri = GetUri(_controllerName, RouteVerbs.REQUEST_PASSWORD_RESET, login);
+                var stringContent = new StringContent(string.Empty);
 
-                using (var response = await httpClient.PutAsync(requestUri, null)) {
+                using (var response = await httpClient.PutAsync(requestUri, stringContent)) {
                     string apiResponse = await response.Content.ReadAsStringAsync();
+                    response.EnsureSuccessStatusCode();
                 }
             }
         }

@@ -108,15 +108,18 @@ namespace API.Business.Controller {
 
         [AllowAnonymous]
         [HttpPost("Login")]
-        public async Task<ActionResult<AuthenticationReponse>> AuthenticateUser(AuthenticationRequest request) {
-            User user = await _context.Users.FirstOrDefaultAsync(x => x.Email == request.Login && x.Hash == request.Password);
+        public async Task<ActionResult<AuthenticationReponse>> LoginUser(AuthenticationRequest request) {
+            User user = await _context.Users.FirstOrDefaultAsync(x => x.Email == request.Login && x.Hash == request.Password && x.IsActive);
 
             if (user == null || user.IsActive == false)
                 return Unauthorized();
 
             string token = TokenManager.GenerateJwtToken(user, _appSettings);
 
-            return Ok(new AuthenticationReponse() { Token = token });
+            return Ok(new AuthenticationReponse() {
+                Token = token,
+                RequestedPasswordReset = user.RequestedPasswordReset,
+            });
         }
 
 
@@ -124,10 +127,11 @@ namespace API.Business.Controller {
             return _context.Users.Any(e => e.Id == id);
         }
 
-        [Authorize]
-        [HttpPut("RequestPasswordReset/{id}")]
-        public async Task<IActionResult> RequestPasswordReset(int id) {
-            User user = await _context.Users.FindAsync(id);
+        //[Authorize]
+        [AllowAnonymous]
+        [HttpPut("RequestPasswordReset/{login}")]
+        public async Task<IActionResult> RequestPasswordReset(string login) {
+            User user = await _context.Users.FirstOrDefaultAsync(x => x.Email == login);
             if (user == null)
                 return NotFound();
 
@@ -147,9 +151,9 @@ namespace API.Business.Controller {
         }
 
         [Authorize]
-        [HttpPut("UpdatePassword/{id}")]
-        public async Task<IActionResult> UpdatePassword(int id, [FromBody]string hash) {
-            User user = await _context.Users.FindAsync(id);
+        [HttpPut("UpdatePassword/{login}")]
+        public async Task<IActionResult> UpdatePassword(string login, [FromBody]string hash) {
+            User user = await _context.Users.FirstOrDefaultAsync(x => x.Email == login);
             if (user == null)
                 return NotFound();
 
