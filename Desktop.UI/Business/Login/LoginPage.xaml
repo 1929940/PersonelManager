@@ -21,7 +21,7 @@
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0" Grid.Column="0" Content="Login:"/>
-        <TextBox Name="LoginBox" Grid.Row="0" Grid.Column="1" Margin="5" VerticalContentAlignment="Center">
+        <TextBox Name="LoginBox" Grid.Row="0" Grid.Column="1" Margin="5" VerticalContentAlignment="Center" TextChanged="FormFilled_TextChanged">
             <TextBox.Style>
                 <Style TargetType="TextBox">
                     <Style.Triggers>
@@ -53,18 +53,20 @@
         </TextBox>
 
         <Label Grid.Row="1" Grid.Column="0" Content="Hasło:"/>
-        <PasswordBox Name="PasswordBox" Grid.Row="1" Grid.Column="1" Margin="5" VerticalContentAlignment="Center"/>
+        <PasswordBox Name="PasswordBox" Grid.Row="1" Grid.Column="1" Margin="5" VerticalContentAlignment="Center" PasswordChanged="FormFilled_TextChanged"/>
 
         <Label Name="ForgotPasswordLabel"
             Grid.Row="2" Grid.Column="1" 
             Content="Przypomnij hasło"
             FontSize="10" FontWeight="UltraLight" FontStyle="Oblique" Foreground="Blue"
             HorizontalAlignment="Right" VerticalAlignment="Top" Padding="0,0,10,10"
-            MouseLeftButtonDown="ForgotPasswordLabel_MouseLeftButtonDown"/>
+            MouseLeftButtonDown="ForgotPasswordLabel_MouseLeftButtonDown"
+            />
 
         <Button Name="LoginButton"
             Grid.Row="3" Grid.Column="1" Content="Zaloguj" 
             Margin="5" Width="100" HorizontalAlignment="Right"
-            Click="LoginButton_Click"/>
+            Click="LoginButton_Click"
+            IsEnabled="False"/>
     </Grid>
 </Page>

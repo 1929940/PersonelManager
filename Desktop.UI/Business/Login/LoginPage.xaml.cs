@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Desktop.UI.Business.Login {
     public partial class LoginPage : Page {
@@ -22,9 +12,9 @@ namespace Desktop.UI.Business.Login {
         public string Login { get; set; }
 
         public LoginPage() {
-            //Login = login;
             this.DataContext = this;
             InitializeComponent();
+
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e) {
@@ -47,6 +37,14 @@ namespace Desktop.UI.Business.Login {
             };
 
             this.ResetPasswordEvent(this, args);
+        }
+
+        private void FormFilled_TextChanged(object sender, RoutedEventArgs e) {
+
+            if (!string.IsNullOrEmpty(PasswordBox?.Password) && !string.IsNullOrEmpty(LoginBox?.Text))
+                LoginButton.IsEnabled = true;
+            else
+                LoginButton.IsEnabled = false;
         }
     }
 }

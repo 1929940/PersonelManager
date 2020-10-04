@@ -69,8 +69,8 @@ namespace Desktop.UI.Business.Login {
             _updatePasswordPage = new UpdatePasswordPage();
             _updatePasswordPage.Login = args.Login;
 
-            _updatePasswordPage.ChangePasswordEvent -= UpdatePasswordEvent;
-            _updatePasswordPage.ChangePasswordEvent += UpdatePasswordEvent;
+            _updatePasswordPage.UpdatePasswordEvent -= UpdatePasswordEvent;
+            _updatePasswordPage.UpdatePasswordEvent += UpdatePasswordEvent;
 
             LoginFrame.Content = _updatePasswordPage;
         }

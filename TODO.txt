@@ -8,13 +8,6 @@
 	string Message
 	T Payload
 
-2. RequestResetPassword -> change to RequestNewPassword
-
-3. RequestResetPassword needs to pass Login (email) not ID...
-	
-	Update Tests
-	Update Controllers
-
 
 4. PASSWORD AND CONFIRM PASSWORD
 
@@ -22,7 +15,16 @@ https://social.technet.microsoft.com/wiki/contents/articles/31422.wpf-passing-a-
 
 https://stackoverflow.com/questions/3862385/wpf-validationrule-with-dependency-property
 
+
+Do this manualy... if pw is less than 6 then display red label
+
 5. GUI REWORK
+
+make bigger window, and set at mid the contents. Perhaps additional grid column on top, bottom, right, left? Will make sure its at middle. 
+Or just a stack panel? 
+
+Perhaps add some logo
+Add Colours Blue-Grey?
 
 6. Consider adding NOTIFY ON CHANGED to LOGIN TO AVOID PASSING LOGIN IN CTR
 //NO PASS ON PROPERTY CHANGED! GO EASY MAKE IT WORK
