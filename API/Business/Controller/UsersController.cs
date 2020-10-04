@@ -127,13 +127,15 @@ namespace API.Business.Controller {
             return _context.Users.Any(e => e.Id == id);
         }
 
-        //[Authorize]
         [AllowAnonymous]
         [HttpPut("RequestPasswordReset/{login}")]
         public async Task<IActionResult> RequestPasswordReset(string login) {
-            User user = await _context.Users.FirstOrDefaultAsync(x => x.Email == login);
+            User user = await _context.Users.FirstOrDefaultAsync(x => x.Email == login && x.IsActive);
+            //TODO:
+            //if (user == null)
+            //    return NotFound();
             if (user == null)
-                return NotFound();
+                return NoContent();
 
             string password = PasswordResetHandler.GeneratePassword(4);
             await PasswordResetHandler.Sent(_appSettings, user.Email, password);
@@ -144,16 +146,15 @@ namespace API.Business.Controller {
             _context.Entry(user).Property(x => x.RequestedPasswordReset).IsModified = true;
             _context.Entry(user).Property(x => x.Hash).IsModified = true;
 
-
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
         [Authorize]
-        [HttpPut("UpdatePassword/{login}")]
-        public async Task<IActionResult> UpdatePassword(string login, [FromBody]string hash) {
-            User user = await _context.Users.FirstOrDefaultAsync(x => x.Email == login);
+        [HttpPut("UpdatePassword/{login}&{hash}")]
+        public async Task<IActionResult> UpdatePassword(string login, string hash) {
+            User user = await _context.Users.FirstOrDefaultAsync(x => x.Email == login && x.IsActive);
             if (user == null)
                 return NotFound();
 

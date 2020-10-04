@@ -14,21 +14,24 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Desktop.UI.Business.Login {
-    public partial class ChangePasswordPage : Page {
+    public partial class UpdatePasswordPage : Page {
 
         public EventHandler<LoginEventArgs> ChangePasswordEvent;
 
-        public ChangePasswordPage() {
+        public string Login { get; set; }
+
+        public UpdatePasswordPage() {
             InitializeComponent();
         }
 
         private void ChangeButton_Click(object sender, RoutedEventArgs e) {
-            if (PasswordBox.Password != PasswordBox2.Password)
-                return;
+            //if (PasswordBox.Password != PasswordBox2.Password)
+            //    return;
 
             LoginEventArgs args = new LoginEventArgs() {
+                Login = Login,
                 Password = PasswordBox.Password,
-                ConfirmPassword = PasswordBox2.Password
+                ConfirmPassword = ConfirmPasswordBox.Password
             };
 
             ChangePasswordEvent(this, args);

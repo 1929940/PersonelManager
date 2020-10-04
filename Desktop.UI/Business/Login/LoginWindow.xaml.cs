@@ -1,9 +1,12 @@
-﻿using CommunicationLibrary.Business.Requests;
+﻿using CommunicationLibrary.Business.Models;
+using CommunicationLibrary.Business.Requests;
 using CommunicationLibrary.Core;
+using CommunicationLibrary.Core.Logic;
 using PersonalManagerDesktop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,9 +23,8 @@ namespace Desktop.UI.Business.Login {
     public partial class LoginWindow : Window {
 
         private LoginPage _loginPage;
-        private ChangePasswordPage _changePasswordPage;
+        private UpdatePasswordPage _updatePasswordPage;
         private RequestResetPasswordPage _requestResetPasswordPage;
-        //private readonly RequestResetPasswordPage _requestResetPasswordPage;
 
         private readonly UserRequestHandler _handler;
 
@@ -31,25 +33,31 @@ namespace Desktop.UI.Business.Login {
 
             //This needs local memory, perhaps to a file? or xml file? 
             Settings.Url = @"https://localhost:44345";
-
-
             //need to check if url is empty, if empty pop a window user enters url
 
             _handler = new UserRequestHandler();
-
-            _changePasswordPage = new ChangePasswordPage();
-            _changePasswordPage.ChangePasswordEvent += StartMainWindow;
-
             NavigateLoginEvent(this, LoginEventArgs.Empty);
         }
 
-        void NavigateChangePasswordEvent(object sender, LoginEventArgs args) {
-            LoginFrame.Content = _changePasswordPage;
+        void NavigateLoginEvent(object sender, LoginEventArgs args) {
+            _loginPage = new LoginPage();
+            _loginPage.LoginEvent += LoginEvent;
+
+            _loginPage.ResetPasswordEvent -= NavigateRequestResetPasswordEvent;
+            _loginPage.ResetPasswordEvent += NavigateRequestResetPasswordEvent;
+
+            _loginPage.LoginBox.Text = args.Login;
+
+            LoginFrame.Content = _loginPage;
         }
 
         void NavigateRequestResetPasswordEvent(object sender, LoginEventArgs args) {
             _requestResetPasswordPage = new RequestResetPasswordPage();
-            _requestResetPasswordPage.ResetPasswordEvent += RequestNewPasswordEvent;
+
+            _requestResetPasswordPage.ResetPasswordEvent -= RequestResetPasswordEvent;
+            _requestResetPasswordPage.ResetPasswordEvent += RequestResetPasswordEvent;
+
+            _requestResetPasswordPage.NavigateToLoginEvent -= NavigateLoginEvent;
             _requestResetPasswordPage.NavigateToLoginEvent += NavigateLoginEvent;
 
             _requestResetPasswordPage.LoginBox.Text = args.Login;
@@ -57,60 +65,95 @@ namespace Desktop.UI.Business.Login {
             LoginFrame.Content = _requestResetPasswordPage;
         }
 
-        void NavigateLoginEvent(object sender, LoginEventArgs args) {
-            _loginPage = new LoginPage();
-            _loginPage.LoginEvent += LaunchLoginEvent;
-            _loginPage.ResetPasswordEvent += NavigateRequestResetPasswordEvent;
+        void NavigateUpdatePasswordEvent(object sender, LoginEventArgs args) {
+            _updatePasswordPage = new UpdatePasswordPage();
+            _updatePasswordPage.Login = args.Login;
 
-            _loginPage.LoginBox.Text = args.Login;
-            //_loginPage.Login = args.Login;
+            _updatePasswordPage.ChangePasswordEvent -= UpdatePasswordEvent;
+            _updatePasswordPage.ChangePasswordEvent += UpdatePasswordEvent;
 
-            LoginFrame.Content = _loginPage;
-        }
-
-        void RequestNewPasswordEvent(object sender, LoginEventArgs args) {
-            string login = args.Login;
-            //TODO: PASS LOGIN
-
-            try {
-                _handler.RequestPasswordReset(args.Login);
-            } catch (Exception) {
-                MessageBox.Show("Wystapił bład, skontaktuj się z administratorem", "", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            LoginFrame.Content = _updatePasswordPage;
         }
 
         void StartMainWindow(object sender, LoginEventArgs args) {
-            string pw1 = args.Password;
-            string pw2 = args.ConfirmPassword;
 
             MainWindow main = new MainWindow();
             main.Show();
             this.Close();
         }
 
-        void LaunchLoginEvent(object sender, LoginEventArgs args) {
-            //to nie powinno byc w evencie - metoda
+        //Jan.Nowak@PersonelManager.pl
+        //2820
 
-            bool result = false;
+        void LoginEvent(object sender, LoginEventArgs args) {
+            Login(args);
+        }
+
+        void RequestResetPasswordEvent(object sender, LoginEventArgs args) {
+            ResetPassword(args);
+        }
+        void UpdatePasswordEvent(object sender, LoginEventArgs args) {
+            UpdatePassword(args);
+        }
+
+        private void Login(LoginEventArgs args) {
             try {
-                result = Login(args.Login, args.Password);
-                if (result) {
-                    StartMainWindow(this, LoginEventArgs.Empty);
-                } else {
-                    NavigateChangePasswordEvent(this, args);
-                }
+                string hashedPassword = PasswordManager.EncryptPassword(args.Password);
 
+                var response = _handler.Login(args.Login, hashedPassword);
+                SetToken(response.Token);
+                if (response.RequestedPasswordReset) {
+                    NavigateUpdatePasswordEvent(this, args);
+                } else {
+                    StartMainWindow(this, LoginEventArgs.Empty);
+                }
+            } catch (UnauthorizedAccessException) {
+                string exceptionMsg = "Niepoprawny login lub hasło.";
+                MessageBox.Show(exceptionMsg, "Uwaga", MessageBoxButton.OK, MessageBoxImage.Warning);
             } catch (Exception ex) {
-                //message is not cool
-                MessageBox.Show(ex.InnerException.Message);
+                string exceptionMsg = GenerateExceptionMsg(ex);
+                MessageBox.Show(exceptionMsg, "Uwaga", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
-        public bool Login(string login, string password) {
-            UserRequestHandler handler = new UserRequestHandler();
-            var response = handler.Login(login, password);
-            Settings.Token = response.Token;
-            return !string.IsNullOrEmpty(response.Token);
+        private void ResetPassword(LoginEventArgs args) {
+            try {
+                _handler.RequestPasswordReset(args.Login);
+                string successMsg = string.Format($"Na adres {args.Login} została wysłana wiadomość z hasłem jednorazowego logowania. " +
+                    $"Zaloguj się za jego pomocą. Po czym zostaniesz poproszony o podanie nowego stałego hasła.");
+                MessageBox.Show(successMsg, "Sukces", MessageBoxButton.OK, MessageBoxImage.Information);
+                NavigateLoginEvent(this, args);
+            } catch (Exception ex) {
+                string exceptionMsg = GenerateExceptionMsg(ex);
+                MessageBox.Show(exceptionMsg, "Uwaga", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private void UpdatePassword(LoginEventArgs args) {
+            try {
+                if (args.Password != args.ConfirmPassword)
+                    MessageBox.Show("Podane hasła muszą być identyczne. Wprowadż ponownie.", "Uwaga", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                //TODO: Clear passwords
+                else {
+                    string hashedPassword = PasswordManager.EncryptPassword(args.Password);
+
+                    _handler.UpdatePassword(args.Login, hashedPassword);
+                    MessageBox.Show("Hasło zostało zaktualizowane.", "Sukces", MessageBoxButton.OK, MessageBoxImage.Information);
+                    StartMainWindow(this, LoginEventArgs.Empty);
+                }
+            } catch (Exception ex) {
+                string exceptionMsg = GenerateExceptionMsg(ex);
+                MessageBox.Show(exceptionMsg, "Uwaga", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        //TODO: This needs to be moved somewhere? AppConfig class?
+        private void SetToken(string token) => Settings.Token = token;
+
+        //TODO: This needs to be somewhere else
+        private string GenerateExceptionMsg(Exception ex) {
+            if (ex?.InnerException is HttpRequestException)
+                return "Nie można nawiązać połączenia z serwerem. Spróbuj ponownie później. Jesli problem będzie się powtarzał skontaktuj się z administratorem.";
+            return ex.InnerException?.Message ?? ex.Message;
         }
     }
 }

@@ -25,6 +25,9 @@ namespace CommunicationLibrary.Core.Logic {
         protected string GetUri(string controller, string routeVerb, string login) =>
             string.Format($"{Settings.Url}/api/{controller}/{routeVerb}/{login}");
 
+        protected string GetUri(string controller, string routeVerb, string login, string password) =>
+            string.Format($"{Settings.Url}/api/{controller}/{routeVerb}/{login}&{password}");
+
         protected StringContent CreateStringContent(T input) {
             string body = JsonConvert.SerializeObject(input);
             return new StringContent(body, Encoding.UTF8, "application/json");
