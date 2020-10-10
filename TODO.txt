@@ -30,3 +30,18 @@ Add Colours Blue-Grey?
 //NO PASS ON PROPERTY CHANGED! GO EASY MAKE IT WORK
 
 7. CONSIDER ENSURING SUCCESS ON EVERY ENDPOINT IN COMMUNICATION LIBRARY
+
+
+8. USE MATERIAL DESIGN ADD LOGO FOR LOGIN SCREEN
+-Human queue
+
+9. How to make async api calls?
+-need to rewrite login
+-i cant have code in LoginWindow because it will be hell in mainWindow
+-can i navigate without events? Need to pass main frame and navigate to it form other classes.
+
+10. Make async
+
+11. Make sure email is passed back and forth properly
+
+12. Move Setting token and generating message somewhere else
