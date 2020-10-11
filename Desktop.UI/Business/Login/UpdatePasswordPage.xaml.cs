@@ -1,7 +1,7 @@
 ﻿using CommunicationLibrary.Business.Requests;
 using CommunicationLibrary.Core.Logic;
+using Desktop.UI.Core.Helpers;
 using System;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,10 +26,10 @@ namespace Desktop.UI.Business.Login {
 
         private async Task UpdatePassword(string login, string password, string confirmPassword) {
             try {
-                if (password != confirmPassword)
+                if (password != confirmPassword) {
                     MessageBox.Show("Podane hasła muszą być identyczne. Wprowadż ponownie.", "Uwaga", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                //TODO: Clear passwords
-                else {
+                    ClearPasswords();
+                } else {
                     string hashedPassword = PasswordManager.EncryptPassword(password);
 
                     await _handler.UpdatePasswordAsync(login, hashedPassword);
@@ -37,7 +37,7 @@ namespace Desktop.UI.Business.Login {
                     LoginWindow.StartMainWindow();
                 }
             } catch (Exception ex) {
-                string exceptionMsg = GenerateExceptionMsg(ex);
+                string exceptionMsg = ExceptionHelper.GenerateExceptionMsg(ex);
                 MessageBox.Show(exceptionMsg, "Uwaga", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -50,12 +50,9 @@ namespace Desktop.UI.Business.Login {
                 UpdateButton.IsEnabled = false;
         }
 
-        //TODO: MOVE SOMEWHERE ELSE
-
-        private string GenerateExceptionMsg(Exception ex) {
-            if (ex?.InnerException is HttpRequestException)
-                return "Nie można nawiązać połączenia z serwerem. Spróbuj ponownie później. Jesli problem będzie się powtarzał skontaktuj się z administratorem.";
-            return ex.InnerException?.Message ?? ex.Message;
+        private void ClearPasswords() {
+            PasswordBox.Password = string.Empty;
+            ConfirmPasswordBox.Password = string.Empty;
         }
     }
 }

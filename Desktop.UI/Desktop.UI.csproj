@@ -71,7 +71,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Business\Login\RequestResetPasswordPage.xaml">
+    <Page Include="Business\Login\ForgotPasswordPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -86,19 +86,20 @@
     <Compile Include="Business\Login\UpdatePasswordPage.xaml.cs">
       <DependentUpon>UpdatePasswordPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Business\Login\LoginEventArgs.cs" />
     <Compile Include="Business\Login\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Business\Login\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Business\Login\RequestResetPasswordPage.xaml.cs">
-      <DependentUpon>RequestResetPasswordPage.xaml</DependentUpon>
+    <Compile Include="Business\Login\ForgotPasswordPage.xaml.cs">
+      <DependentUpon>ForgotPasswordPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Business\Validators\EmailValidator.cs" />
     <Compile Include="Business\Validators\IsNotEmptyValidator.cs" />
     <Compile Include="Business\Validators\PasswordValidator.cs" />
+    <Compile Include="Core\Helpers\ExceptionHelper.cs" />
+    <Compile Include="Core\Helpers\SettingsHelper.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -138,7 +139,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Core\" />
     <Folder Include="HR\" />
     <Folder Include="Payroll\" />
   </ItemGroup>

@@ -28,24 +28,13 @@ namespace Desktop.UI.Business.Login {
             Settings.Url = @"https://localhost:44345";
 
 
-            LoginFrame.Navigate(new LoginPage(LoginFrame));
+            LoginFrame.Navigate(new LoginPage(LoginFrame, string.Empty));
         }
 
         public static void StartMainWindow() {
             MainWindow main = new MainWindow();
             main.Show();
             Application.Current.MainWindow.Close();
-            //this.Close();
-
-        }
-
-        private void SetToken(string token) => Settings.Token = token;
-
-        //TODO: This needs to be somewhere else
-        private string GenerateExceptionMsg(Exception ex) {
-            if (ex?.InnerException is HttpRequestException)
-                return "Nie można nawiązać połączenia z serwerem. Spróbuj ponownie później. Jesli problem będzie się powtarzał skontaktuj się z administratorem.";
-            return ex.InnerException?.Message ?? ex.Message;
         }
     }
 }
