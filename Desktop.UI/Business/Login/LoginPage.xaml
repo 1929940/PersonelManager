@@ -4,9 +4,11 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Desktop.UI.Business.Login"
+      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
       xmlns:validators="clr-namespace:Desktop.UI.Business.Validators"
       mc:Ignorable="d"
-      d:DesignHeight="450" d:DesignWidth="800">
+      d:DesignHeight="450" d:DesignWidth="800"
+      FontFamily="Calibri" FontSize="14">
       
     <Grid>
         <Grid.ColumnDefinitions>
@@ -14,14 +16,19 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" Content="Login:"/>
-        <TextBox Name="LoginBox" Grid.Row="0" Grid.Column="1" Margin="5" VerticalContentAlignment="Center" TextChanged="FormFilled_TextChanged">
+        <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,0,20"
+                    Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+            <iconPacks:PackIconModern Kind="User" Margin="0,5,0,0"/>
+            <Label Content="Login:" FontWeight="Bold"/>
+        </StackPanel>
+        
+        <TextBox Name="LoginBox" Grid.Row="0" Grid.Column="1" Margin="5,0,5,20" VerticalContentAlignment="Center" TextChanged="FormFilled_TextChanged" Height="20">
             <TextBox.Style>
                 <Style TargetType="TextBox">
                     <Style.Triggers>
@@ -46,14 +53,19 @@
                 <Binding Path="Login" Mode="TwoWay" UpdateSourceTrigger="Default">
                     <Binding.ValidationRules>
                         <validators:IsNotEmptyValidator></validators:IsNotEmptyValidator>
-                        <validators:EmailValidator></validators:EmailValidator>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
         </TextBox>
 
-        <Label Grid.Row="1" Grid.Column="0" Content="Hasło:"/>
-        <PasswordBox Name="PasswordBox" Grid.Row="1" Grid.Column="1" Margin="5" VerticalContentAlignment="Center" PasswordChanged="FormFilled_TextChanged"/>
+        <StackPanel Grid.Row="1" Grid.Column="0"
+                    Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+            <iconPacks:PackIconModern Kind="Lock" Margin="0,5,0,0" />
+            <Label Content="Hasło:" FontWeight="Bold"/>
+        </StackPanel>
+
+
+        <PasswordBox Name="PasswordBox" Grid.Row="1" Grid.Column="1" Margin="5" VerticalContentAlignment="Center" PasswordChanged="FormFilled_TextChanged" Height="20"/>
 
         <Label Name="ForgotPasswordLabel"
             Grid.Row="2" Grid.Column="1" 
@@ -65,8 +77,8 @@
 
         <Button Name="LoginButton"
             Grid.Row="3" Grid.Column="1" Content="Zaloguj" 
-            Margin="5" Width="100" HorizontalAlignment="Right"
-            Click="LoginButton_Click"
-            IsEnabled="False"/>
+            Margin="5,5,5,5" Width="100" Height="20"
+            HorizontalAlignment="Right" VerticalAlignment="Bottom"
+            Click="LoginButton_Click" IsEnabled="False" />
     </Grid>
 </Page>

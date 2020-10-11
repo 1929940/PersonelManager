@@ -3,11 +3,32 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:local="clr-namespace:Desktop.UI.Business.Login"
         mc:Ignorable="d"
-        Title="PersonelManager - Login" Height="185" Width="300"
+        Title="PersonelManager - Login" Height="500" Width="400"
         ResizeMode="NoResize">
     <Grid Margin="5">
-        <Frame Name="LoginFrame" NavigationUIVisibility="Hidden"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.1*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.1*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <iconPacks:PackIconModern Kind="PeopleMultiple" Width="Auto" Height="125" 
+                                      HorizontalAlignment="Center"/>
+            <TextBlock Text="Personel Manager" HorizontalAlignment="Center"
+                       FontSize="30" FontWeight="Bold" FontFamily="Calibri"
+                       Padding="0,0,0,20" Foreground="Black"/>
+        </StackPanel>
+
+        <Frame Name="LoginFrame" NavigationUIVisibility="Hidden" Grid.Row="2" Grid.Column="1"/>
     </Grid>
 </Window>

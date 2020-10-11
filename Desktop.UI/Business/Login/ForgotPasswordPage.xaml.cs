@@ -33,9 +33,7 @@ namespace Desktop.UI.Business.Login {
         private async Task ResetPassword(string login) {
             try {
                 await _handler.RequestPasswordResetAsync(login);
-                string successMsg = string.Format($"Na adres {login} została wysłana wiadomość z hasłem jednorazowego logowania. " +
-                    $"Zaloguj się za jego pomocą. Po czym zostaniesz poproszony o podanie nowego stałego hasła.");
-                MessageBox.Show(successMsg, "Sukces", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Hasło zostało wysłane. Sprawdź skrzynke odbiorczą.", "Sukces", MessageBoxButton.OK, MessageBoxImage.Information);
                 _frame.Navigate(new LoginPage(_frame, login));
             } catch (Exception ex) {
                 string exceptionMsg = ExceptionHelper.GenerateExceptionMsg(ex);

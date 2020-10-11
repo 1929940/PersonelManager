@@ -8,16 +8,6 @@
 	string Message
 	T Payload
 
-
-4. PASSWORD AND CONFIRM PASSWORD
-
-https://social.technet.microsoft.com/wiki/contents/articles/31422.wpf-passing-a-data-bound-value-to-a-validation-rule.aspx
-
-https://stackoverflow.com/questions/3862385/wpf-validationrule-with-dependency-property
-
-
-Do this manualy... if pw is less than 6 then display red label
-
 5. GUI REWORK
 
 make bigger window, and set at mid the contents. Perhaps additional grid column on top, bottom, right, left? Will make sure its at middle. 
@@ -26,22 +16,12 @@ Or just a stack panel?
 Perhaps add some logo
 Add Colours Blue-Grey?
 
-6. Consider adding NOTIFY ON CHANGED to LOGIN TO AVOID PASSING LOGIN IN CTR
-//NO PASS ON PROPERTY CHANGED! GO EASY MAKE IT WORK
-
 7. CONSIDER ENSURING SUCCESS ON EVERY ENDPOINT IN COMMUNICATION LIBRARY
 
 
 8. USE MATERIAL DESIGN ADD LOGO FOR LOGIN SCREEN
 -Human queue
 
-9. How to make async api calls?
--need to rewrite login
--i cant have code in LoginWindow because it will be hell in mainWindow
--can i navigate without events? Need to pass main frame and navigate to it form other classes.
 
-10. Make async
 
-11. Make sure email is passed back and forth properly
 
-12. Move Setting token and generating message somewhere else

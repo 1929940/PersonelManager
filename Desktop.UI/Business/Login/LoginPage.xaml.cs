@@ -1,10 +1,7 @@
 ﻿using CommunicationLibrary.Business.Requests;
-using CommunicationLibrary.Core;
 using CommunicationLibrary.Core.Logic;
 using Desktop.UI.Core.Helpers;
-using PersonalManagerDesktop;
 using System;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -57,7 +54,8 @@ namespace Desktop.UI.Business.Login {
                 var response = await _handler.LoginAsync(login, hashedPassword);
                 SettingsHelper.SetToken(response.Token);
                 if (response.RequestedPasswordReset) {
-                    _frame.Navigate(new UpdatePasswordPage(_frame) { Login = Login});
+                    _frame.Navigate(new UpdatePasswordPage(_frame, Login));
+                    //_frame.Navigate(new UpdatePasswordPage(_frame, Login) { Login = Login });
                 } else {
                     LoginWindow.StartMainWindow();
                 }

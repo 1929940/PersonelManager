@@ -14,9 +14,11 @@ namespace Desktop.UI.Business.Login {
 
         public string Login { get; set; }
 
-        public UpdatePasswordPage(Frame frame) {
+        public UpdatePasswordPage(Frame frame, string login) {
             _handler = new UserRequestHandler();
             _frame = frame;
+            Login = login;
+            this.DataContext = this;
             InitializeComponent();
         }
 
@@ -27,8 +29,7 @@ namespace Desktop.UI.Business.Login {
         private async Task UpdatePassword(string login, string password, string confirmPassword) {
             try {
                 if (password != confirmPassword) {
-                    MessageBox.Show("Podane hasła muszą być identyczne. Wprowadż ponownie.", "Uwaga", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                    ClearPasswords();
+                    MessageBox.Show("Podane hasła muszą być identyczne.", "Uwaga", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 } else {
                     string hashedPassword = PasswordManager.EncryptPassword(password);
 
@@ -44,15 +45,24 @@ namespace Desktop.UI.Business.Login {
 
 
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e) {
-            if (PasswordBox.Password?.Length > 5 && ConfirmPasswordBox.Password.Length > 5)
+            if (!string.IsNullOrEmpty(PasswordBox.Password) && !string.IsNullOrEmpty(ConfirmPasswordBox.Password))
                 UpdateButton.IsEnabled = true;
             else
                 UpdateButton.IsEnabled = false;
         }
 
-        private void ClearPasswords() {
-            PasswordBox.Password = string.Empty;
-            ConfirmPasswordBox.Password = string.Empty;
+        private void PasswordBox_LostFocus(object sender, RoutedEventArgs e) {
+            if (PasswordBox.Password?.Length < 6)
+                LengthTextBlock.Visibility = Visibility.Visible;
+            else
+                LengthTextBlock.Visibility = Visibility.Collapsed;
+        }
+
+        private void ConfirmPasswordBox_LostFocus(object sender, RoutedEventArgs e) {
+            if (PasswordBox.Password?.Length > 5 && PasswordBox.Password != ConfirmPasswordBox.Password)
+                DifferentPasswordsTextBlock.Visibility = Visibility.Visible;
+            else
+                DifferentPasswordsTextBlock.Visibility = Visibility.Collapsed;
         }
     }
 }
