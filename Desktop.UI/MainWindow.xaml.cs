@@ -23,145 +23,37 @@ namespace PersonalManagerDesktop {
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
-        public LoginWindow loginUI;
         public MainWindow() {
-
-            //void childWindow_MyEvent(object sender, EventArgs e) {
-            //    loginUI.Content = new ChangePasswordPage();
-            //}
-
-            ////LoginWindow loginUI = new LoginWindow();
-            ////bool? ww = loginUI.ShowDialog();
-
-            //loginUI = new LoginWindow();
-            ////LoginMainFrame loginUI = new LoginMainFrame();
-
-            //ChangePasswordPage changePage = new ChangePasswordPage();
-            //RequestResetPasswordPage requestPage = new RequestResetPasswordPage();
-            //LoginPage loginPage = new LoginPage(loginUI);
-            //loginPage.MyEvent += new EventHandler(childWindow_MyEvent);
-
-            //loginUI.Content = loginPage;
-
-            //loginUI.Content = changeUI;
-            //loginUI.Content = requestUI;
-            //loginUI.ShowDialog();
-
-
-
             InitializeComponent();
+        }
 
-            Console.WriteLine("h3h");
-            //TODO: IF WRONG EMAIL ADDRESS CRASH
-            //IF WRONG API CRASHED RESPONSE DESERIALIZATION WILL CRASH UI - INTERNAL SERVER ERRROR DOES
+        private void StackPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
+            Console.WriteLine("h3h3");
+        }
 
-            //string s1 = "1232";
-            //string s2 = "QWE";
+        private void TreeViewItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
+            TreeViewItem tvi = (TreeViewItem)sender;
 
-            //Settings.Url = @"https://localhost:44345";
-
-            //string en1 = PasswordManager.EncryptPassword(s1);
-            //string en1_1 = PasswordManager.EncryptPassword(s1);
-
-            //string en2 = PasswordManager.EncryptPassword(s2);
-
-            //string en1_2 = PasswordManager.EncryptPassword(s1);
-
-            //string enc_Pw = PasswordManager.EncryptPassword("Macko");
-
-
-
-
-
-
-            //var requestHandler = new CommunicationLibrary.Business.Requests.UserRequestHandler();
-
-            //var configRequestHandler = new ConfigurationPageRequestHandler();
-
-
-            //var login = requestHandler.Login("Jan.Kowalski@PersonelManager.pl", "Macko");
-            //Settings.Token = login.Token;
-
-
-            //var getpage = configRequestHandler.Get(1);
-            //configRequestHandler.Update(1, new ConfigurationPage() {
-            //    Id = 1,
-            //    BillingMonthEnd = 14,
-            //    BillingMonthStart = 15,
-            //    MaximumLeaveTimeInDays = 15,
-            //    PercentOfAdvancesAllowed = 10,
-            //    WarningBeforeCertificateExpires = 35,
-            //    WarningBeforeLeaveReachesLimit = 60,
-            //    WarningBeforeMedicalCheckupExpires = 30,
-            //});
-
-
-            //var getpage2 = configRequestHandler.Get();
-
-
-
-
-
-            //var createOne = requestHandler.Create(new User() {
-            //    Email = "wnuda@wp.pl",
-            //    FirstName = "rzeznicki",
-            //    LastName = "jan",
-            //    IsActive = true,
-            //});
-
-
-            //var login2 = requestHandler.Login("wnuda@wp.pl", "macko15");
-            //Settings.Token = login2.Token;
-
-            //requestHandler.Update(6, new User() {
-            //    Id = 6,
-            //    Email = "ZIOM@32.pl"
-            //});
-
-
-            //requestHandler.RequestPasswordReset(1);
-
-            //requestHandler.UpdatePassword(1, "Macko");
-
-
-            //requestHandler.UpdatePassword(15, PasswordManager.EncryptPassword("Macko"));
-
-
-            //TODO: IF NOT EMAIL - THROWS AN ERROR
-            //var login3 = requestHandler.Login("wnuda@wp.pl", "1234");
-            //Settings.Token = login3.Token;
-
-            //var createAnother = requestHandler.Create(new User() {
-            //    Email = "KOSMOSWZ",
-            //    FirstName = "eloszka",
-            //    LastName = "michalina",
-            //    IsActive = true,
-            //});
-
-            //var task = Task.Run(async () => await requestHandler.LoginAsync("Jan.Kowalski@PersonelManager.pl", "3026"));
-            //var result = task.Result;
-
-
-
-            //var getAll = Task.Run(async () => await requestHandler.GetAsync()).Result;
-
-            //var getOne = Task.Run(async () => await requestHandler.GetAsync(1)).Result;
-
-            //var createOne = Task.Run(async () => await requestHandler.CreateAsync(new User() {
-            //    Email = "wnuda@macko.eu",
-            //    FirstName = "rzeznicki",
-            //    LastName = "jan",
-            //    IsActive = true,
-            //})).Result;
-
-            //Task.Run(async () => await requestHandler.UpdateAsync(5, new User() {
-            //    Id = 5,
-            //    Email = "ziomeczko@32.pl"
-            //})).Wait();
-
-            //Task.Run(async () => await requestHandler.RequestPasswordResetAsync(5)).Wait();
-
-            //Task.Run(async () => await requestHandler.UpdatePasswordAsync(5, "hehe")).Wait();
+            if (tvi.Header is StackPanel panel) {
+                switch (panel.Name) {
+                    case "Desktop_Panel":
+                    case "Employees_Panel":
+                    case "MedicalCheckups_Panel":
+                    case "SafetyTrainings_Panel":
+                    case "Certficates_Panel":
+                    case "Localizations_Panel":
+                    case "Foremen_Panel":
+                    case "Contracts_Panel":
+                    case "Pay_Panel":
+                    case "Advances_Panel":
+                    case "Users_Panel":
+                    case "Settings_Panel":
+                        break;
+                    default:
+                        break;
+                }
+            }
+            e.Handled = true;
         }
     }
 }

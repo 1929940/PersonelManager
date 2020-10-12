@@ -3,10 +3,192 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:local="clr-namespace:PersonalManagerDesktop"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        FontFamily="Calibri" FontSize="14"
+        Title="Personel Manager" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="{x:Type TreeViewItem}" x:Key="ItemBoldOnSelected">
+            <Setter Property="Margin" Value="-20,0,0,0"/>
+            <EventSetter Event="MouseLeftButtonUp" Handler="TreeViewItem_MouseLeftButtonUp"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type iconPacks:PackIconMaterial}">
+            <Setter Property="Margin" Value="0,0,3,0"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Row="0" Grid.Column="0"
+                BorderBrush="Black" BorderThickness="1">
+            <StackPanel Margin="10">
+                <iconPacks:PackIconModern Kind="PeopleMultiple" Width="Auto" Height="60" 
+                                      HorizontalAlignment="Center"/>
+                <TextBlock Text="Personel Manager" HorizontalAlignment="Center"
+                       FontSize="18" FontWeight="Bold" FontFamily="Calibri"
+                       Foreground="Black"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1" Grid.Column="0"
+                BorderBrush="Black" BorderThickness="1,0,1,1">
+            <TreeView BorderThickness="0">
+                <TreeView.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
+                </TreeView.Resources>
+
+                <!--OGÓLNE-->
+
+                <TreeViewItem  Header="OGÓLNE" IsExpanded="True" ItemContainerStyle="{StaticResource ItemBoldOnSelected}">
+                    <TreeViewItem>
+                        <TreeViewItem.Header>
+                            <StackPanel Name="Desktop_Panel" Orientation="Horizontal" VerticalAlignment="Center">
+                                <iconPacks:PackIconMaterial Kind="ChartBoxOutline" VerticalAlignment="Center"/>
+                                <TextBlock Text="Pulpit" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+                </TreeViewItem>
+
+                <!--KADRY-->
+
+                <TreeViewItem Header="KADRY" IsExpanded="True" ItemContainerStyle="{StaticResource ItemBoldOnSelected}" >
+                    <TreeViewItem>
+                        <TreeViewItem.Header>
+                            <StackPanel Name="Employees_Panel" Orientation="Horizontal" VerticalAlignment="Center">
+                                <iconPacks:PackIconMaterial Kind="Human" VerticalAlignment="Center"/>
+                                <TextBlock Text="Pracownicy" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+
+                    <TreeViewItem>
+                        <TreeViewItem.Header>
+                            <StackPanel Name="MedicalCheckups_Panel" Orientation="Horizontal" VerticalAlignment="Center">
+                                <iconPacks:PackIconMaterial Kind="Pill" VerticalAlignment="Center"/>
+                                <TextBlock Text="Badania Lekarskie" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+
+                    <TreeViewItem>
+                        <TreeViewItem.Header>
+                            <StackPanel Name="SafetyTrainings_Panel" Orientation="Horizontal" VerticalAlignment="Center">
+                                <iconPacks:PackIconMaterial Kind="Teach" VerticalAlignment="Center"/>
+                                <TextBlock Text="Szkolenia BHP" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+
+                    <TreeViewItem>
+                        <TreeViewItem.Header>
+                            <StackPanel Name="Certficates_Panel" Orientation="Horizontal" VerticalAlignment="Center">
+                                <iconPacks:PackIconMaterial Kind="CertificateOutline" VerticalAlignment="Center"/>
+                                <TextBlock Text="Certyfikaty" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+
+                    <TreeViewItem>
+                        <TreeViewItem.Header>
+                            <StackPanel Name="Localizations_Panel" Orientation="Horizontal" VerticalAlignment="Center">
+                                <iconPacks:PackIconMaterial Kind="Yurt" VerticalAlignment="Center"/>
+                                <TextBlock Text="Lokalizacje" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+
+                    <TreeViewItem>
+                        <TreeViewItem.Header>
+                            <StackPanel Name="Foremen_Panel" Orientation="Horizontal" VerticalAlignment="Center">
+                                <iconPacks:PackIconMaterial Kind="AccountHardHat" VerticalAlignment="Center"/>
+                                <TextBlock Text="Mistrzowie" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+                </TreeViewItem>
+
+                <!--PŁACE-->
+
+                <TreeViewItem Header="PŁACE" IsExpanded="True" ItemContainerStyle="{StaticResource ItemBoldOnSelected}">
+                    <TreeViewItem>
+                        <TreeViewItem.Header>
+                            <StackPanel Name="Contracts_Panel" Orientation="Horizontal" VerticalAlignment="Center">
+                                <iconPacks:PackIconMaterial Kind="HandshakeOutline" VerticalAlignment="Center"/>
+                                <TextBlock Text="Umowy" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+
+                    <TreeViewItem>
+                        <TreeViewItem.Header>
+                            <StackPanel Name="Pay_Panel" Orientation="Horizontal" VerticalAlignment="Center">
+                                <iconPacks:PackIconMaterial Kind="CurrencyEur" VerticalAlignment="Center"/>
+                                <TextBlock Text="Wypłaty" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+
+                    <TreeViewItem>
+                        <TreeViewItem.Header>
+                            <StackPanel Name="Advances_Panel" Orientation="Horizontal" VerticalAlignment="Center">
+                                <iconPacks:PackIconMaterial Kind="CashPlus" VerticalAlignment="Center"/>
+                                <TextBlock Text="Zaliczki" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+                </TreeViewItem>
+                
+                <!--ADMINISTRACJA-->
+                
+                <TreeViewItem Name="AdminTreeViewItem"
+                    Header="ADMINISTRACJA" IsExpanded="True" ItemContainerStyle="{StaticResource ItemBoldOnSelected}">
+                    <TreeViewItem>
+                        <TreeViewItem.Header>
+                            <StackPanel Name="Users_Panel" Orientation="Horizontal" VerticalAlignment="Center">
+                                <iconPacks:PackIconMaterial Kind="AccountOutline" VerticalAlignment="Center"/>
+                                <TextBlock Text="Użytkownicy" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+
+                    <TreeViewItem>
+                        <TreeViewItem.Header>
+                            <StackPanel Name="Settings_Panel" Orientation="Horizontal" VerticalAlignment="Center">
+                                <iconPacks:PackIconMaterial Kind="CogOutline" VerticalAlignment="Center"/>
+                                <TextBlock Text="Ustawienia" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+
+                </TreeViewItem>
+
+            </TreeView>
+        </Border>
+
+        <Border Grid.Row="0" Grid.Column="1"
+                BorderBrush="Black" BorderThickness="0,1,1,1">
+        </Border>
+
+        <Border Grid.Row="1" Grid.Column="1"
+                BorderBrush="Black" BorderThickness="0,0,1,1">
+        </Border>
+
     </Grid>
 </Window>

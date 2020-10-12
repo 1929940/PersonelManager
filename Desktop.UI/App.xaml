@@ -2,7 +2,9 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:PersonalManagerDesktop"
-             StartupUri="Business/Login/LoginWindow.xaml">
+             StartupUri="MainWindow.xaml">
+    <!--StartupUri="Business/Login/LoginWindow.xaml">-->
+
     <Application.Resources>
          
     </Application.Resources>
