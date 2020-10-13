@@ -141,6 +141,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Business\UserManagment\UserManagmentPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -160,6 +164,9 @@
     </Compile>
     <Compile Include="Business\Login\ForgotPasswordPage.xaml.cs">
       <DependentUpon>ForgotPasswordPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Business\UserManagment\UserManagmentPage.xaml.cs">
+      <DependentUpon>UserManagmentPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Business\Validators\EmailValidator.cs" />
     <Compile Include="Business\Validators\IsNotEmptyValidator.cs" />

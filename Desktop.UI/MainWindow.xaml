@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:PersonalManagerDesktop"
         mc:Ignorable="d"
         FontFamily="Calibri" FontSize="14"
-        Title="Personel Manager" Height="450" Width="800">
+        Title="Personel Manager" Height="450" Width="1000">
     <Window.Resources>
         <Style TargetType="{x:Type TreeViewItem}" x:Key="ItemBoldOnSelected">
             <Setter Property="Margin" Value="-20,0,0,0"/>
@@ -182,13 +182,16 @@
             </TreeView>
         </Border>
 
-        <Border Grid.Row="0" Grid.Column="1"
+        <Border Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"
                 BorderBrush="Black" BorderThickness="0,1,1,1">
+
+            <Frame Name="ContentFrame" NavigationUIVisibility="Hidden"/>
+
         </Border>
 
-        <Border Grid.Row="1" Grid.Column="1"
+        <!--<Border Grid.Row="1" Grid.Column="1"
                 BorderBrush="Black" BorderThickness="0,0,1,1">
-        </Border>
+        </Border>-->
 
     </Grid>
 </Window>

@@ -17,6 +17,7 @@ using CommunicationLibrary.Core;
 using CommunicationLibrary.Core.Logic;
 using CommunicationLibrary.Business.Requests;
 using Desktop.UI.Business.Login;
+using Desktop.UI.Business.UserManagment;
 
 namespace PersonalManagerDesktop {
     /// <summary>
@@ -24,6 +25,11 @@ namespace PersonalManagerDesktop {
     /// </summary>
     public partial class MainWindow : Window {
         public MainWindow() {
+
+            //TODO: REMOVE
+            Settings.Url = @"https://localhost:44345";
+            Settings.Token = new UserRequestHandler().Login("1929940@gmail.com", "1111").Token;
+
             InitializeComponent();
         }
 
@@ -47,6 +53,8 @@ namespace PersonalManagerDesktop {
                     case "Pay_Panel":
                     case "Advances_Panel":
                     case "Users_Panel":
+                        ContentFrame.Navigate(new UserManagmentPage());
+                        break;
                     case "Settings_Panel":
                         break;
                     default:
