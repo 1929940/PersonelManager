@@ -17,7 +17,9 @@ using CommunicationLibrary.Core;
 using CommunicationLibrary.Core.Logic;
 using CommunicationLibrary.Business.Requests;
 using Desktop.UI.Business.Login;
-using Desktop.UI.Business.UserManagment;
+using Desktop.UI.Business.Users;
+using System.Globalization;
+using System.Threading;
 
 namespace PersonalManagerDesktop {
     /// <summary>
@@ -29,6 +31,11 @@ namespace PersonalManagerDesktop {
             //TODO: REMOVE
             Settings.Url = @"https://localhost:44345";
             Settings.Token = new UserRequestHandler().Login("1929940@gmail.com", "1111").Token;
+
+            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("pl-PL");
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("pl-PL");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("pl-PL");
+
 
             InitializeComponent();
         }
@@ -53,7 +60,7 @@ namespace PersonalManagerDesktop {
                     case "Pay_Panel":
                     case "Advances_Panel":
                     case "Users_Panel":
-                        ContentFrame.Navigate(new UserManagmentPage());
+                        ContentFrame.Navigate(new UsersPage());
                         break;
                     case "Settings_Panel":
                         break;

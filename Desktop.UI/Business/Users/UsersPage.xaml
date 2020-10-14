@@ -1,9 +1,9 @@
-﻿<Page x:Class="Desktop.UI.Business.UserManagment.UserManagmentPage"
+﻿<Page x:Class="Desktop.UI.Business.Users.UsersPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Desktop.UI.Business.UserManagment"
+      xmlns:local="clr-namespace:Desktop.UI.Business.Users"
       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
@@ -19,7 +19,7 @@
         <Style TargetType="iconPacks:PackIconMaterial">
             <Setter Property="Margin" Value="0,0,3,0"/>
         </Style>
-        <Style TargetType="{x:Type DataGridCell}" x:Key="DataGridCell_Selected">
+        <Style TargetType="{x:Type DataGridCell}">
             <Setter Property="Height" Value="25"/>
 
             <Style.Triggers>
@@ -99,7 +99,7 @@
                   BorderThickness="0" GridLinesVisibility="Horizontal" RowHeight="25"
                   SelectionMode="Single" SelectionUnit="FullRow"
                   MouseDoubleClick="UsersDataGrid_MouseDoubleClick"
-                  AutoGenerateColumns="False" HeadersVisibility="Column" CellStyle="{StaticResource DataGridCell_Selected}">
+                  AutoGenerateColumns="False" HeadersVisibility="Column">
 
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn Header="Aktywny" Binding="{Binding IsActive}" ElementStyle="{StaticResource DataGridCell_CheckBoxStyle}"/>

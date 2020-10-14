@@ -141,7 +141,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Business\UserManagment\UserManagmentPage.xaml">
+    <Page Include="Business\Users\UsersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Business\Users\UserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -165,8 +169,11 @@
     <Compile Include="Business\Login\ForgotPasswordPage.xaml.cs">
       <DependentUpon>ForgotPasswordPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Business\UserManagment\UserManagmentPage.xaml.cs">
-      <DependentUpon>UserManagmentPage.xaml</DependentUpon>
+    <Compile Include="Business\Users\UsersPage.xaml.cs">
+      <DependentUpon>UsersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Business\Users\UserWindow.xaml.cs">
+      <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Business\Validators\EmailValidator.cs" />
     <Compile Include="Business\Validators\IsNotEmptyValidator.cs" />
@@ -212,6 +219,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Core\Validators\" />
+    <Folder Include="Core\ValueConverters\" />
     <Folder Include="HR\" />
     <Folder Include="Payroll\" />
   </ItemGroup>
