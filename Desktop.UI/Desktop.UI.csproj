@@ -153,6 +153,30 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="HR\Views\Certificates\CertificatesTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HR\Views\Employees\EmployeesTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HR\Views\Foremen\ForemenTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HR\Views\Locations\LocationsTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HR\Views\MedicalCheckups\MedicalCheckupsTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HR\Views\SafetyTrainings\SafetyTrainingsTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -200,12 +224,51 @@
     <Compile Include="Core\Helpers\ExceptionHelper.cs" />
     <Compile Include="Core\Helpers\ServerConnectionHelper.cs" />
     <Compile Include="Core\Validators\IsPercentValue.cs" />
+    <Compile Include="HR\Views\Certificates\CertificatesTableView.xaml.cs">
+      <DependentUpon>CertificatesTableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HR\Views\Employees\EmployeesTableView.xaml.cs">
+      <DependentUpon>EmployeesTableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HR\Views\Foremen\ForemenTableView.xaml.cs">
+      <DependentUpon>ForemenTableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HR\Views\Locations\LocationsTableView.xaml.cs">
+      <DependentUpon>LocationsTableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HR\Views\MedicalCheckups\MedicalCheckupsTableView.xaml.cs">
+      <DependentUpon>MedicalCheckupsTableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HR\Views\SafetyTrainings\SafetyTrainingsTableView.xaml.cs">
+      <DependentUpon>SafetyTrainingsTableView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Payroll\Views\Advances\AdvancesTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Payroll\Views\Contracts\ContractsTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Payroll\Views\Payments\PaymentsTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Payroll\Views\Advances\AdvancesTableView.xaml.cs">
+      <DependentUpon>AdvancesTableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Payroll\Views\Contracts\ContractsTableView.xaml.cs">
+      <DependentUpon>ContractsTableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Payroll\Views\Payments\PaymentsTableView.xaml.cs">
+      <DependentUpon>PaymentsTableView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -244,8 +307,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Core\ValueConverters\" />
-    <Folder Include="HR\" />
-    <Folder Include="Payroll\" />
+    <Folder Include="HR\Views\Leaves\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -25,6 +25,8 @@ namespace Desktop.UI.Business.Users {
     public partial class UsersTableView : Page {
 
         private readonly UserRequestHandler _handler;
+
+        //TODO: ERMOVE
         public IEnumerable<User> Users { get; set; }
 
         public UsersTableView() {
@@ -32,7 +34,6 @@ namespace Desktop.UI.Business.Users {
             InitializeComponent();
             UsersDataGrid.ItemsSource = _handler.Get();
             CollectionViewSource.GetDefaultView(UsersDataGrid.ItemsSource).Filter = Filter;
-            
         }
 
         private void AddUser_Click(object sender, RoutedEventArgs e) {

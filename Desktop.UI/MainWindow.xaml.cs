@@ -22,6 +22,15 @@ using System.Globalization;
 using System.Threading;
 using Desktop.UI.Business.Configuration;
 using Desktop.UI.Core.Helpers;
+using Desktop.UI.HR.Views.Employees;
+using Desktop.UI.HR.Views.MedicalCheckups;
+using Desktop.UI.HR.Views.SafetyTrainings;
+using Desktop.UI.HR.Views.Certificates;
+using Desktop.UI.HR.Views.Locations;
+using Desktop.UI.HR.Views.Foremen;
+using Desktop.UI.Payroll.Views.Contracts;
+using Desktop.UI.Payroll.Views.Payments;
+using Desktop.UI.Payroll.Views.Advances;
 
 namespace PersonalManagerDesktop {
     /// <summary>
@@ -66,14 +75,32 @@ namespace PersonalManagerDesktop {
                 switch (panel.Name) {
                     case "Dashboard_Panel":
                     case "Employees_Panel":
+                        ContentFrame.Navigate(new EmployeesTableView());
+                        break;
                     case "MedicalCheckups_Panel":
+                        ContentFrame.Navigate(new MedicalCheckupsTableView());
+                        break;
                     case "SafetyTrainings_Panel":
+                        ContentFrame.Navigate(new SafetyTrainingsTableView());
+                        break;
                     case "Certficates_Panel":
+                        ContentFrame.Navigate(new CertificatesTableView());
+                        break;
                     case "Localizations_Panel":
+                        ContentFrame.Navigate(new LocationsTableView());
+                        break;
                     case "Foremen_Panel":
+                        ContentFrame.Navigate(new ForemenTableView());
+                        break;
                     case "Contracts_Panel":
+                        ContentFrame.Navigate(new ContractsTableView());
+                        break;
                     case "Pay_Panel":
+                        ContentFrame.Navigate(new PaymentsTableView());
+                        break;
                     case "Advances_Panel":
+                        ContentFrame.Navigate(new AdvancesTableView());
+                        break;
                     case "Users_Panel":
                         ContentFrame.Navigate(new UsersTableView());
                         break;
