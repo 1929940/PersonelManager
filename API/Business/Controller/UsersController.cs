@@ -46,8 +46,8 @@ namespace API.Business.Controller {
         [HttpPost("Create")]
         public async Task<ActionResult<UserDTO>> CreateUser(UserDTO dto) {
             string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value.ToString();
-
-            User user = UserManager.CreateUser(dto);
+            User user = new User();
+            UserManager.UpdateWithDTO(dto,ref user);
             UserManager.WriteCreationTags(requestAuthor, ref user);
 
             _context.Users.Add(user);

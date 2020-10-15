@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:PersonalManagerDesktop"
         mc:Ignorable="d"
         FontFamily="Calibri" FontSize="14"
-        Title="Personel Manager" Height="450" Width="1000">
+        Title="Personel Manager" Height="450" Width="1150">
     <Window.Resources>
         <Style TargetType="{x:Type TreeViewItem}" x:Key="ItemBoldOnSelected">
             <Setter Property="Margin" Value="-20,0,0,0"/>

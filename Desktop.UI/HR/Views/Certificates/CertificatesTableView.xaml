@@ -98,17 +98,18 @@
                   BorderThickness="0" GridLinesVisibility="Horizontal" RowHeight="25"
                   SelectionMode="Single" SelectionUnit="FullRow"
                   MouseDoubleClick="DataGrid_MouseDoubleClick"
-                  AutoGenerateColumns="True" HeadersVisibility="Column">
+                  AutoGenerateColumns="False" HeadersVisibility="Column">
 
-            <!--<DataGrid.Columns>
-                <DataGridCheckBoxColumn Header="Aktywny" Binding="{Binding IsActive}" ElementStyle="{StaticResource DataGridCell_CheckBoxStyle}"/>
-                <DataGridTextColumn Header="Nazwisko" Binding="{Binding LastName}" Width="*" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
-                <DataGridTextColumn Header="Imię" Binding="{Binding FirstName}" Width="*" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
-                <DataGridTextColumn Header="E-Mail" Binding="{Binding Email}" Width="2*" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
-                <DataGridTextColumn Header="Rola" Binding="{Binding Role}" Width="*" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
-            </DataGrid.Columns>-->
-
-
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nazwisko" Binding="{Binding Employee.LastName}" Width="125" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                <DataGridTextColumn Header="Imię" Binding="{Binding Employee.FirstName}" Width="100" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                <DataGridTextColumn Header="Zawód" Binding="{Binding Employee.Profession}" Width="150" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                <DataGridTextColumn Header="Tytuł" Binding="{Binding Title}" Width="300" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                <DataGridTextColumn Header="Numer" Binding="{Binding Number}" Width="100" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                <DataGridTextColumn Header="Ważny od" Binding="{Binding ValidFrom, StringFormat=\{0:yyyy.MM.dd\}}" Width="100" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                <DataGridTextColumn Header="Ważny do" Binding="{Binding ValidTo, StringFormat=\{0:yyyy.MM.dd\}}" Width="100" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                <DataGridTextColumn Header="Wydany przez" Binding="{Binding IssuedBy}" Width="250" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+            </DataGrid.Columns>
 
         </DataGrid>
 
