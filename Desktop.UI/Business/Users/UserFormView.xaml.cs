@@ -74,11 +74,7 @@ namespace Desktop.UI.Business.Users {
                 this.Close();
         }
 
-        private string[] GetRoles() => new string[] {
-            "Pracownik",
-            "Kierownik",
-            "Administrator"
-        };
+        private string[] GetRoles() => Enum.GetNames(typeof(Enums.Roles));
 
         private void InitRoleComboBox() {
             RoleComboBox.ItemsSource = GetRoles();

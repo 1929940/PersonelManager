@@ -55,10 +55,9 @@ namespace PersonalManagerDesktop {
             //PRACOWNIK
             //ServerConnectionHelper.SetLoginData(new UserRequestHandler().Login("wnuda@wp.pl", "5572"));
 
-
-            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("pl-PL");
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("pl-PL");
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("pl-PL");
+            //CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("pl-PL");
+            //Thread.CurrentThread.CurrentCulture = new CultureInfo("pl-PL");
+            //Thread.CurrentThread.CurrentUICulture = new CultureInfo("pl-PL");
 
 
             InitializeComponent();
