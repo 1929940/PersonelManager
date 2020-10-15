@@ -20,13 +20,13 @@ namespace Desktop.UI.Business.Configuration {
     /// <summary>
     /// Interaction logic for DashboardConfigurationPage.xaml
     /// </summary>
-    public partial class DashboardConfigurationPage : Page {
+    public partial class ConfigurationView : Page {
 
         private readonly ConfigurationPageRequestHandler _handler;
         public ConfigurationPage PageData { get; set; }
 
 
-        public DashboardConfigurationPage() {
+        public ConfigurationView() {
             _handler = new ConfigurationPageRequestHandler();
             PageData = _handler.Get();
 

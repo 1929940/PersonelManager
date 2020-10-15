@@ -125,7 +125,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Business\Configuration\DashboardConfigurationPage.xaml">
+    <Page Include="Business\Configuration\ConfigurationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -145,11 +145,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Business\Users\UsersPage.xaml">
+    <Page Include="Business\Users\UsersTableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Business\Users\UserWindow.xaml">
+    <Page Include="Business\Users\UserFormView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -161,8 +161,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Business\Configuration\DashboardConfigurationPage.xaml.cs">
-      <DependentUpon>DashboardConfigurationPage.xaml</DependentUpon>
+    <Compile Include="Business\Configuration\ConfigurationView.xaml.cs">
+      <DependentUpon>ConfigurationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Business\Login\UpdatePasswordPage.xaml.cs">
       <DependentUpon>UpdatePasswordPage.xaml</DependentUpon>
@@ -176,11 +176,11 @@
     <Compile Include="Business\Login\ForgotPasswordPage.xaml.cs">
       <DependentUpon>ForgotPasswordPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Business\Users\UsersPage.xaml.cs">
-      <DependentUpon>UsersPage.xaml</DependentUpon>
+    <Compile Include="Business\Users\UsersTableView.xaml.cs">
+      <DependentUpon>UsersTableView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Business\Users\UserWindow.xaml.cs">
-      <DependentUpon>UserWindow.xaml</DependentUpon>
+    <Compile Include="Business\Users\UserFormView.xaml.cs">
+      <DependentUpon>UserFormView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Core\Helpers\AuthorizationHelper.cs" />
     <Compile Include="Core\Helpers\DialogHelper.cs" />

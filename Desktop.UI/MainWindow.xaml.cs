@@ -75,10 +75,10 @@ namespace PersonalManagerDesktop {
                     case "Pay_Panel":
                     case "Advances_Panel":
                     case "Users_Panel":
-                        ContentFrame.Navigate(new UsersPage());
+                        ContentFrame.Navigate(new UsersTableView());
                         break;
                     case "Settings_Panel":
-                        ContentFrame.Navigate(new DashboardConfigurationPage());
+                        ContentFrame.Navigate(new ConfigurationView());
                         break;
                     default:
                         break;

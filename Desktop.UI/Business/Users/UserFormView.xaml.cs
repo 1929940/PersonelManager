@@ -22,12 +22,12 @@ namespace Desktop.UI.Business.Users {
     /// <summary>
     /// Interaction logic for UserWindow.xaml
     /// </summary>
-    public partial class UserWindow : Window {
+    public partial class UserFormView : Window {
 
         public User User { get; set; }
         private readonly UserRequestHandler _handler;
 
-        public UserWindow() {
+        public UserFormView() {
 
             _handler = new UserRequestHandler();
             User = new User() {
@@ -43,7 +43,7 @@ namespace Desktop.UI.Business.Users {
             InitRoleComboBox();
         }
 
-        public UserWindow(int id) {
+        public UserFormView(int id) {
 
             _handler = new UserRequestHandler();
             User = _handler.Get(id);
