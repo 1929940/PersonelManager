@@ -7,7 +7,7 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:validators="clr-namespace:Desktop.UI.Core.Validators"
         mc:Ignorable="d"
-        Title="UserWindow" Height="300" Width="450"
+        Title="UserWindow" Height="350" Width="450"
         FontFamily="Calibri" FontSize="14"
         ResizeMode="NoResize">
     <Window.Resources>
@@ -68,6 +68,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" Name="CreatedRow"/>
+            <RowDefinition Height="Auto" Name="UpdatedRow"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -123,7 +125,22 @@
         <Separator Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4"
                    Background="Black"/>
 
-        <StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal"
+        <TextBlock Grid.Row="7" Grid.Column="0" Text="Stworzono"/>
+        <TextBlock Grid.Row="7" Grid.Column="1" FontStyle="Oblique"
+                 Text="{Binding CreatedOn, StringFormat=\{0:yyyy.MM.dd HH:mm:ss\}}"/>
+        <TextBlock Grid.Row="7" Grid.Column="2" Text="Przez"/>
+        <TextBlock Grid.Row="7" Grid.Column="3" FontStyle="Oblique"
+                 Text="{Binding CreatedBy}"/>
+
+        <TextBlock Grid.Row="8" Grid.Column="0" Text="Modyfikowano"/>
+        <TextBlock Grid.Row="8" Grid.Column="1" FontStyle="Oblique"
+                 Text="{Binding UpdatedOn, StringFormat=\{0:yyyy.MM.dd HH:mm:ss\}}"/>
+        <TextBlock Grid.Row="8" Grid.Column="2" Text="Przez"/>
+        <TextBlock Grid.Row="8" Grid.Column="3" FontStyle="Oblique"
+                 Text="{Binding UpdatedBy}"/>
+
+
+        <StackPanel Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal"
                     VerticalAlignment="Bottom" HorizontalAlignment="Right">
 
             <Button Name="AddUser" Click="AddUser_Click" Visibility="Collapsed">

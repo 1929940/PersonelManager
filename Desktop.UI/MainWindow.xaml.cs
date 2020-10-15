@@ -46,10 +46,10 @@ namespace PersonalManagerDesktop {
             //Settings.Token = new UserRequestHandler().Login("1929940@gmail.com", "1111").Token;
 
             //ADMIN
-            //ServerConnectionHelper.SetLoginData(new UserRequestHandler().Login("1929940@gmail.com", "1111"));
+            ServerConnectionHelper.SetLoginData(new UserRequestHandler().Login("1929940@gmail.com", "1111"));
 
             //KIEROWNIK
-            ServerConnectionHelper.SetLoginData(new UserRequestHandler().Login("Witkowski@poczta.pl", "2897"));
+            //ServerConnectionHelper.SetLoginData(new UserRequestHandler().Login("Witkowski@poczta.pl", "2897"));
 
 
             //PRACOWNIK

@@ -41,6 +41,7 @@ namespace Desktop.UI.Business.Users {
             HeaderText.Text = "Dodaj Użytkownika";
             AddUser.Visibility = Visibility.Visible;
             InitRoleComboBox();
+            HideMetaDataRows();
         }
 
         public UserFormView(int id) {
@@ -86,6 +87,12 @@ namespace Desktop.UI.Business.Users {
 
         private void RoleComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             User.Role = RoleComboBox.SelectedValue as string;
+        }
+
+        private void HideMetaDataRows() {
+            CreatedRow.Height = new GridLength(0);
+            UpdatedRow.Height = new GridLength(0);
+            this.Height -= 50;
         }
     }
 }
