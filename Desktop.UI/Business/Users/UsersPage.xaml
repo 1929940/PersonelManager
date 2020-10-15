@@ -69,6 +69,15 @@
                     </Button.Content>
                 </Button>
 
+                <Button Name="EditUser" Click="EditUser_Click">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks:PackIconMaterial Kind="AccountEditOutline"/>
+                            <TextBlock Text="Edytuj"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+                
                 <Button Name="DeleteUser" Click="DeleteUser_Click">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal">
@@ -78,14 +87,6 @@
                     </Button.Content>
                 </Button>
 
-                <Button Name="EditUser" Click="EditUser_Click">
-                    <Button.Content>
-                        <StackPanel Orientation="Horizontal">
-                            <iconPacks:PackIconMaterial Kind="AccountEditOutline"/>
-                            <TextBlock Text="Edytuj"/>
-                        </StackPanel>
-                    </Button.Content>
-                </Button>
             </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <TextBlock Text="Szukaj" FontSize="16" VerticalAlignment="Center"/>

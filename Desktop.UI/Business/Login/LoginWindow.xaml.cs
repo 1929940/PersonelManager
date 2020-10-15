@@ -25,7 +25,7 @@ namespace Desktop.UI.Business.Login {
             InitializeComponent();
 
             //This needs local memory, perhaps to a file? or xml file? 
-            Settings.Url = @"https://localhost:44345";
+            ServerConnectionData.Url = @"https://localhost:44345";
 
 
             LoginFrame.Navigate(new LoginPage(LoginFrame, string.Empty));

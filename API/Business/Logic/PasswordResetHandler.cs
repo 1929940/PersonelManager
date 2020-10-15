@@ -27,7 +27,7 @@ namespace API.Business.Logic {
             var mailMessage = new MimeMessage();
             mailMessage.From.Add(new MailboxAddress("PersonalManager - NoReply", appSettings.EmailAddress));
             mailMessage.To.Add(new MailboxAddress("To", emailTo));
-            mailMessage.Subject = "Zresetowanie hasła do systemu PersonalManager";
+            mailMessage.Subject = "Nadanie hasła do systemu PersonalManager";
 
             var bodyBuilder = new BodyBuilder();
             bodyBuilder.HtmlBody = $"Twoje jednorazowe hasło to: <b>{newPassword}</b> <br/><br/>Po zalogowaniu wymagane bedzie podanie nowego hasła.";

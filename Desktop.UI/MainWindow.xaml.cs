@@ -20,6 +20,8 @@ using Desktop.UI.Business.Login;
 using Desktop.UI.Business.Users;
 using System.Globalization;
 using System.Threading;
+using Desktop.UI.Business.Configuration;
+using Desktop.UI.Core.Helpers;
 
 namespace PersonalManagerDesktop {
     /// <summary>
@@ -29,8 +31,21 @@ namespace PersonalManagerDesktop {
         public MainWindow() {
 
             //TODO: REMOVE
-            Settings.Url = @"https://localhost:44345";
-            Settings.Token = new UserRequestHandler().Login("1929940@gmail.com", "1111").Token;
+            ServerConnectionData.Url = @"https://localhost:44345";
+
+
+            //Settings.Token = new UserRequestHandler().Login("1929940@gmail.com", "1111").Token;
+
+            //ADMIN
+            //ServerConnectionHelper.SetLoginData(new UserRequestHandler().Login("1929940@gmail.com", "1111"));
+
+            //KIEROWNIK
+            ServerConnectionHelper.SetLoginData(new UserRequestHandler().Login("Witkowski@poczta.pl", "2897"));
+
+
+            //PRACOWNIK
+            //ServerConnectionHelper.SetLoginData(new UserRequestHandler().Login("wnuda@wp.pl", "5572"));
+
 
             CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("pl-PL");
             Thread.CurrentThread.CurrentCulture = new CultureInfo("pl-PL");
@@ -49,7 +64,7 @@ namespace PersonalManagerDesktop {
 
             if (tvi.Header is StackPanel panel) {
                 switch (panel.Name) {
-                    case "Desktop_Panel":
+                    case "Dashboard_Panel":
                     case "Employees_Panel":
                     case "MedicalCheckups_Panel":
                     case "SafetyTrainings_Panel":
@@ -63,12 +78,17 @@ namespace PersonalManagerDesktop {
                         ContentFrame.Navigate(new UsersPage());
                         break;
                     case "Settings_Panel":
+                        ContentFrame.Navigate(new DashboardConfigurationPage());
                         break;
                     default:
                         break;
                 }
             }
             e.Handled = true;
+        }
+
+        private void AdminTreeViewItem_Loaded(object sender, RoutedEventArgs e) {
+            AdminTreeViewItem.Visibility = (AuthorizationHelper.Authorize(Enums.Roles.Kierownik)) ? Visibility.Visible : Visibility.Collapsed;
         }
     }
 }

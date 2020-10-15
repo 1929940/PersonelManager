@@ -14,19 +14,19 @@ namespace CommunicationLibrary.Core.Logic {
 
         protected void SetToken(HttpClient httpClient) =>
             httpClient.DefaultRequestHeaders.Authorization =
-            new AuthenticationHeaderValue("Bearer", Settings.Token);
+            new AuthenticationHeaderValue("Bearer", ServerConnectionData.Token);
 
         protected string GetUri(string controller, string routeVerb) =>
-            string.Format($"{Settings.Url}/api/{controller}/{routeVerb}");
+            string.Format($"{ServerConnectionData.Url}/api/{controller}/{routeVerb}");
 
         protected string GetUri(string controller, string routeVerb, int id) =>
-            string.Format($"{Settings.Url}/api/{controller}/{routeVerb}/{id}");
+            string.Format($"{ServerConnectionData.Url}/api/{controller}/{routeVerb}/{id}");
 
         protected string GetUri(string controller, string routeVerb, string login) =>
-            string.Format($"{Settings.Url}/api/{controller}/{routeVerb}/{login}");
+            string.Format($"{ServerConnectionData.Url}/api/{controller}/{routeVerb}/{login}");
 
         protected string GetUri(string controller, string routeVerb, string login, string password) =>
-            string.Format($"{Settings.Url}/api/{controller}/{routeVerb}/{login}&{password}");
+            string.Format($"{ServerConnectionData.Url}/api/{controller}/{routeVerb}/{login}&{password}");
 
         protected StringContent CreateStringContent(T input) {
             string body = JsonConvert.SerializeObject(input);

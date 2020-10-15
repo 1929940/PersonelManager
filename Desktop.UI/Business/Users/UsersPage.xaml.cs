@@ -1,6 +1,7 @@
 ﻿using CommunicationLibrary.Business.Models;
 using CommunicationLibrary.Business.Requests;
 using Desktop.UI.Core;
+using Desktop.UI.Core.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -30,6 +31,8 @@ namespace Desktop.UI.Business.Users {
             _handler = new UserRequestHandler();
             InitializeComponent();
             UsersDataGrid.ItemsSource = _handler.Get();
+            CollectionViewSource.GetDefaultView(UsersDataGrid.ItemsSource).Filter = Filter;
+            
         }
 
         private void AddUser_Click(object sender, RoutedEventArgs e) {
@@ -39,14 +42,11 @@ namespace Desktop.UI.Business.Users {
         }
 
         private async void DeleteUser_Click(object sender, RoutedEventArgs e) {
-            User user = (User)UsersDataGrid.SelectedItem;
-            await _handler.DeleteAsync(user.Id);
-            UsersDataGrid.ItemsSource = _handler.Get();
-            //if successful show ok, update list
-            //if fail do nothing
-
-            //what if row was already removed?
-            //what if connection failed?
+            if (DialogHelper.Delete()) {
+                User user = (User)UsersDataGrid.SelectedItem;
+                await _handler.DeleteAsync(user.Id);
+                UsersDataGrid.ItemsSource = _handler.Get();
+            }
         }
 
         private void EditUser_Click(object sender, RoutedEventArgs e) {
@@ -57,7 +57,20 @@ namespace Desktop.UI.Business.Users {
         }
 
         private void FilterBox_TextChanged(object sender, TextChangedEventArgs e) {
+            CollectionViewSource.GetDefaultView(UsersDataGrid.ItemsSource).Refresh();
+        }
 
+        private bool Filter(object item) {
+            string input = FilterBox.Text;
+            User user = item as User;
+
+            if (string.IsNullOrEmpty(input))
+                return true;
+
+            return user.FirstName.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0
+                || user.LastName.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0
+                || user.Email.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0
+                || user.Role.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
         private void UsersDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) {

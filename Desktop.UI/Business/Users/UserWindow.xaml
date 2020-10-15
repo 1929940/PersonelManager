@@ -5,38 +5,54 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Desktop.UI.Business.Users"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:validators="clr-namespace:Desktop.UI.Core.Validators"
         mc:Ignorable="d"
-        Title="UserWindow" Height="400" Width="450"
+        Title="UserWindow" Height="300" Width="450"
         FontFamily="Calibri" FontSize="14"
         ResizeMode="NoResize">
     <Window.Resources>
+        <Style TargetType="Separator">
+            <Setter Property="Height" Value="10"/>
+        </Style>
+
         <Style TargetType="{x:Type TextBlock}">
             <Setter Property="Margin" Value="5,10"/>
         </Style>
+
         <Style TargetType="{x:Type TextBox}">
             <Setter Property="Margin" Value="5,10"/>
         </Style>
+
         <Style TargetType="Button">
             <Setter Property="Height" Value="25"/>
             <Setter Property="Width" Value="100"/>
             <Setter Property="Margin" Value="5"/>
         </Style>
+
         <Style TargetType="iconPacks:PackIconMaterial">
             <Setter Property="Margin" Value="0,0,3,0"/>
         </Style>
+
         <Style TargetType="ComboBox">
             <Setter Property="Margin" Value="5,10"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
+
         <Style TargetType="CheckBox">
             <Setter Property="Margin" Value="5,10"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
 
-
-
+        <ControlTemplate x:Key="ErrorTemplate">
+            <StackPanel Orientation="Vertical">
+                <Border BorderBrush="Red" BorderThickness="1">
+                    <AdornedElementPlaceholder/>
+                </Border>
+                <TextBlock Text="{Binding CurrentItem.ErrorContent}" Foreground="Red" FontSize="10" Padding="2,0,0,0"/>
+            </StackPanel>
+        </ControlTemplate>
     </Window.Resources>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -52,26 +68,49 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4"
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4"
             Text="TMP" Name="HeaderText" Margin="2" 
                    FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
 
-        <Separator Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4"
+        <Separator Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4"
                    Background="Black"/>
 
 
         <TextBlock Grid.Row="2" Grid.Column="0" Text="Imię"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Name="FirstNameTextBox" Text="{Binding FirstName}"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Name="FirstNameTextBox" Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+            <TextBox.Text>
+                <Binding Path="FirstName" Mode="TwoWay" UpdateSourceTrigger="Default">
+                    <Binding.ValidationRules>
+                        <validators:IsNotEmptyValidator/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <TextBlock Grid.Row="2" Grid.Column="2" Text="Nazwisko"/>
-        <TextBox Grid.Row="2" Grid.Column="3" Name="LastNameTextBox" Text="{Binding LastName}"/>
+        <TextBox Grid.Row="2" Grid.Column="3" Name="LastNameTextBox" Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+            <TextBox.Text>
+                <Binding Path="LastName" Mode="TwoWay" UpdateSourceTrigger="Default">
+                    <Binding.ValidationRules>
+                        <validators:IsNotEmptyValidator/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
         <TextBlock Grid.Row="3" Grid.Column="0" Text="Email"/>
-        <TextBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Name="EmailTextBox" Text="{Binding Email}"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Name="EmailTextBox" Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+            <TextBox.Text>
+                <Binding Path="Email" Mode="TwoWay" UpdateSourceTrigger="Default">
+                    <Binding.ValidationRules>
+                        <validators:IsNotEmptyValidator/>
+                        <validators:EmailValidator/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
         <Separator Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4"
                    Background="Black"/>
@@ -84,17 +123,7 @@
         <Separator Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4"
                    Background="Black"/>
 
-        <TextBlock Grid.Row="7" Grid.Column="0" Text="Dodano"/>
-        <TextBox Grid.Row="7" Grid.Column="1" Name="CreatedOnTextBox" IsReadOnly="True" Text="{Binding CreatedOn}"/>
-        <TextBlock Grid.Row="7" Grid.Column="2" Text="Przez"/>
-        <TextBox Grid.Row="7" Grid.Column="3" Name="CreatedByTextBox" IsReadOnly="True" Text="{Binding CreatedBy}"/>
-
-        <TextBlock Grid.Row="8" Grid.Column="0" Text="Zmienino"/>
-        <TextBox Grid.Row="8" Grid.Column="1" Name="UpdatedOnTextBox" IsReadOnly="True" Text="{Binding UpdatedOn}"/>
-        <TextBlock Grid.Row="8" Grid.Column="2" Text="Przez"/>
-        <TextBox Grid.Row="8" Grid.Column="3" Name="UpdatedByTextBox" IsReadOnly="True" Text="{Binding UpdatedBy}"/>
-
-        <StackPanel Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal"
+        <StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal"
                     VerticalAlignment="Bottom" HorizontalAlignment="Right">
 
             <Button Name="AddUser" Click="AddUser_Click" Visibility="Collapsed">
@@ -106,7 +135,8 @@
                 </Button.Content>
             </Button>
 
-            <Button Name="EditUser" Click="EditUser_Click" Visibility="Collapsed">
+            
+            <Button Name="UpdateUser" Click="UpdateUser_Click" Visibility="Collapsed">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <iconPacks:PackIconMaterial Kind="ContentSaveOutline"/>
@@ -123,8 +153,10 @@
                     </StackPanel>
                 </Button.Content>
             </Button>
+            
+            
 
         </StackPanel>
-        
+
     </Grid>
 </Window>

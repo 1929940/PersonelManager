@@ -14,11 +14,11 @@ namespace CommunicationLibrary.Test.Core {
         protected int _id;
         protected IEqualityComparer<T> _comparer;
         public BaseTest() {
-            Settings.Url = @"https://localhost:44345";
+            ServerConnectionData.Url = @"https://localhost:44345";
 
-            if (Settings.Token == null) {
+            if (ServerConnectionData.Token == null) {
                 var login = new UserRequestHandler().Login("Jan.Kowalski@PersonelManager.pl", "Macko");
-                Settings.Token = login.Token;
+                ServerConnectionData.Token = login.Token;
             }
         }
 

@@ -58,7 +58,7 @@
                 <TreeViewItem  Header="OGÓLNE" IsExpanded="True" ItemContainerStyle="{StaticResource ItemBoldOnSelected}">
                     <TreeViewItem>
                         <TreeViewItem.Header>
-                            <StackPanel Name="Desktop_Panel" Orientation="Horizontal" VerticalAlignment="Center">
+                            <StackPanel Name="Dashboard_Panel" Orientation="Horizontal" VerticalAlignment="Center">
                                 <iconPacks:PackIconMaterial Kind="ChartBoxOutline" VerticalAlignment="Center"/>
                                 <TextBlock Text="Pulpit" VerticalAlignment="Center"/>
                             </StackPanel>
@@ -157,7 +157,7 @@
                 
                 <!--ADMINISTRACJA-->
                 
-                <TreeViewItem Name="AdminTreeViewItem"
+                <TreeViewItem Name="AdminTreeViewItem" Loaded="AdminTreeViewItem_Loaded"
                     Header="ADMINISTRACJA" IsExpanded="True" ItemContainerStyle="{StaticResource ItemBoldOnSelected}">
                     <TreeViewItem>
                         <TreeViewItem.Header>

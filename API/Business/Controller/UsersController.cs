@@ -119,6 +119,7 @@ namespace API.Business.Controller {
             return Ok(new AuthenticationReponse() {
                 Token = token,
                 RequestedPasswordReset = user.RequestedPasswordReset,
+                Role = user.Role
             });
         }
 

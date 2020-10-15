@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
 
-namespace Desktop.UI.Business.Validators {
+namespace Desktop.UI.Core.Validators {
     public class EmailValidator : ValidationRule {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo) {
             string input = (string)value;

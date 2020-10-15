@@ -1,5 +1,7 @@
 ﻿using CommunicationLibrary.Business.Models;
 using CommunicationLibrary.Business.Requests;
+using Desktop.UI.Core.Helpers;
+using Desktop.UI.Core.Resources;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -39,7 +41,6 @@ namespace Desktop.UI.Business.Users {
             HeaderText.Text = "Dodaj Użytkownika";
             AddUser.Visibility = Visibility.Visible;
             InitRoleComboBox();
-
         }
 
         public UserWindow(int id) {
@@ -49,24 +50,27 @@ namespace Desktop.UI.Business.Users {
             this.DataContext = User;
             InitializeComponent();
             HeaderText.Text = "Modyfikuj Użytkownika";
-            EditUser.Visibility = Visibility.Visible;
+            UpdateUser.Visibility = Visibility.Visible;
             InitRoleComboBox();
-
-
         }
 
         private async void AddUser_Click(object sender, RoutedEventArgs e) {
-            await _handler.CreateAsync(User);
-            this.Close();
+            if (ValidationHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
+                await _handler.CreateAsync(User);
+                this.Close();
+            }
         }
 
-        private async void EditUser_Click(object sender, RoutedEventArgs e) {
-            await _handler.UpdateAsync(User.Id, User);
-            this.Close();
+        private async void UpdateUser_Click(object sender, RoutedEventArgs e) {
+            if (ValidationHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
+                await _handler.UpdateAsync(User.Id, User);
+                this.Close();
+            }
         }
 
         private void Close_Click(object sender, RoutedEventArgs e) {
-            this.Close();
+            if (DialogHelper.Close())
+                this.Close();
         }
 
         private string[] GetRoles() => new string[] {

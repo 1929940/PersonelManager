@@ -125,6 +125,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Business\Configuration\DashboardConfigurationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Business\Login\UpdatePasswordPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -157,6 +161,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Business\Configuration\DashboardConfigurationPage.xaml.cs">
+      <DependentUpon>DashboardConfigurationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Business\Login\UpdatePasswordPage.xaml.cs">
       <DependentUpon>UpdatePasswordPage.xaml</DependentUpon>
     </Compile>
@@ -175,11 +182,24 @@
     <Compile Include="Business\Users\UserWindow.xaml.cs">
       <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Business\Validators\EmailValidator.cs" />
-    <Compile Include="Business\Validators\IsNotEmptyValidator.cs" />
+    <Compile Include="Core\Helpers\AuthorizationHelper.cs" />
+    <Compile Include="Core\Helpers\DialogHelper.cs" />
+    <Compile Include="Core\Helpers\Enums.cs" />
+    <Compile Include="Core\Helpers\ValidationHelper.cs" />
+    <Compile Include="Core\Resources\Messages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Core\Validators\EmailValidator.cs" />
+    <Compile Include="Core\Validators\IsDayOfMonthValidator.cs" />
+    <Compile Include="Core\Validators\IsDoubleValidator.cs" />
+    <Compile Include="Core\Validators\IsIntValidator.cs" />
+    <Compile Include="Core\Validators\IsNotEmptyValidator.cs" />
     <Compile Include="Business\Validators\PasswordValidator.cs" />
     <Compile Include="Core\Helpers\ExceptionHelper.cs" />
-    <Compile Include="Core\Helpers\SettingsHelper.cs" />
+    <Compile Include="Core\Helpers\ServerConnectionHelper.cs" />
+    <Compile Include="Core\Validators\IsPercentValue.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -199,6 +219,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Core\Resources\Messages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -219,7 +243,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Core\Validators\" />
     <Folder Include="Core\ValueConverters\" />
     <Folder Include="HR\" />
     <Folder Include="Payroll\" />

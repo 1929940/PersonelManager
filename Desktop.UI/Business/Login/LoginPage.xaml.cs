@@ -52,10 +52,9 @@ namespace Desktop.UI.Business.Login {
                 string hashedPassword = PasswordManager.EncryptPassword(password);
 
                 var response = await _handler.LoginAsync(login, hashedPassword);
-                SettingsHelper.SetToken(response.Token);
+                ServerConnectionHelper.SetLoginData(response);
                 if (response.RequestedPasswordReset) {
                     _frame.Navigate(new UpdatePasswordPage(_frame, Login));
-                    //_frame.Navigate(new UpdatePasswordPage(_frame, Login) { Login = Login });
                 } else {
                     LoginWindow.StartMainWindow();
                 }
