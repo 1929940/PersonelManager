@@ -20,6 +20,8 @@ Add Colours Blue-Grey?
 
 9. ADD SHOW ONLY ACTIVE {BOOL} TO VIEWS
 
+10. Foreman has MAIL while Users have EMAIL - need to unify this
+
 
 
 

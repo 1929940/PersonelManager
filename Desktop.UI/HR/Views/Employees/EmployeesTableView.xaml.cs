@@ -1,4 +1,6 @@
-﻿using CommunicationLibrary.HR.Requests;
+﻿using CommunicationLibrary.HR.Models;
+using CommunicationLibrary.HR.Requests;
+using Desktop.UI.Core.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +28,7 @@ namespace Desktop.UI.HR.Views.Employees {
             _handler = new EmployeeRequestHandler();
             InitializeComponent();
             DataGrid.ItemsSource = _handler.Get();
-            //CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
+            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e) {
@@ -37,13 +39,31 @@ namespace Desktop.UI.HR.Views.Employees {
 
         }
 
-        private void DeleteButton_Click(object sender, RoutedEventArgs e) {
-
+        private async void DeleteButton_Click(object sender, RoutedEventArgs e) {
+            await ViewHelper.DeleteRow(_handler, DataGrid);
         }
+
+        private bool Filter(object item) {
+            string input = FilterBox.Text;
+            Employee employee = item as Employee;
+
+            if (string.IsNullOrEmpty(input))
+                return true;
+
+            return employee.FirstName.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0
+                || employee.LastName.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0
+                || employee.Profession.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0
+                || employee.ForemanFullName.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0
+                || employee.LocationName.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0
+                || employee.PhoneNo.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0
+                || employee.Nationality.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0;
+        }
+
 
         private void FilterBox_TextChanged(object sender, TextChangedEventArgs e) {
-
+            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
+
 
         private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
 

@@ -49,7 +49,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Zarządzaj pracownikami" FontSize="22" FontWeight="Bold"
+        <TextBlock Text="Zarządzaj Lokalizacjami" FontSize="22" FontWeight="Bold"
                    Margin="5"/>
 
         <Border Grid.Row="1" BorderThickness="0,1" BorderBrush="Black">
@@ -98,15 +98,17 @@
                   BorderThickness="0" GridLinesVisibility="Horizontal" RowHeight="25"
                   SelectionMode="Single" SelectionUnit="FullRow"
                   MouseDoubleClick="DataGrid_MouseDoubleClick"
-                  AutoGenerateColumns="True" HeadersVisibility="Column">
+                  AutoGenerateColumns="False" HeadersVisibility="Column">
 
-            <!--<DataGrid.Columns>
-                <DataGridCheckBoxColumn Header="Aktywny" Binding="{Binding IsActive}" ElementStyle="{StaticResource DataGridCell_CheckBoxStyle}"/>
-                <DataGridTextColumn Header="Nazwisko" Binding="{Binding LastName}" Width="*" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
-                <DataGridTextColumn Header="Imię" Binding="{Binding FirstName}" Width="*" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
-                <DataGridTextColumn Header="E-Mail" Binding="{Binding Email}" Width="2*" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
-                <DataGridTextColumn Header="Rola" Binding="{Binding Role}" Width="*" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
-            </DataGrid.Columns>-->
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nazwa" Binding="{Binding Name}" Width="3*" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                <DataGridTextColumn Header="Kraj" Binding="{Binding Country}" Width="*" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                <DataGridTextColumn Header="Region" Binding="{Binding Region}" Width="*" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                <DataGridTextColumn Header="Miasto" Binding="{Binding City}" Width="*" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                <DataGridTextColumn Header="Kod Pocztowy" Binding="{Binding Zip}" Width="*" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                <DataGridTextColumn Header="Ulica" Binding="{Binding Street}" Width="*" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                <DataGridTextColumn Header="Numer" Binding="{Binding Number}" Width="0.6*" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+            </DataGrid.Columns>
 
 
 

@@ -1,4 +1,7 @@
-﻿using CommunicationLibrary.HR.Requests;
+﻿using CommunicationLibrary.Business.Models;
+using CommunicationLibrary.HR.Models;
+using CommunicationLibrary.HR.Requests;
+using Desktop.UI.Core.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +29,7 @@ namespace Desktop.UI.HR.Views.Certificates {
             _handler = new CertificateRequestHandler();
             InitializeComponent();
             DataGrid.ItemsSource = _handler.Get();
-            //CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
+            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e) {
@@ -37,12 +40,16 @@ namespace Desktop.UI.HR.Views.Certificates {
 
         }
 
-        private void DeleteButton_Click(object sender, RoutedEventArgs e) {
-
+        private async void DeleteButton_Click(object sender, RoutedEventArgs e) {
+            await ViewHelper.DeleteRow(_handler, DataGrid);
         }
 
         private void FilterBox_TextChanged(object sender, TextChangedEventArgs e) {
+            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
+        }
 
+        private bool Filter(object item) {
+            return ViewHelper.IsDocWithinSearchParams(FilterBox.Text, item);
         }
 
         private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) {

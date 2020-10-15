@@ -43,18 +43,11 @@ namespace Desktop.UI.Business.Users {
         }
 
         private async void DeleteUser_Click(object sender, RoutedEventArgs e) {
-            if (DialogHelper.Delete()) {
-                User user = (User)UsersDataGrid.SelectedItem;
-                await _handler.DeleteAsync(user.Id);
-                UsersDataGrid.ItemsSource = _handler.Get();
-            }
+            await ViewHelper.DeleteRow(_handler, UsersDataGrid);
         }
 
         private void EditUser_Click(object sender, RoutedEventArgs e) {
-            User user = (User)UsersDataGrid.SelectedItem;
-            UserFormView userWindow = new UserFormView(user.Id);
-            userWindow.ShowDialog();
-            UsersDataGrid.ItemsSource = _handler.Get();
+            EditRow();
         }
 
         private void FilterBox_TextChanged(object sender, TextChangedEventArgs e) {
@@ -75,6 +68,11 @@ namespace Desktop.UI.Business.Users {
         }
 
         private void UsersDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
+            EditRow();
+        }
+
+
+        private void EditRow() {
             User user = (User)UsersDataGrid.SelectedItem;
             UserFormView userWindow = new UserFormView(user.Id);
             userWindow.ShowDialog();

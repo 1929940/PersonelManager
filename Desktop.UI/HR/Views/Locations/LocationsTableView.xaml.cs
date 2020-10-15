@@ -1,4 +1,6 @@
-﻿using CommunicationLibrary.HR.Requests;
+﻿using CommunicationLibrary.HR.Models;
+using CommunicationLibrary.HR.Requests;
+using Desktop.UI.Core.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +28,7 @@ namespace Desktop.UI.HR.Views.Locations {
             _handler = new LocationRequestHandler();
             InitializeComponent();
             DataGrid.ItemsSource = _handler.Get();
-            //CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
+            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
         private void AddButton_Click(object sender, RoutedEventArgs e) {
 
@@ -36,12 +38,28 @@ namespace Desktop.UI.HR.Views.Locations {
 
         }
 
-        private void DeleteButton_Click(object sender, RoutedEventArgs e) {
+        private async void DeleteButton_Click(object sender, RoutedEventArgs e) {
+            await ViewHelper.DeleteRow(_handler, DataGrid);
+        }
 
+        private bool Filter(object item) {
+            string input = FilterBox.Text;
+            Location location = item as Location;
+
+            if (string.IsNullOrEmpty(input))
+                return true;
+
+            return location.Name.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0
+                || location.Country.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0
+                || location.Region.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0
+                || location.City.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0
+                || location.Name.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0
+                || location.Street.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0
+                || location.Number.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
         private void FilterBox_TextChanged(object sender, TextChangedEventArgs e) {
-
+            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
 
         private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
