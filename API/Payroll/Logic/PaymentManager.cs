@@ -1,4 +1,5 @@
 ﻿using API.Core.Logic;
+using API.HR.Logic;
 using API.Payroll.Models;
 
 namespace API.Payroll.Logic {
@@ -7,6 +8,7 @@ namespace API.Payroll.Logic {
         public static PaymentDTO CreateDTO(Payment payment) {
             PaymentDTO dto = new PaymentDTO() {
                 Contract = ContractManager.CreateSimplifiedDTO(payment.Contract),
+                Employee = EmployeeManager.CreateSimplifiedDTO(payment.Contract),
                 Id = payment.Id,
                 GrossAmount = payment.GrossAmount,
                 NetAmount = payment.NetAmount,

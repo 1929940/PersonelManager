@@ -1,5 +1,6 @@
 ﻿using API.Core.Logic;
 using API.HR.Models;
+using API.Payroll.Models;
 using System.Linq;
 
 namespace API.HR.Logic {
@@ -9,6 +10,13 @@ namespace API.HR.Logic {
             FirstName = employee.FirstName,
             LastName = employee.History.Last().LastName,
             Profession = employee.History.Last().Profession
+        };
+
+        public static EmployeeSimplifiedDTO CreateSimplifiedDTO(Contract contract) => new EmployeeSimplifiedDTO() {
+            Id = contract.Employee.Id,
+            FirstName = contract.Employee.FirstName,
+            LastName = contract.Employee.History.Last().LastName,
+            Profession = contract.Employee.History.Last().Profession
         };
 
         public static EmployeeDTO CreateDTO(Employee employee) {

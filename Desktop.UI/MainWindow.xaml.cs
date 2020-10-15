@@ -42,7 +42,6 @@ namespace PersonalManagerDesktop {
             //TODO: REMOVE
             ServerConnectionData.Url = @"https://localhost:44345";
 
-
             //Settings.Token = new UserRequestHandler().Login("1929940@gmail.com", "1111").Token;
 
             //ADMIN

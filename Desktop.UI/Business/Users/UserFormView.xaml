@@ -120,7 +120,8 @@
         <TextBlock Grid.Row="5" Grid.Column="0" Text="Aktywny"/>
         <CheckBox Grid.Row="5" Grid.Column="1" Name="IsActiveCheckBox" IsChecked="{Binding IsActive}"/>
         <TextBlock Grid.Row="5" Grid.Column="2" Text="Rola"/>
-        <ComboBox Grid.Row="5" Grid.Column="3" Name="RoleComboBox" SelectionChanged="RoleComboBox_SelectionChanged"/>
+        <ComboBox Grid.Row="5" Grid.Column="3" Name="RoleComboBox" SelectionChanged="RoleComboBox_SelectionChanged"
+                  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"/>
 
         <Separator Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4"
                    Background="Black"/>
