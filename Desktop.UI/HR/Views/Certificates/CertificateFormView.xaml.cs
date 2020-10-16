@@ -15,32 +15,32 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Desktop.UI.HR.Views.MedicalCheckups {
+namespace Desktop.UI.HR.Views.Certificates {
     /// <summary>
-    /// Interaction logic for MedicalCheckupFormView.xaml
+    /// Interaction logic for CertificateFormView.xaml
     /// </summary>
-    public partial class MedicalCheckupFormView : Window {
+    public partial class CertificateFormView : Window {
         public PersonelDocument Document { get; set; }
-        private readonly MedicalCheckupRequestHandler _handler;
+        private readonly CertificateRequestHandler _handler;
 
-        public MedicalCheckupFormView() {
-            _handler = new MedicalCheckupRequestHandler();
+        public CertificateFormView() {
+            _handler = new CertificateRequestHandler();
             Document = new PersonelDocument();
             this.DataContext = Document;
             InitializeComponent();
-            HeaderText.Text = "Dodaj Badanie Lekarskie";
+            HeaderText.Text = "Dodaj Certyfikat";
             AddButton.Visibility = Visibility.Visible;
             BindCombobox();
             HideMetaDataRows();
         }
 
-        public MedicalCheckupFormView(int id) {
+        public CertificateFormView(int id) {
 
-            _handler = new MedicalCheckupRequestHandler();
+            _handler = new CertificateRequestHandler();
             Document = _handler.Get(id);
             this.DataContext = Document;
             InitializeComponent();
-            HeaderText.Text = "Modyfikuj Badanie Lekarskie";
+            HeaderText.Text = "Modyfikuj Certyfikat";
             UpdateButton.Visibility = Visibility.Visible;
             BindCombobox();
             if (!AuthorizationHelper.Authorize(Enums.Roles.Kierownik))

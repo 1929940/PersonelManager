@@ -33,11 +33,13 @@ namespace Desktop.UI.HR.Views.Certificates {
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e) {
-
+            CertificateFormView form = new CertificateFormView();
+            form.ShowDialog();
+            DataGrid.ItemsSource = _handler.Get();
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e) {
-
+            EditRow();
         }
 
         private async void DeleteButton_Click(object sender, RoutedEventArgs e) {
@@ -53,7 +55,14 @@ namespace Desktop.UI.HR.Views.Certificates {
         }
 
         private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
+            EditRow();
+        }
 
+        private void EditRow() {
+            PersonelDocument doc = (PersonelDocument)DataGrid.SelectedItem;
+            CertificateFormView form = new CertificateFormView(doc.Id);
+            form.ShowDialog();
+            DataGrid.ItemsSource = _handler.Get();
         }
     }
 }

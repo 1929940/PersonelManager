@@ -32,15 +32,19 @@ namespace Desktop.UI.HR.Views.Employees {
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e) {
-
+            EmployeeFormView form = new EmployeeFormView();
+            form.ShowDialog();
+            DataGrid.ItemsSource = _handler.Get();
+            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e) {
-
+            EditRow();
         }
 
         private async void DeleteButton_Click(object sender, RoutedEventArgs e) {
             await ViewHelper.DeleteRow(_handler, DataGrid);
+            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
 
         private bool Filter(object item) {
@@ -61,12 +65,19 @@ namespace Desktop.UI.HR.Views.Employees {
 
 
         private void FilterBox_TextChanged(object sender, TextChangedEventArgs e) {
-            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
+            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
         }
 
 
         private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
-
+            EditRow();
+        }
+        private void EditRow() {
+            Employee employee = (Employee)DataGrid.SelectedItem;
+            EmployeeFormView form = new EmployeeFormView(employee.Id);
+            form.ShowDialog();
+            DataGrid.ItemsSource = _handler.Get();
+            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
     }
 }

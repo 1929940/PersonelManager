@@ -1,4 +1,5 @@
-﻿using CommunicationLibrary.HR.Requests;
+﻿using CommunicationLibrary.HR.Models;
+using CommunicationLibrary.HR.Requests;
 using Desktop.UI.Core.Helpers;
 using System;
 using System.Collections.Generic;
@@ -31,11 +32,13 @@ namespace Desktop.UI.HR.Views.SafetyTrainings {
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e) {
-
+            SafetyTrainingFormView form = new SafetyTrainingFormView();
+            form.ShowDialog();
+            DataGrid.ItemsSource = _handler.Get();
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e) {
-
+            EditRow();
         }
 
         private async void DeleteButton_Click(object sender, RoutedEventArgs e) {
@@ -52,7 +55,14 @@ namespace Desktop.UI.HR.Views.SafetyTrainings {
     
 
         private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
+            EditRow();
+        }
 
+        private void EditRow() {
+            PersonelDocument doc = (PersonelDocument)DataGrid.SelectedItem;
+            SafetyTrainingFormView form = new SafetyTrainingFormView(doc.Id);
+            form.ShowDialog();
+            DataGrid.ItemsSource = _handler.Get();
         }
     }
 }

@@ -153,11 +153,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="HR\Views\Certificates\CertificateFormView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="HR\Views\Certificates\CertificatesTableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="HR\Views\Employees\EmployeeFormView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="HR\Views\Employees\EmployeesTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HR\Views\Employees\Tabs\GeneralTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -182,6 +194,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="HR\Views\MedicalCheckups\MedicalCheckupsTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HR\Views\SafetyTrainings\SafetyTrainingFormView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -237,11 +253,20 @@
     <Compile Include="Core\Helpers\ExceptionHelper.cs" />
     <Compile Include="Core\Helpers\ServerConnectionHelper.cs" />
     <Compile Include="Core\Validators\IsPercentValue.cs" />
+    <Compile Include="HR\Views\Certificates\CertificateFormView.xaml.cs">
+      <DependentUpon>CertificateFormView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HR\Views\Certificates\CertificatesTableView.xaml.cs">
       <DependentUpon>CertificatesTableView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HR\Views\Employees\EmployeeFormView.xaml.cs">
+      <DependentUpon>EmployeeFormView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HR\Views\Employees\EmployeesTableView.xaml.cs">
       <DependentUpon>EmployeesTableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HR\Views\Employees\Tabs\GeneralTab.xaml.cs">
+      <DependentUpon>GeneralTab.xaml</DependentUpon>
     </Compile>
     <Compile Include="HR\Views\Foremen\ForemanFormView.xaml.cs">
       <DependentUpon>ForemanFormView.xaml</DependentUpon>
@@ -260,6 +285,9 @@
     </Compile>
     <Compile Include="HR\Views\MedicalCheckups\MedicalCheckupsTableView.xaml.cs">
       <DependentUpon>MedicalCheckupsTableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HR\Views\SafetyTrainings\SafetyTrainingFormView.xaml.cs">
+      <DependentUpon>SafetyTrainingFormView.xaml</DependentUpon>
     </Compile>
     <Compile Include="HR\Views\SafetyTrainings\SafetyTrainingsTableView.xaml.cs">
       <DependentUpon>SafetyTrainingsTableView.xaml</DependentUpon>
