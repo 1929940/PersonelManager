@@ -10,12 +10,13 @@ namespace Desktop.UI.Core.Helpers {
             if (depObj != null) {
                 for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++) {
                     DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
-                    if (child != null && child is T) {
+                    if (child != null && child is T && child.DependencyObjectType.Name == typeof(T).Name) {
                         yield return (T)child;
                     }
 
                     foreach (T childOfChild in FindVisualChildren<T>(child)) {
-                        yield return childOfChild;
+                        if (childOfChild.DependencyObjectType.Name == typeof(T).Name)
+                            yield return childOfChild;
                     }
                 }
             }
