@@ -161,11 +161,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="HR\Views\Foremen\ForemanFormView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="HR\Views\Foremen\ForemenTableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="HR\Views\Locations\LocationsFormView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="HR\Views\Locations\LocationsTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HR\Views\MedicalCheckups\MedicalCheckupFormView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -231,11 +243,20 @@
     <Compile Include="HR\Views\Employees\EmployeesTableView.xaml.cs">
       <DependentUpon>EmployeesTableView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HR\Views\Foremen\ForemanFormView.xaml.cs">
+      <DependentUpon>ForemanFormView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HR\Views\Foremen\ForemenTableView.xaml.cs">
       <DependentUpon>ForemenTableView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HR\Views\Locations\LocationsFormView.xaml.cs">
+      <DependentUpon>LocationsFormView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HR\Views\Locations\LocationsTableView.xaml.cs">
       <DependentUpon>LocationsTableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HR\Views\MedicalCheckups\MedicalCheckupFormView.xaml.cs">
+      <DependentUpon>MedicalCheckupFormView.xaml</DependentUpon>
     </Compile>
     <Compile Include="HR\Views\MedicalCheckups\MedicalCheckupsTableView.xaml.cs">
       <DependentUpon>MedicalCheckupsTableView.xaml</DependentUpon>

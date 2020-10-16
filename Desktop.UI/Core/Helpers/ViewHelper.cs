@@ -1,6 +1,7 @@
 ﻿using CommunicationLibrary.Core.Logic;
 using CommunicationLibrary.Core.Models;
 using CommunicationLibrary.HR.Models;
+using CommunicationLibrary.HR.Requests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,5 +33,15 @@ namespace Desktop.UI.Core.Helpers {
                 dataGrid.ItemsSource = handler.Get();
             }
         }
+
+        public static int GetIndexOfComboboxValue(int id, ComboBox comboBox) {
+            if (id == 0)
+                return 0;
+            return comboBox.ItemsSource.OfType<KeyValuePair<int, string>>()
+                    .Select(x => x.Key).ToList().IndexOf(id);
+        }
+
+        public static Dictionary<int, string> GetEmployeesDictionary() =>
+            new EmployeeRequestHandler().Get().ToDictionary(x => x.Id, x => string.Format($"{x.LastName} {x.FirstName}"));
     }
 }

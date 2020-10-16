@@ -31,10 +31,7 @@ namespace Desktop.UI.Business.Users {
 
             _handler = new UserRequestHandler();
             User = new User() {
-                IsActive = true,
-                CreatedOn = DateTime.Now,
-                CreatedBy = "me"
-
+                IsActive = true
             };
             this.DataContext = User;
             InitializeComponent();
@@ -78,7 +75,14 @@ namespace Desktop.UI.Business.Users {
 
         private void InitRoleComboBox() {
             RoleComboBox.ItemsSource = GetRoles();
-            RoleComboBox.SelectedIndex = 0;
+            AssignValueToCombobox();
+        }
+
+        private void AssignValueToCombobox() {
+            int selectedIndex = 0;
+            if (!string.IsNullOrEmpty(User.Role))
+                selectedIndex = RoleComboBox.ItemsSource.OfType<string>().ToList().IndexOf(User.Role);
+            RoleComboBox.SelectedIndex = selectedIndex;
         }
 
         private void RoleComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {

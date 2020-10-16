@@ -31,11 +31,13 @@ namespace Desktop.UI.HR.Views.Foremen {
             CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
         private void AddButton_Click(object sender, RoutedEventArgs e) {
-
+            ForemanFormView form = new ForemanFormView();
+            form.ShowDialog();
+            DataGrid.ItemsSource = _handler.Get();
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e) {
-
+            EditRow();
         }
 
         private async void DeleteButton_Click(object sender, RoutedEventArgs e) {
@@ -62,7 +64,14 @@ namespace Desktop.UI.HR.Views.Foremen {
         }
 
         private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
+            EditRow();
+        }
 
+        private void EditRow() {
+            Foreman foreman = (Foreman)DataGrid.SelectedItem;
+            ForemanFormView form = new ForemanFormView(foreman.Id);
+            form.ShowDialog();
+            DataGrid.ItemsSource = _handler.Get();
         }
     }
 }

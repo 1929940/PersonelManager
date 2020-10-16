@@ -1,0 +1,181 @@
+﻿<Window x:Class="Desktop.UI.HR.Views.MedicalCheckups.MedicalCheckupFormView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Desktop.UI.HR.Views.MedicalCheckups"
+        mc:Ignorable="d"
+        FontFamily="Calibri" FontSize="14"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
+        xmlns:validators="clr-namespace:Desktop.UI.Core.Validators"
+        Title="Badania Lekarskie" Height="400" Width="440">
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Margin" Value="5,10"/>
+            <Setter Property="Width" Value="40"/>
+        </Style>
+
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Margin" Value="5,10"/>
+            <Setter Property="Width" Value="150"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+
+        <Style TargetType="iconPacks:PackIconMaterial">
+            <Setter Property="Margin" Value="0,0,3,0"/>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="5,10"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="CheckBox">
+            <Setter Property="Margin" Value="5,10"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="Border">
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="Padding" Value="0,0,0,10"/>
+        </Style>
+
+        <Style TargetType="DatePicker">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Margin" Value="0,-5,0,0"/>
+            <Setter Property="Width" Value="100"/>
+        </Style>
+        <Style TargetType="DatePickerTextBox">
+            <Setter Property="VerticalAlignment"  Value="Bottom"/>
+        </Style>
+
+
+
+
+        <ControlTemplate x:Key="ErrorTemplate">
+            <StackPanel Orientation="Vertical">
+                <Border BorderBrush="Red" BorderThickness="1">
+                    <AdornedElementPlaceholder/>
+                </Border>
+                <TextBlock Text="{Binding CurrentItem.ErrorContent}" Foreground="Red" FontSize="10" Padding="2,0,0,0"/>
+            </StackPanel>
+        </ControlTemplate>
+    </Window.Resources>
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" Name="CreatedRow"/>
+            <RowDefinition Height="Auto" Name="UpdatedRow"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0">
+            <TextBlock Text="TMP" Name="HeaderText" Width="Auto"
+                       FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
+        </Border>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <TextBlock Text="Pracownik" Width="70"/>
+            <ComboBox Name="EmployeeCombobox" Width="329"
+                      DisplayMemberPath="Value" SelectedValuePath="Key"
+                      SelectionChanged="EmployeeCombobox_SelectionChanged"/>
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <TextBlock Text="Tytuł"/>
+            <TextBox Name="TitleTextBox" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" Width="220">
+                <TextBox.Text>
+                        <Binding Path="Title" Mode="TwoWay" UpdateSourceTrigger="Default">
+                            <Binding.ValidationRules>
+                            <validators:IsNotEmptyValidator/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBlock Text="Numer"/>
+            <TextBox Name="CityTextBox" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" Width="80">
+                <TextBox.Text>
+                    <Binding Path="Number" Mode="TwoWay" UpdateSourceTrigger="Default">
+                        <Binding.ValidationRules>
+                            <validators:IsNotEmptyValidator/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </StackPanel>
+
+        <!--DATE PICKER-->
+        
+        <Border Grid.Row="3">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Ważne od" Width="70"/>
+                <DatePicker Name="ValidFromDatePicker" SelectedDate="{Binding ValidFrom}"/>
+                <TextBlock Text="Ważne do" Width="70" Margin="60,10,0,10"/>
+                <DatePicker Name="ValidToDatePicker" SelectedDate="{Binding ValidTo}"/>
+            </StackPanel>
+        </Border>
+
+        <StackPanel Grid.Row="4" Orientation="Horizontal">
+            <TextBlock Grid.Row="6" Grid.Column="0" Text="Stworzono" Width="90"/>
+            <TextBlock Grid.Row="6" Grid.Column="1" FontStyle="Oblique" Width="120"
+                 Text="{Binding CreatedOn, StringFormat=\{0:yyyy.MM.dd HH:mm:ss\}}"/>
+            <TextBlock Grid.Row="6" Grid.Column="2" Text="Przez" Width="40"/>
+            <TextBlock Grid.Row="6" Grid.Column="3" FontStyle="Oblique" Width="Auto"
+                 Text="{Binding CreatedBy}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="5" Orientation="Horizontal">
+            <TextBlock Text="Modyfikowano" Width="90"/>
+            <TextBlock FontStyle="Oblique" Width="120"
+                 Text="{Binding UpdatedOn, StringFormat=\{0:yyyy.MM.dd HH:mm:ss\}}"/>
+            <TextBlock Text="Przez" Width="40"/>
+            <TextBlock FontStyle="Oblique" Width="Auto"
+                 Text="{Binding UpdatedBy}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="6" Orientation="Horizontal"
+                    VerticalAlignment="Bottom" HorizontalAlignment="Right">
+
+            <Button Name="AddButton" Click="AddButton_Click" Visibility="Collapsed">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <iconPacks:PackIconMaterial Kind="PlusCircleOutline"/>
+                        <TextBlock Text="Dodaj" Margin="0"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+
+            <Button Name="UpdateButton" Click="UpdateButton_Click" Visibility="Collapsed">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <iconPacks:PackIconMaterial Kind="ContentSaveOutline"/>
+                        <TextBlock Text="Zapisz" Margin="0"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+
+            <Button Name="Close" Click="Close_Click">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <iconPacks:PackIconMaterial Kind="LocationExit"/>
+                        <TextBlock Text="Anuluj" Margin="0"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+        </StackPanel>
+
+    </Grid>
+</Window>

@@ -1,4 +1,5 @@
-﻿using CommunicationLibrary.HR.Requests;
+﻿using CommunicationLibrary.HR.Models;
+using CommunicationLibrary.HR.Requests;
 using Desktop.UI.Core.Helpers;
 using System;
 using System.Collections.Generic;
@@ -31,11 +32,13 @@ namespace Desktop.UI.HR.Views.MedicalCheckups {
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e) {
-
+            MedicalCheckupFormView form = new MedicalCheckupFormView();
+            form.ShowDialog();
+            DataGrid.ItemsSource = _handler.Get();
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e) {
-
+            EditRow();
         }
 
         private async void DeleteButton_Click(object sender, RoutedEventArgs e) {
@@ -51,7 +54,14 @@ namespace Desktop.UI.HR.Views.MedicalCheckups {
         }
 
         private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
+            EditRow();
+        }
 
+        private void EditRow() {
+            PersonelDocument doc = (PersonelDocument)DataGrid.SelectedItem;
+            MedicalCheckupFormView form = new MedicalCheckupFormView(doc.Id);
+            form.ShowDialog();
+            DataGrid.ItemsSource = _handler.Get();
         }
     }
 }

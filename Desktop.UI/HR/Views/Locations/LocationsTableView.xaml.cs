@@ -31,11 +31,13 @@ namespace Desktop.UI.HR.Views.Locations {
             CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
         private void AddButton_Click(object sender, RoutedEventArgs e) {
-
+            LocationsFormView form = new LocationsFormView();
+            form.ShowDialog();
+            DataGrid.ItemsSource = _handler.Get();
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e) {
-
+            EditRow();
         }
 
         private async void DeleteButton_Click(object sender, RoutedEventArgs e) {
@@ -63,7 +65,14 @@ namespace Desktop.UI.HR.Views.Locations {
         }
 
         private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
+            EditRow();
+        }
 
+        private void EditRow() {
+            Location location = (Location)DataGrid.SelectedItem;
+            LocationsFormView form = new LocationsFormView(location.Id);
+            form.ShowDialog();
+            DataGrid.ItemsSource = _handler.Get();
         }
     }
 }
