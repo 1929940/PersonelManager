@@ -85,21 +85,25 @@ namespace CommunicationLibrary.Test.HR {
             Assert.NotEmpty(employeeHistory);
         }
 
-        [Fact]
-        public void DoesEmployeeTakeDataFromLastEmployeeHistory_ShouldPass() {
-            var employeeHistory = _employeesRequestHandler.GetEmployeeHistory(1);
-            var employee = _employeesRequestHandler.Get(1);
+        //TODO: POINTLESS?
 
-            Assert.True(IsEmployeeHistoryEqualToEmployee(employeeHistory.Last(), employee));
-        }
+        //[Fact]
+        //public void DoesEmployeeTakeDataFromLastEmployeeHistory_ShouldPass() {
+        //    var employeeHistory = _employeesRequestHandler.GetEmployeeHistory(1);
+        //    var employee = _employeesRequestHandler.Get(1);
 
-        [Fact]
-        public async Task DoesEmployeeTakeDataFromLastEmployeeHistoryAsync_ShouldPass() {
-            var employeeHistory = await _employeesRequestHandler.GetEmployeeHistoryAsync(1);
-            var employee = await _employeesRequestHandler.GetAsync(1);
+        //    Assert.True(IsEmployeeHistoryEqualToEmployee(employeeHistory.Last(), employee));
+        //}
 
-            Assert.True(IsEmployeeHistoryEqualToEmployee(employeeHistory.Last(), employee));
-        }
+        //[Fact]
+        //public async Task DoesEmployeeTakeDataFromLastEmployeeHistoryAsync_ShouldPass() {
+        //    var employeeHistory = await _employeesRequestHandler.GetEmployeeHistoryAsync(1);
+        //    var employee = await _employeesRequestHandler.GetAsync(1);
+
+        //    Assert.True(IsEmployeeHistoryEqualToEmployee(employeeHistory.Last(), employee));
+        //}
+
+        //TODO: POINTLESS?
 
         [Fact]
         public void ArchiveEmployee_ShouldPass() {

@@ -62,15 +62,23 @@ namespace Desktop.UI.HR.Views.Employees {
             }
         }
 
-        private void AddButton_Click(object sender, RoutedEventArgs e) {
-
+        private async void AddButton_Click(object sender, RoutedEventArgs e) {
+            if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
+                await _handler.CreateAsync(Employee);
+                this.Close();
+            }
         }
 
-        private void UpdateButton_Click(object sender, RoutedEventArgs e) {
-
+        private async void UpdateButton_Click(object sender, RoutedEventArgs e) {
+            if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
+                await _handler.CreateAsync(Employee);
+                this.Close();
+            }
         }
+
         private void Close_Click(object sender, RoutedEventArgs e) {
-
+            if (DialogHelper.Close())
+                this.Close();
         }
     }
 }

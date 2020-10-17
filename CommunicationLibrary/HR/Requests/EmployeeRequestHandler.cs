@@ -12,8 +12,8 @@ namespace CommunicationLibrary.HR.Requests {
             _controllerName = "Employees";
         }
 
-        public IEnumerable<EmployeeHistory> GetEmployeeHistory(int id) {
-            List<EmployeeHistory> output = new List<EmployeeHistory>();
+        public IEnumerable<Employee> GetEmployeeHistory(int id) {
+            List<Employee> output = new List<Employee>();
             using (var httpClient = new HttpClient()) {
                 SetToken(httpClient);
 
@@ -21,14 +21,14 @@ namespace CommunicationLibrary.HR.Requests {
 
                 using (var response = httpClient.GetAsync(requestUri).Result) {
                     string apiResponse = response.Content.ReadAsStringAsync().Result;
-                    output = JsonConvert.DeserializeObject<List<EmployeeHistory>>(apiResponse);
+                    output = JsonConvert.DeserializeObject<List<Employee>>(apiResponse);
                 }
             }
             return output;
         }
 
-        public async Task<IEnumerable<EmployeeHistory>> GetEmployeeHistoryAsync(int id) {
-            List<EmployeeHistory> output = new List<EmployeeHistory>();
+        public async Task<IEnumerable<Employee>> GetEmployeeHistoryAsync(int id) {
+            List<Employee> output = new List<Employee>();
             using (var httpClient = new HttpClient()) {
                 SetToken(httpClient);
 
@@ -36,7 +36,7 @@ namespace CommunicationLibrary.HR.Requests {
 
                 using (var response = await httpClient.GetAsync(requestUri)) {
                     string apiResponse = await response.Content.ReadAsStringAsync();
-                    output = JsonConvert.DeserializeObject<List<EmployeeHistory>>(apiResponse);
+                    output = JsonConvert.DeserializeObject<List<Employee>>(apiResponse);
                 }
             }
             return output;

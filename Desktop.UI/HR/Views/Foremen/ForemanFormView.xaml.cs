@@ -61,7 +61,6 @@ namespace Desktop.UI.HR.Views.Foremen {
             }
         }
 
-
         private void Close_Click(object sender, RoutedEventArgs e) {
             if (DialogHelper.Close())
                 this.Close();

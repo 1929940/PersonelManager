@@ -98,15 +98,10 @@
 
         <TextBlock Grid.Row="0" Grid.Column="0" Name="HistoryTextBlock"
                 Text="Stan na dzień:" Visibility="Hidden"/>
-        <ComboBox Grid.Row="0" Grid.Column="1" Name="HistoryComboBox" Visibility="Hidden" 
-                  DisplayMemberPath="Value" SelectedValuePath="Key"
+        <ComboBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
+                  Name="HistoryComboBox" Visibility="Hidden" 
                   SelectionChanged="HistoryComboBox_SelectionChanged"
-                  Loaded="HistoryComboBox_Loaded">
-            <ComboBoxItem Tag="Hello">Hello</ComboBoxItem>
-            <ComboBoxItem Tag="Hello">Two</ComboBoxItem>
-            <ComboBoxItem Tag="Hello"/>
-
-        </ComboBox>
+                  DisplayMemberPath="CreatedOn" ItemStringFormat="{}{0:yyyy.MM.dd HH:mm:ss}"/>
 
         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="6" HorizontalAlignment="Right">
             <TextBlock Grid.Row="2" Grid.Column="4" Text="Archiwum"/>

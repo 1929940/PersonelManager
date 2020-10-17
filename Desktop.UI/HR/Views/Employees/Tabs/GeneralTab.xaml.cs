@@ -1,4 +1,5 @@
 ﻿using CommunicationLibrary.HR.Models;
+using CommunicationLibrary.HR.Requests;
 using Desktop.UI.Core.Helpers;
 using System;
 using System.Collections.Generic;
@@ -34,22 +35,17 @@ namespace Desktop.UI.HR.Views.Employees.Tabs {
             this.DataContext = employee;
 
             if (historyView)
-                EnableHistoryView();
+                ShowHistoryControls();
 
             if (!EditMode || !AuthorizationHelper.Authorize(Enums.Roles.Kierownik))
                 HideMetaDataRows();
 
-
             BindComboboxes();
-
-
         }
 
-        private void EnableHistoryView() {
+        private void ShowHistoryControls() {
             HistoryComboBox.Visibility = Visibility.Visible;
             HistoryTextBlock.Visibility = Visibility.Visible;
-            HistoryEmployee = new Employee();
-            this.DataContext = HistoryEmployee;
         }
 
         private void HideMetaDataRows() {
@@ -68,6 +64,11 @@ namespace Desktop.UI.HR.Views.Employees.Tabs {
             LocationCombobox.SelectedIndex = ViewHelper.GetIndexOfComboboxValue(Employee.LocationId ?? 0, LocationCombobox);
 
             BindForemanComboboxes((int)LocationCombobox.SelectedValue);
+
+            if (IsHistoryView) {
+                HistoryComboBox.ItemsSource = new EmployeeRequestHandler().GetEmployeeHistory(Employee.Id);
+                HistoryComboBox.SelectedIndex = 0;
+            }
         }
 
         private void BindForemanComboboxes(int locationId) {
@@ -89,12 +90,10 @@ namespace Desktop.UI.HR.Views.Employees.Tabs {
         }
 
         private void HistoryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-
-        }
-
-        private void HistoryComboBox_Loaded(object sender, RoutedEventArgs e) {
-
-            HistoryComboBox.ItemsSource = null;
+            if (IsHistoryView) {
+                HistoryEmployee = (Employee)HistoryComboBox.SelectedValue;
+                this.DataContext = HistoryEmployee;
+            }
         }
     }
 }

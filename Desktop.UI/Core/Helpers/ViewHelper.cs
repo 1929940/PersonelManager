@@ -58,9 +58,15 @@ namespace Desktop.UI.Core.Helpers {
             return output;
         }
 
-        public static Dictionary<int, string> GetEmployeeHistory(int employeeId) {
-            var foremen = new EmployeeRequestHandler().GetEmployeeHistory(employeeId);
-            Dictionary<int, string> output = foremen.ToDictionary(x => x.Id, x => string.Format($"{x.LastName}"));
+        //public static Dictionary<int, string> GetEmployeeHistory(int employeeId) {
+        //    var history = new EmployeeRequestHandler().GetEmployeeHistory(employeeId);
+        //    Dictionary<int, string> output = history.ToDictionary(x => x.Id, x => string.Format($"{x.CreatedOn.ToString("yyyy-MM-dd")}"));
+        //    return output;
+        //}
+
+        public static List <string> GetEmployeeHistory(int employeeId) {
+            var history = new EmployeeRequestHandler().GetEmployeeHistory(employeeId);
+            List<string> output = history.Select(x => string.Format($"{x.CreatedOn.ToString("yyyy-MM-dd")}")).ToList();
             return output;
         }
     }

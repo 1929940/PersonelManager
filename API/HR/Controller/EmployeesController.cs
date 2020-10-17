@@ -39,10 +39,11 @@ namespace API.HR.Controller {
         }
 
         [HttpGet("GetEmployeeHistory/{id}")]
-        public async Task<ActionResult<EmployeeHistory>> GetEmployeeHistory(int id) {
+        public async Task<ActionResult<EmployeeDTO>> GetEmployeeHistory(int id) {
+            var employee = await _context.Employees.FindAsync(id);
             var histories = await _context.EmployeesHistory.Where(x => x.EmployeeId == id).ToListAsync();
 
-            return Ok(histories);
+            return Ok(histories.Select(x => EmployeeManager.CreateHistoryDTO(employee, x)));
         }
 
 
@@ -116,6 +117,8 @@ namespace API.HR.Controller {
 
             return employee;
         }
+
+        //TODO: POINTLESS
 
         [HttpPut("ArchiveEmployee/{id}")]
         public async Task<ActionResult> PatchIsArchived(int id, [FromBody]bool isArchived) {

@@ -20,35 +20,47 @@ namespace API.HR.Logic {
         };
 
         public static EmployeeDTO CreateDTO(Employee employee) {
-            EmployeeHistory current = employee.History.Last();
+            return CreateDTO(employee, employee.History.Last());
+        }
 
-            var dto = new EmployeeDTO() {
+        public static EmployeeDTO CreateDTO(Employee employee, EmployeeHistory history) {
+            var dto = CreateBaseDTO(employee, history);
+
+            CopyTags(employee, ref dto);
+            return dto;
+        }
+
+        public static EmployeeDTO CreateHistoryDTO(Employee employee, EmployeeHistory history) {
+            var dto = CreateBaseDTO(employee, history);
+
+            CopyTags(history, ref dto);
+            return dto;
+        }
+
+        private static EmployeeDTO CreateBaseDTO(Employee employee, EmployeeHistory history) =>
+            new EmployeeDTO() {
                 FirstName = employee.FirstName,
-                LastName = current.LastName,
+                LastName = history.LastName,
                 DateOfBirth = employee.DateOfBirth,
                 Nationality = employee.Nationality,
                 FatherName = employee.FatherName,
                 MotherName = employee.MotherName,
                 IsArchived = employee.IsArchived,
                 Pesel = employee.Pesel,
-                PhoneNo = current.PhoneNo,
-                Profession = current.Profession,
-                Country = current.Country,
-                Region = current.Region,
-                City = current.City,
-                Zip = current.Zip,
-                Street = current.Street,
-                Number = current.Number,
-                ForemanId = current.ForemanId,
+                PhoneNo = history.PhoneNo,
+                Profession = history.Profession,
+                Country = history.Country,
+                Region = history.Region,
+                City = history.City,
+                Zip = history.Zip,
+                Street = history.Street,
+                Number = history.Number,
+                ForemanId = history.ForemanId,
                 ForemanFullName = string.Format(
-                    $"{current.Foreman?.FirstName} {current.Foreman?.LastName}"),
-                LocationId = current.LocationId,
-                LocationName = current.Location?.Name
+                    $"{history.Foreman?.FirstName} {history.Foreman?.LastName}"),
+                LocationId = history.LocationId,
+                LocationName = history.Location?.Name
             };
-
-            CopyTags(employee, ref dto);
-            return dto;
-        }
 
         public static void UpdateWithDTO(EmployeeDTO dto, ref Employee employee) {
             employee.FirstName = dto.FirstName;
