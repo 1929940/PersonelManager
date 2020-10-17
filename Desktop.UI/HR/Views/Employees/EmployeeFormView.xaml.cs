@@ -1,5 +1,6 @@
 ﻿using CommunicationLibrary.HR.Models;
 using CommunicationLibrary.HR.Requests;
+using Desktop.UI.Core.Helpers;
 using Desktop.UI.HR.Views.Employees.Tabs;
 using Desktop.UI.HR.Views.MedicalCheckups;
 using System;
@@ -22,6 +23,7 @@ namespace Desktop.UI.HR.Views.Employees {
     /// </summary>
     public partial class EmployeeFormView : Window {
         public Employee Employee { get; set; }
+        public bool EditMode { get; set; }
         private readonly EmployeeRequestHandler _handler;
 
         public EmployeeFormView() {
@@ -29,37 +31,35 @@ namespace Desktop.UI.HR.Views.Employees {
             Employee = new Employee();
             InitializeComponent();
             GeneralTab.IsSelected = true;
+            AddButton.Visibility = Visibility.Visible;
+            HistoryDataTab.Visibility = Visibility.Collapsed;
         }
 
         public EmployeeFormView(int id) {
             _handler = new EmployeeRequestHandler();
             Employee = _handler.Get(id);
+            EditMode = true;
             InitializeComponent();
             GeneralTab.IsSelected = true;
+            UpdateButton.Visibility = Visibility.Visible;
         }
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             TabControl tabControl = sender as TabControl;
             switch ((tabControl.SelectedItem as TabItem).Name) {
                 case "GeneralTab":
-                    TabFrame.Navigate(new GeneralTab(Employee));
+                    TabFrame.Navigate(new GeneralTab(Employee, EditMode));
                     break;
                 case "AbsencesTab":
                 case "MedicalCheckupTab":
-                    TabFrame.Navigate(new MedicalCheckupFormView(Employee.Id));
-                    break;
                 case "SecurityTrainingTab":
                 case "CertificationTab":
                 case "HistoryDataTab":
-                    TabFrame.Navigate(new GeneralTab(Employee, true));
+                    TabFrame.Navigate(new GeneralTab(Employee, true, true));
                     break;
                 default:
                     break;
             }
-
-
-            Console.WriteLine("hehe");
-
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e) {

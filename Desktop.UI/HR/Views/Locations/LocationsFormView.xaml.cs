@@ -46,14 +46,14 @@ namespace Desktop.UI.HR.Views.Locations {
                 HideMetaDataRows();
         }
         private async void AddButton_Click(object sender, RoutedEventArgs e) {
-            if (ValidationHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
+            if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
                 await _handler.CreateAsync(Location);
                 this.Close();
             }
         }
 
         private async void UpdateButton_Click(object sender, RoutedEventArgs e) {
-            if (ValidationHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
+            if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
                 await _handler.UpdateAsync(Location.Id, Location);
                 this.Close();
             }

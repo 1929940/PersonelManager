@@ -48,14 +48,14 @@ namespace Desktop.UI.HR.Views.Foremen {
                 HideMetaDataRows();
         }
         private async void AddButton_Click(object sender, RoutedEventArgs e) {
-            if (ValidationHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
+            if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
                 await _handler.CreateAsync(Foreman);
                 this.Close();
             }
         }
 
         private async void UpdateButton_Click(object sender, RoutedEventArgs e) {
-            if (ValidationHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
+            if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
                 await _handler.UpdateAsync(Foreman.Id, Foreman);
                 this.Close();
             }
@@ -73,14 +73,8 @@ namespace Desktop.UI.HR.Views.Foremen {
             this.Height -= 50;
         }
 
-        private Dictionary<int, string> GetLocations() {
-            var locations = new LocationRequestHandler().Get();
-            Dictionary<int, string> output = locations.ToDictionary(x => x.Id, x => x.Name);
-            return output;
-        }
-
         private void BindCombobox() {
-            LocationComboBox.ItemsSource = GetLocations();
+            LocationComboBox.ItemsSource = ViewHelper.GetLocations();
             LocationComboBox.SelectedIndex = ViewHelper.GetIndexOfComboboxValue(Foreman.LocationId, LocationComboBox);
         }
 

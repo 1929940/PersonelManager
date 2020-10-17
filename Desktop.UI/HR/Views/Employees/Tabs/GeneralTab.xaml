@@ -8,8 +8,9 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       FontSize="14" FontFamily="Calibri"
-      Background="AliceBlue"
-      Title="GeneralTab">
+      Title="GeneralTab"
+      Name="GeneralTabPage"
+      Loaded="GeneralTabPage_Loaded">
     <Page.Resources>
         <Style TargetType="{x:Type TextBlock}">
             <Setter Property="Margin" Value="5,10"/>
@@ -17,7 +18,7 @@
 
         <Style TargetType="{x:Type TextBox}">
             <Setter Property="Margin" Value="5,10"/>
-            <Setter Property="Height" Value="20"/>
+            <Setter Property="Height" Value="22"/>
         </Style>
 
         <Style TargetType="Button">
@@ -32,7 +33,7 @@
 
         <Style TargetType="ComboBox">
             <Setter Property="Margin" Value="5,10"/>
-            <Setter Property="Height" Value="20"/>
+            <Setter Property="Height" Value="22"/>
         </Style>
 
         <Style TargetType="CheckBox">
@@ -89,15 +90,23 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" Name="CreatedRow"/>
+            <RowDefinition Height="Auto" Name="UpdatedRow"/>
         </Grid.RowDefinitions>
 
         <!--History Header-->
 
         <TextBlock Grid.Row="0" Grid.Column="0" Name="HistoryTextBlock"
                 Text="Stan na dzień:" Visibility="Hidden"/>
-        <ComboBox Grid.Row="0" Grid.Column="1" Name="HistoryComboBox" Visibility="Hidden"/>
+        <ComboBox Grid.Row="0" Grid.Column="1" Name="HistoryComboBox" Visibility="Hidden" 
+                  DisplayMemberPath="Value" SelectedValuePath="Key"
+                  SelectionChanged="HistoryComboBox_SelectionChanged"
+                  Loaded="HistoryComboBox_Loaded">
+            <ComboBoxItem Tag="Hello">Hello</ComboBoxItem>
+            <ComboBoxItem Tag="Hello">Two</ComboBoxItem>
+            <ComboBoxItem Tag="Hello"/>
+
+        </ComboBox>
 
         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="6" HorizontalAlignment="Right">
             <TextBlock Grid.Row="2" Grid.Column="4" Text="Archiwum"/>
@@ -113,7 +122,7 @@
 
         <TextBlock Grid.Row="2" Grid.Column="0" 
                    Text="Imię"/>
-        <TextBox Grid.Row="2" Grid.Column="1"
+        <TextBox Grid.Row="2" Grid.Column="1" Name="FirstNameTextBox"
                  Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
             <TextBox.Text>
                 <Binding Path="FirstName" Mode="TwoWay">
@@ -212,13 +221,17 @@
         <TextBlock Grid.Row="6" Grid.Column="2" 
                    Text="Lokalizacja"/>
 
-        <ComboBox Grid.Row="6" Grid.Column="3" Name="LocationCombobox"/>
+        <ComboBox Grid.Row="6" Grid.Column="3" Name="LocationCombobox"
+                  DisplayMemberPath="Value" SelectedValuePath="Key"
+                  SelectionChanged="LocationCombobox_SelectionChanged"/>
 
 
         <TextBlock Grid.Row="6" Grid.Column="4" 
                    Text="Mistrz"/>
 
-        <ComboBox Grid.Row="6" Grid.Column="5" Name="ForemanCombobox"/>
+        <ComboBox Grid.Row="6" Grid.Column="5" Name="ForemanCombobox"
+                  DisplayMemberPath="Value" SelectedValuePath="Key"
+                  SelectionChanged="ForemanCombobox_SelectionChanged"/>
 
         <Border Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="6"/>
 

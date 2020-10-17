@@ -53,14 +53,14 @@ namespace Desktop.UI.Business.Users {
         }
 
         private async void AddUser_Click(object sender, RoutedEventArgs e) {
-            if (ValidationHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
+            if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
                 await _handler.CreateAsync(User);
                 this.Close();
             }
         }
 
         private async void UpdateUser_Click(object sender, RoutedEventArgs e) {
-            if (ValidationHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
+            if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
                 await _handler.UpdateAsync(User.Id, User);
                 this.Close();
             }

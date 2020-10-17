@@ -238,7 +238,7 @@
     <Compile Include="Core\Helpers\DialogHelper.cs" />
     <Compile Include="Core\Helpers\Enums.cs" />
     <Compile Include="Core\Helpers\ViewHelper.cs" />
-    <Compile Include="Core\Helpers\ValidationHelper.cs" />
+    <Compile Include="Core\Helpers\ControlsHelper.cs" />
     <Compile Include="Core\Resources\Messages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

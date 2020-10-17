@@ -35,7 +35,7 @@ namespace Desktop.UI.Business.Configuration {
         }
 
         private async void SaveForm_Click(object sender, RoutedEventArgs e) {
-            if (ValidationHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
+            if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
                 await _handler.UpdateAsync(PageData.Id, PageData);
             }
         }

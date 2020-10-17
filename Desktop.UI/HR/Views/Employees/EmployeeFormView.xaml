@@ -8,7 +8,7 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         Background="White"
         FontSize="14" FontFamily="Calibri"
-        Title="EmployeeFormView" Height="450" Width="800">
+        Title="EmployeeFormView" Height="520" Width="800">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Height" Value="25"/>
@@ -51,7 +51,7 @@
                 </Grid.RowDefinitions>
                 <!--Frame-->
 
-                <Frame Grid.Row="0" Name="TabFrame" NavigationUIVisibility="Hidden" Background="White" BorderBrush="Black" BorderThickness="1"/>
+                <Frame Grid.Row="0" Name="TabFrame" NavigationUIVisibility="Hidden" Background="White" BorderBrush="Black" BorderThickness="1" Margin="0,0,5,0"/>
 
                 <!--Bottom Panel Buttons-->
 

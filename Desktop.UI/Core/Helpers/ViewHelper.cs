@@ -43,5 +43,25 @@ namespace Desktop.UI.Core.Helpers {
 
         public static Dictionary<int, string> GetEmployeesDictionary() =>
             new EmployeeRequestHandler().Get().ToDictionary(x => x.Id, x => string.Format($"{x.LastName} {x.FirstName}"));
+
+        public static Dictionary<int, string> GetLocations() {
+            var locations = new LocationRequestHandler().Get();
+            Dictionary<int, string> output = locations.ToDictionary(x => x.Id, x => x.Name);
+            return output;
+        }
+
+        public static Dictionary<int, string> GetForemen(int locationId = 0) {
+            var foremen = new ForemanRequestHandler().Get();
+            if (locationId != 0)
+                foremen = foremen.Where(x => x.LocationId == locationId);
+            Dictionary<int, string> output = foremen.ToDictionary(x => x.Id, x => string.Format($"{x.LastName} {x.FirstName}"));
+            return output;
+        }
+
+        public static Dictionary<int, string> GetEmployeeHistory(int employeeId) {
+            var foremen = new EmployeeRequestHandler().GetEmployeeHistory(employeeId);
+            Dictionary<int, string> output = foremen.ToDictionary(x => x.Id, x => string.Format($"{x.LastName}"));
+            return output;
+        }
     }
 }
