@@ -42,7 +42,7 @@ namespace Desktop.UI.HR.Views.MedicalCheckups {
         }
 
         private async void DeleteButton_Click(object sender, RoutedEventArgs e) {
-            await ViewHelper.DeleteRow(_handler, DataGrid);
+            await ViewHelper.DeleteRowAsync(_handler, DataGrid);
         }
 
         private void FilterBox_TextChanged(object sender, TextChangedEventArgs e) {

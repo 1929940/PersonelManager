@@ -51,6 +51,8 @@ namespace Desktop.UI.HR.Views.Employees {
                     TabFrame.Navigate(new GeneralTab(Employee, EditMode));
                     break;
                 case "AbsencesTab":
+                    TabFrame.Navigate(new AbsencesTab(Employee, EditMode));
+                    break;
                 case "MedicalCheckupTab":
                 case "SecurityTrainingTab":
                 case "CertificationTab":
@@ -71,7 +73,7 @@ namespace Desktop.UI.HR.Views.Employees {
 
         private async void UpdateButton_Click(object sender, RoutedEventArgs e) {
             if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
-                await _handler.CreateAsync(Employee);
+                await _handler.UpdateAsync(Employee.Id, Employee);
                 this.Close();
             }
         }

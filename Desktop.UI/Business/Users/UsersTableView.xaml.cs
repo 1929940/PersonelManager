@@ -43,7 +43,7 @@ namespace Desktop.UI.Business.Users {
         }
 
         private async void DeleteUser_Click(object sender, RoutedEventArgs e) {
-            await ViewHelper.DeleteRow(_handler, UsersDataGrid);
+            await ViewHelper.DeleteRowAsync(_handler, UsersDataGrid);
         }
 
         private void EditUser_Click(object sender, RoutedEventArgs e) {

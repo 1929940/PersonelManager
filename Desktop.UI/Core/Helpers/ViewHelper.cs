@@ -26,7 +26,7 @@ namespace Desktop.UI.Core.Helpers {
                 || doc.IssuedBy.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
-        public static async Task DeleteRow<T>(BaseRequestHandler<T> handler, DataGrid dataGrid) where T : BaseEntity {
+        public static async Task DeleteRowAsync<T>(BaseRequestHandler<T> handler, DataGrid dataGrid) where T : BaseEntity {
             if (DialogHelper.Delete()) {
                 T selectedItem = (T)dataGrid.SelectedItem;
                 await handler.DeleteAsync(selectedItem.Id);

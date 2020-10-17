@@ -153,6 +153,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="HR\Views\Absences\AbsenceFormView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="HR\Views\Certificates\CertificateFormView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -166,6 +170,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="HR\Views\Employees\EmployeesTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HR\Views\Employees\Tabs\AbsencesTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -253,6 +261,9 @@
     <Compile Include="Core\Helpers\ExceptionHelper.cs" />
     <Compile Include="Core\Helpers\ServerConnectionHelper.cs" />
     <Compile Include="Core\Validators\IsPercentValue.cs" />
+    <Compile Include="HR\Views\Absences\AbsenceFormView.xaml.cs">
+      <DependentUpon>AbsenceFormView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HR\Views\Certificates\CertificateFormView.xaml.cs">
       <DependentUpon>CertificateFormView.xaml</DependentUpon>
     </Compile>
@@ -264,6 +275,9 @@
     </Compile>
     <Compile Include="HR\Views\Employees\EmployeesTableView.xaml.cs">
       <DependentUpon>EmployeesTableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HR\Views\Employees\Tabs\AbsencesTab.xaml.cs">
+      <DependentUpon>AbsencesTab.xaml</DependentUpon>
     </Compile>
     <Compile Include="HR\Views\Employees\Tabs\GeneralTab.xaml.cs">
       <DependentUpon>GeneralTab.xaml</DependentUpon>

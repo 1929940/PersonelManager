@@ -41,7 +41,7 @@ namespace Desktop.UI.HR.Views.Foremen {
         }
 
         private async void DeleteButton_Click(object sender, RoutedEventArgs e) {
-            await ViewHelper.DeleteRow(_handler, DataGrid);
+            await ViewHelper.DeleteRowAsync(_handler, DataGrid);
         }
 
         private bool Filter(object item) {

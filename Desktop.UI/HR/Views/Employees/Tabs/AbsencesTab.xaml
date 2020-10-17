@@ -1,0 +1,119 @@
+﻿<Page x:Class="Desktop.UI.HR.Views.Employees.Tabs.AbsencesTab"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Desktop.UI.HR.Views.Employees.Tabs"
+      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
+      xmlns:validators="clr-namespace:Desktop.UI.Core.Validators"
+      mc:Ignorable="d" Background="WhiteSmoke"
+      d:DesignHeight="450" d:DesignWidth="800"
+      FontSize="14" FontFamily="Calibri"
+      Title="AbsencesTab">
+    <Page.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="iconPacks:PackIconMaterial">
+            <Setter Property="Margin" Value="0,0,3,0"/>
+        </Style>
+        <Style TargetType="{x:Type DataGridCell}">
+            <Setter Property="Height" Value="25"/>
+
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="BorderBrush" Value="Gainsboro"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Background" Value="Gainsboro"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type TextBlock}" x:Key="DataGridCell_TextStyle">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="3,0,0,0"/>
+        </Style>
+        <Style TargetType="{x:Type CheckBox}" x:Key="DataGridCell_CheckBoxStyle">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="Border">
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        </Style>
+    </Page.Resources>
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0">
+
+            <StackPanel
+            Orientation="Horizontal">
+                <Button Name="AddButton" Click="AddButton_Click">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks:PackIconMaterial Kind="PlusBoxOutline"/>
+                            <TextBlock Text="Dodaj"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+
+                <Button Name="EditButton" Click="EditButton_Click">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks:PackIconMaterial Kind="CalendarEdit"/>
+                            <TextBlock Text="Edytuj"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+
+                <Button Name="DeleteButton" Click="DeleteButton_Click">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks:PackIconMaterial Kind="MinusBoxOutline"/>
+                            <TextBlock Text="Usuń"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+
+            </StackPanel>
+        </Border>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
+            <TextBlock Text="Szukaj" FontSize="16" VerticalAlignment="Center"/>
+            <TextBox x:Name="FilterBox" Width="150" Height="25" Margin="5" 
+                             TextChanged="FilterBox_TextChanged" VerticalContentAlignment="Center"/>
+        </StackPanel>
+
+        <DataGrid Grid.Row="1" Name="DataGrid" IsReadOnly="True"
+                  BorderThickness="0" GridLinesVisibility="Horizontal" RowHeight="25"
+                  SelectionMode="Single" SelectionUnit="FullRow"
+                  MouseDoubleClick="DataGrid_MouseDoubleClick"
+                  AutoGenerateColumns="False" HeadersVisibility="Column">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Typ" Width="*"
+                                    Binding="{Binding Type}" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                <DataGridTextColumn Header="Od" Width="100"
+                                    Binding="{Binding From, StringFormat=\{0:yyyy.MM.dd\}}" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                <DataGridTextColumn Header="Do" Width="100"
+                                    Binding="{Binding To, StringFormat=\{0:yyyy.MM.dd\}}" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                <DataGridTextColumn Header="Dodatkowy Komentarz" Width="2*"
+                                    Binding="{Binding Comment}" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+            </DataGrid.Columns>
+
+        </DataGrid>
+        
+
+
+    </Grid>
+</Page>

@@ -1,0 +1,159 @@
+﻿<Window x:Class="Desktop.UI.HR.Views.Absences.AbsenceFormView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Desktop.UI.HR.Views.Absences"
+        mc:Ignorable="d"
+        FontFamily="Calibri" FontSize="14"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
+        Title="Badanie Lekarskie" Height="400" Width="400">
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Margin" Value="5,10"/>
+            <Setter Property="Width" Value="Auto"/>
+        </Style>
+
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Margin" Value="5,10"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+
+        <Style TargetType="iconPacks:PackIconMaterial">
+            <Setter Property="Margin" Value="0,0,3,0"/>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="5,10"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="Border">
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        </Style>
+
+        <Style TargetType="DatePicker">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Margin" Value="0,-5,0,0"/>
+            <Setter Property="Width" Value="120"/>
+        </Style>
+        <Style TargetType="DatePickerTextBox">
+            <Setter Property="VerticalAlignment"  Value="Bottom"/>
+        </Style>
+
+
+
+
+        <ControlTemplate x:Key="ErrorTemplate">
+            <StackPanel Orientation="Vertical">
+                <Border BorderBrush="Red" BorderThickness="1">
+                    <AdornedElementPlaceholder/>
+                </Border>
+                <TextBlock Text="{Binding CurrentItem.ErrorContent}" Foreground="Red" FontSize="10" Padding="2,0,0,0"/>
+            </StackPanel>
+        </ControlTemplate>
+    </Window.Resources>
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" Name="CreatedRow"/>
+            <RowDefinition Height="Auto" Name="UpdatedRow"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0">
+            <TextBlock Text="TMP" Name="HeaderText" Width="Auto"
+                       FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
+        </Border>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <TextBlock Text="Typ nieobecności" Width="100"/>
+            <ComboBox Name="TypeCombobox" Width="262"
+                      SelectionChanged="TypeCombobox_SelectionChanged"/>
+
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2">
+            <TextBlock Text="Od" Width="30"/>
+            <DatePicker Name="ValidFromDatePicker" SelectedDate="{Binding From}"/>
+            <TextBlock Text="Do" Width="30" Margin="70,10,0,10"/>
+            <DatePicker Name="ValidToDatePicker" SelectedDate="{Binding To}"/>
+        </StackPanel>
+
+
+
+        <Border Grid.Row="3">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Komentarz"/>
+                <TextBox Name="CommentTextbox" Text="{Binding Comment, Mode=OneWay}"
+                     Width="300" Height="80" 
+                     TextWrapping="Wrap" AcceptsReturn="True"
+                     MaxLines="2" MaxLength="180"/>
+            </StackPanel>
+        </Border>
+
+
+        <StackPanel Grid.Row="4" Orientation="Horizontal">
+            <TextBlock Text="Stworzono" Width="90"/>
+            <TextBlock FontStyle="Oblique" Width="120"
+                 Text="{Binding CreatedOn, StringFormat=\{0:yyyy.MM.dd HH:mm:ss\}}"/>
+            <TextBlock Text="Przez" Width="40"/>
+            <TextBlock FontStyle="Oblique" Width="Auto"
+                 Text="{Binding CreatedBy}"/>
+        </StackPanel>
+
+
+        <StackPanel Grid.Row="5" Orientation="Horizontal">
+            <TextBlock Text="Modyfikowano" Width="90"/>
+            <TextBlock FontStyle="Oblique" Width="120"
+                 Text="{Binding UpdatedOn, StringFormat=\{0:yyyy.MM.dd HH:mm:ss\}}"/>
+            <TextBlock Text="Przez" Width="40"/>
+            <TextBlock FontStyle="Oblique" Width="Auto"
+                 Text="{Binding UpdatedBy}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="6" Orientation="Horizontal"
+                    VerticalAlignment="Bottom" HorizontalAlignment="Right">
+
+            <Button Name="AddButton" Click="AddButton_Click" Visibility="Collapsed">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <iconPacks:PackIconMaterial Kind="PlusCircleOutline"/>
+                        <TextBlock Text="Dodaj" Margin="0"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+
+            <Button Name="UpdateButton" Click="UpdateButton_Click" Visibility="Collapsed">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <iconPacks:PackIconMaterial Kind="ContentSaveOutline"/>
+                        <TextBlock Text="Zapisz" Margin="0"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+
+            <Button Name="Close" Click="Close_Click">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <iconPacks:PackIconMaterial Kind="LocationExit"/>
+                        <TextBlock Text="Anuluj" Margin="0"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+        </StackPanel>
+
+    </Grid>
+</Window>

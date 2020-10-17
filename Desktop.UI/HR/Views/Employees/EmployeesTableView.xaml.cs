@@ -43,7 +43,7 @@ namespace Desktop.UI.HR.Views.Employees {
         }
 
         private async void DeleteButton_Click(object sender, RoutedEventArgs e) {
-            await ViewHelper.DeleteRow(_handler, DataGrid);
+            await ViewHelper.DeleteRowAsync(_handler, DataGrid);
             CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
 
