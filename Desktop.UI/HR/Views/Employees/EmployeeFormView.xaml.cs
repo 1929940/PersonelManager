@@ -1,4 +1,5 @@
-﻿using CommunicationLibrary.HR.Models;
+﻿using CommunicationLibrary.Core.Logic;
+using CommunicationLibrary.HR.Models;
 using CommunicationLibrary.HR.Requests;
 using Desktop.UI.Core.Helpers;
 using Desktop.UI.HR.Views.Employees.Tabs;
@@ -26,13 +27,21 @@ namespace Desktop.UI.HR.Views.Employees {
         public bool EditMode { get; set; }
         private readonly EmployeeRequestHandler _handler;
 
+        public static Bufor<Leave> LeaveBufor { get; set; }
+        public static Bufor<PersonelDocument> MedicalCheckupBufor { get; set; }
+        public static Bufor<PersonelDocument> SafetyTrainingBufor { get; set; }
+        public static Bufor<PersonelDocument> CertificateBufor { get; set; }
+
+
         public EmployeeFormView() {
             _handler = new EmployeeRequestHandler();
             Employee = new Employee();
             InitializeComponent();
-            GeneralTab.IsSelected = true;
-            AddButton.Visibility = Visibility.Visible;
-            HistoryDataTab.Visibility = Visibility.Collapsed;
+            InitializeUI();
+            //GeneralTab.IsSelected = true;
+            //AddButton.Visibility = Visibility.Visible;
+            //HistoryDataTab.Visibility = Visibility.Collapsed;
+            InitializeBufors();
         }
 
         public EmployeeFormView(int id) {
@@ -40,9 +49,37 @@ namespace Desktop.UI.HR.Views.Employees {
             Employee = _handler.Get(id);
             EditMode = true;
             InitializeComponent();
-            GeneralTab.IsSelected = true;
-            UpdateButton.Visibility = Visibility.Visible;
+            InitializeUI();
+            //GeneralTab.IsSelected = true;
+            //UpdateButton.Visibility = Visibility.Visible;
+            InitializeBufors();
         }
+
+        private void InitializeUI() {
+            GeneralTab.IsSelected = true;
+            if (EditMode) {
+                UpdateButton.Visibility = Visibility.Visible;
+            } else {
+                AddButton.Visibility = Visibility.Visible;
+                HistoryDataTab.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void InitializeBufors() {
+            LeaveBufor = new Bufor<Leave>(new LeaveRequestHandler());
+            MedicalCheckupBufor = new Bufor<PersonelDocument>(new MedicalCheckupRequestHandler());
+            SafetyTrainingBufor = new Bufor<PersonelDocument>(new SafetyTrainingRequestHandler());
+            CertificateBufor = new Bufor<PersonelDocument>(new CertificateRequestHandler());
+        }
+
+        private async Task FlushBuforsAsync(int id) {
+            await LeaveBufor.FlushAsync(id);
+            await MedicalCheckupBufor.FlushAsync(id);
+            await SafetyTrainingBufor.FlushAsync(id);
+            await CertificateBufor.FlushAsync(id);
+        }
+
+
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             TabControl tabControl = sender as TabControl;
@@ -65,17 +102,21 @@ namespace Desktop.UI.HR.Views.Employees {
         }
 
         private async void AddButton_Click(object sender, RoutedEventArgs e) {
-            if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
-                await _handler.CreateAsync(Employee);
+            //if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
+                Employee created = await _handler.CreateAsync(Employee);
+                await FlushBuforsAsync(created.Id);
+
+
                 this.Close();
-            }
+            //}
         }
 
         private async void UpdateButton_Click(object sender, RoutedEventArgs e) {
-            if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
+            //if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
                 await _handler.UpdateAsync(Employee.Id, Employee);
+                await FlushBuforsAsync(Employee.Id);
                 this.Close();
-            }
+            //}
         }
 
         private void Close_Click(object sender, RoutedEventArgs e) {

@@ -105,7 +105,7 @@
 
         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="6" HorizontalAlignment="Right">
             <TextBlock Grid.Row="2" Grid.Column="4" Text="Archiwum"/>
-            <CheckBox Grid.Row="2" Grid.Column="5" Name="IsArchiveCheckBox" IsChecked="{Binding IsArchive}" Margin="0,-4,5,0"/>
+            <CheckBox Grid.Row="2" Grid.Column="5" Name="IsArchiveCheckBox" IsChecked="{Binding IsArchived}" Margin="0,-4,5,0"/>
         </StackPanel>
 
 

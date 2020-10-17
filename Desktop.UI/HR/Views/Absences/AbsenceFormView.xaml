@@ -97,7 +97,7 @@
         <Border Grid.Row="3">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Komentarz"/>
-                <TextBox Name="CommentTextbox" Text="{Binding Comment, Mode=OneWay}"
+                <TextBox Name="CommentTextbox" Text="{Binding Comment, Mode=TwoWay}"
                      Width="300" Height="80" 
                      TextWrapping="Wrap" AcceptsReturn="True"
                      MaxLines="2" MaxLength="180"/>

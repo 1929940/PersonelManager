@@ -26,7 +26,7 @@ namespace Desktop.UI.HR.Views.Absences {
         public Leave Leave { get; set; }
 
 
-        public AbsenceFormView() {
+        public AbsenceFormView(out Leave leave) {
             Leave = new Leave() {
                 From = DateTime.Today
             };
@@ -39,6 +39,8 @@ namespace Desktop.UI.HR.Views.Absences {
             AddButton.Visibility = Visibility.Visible;
 
             HideMetaDataRows();
+
+            leave = Leave;
         }
 
         public AbsenceFormView(Leave leave) {
@@ -82,6 +84,7 @@ namespace Desktop.UI.HR.Views.Absences {
         //TODO: These dialogboxes need to signal that data will be saved on saving employee
         private void UpdateButton_Click(object sender, RoutedEventArgs e) {
             if (DialogHelper.Save()) {
+                EmployeeFormView.LeaveBufor.Modify(Leave);
                 //await _handler.UpdateAsync(User.Id, User);
                 this.Close();
             }
@@ -89,6 +92,7 @@ namespace Desktop.UI.HR.Views.Absences {
 
         private void AddButton_Click(object sender, RoutedEventArgs e) {
             if (DialogHelper.Save()) {
+                EmployeeFormView.LeaveBufor.Add(Leave);
                 //await _handler.CreateAsync(User);
                 this.Close();
             }

@@ -26,8 +26,7 @@ namespace Desktop.UI.HR.Views.Employees.Tabs {
 
         public Employee Employee { get; set; }
         public bool EditMode { get; set; }
-        public List<Leave> OriginalData { get; set; }
-        public List<Leave> CurrentData { get; set; }
+        public List<Leave> DisplayData { get; set; }
 
         //TODO: STORE DATA THAT WAS CHANGED AND STATUS ADDED MODIFIED DELETED
         //COMMUNICATION LIBRARY
@@ -44,11 +43,11 @@ namespace Desktop.UI.HR.Views.Employees.Tabs {
             Employee = employee;
             EditMode = editMode;
             _handler = new LeaveRequestHandler();
-            OriginalData = CurrentData = _handler.GetEmployeeLeaves(Employee.Id).ToList();
+            DisplayData = _handler.GetEmployeeLeaves(Employee.Id).ToList();
 
             InitializeComponent();
 
-            DataGrid.ItemsSource = CurrentData;
+            DataGrid.ItemsSource = DisplayData;
             CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
 
@@ -69,8 +68,11 @@ namespace Desktop.UI.HR.Views.Employees.Tabs {
 
 
         private void AddButton_Click(object sender, RoutedEventArgs e) {
-            AbsenceFormView form = new AbsenceFormView();
+            AbsenceFormView form = new AbsenceFormView(out Leave leave);
             form.ShowDialog();
+            DisplayData.Add(leave);
+            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
+
             //DataGrid.ItemsSource = _handler.Get();
             //CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
@@ -78,11 +80,14 @@ namespace Desktop.UI.HR.Views.Employees.Tabs {
         private void EditButton_Click(object sender, RoutedEventArgs e) {
             EditRow();
         }
-        private async void DeleteButton_Click(object sender, RoutedEventArgs e) {
-            if (EditMode) {
-                await ViewHelper.DeleteRowAsync(_handler, DataGrid);
-                CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
-            }
+        private void DeleteButton_Click(object sender, RoutedEventArgs e) {
+            //if (EditMode) {
+            //    await ViewHelper.DeleteRowAsync(_handler, DataGrid);
+            //    CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
+            //}
+            Leave leave = (Leave)DataGrid.SelectedItem;
+            EmployeeFormView.LeaveBufor.Remove(leave);
+            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
         }
 
 
@@ -94,6 +99,9 @@ namespace Desktop.UI.HR.Views.Employees.Tabs {
             Leave leave = (Leave)DataGrid.SelectedItem;
             AbsenceFormView form = new AbsenceFormView(leave);
             form.ShowDialog();
+            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
+
+            //it updates awesome
             //This needs to update but with current data
             //DataGrid.ItemsSource = _handler.Get();
             //CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
