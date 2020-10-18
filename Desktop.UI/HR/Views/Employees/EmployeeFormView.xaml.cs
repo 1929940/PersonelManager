@@ -38,9 +38,6 @@ namespace Desktop.UI.HR.Views.Employees {
             Employee = new Employee();
             InitializeComponent();
             InitializeUI();
-            //GeneralTab.IsSelected = true;
-            //AddButton.Visibility = Visibility.Visible;
-            //HistoryDataTab.Visibility = Visibility.Collapsed;
             InitializeBufors();
         }
 
@@ -50,8 +47,6 @@ namespace Desktop.UI.HR.Views.Employees {
             EditMode = true;
             InitializeComponent();
             InitializeUI();
-            //GeneralTab.IsSelected = true;
-            //UpdateButton.Visibility = Visibility.Visible;
             InitializeBufors();
         }
 
@@ -79,8 +74,6 @@ namespace Desktop.UI.HR.Views.Employees {
             await CertificateBufor.FlushAsync(id);
         }
 
-
-
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             TabControl tabControl = sender as TabControl;
             switch ((tabControl.SelectedItem as TabItem).Name) {
@@ -102,21 +95,19 @@ namespace Desktop.UI.HR.Views.Employees {
         }
 
         private async void AddButton_Click(object sender, RoutedEventArgs e) {
-            //if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
+            if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
                 Employee created = await _handler.CreateAsync(Employee);
                 await FlushBuforsAsync(created.Id);
-
-
                 this.Close();
-            //}
+            }
         }
 
         private async void UpdateButton_Click(object sender, RoutedEventArgs e) {
-            //if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
+            if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
                 await _handler.UpdateAsync(Employee.Id, Employee);
                 await FlushBuforsAsync(Employee.Id);
                 this.Close();
-            //}
+            }
         }
 
         private void Close_Click(object sender, RoutedEventArgs e) {

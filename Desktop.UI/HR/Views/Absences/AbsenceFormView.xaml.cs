@@ -25,7 +25,6 @@ namespace Desktop.UI.HR.Views.Absences {
         public string[] Types { get => Enum.GetNames(typeof(AbsenceTypes)); }
         public Leave Leave { get; set; }
 
-
         public AbsenceFormView(out Leave leave) {
             Leave = new Leave() {
                 From = DateTime.Today
@@ -70,7 +69,6 @@ namespace Desktop.UI.HR.Views.Absences {
         }
 
 
-
         private void TypeCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             Leave.Type = TypeCombobox.SelectedValue as string;
         }
@@ -85,7 +83,6 @@ namespace Desktop.UI.HR.Views.Absences {
         private void UpdateButton_Click(object sender, RoutedEventArgs e) {
             if (DialogHelper.Save()) {
                 EmployeeFormView.LeaveBufor.Modify(Leave);
-                //await _handler.UpdateAsync(User.Id, User);
                 this.Close();
             }
         }
@@ -93,7 +90,6 @@ namespace Desktop.UI.HR.Views.Absences {
         private void AddButton_Click(object sender, RoutedEventArgs e) {
             if (DialogHelper.Save()) {
                 EmployeeFormView.LeaveBufor.Add(Leave);
-                //await _handler.CreateAsync(User);
                 this.Close();
             }
         }

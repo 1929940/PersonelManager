@@ -44,7 +44,7 @@ namespace API.HR.Controller {
             var employee = await _context.Employees.FindAsync(id);
 
             if (employee == null) {
-                return NotFound();
+                return Ok(new List<LeaveDTO>());
             }
 
             return Ok(employee.Leaves.Select(x => LeaveManager.CreateDTO(x)));

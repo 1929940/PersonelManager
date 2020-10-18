@@ -18,26 +18,6 @@ namespace CommunicationLibrary.Core.Logic {
             BuforData = new List<BuforObject<T>>();
         }
 
-
-        //TODO: Go with base entity instead of T
-        //Convert base entity to whatever you're updating.
-        //Figure out which requesthandler to use
-
-        //I proly need employeeID - perhaps interface?
-
-
-        /* 1. Rename EmployeeDataBufor
-         * 2. Needs to be able store changes in personel docs and leaves
-         * 3. needs to be able to set employee id to them all
-         * 4. needs to be able to do update, modify, add rows
-         * 
-         * PROBLEMS:
-         * How to tell if its medical doc or bhp? Its personel document
-         * 
-         * 
-         * Just make this an abstract class and make bufor for leaves, and for documents
-         */
-
         public void Add(T value) {
             AddToBufor(Status.Added, value);
         }
@@ -83,15 +63,7 @@ namespace CommunicationLibrary.Core.Logic {
             BuforData.Clear();
         }
 
-        /*
-         * Mam dwie alternatywy - albo to jest personel doc albo leave
-         * Moze sprawdzic ktory, rzutowac na konkretny typ?
-         * I do tego typu przypisac?
-         */
-
-        /*
-         * Potrzebuje klase nadrzedna - EmployeeBufor, gdzie beda 4 buffory Leave, i 3 pers doc, na tym etapie dodaje handlera
-         */
+        public bool Contains(T value) => BuforData.Exists(x => x.Value == value);
 
         private void SetEmployeeId(T value, int id) {
             if (value is PersonelDocument doc) {
@@ -110,10 +82,8 @@ namespace CommunicationLibrary.Core.Logic {
         }
 
         public class BuforObject<T> where T : BaseEntity {
-
             public Status Status { get; set; }
             public T Value { get; set; }
         }
-
     }
 }

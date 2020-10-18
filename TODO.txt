@@ -18,10 +18,18 @@ Add Colours Blue-Grey?
 
 10. Foreman has MAIL while Users have EMAIL - need to unify this
 
-11. SAVING EMPLOYEE:
-	-CREATE EMPLOYEE RETURNS EMPLOYEE OBJ
-	-GET ID FROM IT AND ADD
-	-STORE IN MEMORY CURRENT OBJECTS - STORE ONLY IF CHANGED
+11. BUFOR - ADD and DELETE in the same session just adds. 
+	- Need to check if object is in bufor
+	- If so need to apply changes to it
+
+	-If added then deleted - remove from bufor all together
+	-If added then modified - change the added item
+
+	-basically need to detect and optimilize duplicates
+
+12. Dialogboxes - make em inform the user about changes being saved on saving employee?
+				Or just no msg box there...
+
 
 
 

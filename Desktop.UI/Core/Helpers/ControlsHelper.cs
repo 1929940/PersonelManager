@@ -61,7 +61,7 @@ namespace Desktop.UI.Core.Helpers {
             bool result = true;
 
             foreach (var textbox in textboxes) {
-                textbox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+                textbox.GetBindingExpression(TextBox.TextProperty)?.UpdateSource();
                 if (Validation.GetHasError(textbox))
                     result = false;
             }

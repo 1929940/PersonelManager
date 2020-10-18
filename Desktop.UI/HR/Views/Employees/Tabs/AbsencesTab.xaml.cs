@@ -28,22 +28,13 @@ namespace Desktop.UI.HR.Views.Employees.Tabs {
         public bool EditMode { get; set; }
         public List<Leave> DisplayData { get; set; }
 
-        //TODO: STORE DATA THAT WAS CHANGED AND STATUS ADDED MODIFIED DELETED
-        //COMMUNICATION LIBRARY
-
-        // OF T : WHERE T is BASE ENTITY
-        // T value ALLOWS TO ADD EVERYTHING
-        // METHODS ADDDATA/REMOVEDATA/MODIFYDATA
-        // EXECUTE or SYNC OR FLUSH!
-
-
         private readonly LeaveRequestHandler _handler;
 
         public AbsencesTab(Employee employee, bool editMode) {
             Employee = employee;
             EditMode = editMode;
             _handler = new LeaveRequestHandler();
-            DisplayData = _handler.GetEmployeeLeaves(Employee.Id).ToList();
+            DisplayData = _handler.GetEmployeeLeaves(Employee?.Id ?? 0).ToList();
 
             InitializeComponent();
 
@@ -70,24 +61,23 @@ namespace Desktop.UI.HR.Views.Employees.Tabs {
         private void AddButton_Click(object sender, RoutedEventArgs e) {
             AbsenceFormView form = new AbsenceFormView(out Leave leave);
             form.ShowDialog();
-            DisplayData.Add(leave);
-            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
+            if (EmployeeFormView.LeaveBufor.Contains(leave)) {
+                DisplayData.Add(leave);
+                CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
+            }
 
-            //DataGrid.ItemsSource = _handler.Get();
-            //CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e) {
             EditRow();
         }
         private void DeleteButton_Click(object sender, RoutedEventArgs e) {
-            //if (EditMode) {
-            //    await ViewHelper.DeleteRowAsync(_handler, DataGrid);
-            //    CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
-            //}
-            Leave leave = (Leave)DataGrid.SelectedItem;
-            EmployeeFormView.LeaveBufor.Remove(leave);
-            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
+            if (DialogHelper.Delete()) {
+                Leave leave = (Leave)DataGrid.SelectedItem;
+                EmployeeFormView.LeaveBufor.Remove(leave);
+                DisplayData.Remove(leave);
+                CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
+            }
         }
 
 
