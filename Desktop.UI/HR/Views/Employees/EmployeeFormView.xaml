@@ -58,16 +58,7 @@
                 <StackPanel Grid.Row="1" Orientation="Horizontal" Background="#FFF0F0F0"
                     VerticalAlignment="Bottom" HorizontalAlignment="Right">
 
-                    <Button Name="AddButton" Click="AddButton_Click" Visibility="Collapsed">
-                        <Button.Content>
-                            <StackPanel Orientation="Horizontal">
-                                <iconPacks:PackIconMaterial Kind="PlusCircleOutline"/>
-                                <TextBlock Text="Dodaj" Margin="0"/>
-                            </StackPanel>
-                        </Button.Content>
-                    </Button>
-
-                    <Button Name="UpdateButton" Click="UpdateButton_Click" Visibility="Collapsed">
+                    <Button Name="UpdateButton" Click="UpdateButton_Click" Visibility="Visible">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal">
                                 <iconPacks:PackIconMaterial Kind="ContentSaveOutline"/>

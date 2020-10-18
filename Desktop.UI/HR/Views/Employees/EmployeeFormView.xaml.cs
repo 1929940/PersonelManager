@@ -1,7 +1,7 @@
-﻿using CommunicationLibrary.Core.Logic;
-using CommunicationLibrary.HR.Models;
+﻿using CommunicationLibrary.HR.Models;
 using CommunicationLibrary.HR.Requests;
 using Desktop.UI.Core.Helpers;
+using Desktop.UI.HR.Helper;
 using Desktop.UI.HR.Views.Certificates;
 using Desktop.UI.HR.Views.Employees.Tabs;
 using Desktop.UI.HR.Views.MedicalCheckups;
@@ -25,66 +25,29 @@ namespace Desktop.UI.HR.Views.Employees {
         public Employee Employee { get; set; }
         public bool EditMode { get; set; }
         private readonly EmployeeRequestHandler _handler;
-
-        public static Bufor<Leave> LeaveBufor { get; set; }
-        public static Bufor<PersonelDocument> MedicalCheckupBufor { get; set; }
-        public static Bufor<PersonelDocument> SafetyTrainingBufor { get; set; }
-        public static Bufor<PersonelDocument> CertificateBufor { get; set; }
-
-        public List<Leave> LeavesStorage { get; set; }
-        public List<PersonelDocument> MedicalCheckupsStorage { get; set; }
-        public List<PersonelDocument> SafetyTrainingsStorage { get; set; }
-        public List<PersonelDocument> CertificatesStorage { get; set; }
-
+        public EmployeeBufor Bufor { get; set; }
 
         public EmployeeFormView() {
             _handler = new EmployeeRequestHandler();
             Employee = new Employee();
+            Bufor = new EmployeeBufor();
             InitializeComponent();
             InitializeUI();
-            InitializeBufors();
-            InitializeTabStorage();
         }
 
         public EmployeeFormView(int id) {
             _handler = new EmployeeRequestHandler();
             Employee = _handler.Get(id);
+            Bufor = new EmployeeBufor();
             EditMode = true;
             InitializeComponent();
             InitializeUI();
-            InitializeBufors();
-            InitializeTabStorage();
         }
 
         private void InitializeUI() {
             GeneralTab.IsSelected = true;
-            if (EditMode) {
-                UpdateButton.Visibility = Visibility.Visible;
-            } else {
-                AddButton.Visibility = Visibility.Visible;
+            if (!EditMode)
                 HistoryDataTab.Visibility = Visibility.Collapsed;
-            }
-        }
-
-        private void InitializeBufors() {
-            LeaveBufor = new Bufor<Leave>(new LeaveRequestHandler());
-            MedicalCheckupBufor = new Bufor<PersonelDocument>(new MedicalCheckupRequestHandler());
-            SafetyTrainingBufor = new Bufor<PersonelDocument>(new SafetyTrainingRequestHandler());
-            CertificateBufor = new Bufor<PersonelDocument>(new CertificateRequestHandler());
-        }
-
-        private void InitializeTabStorage() {
-            LeavesStorage = new List<Leave>();
-            MedicalCheckupsStorage = new List<PersonelDocument>();
-            SafetyTrainingsStorage = new List<PersonelDocument>();
-            CertificatesStorage = new List<PersonelDocument>();
-        }
-
-        private async Task FlushBuforsAsync(int id) {
-            await LeaveBufor.FlushAsync(id);
-            await MedicalCheckupBufor.FlushAsync(id);
-            await SafetyTrainingBufor.FlushAsync(id);
-            await CertificateBufor.FlushAsync(id);
         }
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e) {
@@ -94,16 +57,16 @@ namespace Desktop.UI.HR.Views.Employees {
                     TabFrame.Navigate(new GeneralTab(Employee, EditMode));
                     break;
                 case "AbsencesTab":
-                    TabFrame.Navigate(new AbsencesTab(Employee, LeavesStorage));
+                    TabFrame.Navigate(new AbsencesTab(Employee, Bufor.LeaveBufor));
                     break;
                 case "MedicalCheckupTab":
-                    TabFrame.Navigate(new MedicalCheckupsTableView(Employee, MedicalCheckupsStorage));
+                    TabFrame.Navigate(new MedicalCheckupsTableView(Employee, Bufor.MedicalCheckupBufor));
                     break;
                 case "SecurityTrainingTab":
-                    TabFrame.Navigate(new SafetyTrainingsTableView(Employee, SafetyTrainingsStorage));
+                    TabFrame.Navigate(new SafetyTrainingsTableView(Employee, Bufor.SafetyTrainingBufor));
                     break;
                 case "CertificationTab":
-                    TabFrame.Navigate(new CertificatesTableView(Employee, CertificatesStorage));
+                    TabFrame.Navigate(new CertificatesTableView(Employee, Bufor.CertificateBufor));
                     break;
                 case "HistoryDataTab":
                     TabFrame.Navigate(new GeneralTab(Employee, true, true));
@@ -113,18 +76,15 @@ namespace Desktop.UI.HR.Views.Employees {
             }
         }
 
-        private async void AddButton_Click(object sender, RoutedEventArgs e) {
-            if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
-                Employee created = await _handler.CreateAsync(Employee);
-                await FlushBuforsAsync(created.Id);
-                this.Close();
-            }
-        }
-
         private async void UpdateButton_Click(object sender, RoutedEventArgs e) {
             if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
-                await _handler.UpdateAsync(Employee.Id, Employee);
-                await FlushBuforsAsync(Employee.Id);
+                if (EditMode) {
+                    await _handler.UpdateAsync(Employee.Id, Employee);
+                    await Bufor.FlushBuforsAsync(Employee.Id);
+                } else {
+                    Employee created = await _handler.CreateAsync(Employee);
+                    await Bufor.FlushBuforsAsync(created.Id);
+                }
                 this.Close();
             }
         }

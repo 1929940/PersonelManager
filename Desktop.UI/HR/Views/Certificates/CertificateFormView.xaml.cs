@@ -1,5 +1,6 @@
 ﻿using CommunicationLibrary.HR.Models;
 using CommunicationLibrary.HR.Requests;
+using Desktop.UI.Core.Bufor;
 using Desktop.UI.Core.Helpers;
 using Desktop.UI.HR.Views.Employees;
 using System;
@@ -19,12 +20,14 @@ using System.Windows.Shapes;
 namespace Desktop.UI.HR.Views.Certificates {
     public partial class CertificateFormView : Window {
         public PersonelDocument Document { get; set; }
-        public bool UseBufor { get; set; }
+        public Bufor<PersonelDocument> Bufor { get; set; }
+        public bool UseBufor { get => Bufor != null; }
+
         private readonly CertificateRequestHandler _handler;
 
-        public CertificateFormView(out PersonelDocument doc, bool useBufor = false) {
+        public CertificateFormView(out PersonelDocument doc, Bufor<PersonelDocument> bufor = null) {
             _handler = new CertificateRequestHandler();
-            UseBufor = useBufor;
+            Bufor = bufor;
 
             InitializeComponent();
             InitializeAddForm();
@@ -34,9 +37,9 @@ namespace Desktop.UI.HR.Views.Certificates {
             doc = Document;
         }
 
-        public CertificateFormView(PersonelDocument doc, bool useBufor = false) {
-            UseBufor = useBufor;
+        public CertificateFormView(PersonelDocument doc, Bufor<PersonelDocument> bufor = null) {
             _handler = new CertificateRequestHandler();
+            Bufor = bufor;
 
             InitializeComponent();
             InitializeEditForm();
@@ -60,7 +63,7 @@ namespace Desktop.UI.HR.Views.Certificates {
         private async void AddButton_Click(object sender, RoutedEventArgs e) {
             if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
                 if (UseBufor)
-                    EmployeeFormView.CertificateBufor.Add(Document);
+                    Bufor.TransactionBufor.Add(Document);
                 else
                     await _handler.CreateAsync(Document);
                 this.Close();
@@ -68,10 +71,11 @@ namespace Desktop.UI.HR.Views.Certificates {
         }
 
         private async void UpdateButton_Click(object sender, RoutedEventArgs e) {
-            if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
+            if (ControlsHelper.AreTextboxesValid(this)) {
                 if (UseBufor)
-                    EmployeeFormView.CertificateBufor.Modify(Document);
+                    Bufor.TransactionBufor.Modify(Document);
                 else
+                    if (DialogHelper.Save())
                     await _handler.UpdateAsync(Document.Id, Document);
                 this.Close();
             }

@@ -1,6 +1,7 @@
 ﻿using CommunicationLibrary.Business.Models;
 using CommunicationLibrary.HR.Models;
 using CommunicationLibrary.HR.Requests;
+using Desktop.UI.Core.Bufor;
 using Desktop.UI.Core.Helpers;
 using Desktop.UI.HR.Views.Employees;
 using System;
@@ -26,35 +27,35 @@ namespace Desktop.UI.HR.Views.Certificates {
 
         private readonly CertificateRequestHandler _handler;
         public Employee Employee { get; set; }
-        public bool UseBufor { get; set; }
-        public List<PersonelDocument> DisplayData { get; set; }
+        public Bufor<PersonelDocument> Bufor { get; set; }
+        public bool UseBufor { get => Bufor != null; }
 
         public CertificatesTableView() {
             _handler = new CertificateRequestHandler();
 
             InitializeComponent();
-            DisplayData = _handler.Get().ToList();
-            DataGrid.ItemsSource = DisplayData;
+            DataGrid.ItemsSource = _handler.Get().ToList();
             CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
 
-        public CertificatesTableView(Employee employee, List<PersonelDocument> displayData) {
+        public CertificatesTableView(Employee employee, Bufor<PersonelDocument> bufor) {
             Employee = employee;
-            UseBufor = true;
+            Bufor = bufor;
+
             _handler = new CertificateRequestHandler();
             InitializeComponent();
             InitializeEmployeeView();
-            BindDisplayData(displayData);
+            BindDisplayData(bufor.DisplayBufor);
         }
 
 
         private void AddButton_Click(object sender, RoutedEventArgs e) {
-            CertificateFormView form = new CertificateFormView(out PersonelDocument doc, UseBufor);
+            CertificateFormView form = new CertificateFormView(out PersonelDocument doc, Bufor);
             form.ShowDialog();
 
             if (UseBufor) {
-                if (EmployeeFormView.CertificateBufor.Contains(doc)) {
-                    DisplayData.Add(doc);
+                if (Bufor.TransactionBufor.Contains(doc)) {
+                    Bufor.DisplayBufor.Add(doc);
                     CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
                 }
             } else {
@@ -67,17 +68,15 @@ namespace Desktop.UI.HR.Views.Certificates {
         }
 
         private async void DeleteButton_Click(object sender, RoutedEventArgs e) {
-            if (DialogHelper.Delete()) {
-                PersonelDocument doc = (PersonelDocument)DataGrid.SelectedItem;
-                if (UseBufor) {
-                    EmployeeFormView.CertificateBufor.Remove(doc);
-                    DisplayData.Remove(doc);
-                    CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
-                } else {
-                    await _handler.DeleteAsync(doc.Id);
-                    DataGrid.ItemsSource = _handler.Get();
-                    CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
-                }
+            PersonelDocument doc = (PersonelDocument)DataGrid.SelectedItem;
+            if (UseBufor) {
+                Bufor.TransactionBufor.Remove(doc);
+                Bufor.DisplayBufor.Remove(doc);
+                CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
+            } else if (DialogHelper.Delete()){
+                await _handler.DeleteAsync(doc.Id);
+                DataGrid.ItemsSource = _handler.Get();
+                CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
             }
         }
 
@@ -96,7 +95,7 @@ namespace Desktop.UI.HR.Views.Certificates {
 
         private void EditRow() {
             PersonelDocument doc = (PersonelDocument)DataGrid.SelectedItem;
-            CertificateFormView form = new CertificateFormView(doc, UseBufor);
+            CertificateFormView form = new CertificateFormView(doc, Bufor);
             form.ShowDialog();
 
             if (UseBufor) {
@@ -116,8 +115,7 @@ namespace Desktop.UI.HR.Views.Certificates {
         private void BindDisplayData(List<PersonelDocument> displayData) {
             if (displayData == null || !displayData.Any())
                 displayData.AddRange(_handler.GetEmployeeCertificates(Employee?.Id ?? 0));
-            DisplayData = displayData;
-            DataGrid.ItemsSource = DisplayData;
+            DataGrid.ItemsSource = displayData;
             CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
     }

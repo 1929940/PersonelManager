@@ -1,5 +1,6 @@
 ﻿using CommunicationLibrary.HR.Models;
 using CommunicationLibrary.HR.Requests;
+using Desktop.UI.Core.Bufor;
 using Desktop.UI.Core.Helpers;
 using Desktop.UI.HR.Views.Employees;
 using System;
@@ -22,37 +23,33 @@ namespace Desktop.UI.HR.Views.MedicalCheckups {
 
         private readonly MedicalCheckupRequestHandler _handler;
         public Employee Employee { get; set; }
-        public bool UseBufor { get; set; }
-        public List<PersonelDocument> DisplayData { get; set; }
 
+        public Bufor<PersonelDocument> Bufor { get; set; }
+        public bool UseBufor { get => Bufor != null; }
 
         public MedicalCheckupsTableView() {
             _handler = new MedicalCheckupRequestHandler();
             InitializeComponent();
-            DisplayData = _handler.Get().ToList();
-            DataGrid.ItemsSource = DisplayData;
+            DataGrid.ItemsSource = _handler.Get().ToList();
             CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
 
-        public MedicalCheckupsTableView(Employee employee, List<PersonelDocument> displayData) {
+        public MedicalCheckupsTableView(Employee employee, Bufor<PersonelDocument> bufor) {
             Employee = employee;
-            UseBufor = true;
+            Bufor = bufor;
             _handler = new MedicalCheckupRequestHandler();
             InitializeComponent();
             InitializeEmployeeView();
-            //DisplayData = _handler.GetEmployeeMedicalCheckups(employee.Id).ToList();
-            //DataGrid.ItemsSource = DisplayData;
-            BindDisplayData(displayData);
-            //CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
+            BindDisplayData(bufor.DisplayBufor);
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e) {
-            MedicalCheckupFormView form = new MedicalCheckupFormView(out PersonelDocument doc, UseBufor);
+            MedicalCheckupFormView form = new MedicalCheckupFormView(out PersonelDocument doc, Bufor);
             form.ShowDialog();
 
             if (UseBufor) {
-                if (EmployeeFormView.MedicalCheckupBufor.Contains(doc)) {
-                    DisplayData.Add(doc);
+                if (Bufor.TransactionBufor.Contains(doc)) {
+                    Bufor.DisplayBufor.Add(doc);
                     CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
                 }
             } else {
@@ -65,17 +62,15 @@ namespace Desktop.UI.HR.Views.MedicalCheckups {
         }
 
         private async void DeleteButton_Click(object sender, RoutedEventArgs e) {
-            if (DialogHelper.Delete()) {
-                PersonelDocument doc = (PersonelDocument)DataGrid.SelectedItem;
-                if (UseBufor) {
-                    EmployeeFormView.MedicalCheckupBufor.Remove(doc);
-                    DisplayData.Remove(doc);
-                    CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
-                } else {
-                    await _handler.DeleteAsync(doc.Id);
-                    DataGrid.ItemsSource = _handler.Get();
-                    CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
-                }
+            PersonelDocument doc = (PersonelDocument)DataGrid.SelectedItem;
+            if (UseBufor) {
+                Bufor.TransactionBufor.Remove(doc);
+                Bufor.DisplayBufor.Remove(doc);
+                CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
+            } else if (DialogHelper.Delete() ){
+                await _handler.DeleteAsync(doc.Id);
+                DataGrid.ItemsSource = _handler.Get();
+                CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
             }
         }
 
@@ -93,7 +88,7 @@ namespace Desktop.UI.HR.Views.MedicalCheckups {
 
         private void EditRow() {
             PersonelDocument doc = (PersonelDocument)DataGrid.SelectedItem;
-            MedicalCheckupFormView form = new MedicalCheckupFormView(doc, UseBufor);
+            MedicalCheckupFormView form = new MedicalCheckupFormView(doc, Bufor);
             form.ShowDialog();
 
             if (UseBufor) {
@@ -113,8 +108,7 @@ namespace Desktop.UI.HR.Views.MedicalCheckups {
         private void BindDisplayData(List<PersonelDocument> displayData) {
             if (displayData == null || !displayData.Any())
                 displayData.AddRange(_handler.GetEmployeeMedicalCheckups(Employee?.Id ?? 0));
-            DisplayData = displayData;
-            DataGrid.ItemsSource = DisplayData;
+            DataGrid.ItemsSource = displayData;
             CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
     }

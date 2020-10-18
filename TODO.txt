@@ -1,17 +1,5 @@
 //TODO LIST
 
-1. Requests should return data wrapped in a class
-
-	ResponseWrapper<T>
-
-	string StatusCode
-	string Message
-	T Payload
-
-
-Perhaps add some logo
-Add Colours Blue-Grey?
-
 7. CONSIDER ENSURING SUCCESS ON EVERY ENDPOINT IN COMMUNICATION LIBRARY
 
 9. ADD SHOW ONLY ACTIVE {BOOL} TO VIEWS
@@ -32,6 +20,22 @@ Add Colours Blue-Grey?
 
 
 13. EmployeeView - validation happens on opened tab, even on history tab thats unabled.
+
+14. Rename Absences to Leave
+
+15. Archive button - does not enable on demand - requires reset
+
+16. Buttons - redo icons
+
+17. Consider adding more logos
+
+18. Colour palet needs to be redone
+
+19. BUFOR - if there are 0 elements in display list, gets list from db. What if this was done on purpose?
+	FIX: If 0 get original list
+		if 0 in original list cool
+		if there are any elements to be delted in bufor
+		if so, dont download
  
 
 

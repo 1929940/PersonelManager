@@ -1,19 +1,21 @@
-﻿using CommunicationLibrary.Core.Models;
+﻿using CommunicationLibrary.Core.Logic;
+using CommunicationLibrary.Core.Models;
 using CommunicationLibrary.HR.Models;
+using CommunicationLibrary.Payroll.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static CommunicationLibrary.Core.Models.Enums;
+using static Desktop.UI.Core.Helpers.Enums;
 
-namespace CommunicationLibrary.Core.Logic {
-
-    public class Bufor<T> where T : BaseEntity {
+namespace Desktop.UI.Core.Bufor {
+    public class TransactionBufor<T> where T : BaseEntity {
 
         private List<BuforObject<T>> BuforData { get; set; }
         private readonly BaseRequestHandler<T> _handler;
 
-        public Bufor(BaseRequestHandler<T> handler) {
+        public TransactionBufor(BaseRequestHandler<T> handler) {
             _handler = handler;
             BuforData = new List<BuforObject<T>>();
         }
@@ -29,7 +31,7 @@ namespace CommunicationLibrary.Core.Logic {
         }
         public void Flush(int employeeId) {
             foreach (var data in BuforData) {
-                SetEmployeeId(data.Value, employeeId);
+                SetParentId(data.Value, employeeId);
                 switch (data.Status) {
                     case Status.Added:
                         _handler.Create(data.Value);
@@ -45,9 +47,9 @@ namespace CommunicationLibrary.Core.Logic {
             BuforData.Clear();
         }
 
-        public async Task FlushAsync(int employeeId) {
+        public async Task FlushAsync(int parentId) {
             foreach (var data in BuforData) {
-                SetEmployeeId(data.Value, employeeId);
+                SetParentId(data.Value, parentId);
                 switch (data.Status) {
                     case Status.Added:
                         await _handler.CreateAsync(data.Value);
@@ -65,25 +67,33 @@ namespace CommunicationLibrary.Core.Logic {
 
         public bool Contains(T value) => BuforData.Exists(x => x.Value == value);
 
-        private void SetEmployeeId(T value, int id) {
-            if (value is PersonelDocument doc) {
-                doc.Employee = new EmployeeSimplified() { Id = id };
-            } else if (value is Leave leave) {
-                leave.Employee = new EmployeeSimplified() { Id = id };
+        private void SetParentId(T value, int id) {
+            switch (value) {
+                case PersonelDocument doc:
+                    doc.Employee = new EmployeeSimplified() { Id = id };
+                    break;
+                case Leave leave:
+                    leave.Employee = new EmployeeSimplified() { Id = id };
+                    break;
+                case Payment payment:
+                    payment.Contract = new ContractSimplified() { Id = id };
+                    break;
+                case Advance advance:
+                    advance.Contract = new ContractSimplified() { Id = id };
+                    break;
             }
+            //if (value is PersonelDocument doc) {
+            //    doc.Employee = new EmployeeSimplified() { Id = id };
+            //} else if (value is Leave leave) {
+            //    leave.Employee = new EmployeeSimplified() { Id = id };
+            //}
         }
-
 
         private void AddToBufor(Status status, T value) {
             BuforData.Add(new BuforObject<T>() {
                 Status = status,
                 Value = value
             });
-        }
-
-        public class BuforObject<T> where T : BaseEntity {
-            public Status Status { get; set; }
-            public T Value { get; set; }
         }
     }
 }

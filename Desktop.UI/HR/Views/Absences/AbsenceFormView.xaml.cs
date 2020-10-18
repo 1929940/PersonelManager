@@ -1,5 +1,7 @@
 ﻿using CommunicationLibrary.HR.Models;
+using Desktop.UI.Core.Bufor;
 using Desktop.UI.Core.Helpers;
+using Desktop.UI.HR.Helper;
 using Desktop.UI.HR.Views.Employees;
 using System;
 using System.Collections.Generic;
@@ -17,18 +19,18 @@ using System.Windows.Shapes;
 using static Desktop.UI.Core.Helpers.Enums;
 
 namespace Desktop.UI.HR.Views.Absences {
-    /// <summary>
-    /// Interaction logic for AbsenceFormView.xaml
-    /// </summary>
     public partial class AbsenceFormView : Window {
 
         public string[] Types { get => Enum.GetNames(typeof(AbsenceTypes)); }
         public Leave Leave { get; set; }
+        public Bufor<Leave> Bufor { get; set; }
 
-        public AbsenceFormView(out Leave leave) {
+
+        public AbsenceFormView(out Leave leave, Bufor<Leave> bufor) {
             Leave = new Leave() {
                 From = DateTime.Today
             };
+            Bufor = bufor;
 
             this.DataContext = Leave;
             InitializeComponent();
@@ -42,8 +44,9 @@ namespace Desktop.UI.HR.Views.Absences {
             leave = Leave;
         }
 
-        public AbsenceFormView(Leave leave) {
+        public AbsenceFormView(Leave leave, Bufor<Leave> bufor) {
             Leave = leave;
+            Bufor = bufor;
 
             this.DataContext = Leave;
             InitializeComponent();
@@ -78,20 +81,14 @@ namespace Desktop.UI.HR.Views.Absences {
                 this.Close();
         }
 
-
-        //TODO: These dialogboxes need to signal that data will be saved on saving employee
         private void UpdateButton_Click(object sender, RoutedEventArgs e) {
-            if (DialogHelper.Save()) {
-                EmployeeFormView.LeaveBufor.Modify(Leave);
-                this.Close();
-            }
+            Bufor.TransactionBufor.Modify(Leave);
+            this.Close();
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e) {
-            if (DialogHelper.Save()) {
-                EmployeeFormView.LeaveBufor.Add(Leave);
-                this.Close();
-            }
+            Bufor.TransactionBufor.Add(Leave);
+            this.Close();
         }
 
         private void HideMetaDataRows() {

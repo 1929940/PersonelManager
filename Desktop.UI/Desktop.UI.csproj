@@ -242,6 +242,9 @@
     <Compile Include="Business\Users\UserFormView.xaml.cs">
       <DependentUpon>UserFormView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Core\Bufor\Bufor.cs" />
+    <Compile Include="Core\Bufor\BuforObject.cs" />
+    <Compile Include="Core\Bufor\TransactionBufor.cs" />
     <Compile Include="Core\Helpers\AuthorizationHelper.cs" />
     <Compile Include="Core\Helpers\DialogHelper.cs" />
     <Compile Include="Core\Helpers\Enums.cs" />
@@ -261,6 +264,7 @@
     <Compile Include="Core\Helpers\ExceptionHelper.cs" />
     <Compile Include="Core\Helpers\ServerConnectionHelper.cs" />
     <Compile Include="Core\Validators\IsPercentValue.cs" />
+    <Compile Include="HR\Helper\EmployeeBufor.cs" />
     <Compile Include="HR\Views\Absences\AbsenceFormView.xaml.cs">
       <DependentUpon>AbsenceFormView.xaml</DependentUpon>
     </Compile>

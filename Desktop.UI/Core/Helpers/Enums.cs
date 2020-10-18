@@ -12,5 +12,11 @@ namespace Desktop.UI.Core.Helpers {
             Wypoczynkowy,
             Nieusprawiedliwiony
         }
+
+        public enum Status {
+            Added,
+            Modified,
+            Removed
+        }
     }
 }

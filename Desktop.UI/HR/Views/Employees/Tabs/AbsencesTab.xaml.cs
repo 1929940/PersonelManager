@@ -1,40 +1,33 @@
 ﻿using CommunicationLibrary.HR.Models;
 using CommunicationLibrary.HR.Requests;
+using Desktop.UI.Core.Bufor;
 using Desktop.UI.Core.Helpers;
 using Desktop.UI.HR.Views.Absences;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Desktop.UI.HR.Views.Employees.Tabs {
-    /// <summary>
-    /// Interaction logic for AbsencesTab.xaml
-    /// </summary>
     public partial class AbsencesTab : Page {
 
         public Employee Employee { get; set; }
         public List<Leave> DisplayData { get; set; }
+        public Bufor<Leave> Bufor { get; set; }
 
         private readonly LeaveRequestHandler _handler;
 
-        public AbsencesTab(Employee employee, List<Leave> displayData) {
+        public AbsencesTab(Employee employee, Bufor<Leave> bufor) {
             Employee = employee;
+            Bufor = bufor;
             _handler = new LeaveRequestHandler();
 
             InitializeComponent();
-            BindDisplayData(displayData);
+            BindDisplayData(Bufor.DisplayBufor);
         }
 
         private void FilterBox_TextChanged(object sender, TextChangedEventArgs e) {
@@ -54,9 +47,9 @@ namespace Desktop.UI.HR.Views.Employees.Tabs {
 
 
         private void AddButton_Click(object sender, RoutedEventArgs e) {
-            AbsenceFormView form = new AbsenceFormView(out Leave leave);
+            AbsenceFormView form = new AbsenceFormView(out Leave leave, Bufor);
             form.ShowDialog();
-            if (EmployeeFormView.LeaveBufor.Contains(leave)) {
+            if (Bufor.TransactionBufor.Contains(leave)) {
                 DisplayData.Add(leave);
                 CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
             }
@@ -66,12 +59,10 @@ namespace Desktop.UI.HR.Views.Employees.Tabs {
             EditRow();
         }
         private void DeleteButton_Click(object sender, RoutedEventArgs e) {
-            if (DialogHelper.Delete()) {
-                Leave leave = (Leave)DataGrid.SelectedItem;
-                EmployeeFormView.LeaveBufor.Remove(leave);
-                DisplayData.Remove(leave);
-                CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
-            }
+            Leave leave = (Leave)DataGrid.SelectedItem;
+            Bufor.TransactionBufor.Remove(leave);
+            DisplayData.Remove(leave);
+            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
         }
 
 
@@ -81,7 +72,7 @@ namespace Desktop.UI.HR.Views.Employees.Tabs {
 
         private void EditRow() {
             Leave leave = (Leave)DataGrid.SelectedItem;
-            AbsenceFormView form = new AbsenceFormView(leave);
+            AbsenceFormView form = new AbsenceFormView(leave, Bufor);
             form.ShowDialog();
             CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
         }

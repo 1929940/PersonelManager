@@ -1,5 +1,6 @@
 ﻿using CommunicationLibrary.HR.Models;
 using CommunicationLibrary.HR.Requests;
+using Desktop.UI.Core.Bufor;
 using Desktop.UI.Core.Helpers;
 using Desktop.UI.HR.Views.Employees;
 using System;
@@ -17,41 +18,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace Desktop.UI.HR.Views.SafetyTrainings {
-    /// <summary>
-    /// Interaction logic for SafetyTrainingFormView.xaml
-    /// </summary>
     public partial class SafetyTrainingFormView : Window {
         public PersonelDocument Document { get; set; }
-        public bool UseBufor { get; set; }
+        public Bufor<PersonelDocument> Bufor { get; set; }
+        public bool UseBufor { get => Bufor != null; }
+
         private readonly SafetyTrainingRequestHandler _handler;
 
-        //public SafetyTrainingFormView() {
-        //    _handler = new SafetyTrainingRequestHandler();
-        //    Document = new PersonelDocument();
-        //    this.DataContext = Document;
-        //    InitializeComponent();
-        //    HeaderText.Text = "Dodaj Szkolenie BHP";
-        //    AddButton.Visibility = Visibility.Visible;
-        //    BindCombobox();
-        //    HideMetaDataRows();
-        //}
-
-        //public SafetyTrainingFormView(int id) {
-
-        //    _handler = new SafetyTrainingRequestHandler();
-        //    Document = _handler.Get(id);
-        //    this.DataContext = Document;
-        //    InitializeComponent();
-        //    HeaderText.Text = "Modyfikuj Szkolenie BHP";
-        //    UpdateButton.Visibility = Visibility.Visible;
-        //    BindCombobox();
-        //    if (!AuthorizationHelper.Authorize(Enums.Roles.Kierownik))
-        //        HideMetaDataRows();
-        //}
-
-        public SafetyTrainingFormView(out PersonelDocument doc, bool useBufor = false) {
+        public SafetyTrainingFormView(out PersonelDocument doc, Bufor<PersonelDocument> bufor = null) {
             _handler = new SafetyTrainingRequestHandler();
-            UseBufor = useBufor;
+            Bufor = bufor;
 
             InitializeComponent();
             InitializeAddForm();
@@ -61,8 +37,8 @@ namespace Desktop.UI.HR.Views.SafetyTrainings {
             doc = Document;
         }
 
-        public SafetyTrainingFormView(PersonelDocument doc, bool useBufor = false) {
-            UseBufor = useBufor;
+        public SafetyTrainingFormView(PersonelDocument doc, Bufor<PersonelDocument> bufor = null) {
+            Bufor = bufor;
             _handler = new SafetyTrainingRequestHandler();
 
             InitializeComponent();
@@ -84,20 +60,20 @@ namespace Desktop.UI.HR.Views.SafetyTrainings {
         }
 
         private async void AddButton_Click(object sender, RoutedEventArgs e) {
-            if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
+            if (ControlsHelper.AreTextboxesValid(this)) {
                 if (UseBufor)
-                    EmployeeFormView.SafetyTrainingBufor.Add(Document);
-                else
+                    Bufor.TransactionBufor.Add(Document);
+                else if (DialogHelper.Save())
                     await _handler.CreateAsync(Document);
                 this.Close();
             }
         }
 
         private async void UpdateButton_Click(object sender, RoutedEventArgs e) {
-            if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
+            if (ControlsHelper.AreTextboxesValid(this)) {
                 if (UseBufor)
-                    EmployeeFormView.SafetyTrainingBufor.Modify(Document);
-                else
+                    Bufor.TransactionBufor.Modify(Document);
+                else if (DialogHelper.Save())
                     await _handler.UpdateAsync(Document.Id, Document);
                 this.Close();
             }

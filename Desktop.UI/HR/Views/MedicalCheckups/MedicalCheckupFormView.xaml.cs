@@ -1,5 +1,6 @@
 ﻿using CommunicationLibrary.HR.Models;
 using CommunicationLibrary.HR.Requests;
+using Desktop.UI.Core.Bufor;
 using Desktop.UI.Core.Helpers;
 using Desktop.UI.HR.Views.Employees;
 using System;
@@ -19,12 +20,13 @@ using System.Windows.Shapes;
 namespace Desktop.UI.HR.Views.MedicalCheckups {
     public partial class MedicalCheckupFormView : Window {
         public PersonelDocument Document { get; set; }
-        public bool UseBufor { get; set; }
+        public Bufor<PersonelDocument> Bufor { get; set; }
+        public bool UseBufor { get => Bufor != null; }
         private readonly MedicalCheckupRequestHandler _handler;
 
-        public MedicalCheckupFormView(out PersonelDocument doc, bool useBufor = false) {
+        public MedicalCheckupFormView(out PersonelDocument doc, Bufor<PersonelDocument> bufor = null) {
             _handler = new MedicalCheckupRequestHandler();
-            UseBufor = useBufor;
+            Bufor = bufor;
 
             InitializeComponent();
             InitializeAddForm();
@@ -34,8 +36,8 @@ namespace Desktop.UI.HR.Views.MedicalCheckups {
             doc = Document;
         }
 
-        public MedicalCheckupFormView(PersonelDocument doc, bool useBufor = false){
-            UseBufor = useBufor;
+        public MedicalCheckupFormView(PersonelDocument doc, Bufor<PersonelDocument> bufor = null) {
+            Bufor = bufor;
             _handler = new MedicalCheckupRequestHandler();
 
             InitializeComponent();
@@ -58,20 +60,20 @@ namespace Desktop.UI.HR.Views.MedicalCheckups {
         }
 
         private async void AddButton_Click(object sender, RoutedEventArgs e) {
-            if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
+            if (ControlsHelper.AreTextboxesValid(this)) {
                 if (UseBufor)
-                    EmployeeFormView.MedicalCheckupBufor.Add(Document);
-                else
+                    Bufor.TransactionBufor.Add(Document);
+                else if (DialogHelper.Save())
                     await _handler.CreateAsync(Document);
                 this.Close();
             }
         }
 
         private async void UpdateButton_Click(object sender, RoutedEventArgs e) {
-            if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
+            if (ControlsHelper.AreTextboxesValid(this)) {
                 if (UseBufor)
-                    EmployeeFormView.MedicalCheckupBufor.Modify(Document);
-                else
+                    Bufor.TransactionBufor.Modify(Document);
+                else if (DialogHelper.Save())
                     await _handler.UpdateAsync(Document.Id, Document);
                 this.Close();
             }
