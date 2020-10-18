@@ -84,6 +84,8 @@ namespace Desktop.UI.HR.Views.Employees {
                     TabFrame.Navigate(new AbsencesTab(Employee, EditMode));
                     break;
                 case "MedicalCheckupTab":
+                    TabFrame.Navigate(new MedicalCheckupsTableView(Employee));
+                    break;
                 case "SecurityTrainingTab":
                 case "CertificationTab":
                 case "HistoryDataTab":

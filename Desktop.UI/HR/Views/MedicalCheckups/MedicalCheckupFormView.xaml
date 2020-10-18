@@ -8,7 +8,7 @@
         FontFamily="Calibri" FontSize="14"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
         xmlns:validators="clr-namespace:Desktop.UI.Core.Validators"
-        Title="Badanie Lekarskie" Height="400" Width="440">
+        Title="Badanie Lekarskie" Height="420" Width="440">
     <Window.Resources>
         <Style TargetType="{x:Type TextBlock}">
             <Setter Property="Margin" Value="5,10"/>
@@ -76,6 +76,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto" Name="CreatedRow"/>
             <RowDefinition Height="Auto" Name="UpdatedRow"/>
             <RowDefinition Height="*"/>
@@ -86,7 +87,7 @@
                        FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
         </Border>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Name="EmployeeStackPanel">
             <TextBlock Text="Pracownik" Width="70"/>
             <ComboBox Name="EmployeeCombobox" Width="329"
                       DisplayMemberPath="Value" SelectedValuePath="Key"
@@ -117,9 +118,22 @@
             </TextBox>
         </StackPanel>
 
+        <StackPanel Grid.Row="3" Orientation="Horizontal">
+            <TextBlock Text="Wydany przez" Width="Auto"/>
+            <TextBox Name="IssuedByTextBox" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" Width="320">
+                <TextBox.Text>
+                    <Binding Path="IssuedBy" Mode="TwoWay" UpdateSourceTrigger="Default">
+                        <Binding.ValidationRules>
+                            <validators:IsNotEmptyValidator/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </StackPanel>
+
         <!--DATE PICKER-->
         
-        <Border Grid.Row="3">
+        <Border Grid.Row="4">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Ważne od" Width="70"/>
                 <DatePicker Name="ValidFromDatePicker" SelectedDate="{Binding ValidFrom}"/>
@@ -128,16 +142,16 @@
             </StackPanel>
         </Border>
 
-        <StackPanel Grid.Row="4" Orientation="Horizontal">
-            <TextBlock Grid.Row="6" Grid.Column="0" Text="Stworzono" Width="90"/>
-            <TextBlock Grid.Row="6" Grid.Column="1" FontStyle="Oblique" Width="120"
+        <StackPanel Grid.Row="5" Orientation="Horizontal">
+            <TextBlock Text="Stworzono" Width="90"/>
+            <TextBlock FontStyle="Oblique" Width="120"
                  Text="{Binding CreatedOn, StringFormat=\{0:yyyy.MM.dd HH:mm:ss\}}"/>
-            <TextBlock Grid.Row="6" Grid.Column="2" Text="Przez" Width="40"/>
-            <TextBlock Grid.Row="6" Grid.Column="3" FontStyle="Oblique" Width="Auto"
+            <TextBlock Text="Przez" Width="40"/>
+            <TextBlock FontStyle="Oblique" Width="Auto"
                  Text="{Binding CreatedBy}"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="5" Orientation="Horizontal">
+        <StackPanel Grid.Row="6" Orientation="Horizontal">
             <TextBlock Text="Modyfikowano" Width="90"/>
             <TextBlock FontStyle="Oblique" Width="120"
                  Text="{Binding UpdatedOn, StringFormat=\{0:yyyy.MM.dd HH:mm:ss\}}"/>
@@ -146,7 +160,7 @@
                  Text="{Binding UpdatedBy}"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="6" Orientation="Horizontal"
+        <StackPanel Grid.Row="7" Orientation="Horizontal"
                     VerticalAlignment="Bottom" HorizontalAlignment="Right">
 
             <Button Name="AddButton" Click="AddButton_Click" Visibility="Collapsed">

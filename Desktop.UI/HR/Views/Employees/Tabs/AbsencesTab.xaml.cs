@@ -65,7 +65,6 @@ namespace Desktop.UI.HR.Views.Employees.Tabs {
                 DisplayData.Add(leave);
                 CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
             }
-
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e) {
@@ -90,11 +89,6 @@ namespace Desktop.UI.HR.Views.Employees.Tabs {
             AbsenceFormView form = new AbsenceFormView(leave);
             form.ShowDialog();
             CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
-
-            //it updates awesome
-            //This needs to update but with current data
-            //DataGrid.ItemsSource = _handler.Get();
-            //CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
     }
 }

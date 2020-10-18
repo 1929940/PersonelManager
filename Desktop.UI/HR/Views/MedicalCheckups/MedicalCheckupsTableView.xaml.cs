@@ -1,6 +1,7 @@
 ﻿using CommunicationLibrary.HR.Models;
 using CommunicationLibrary.HR.Requests;
 using Desktop.UI.Core.Helpers;
+using Desktop.UI.HR.Views.Employees;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,24 +18,45 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Desktop.UI.HR.Views.MedicalCheckups {
-    /// <summary>
-    /// Interaction logic for MedicalCheckupsTableView.xaml
-    /// </summary>
     public partial class MedicalCheckupsTableView : Page {
 
         private readonly MedicalCheckupRequestHandler _handler;
+        public Employee Employee { get; set; }
+        public bool UseBufor { get; set; }
+        public List<PersonelDocument> DisplayData { get; set; }
+
 
         public MedicalCheckupsTableView() {
             _handler = new MedicalCheckupRequestHandler();
             InitializeComponent();
-            DataGrid.ItemsSource = _handler.Get();
+            DisplayData = _handler.Get().ToList();
+            DataGrid.ItemsSource = DisplayData;
+            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
+        }
+
+        public MedicalCheckupsTableView(Employee employee) {
+            Employee = employee;
+            UseBufor = true;
+            _handler = new MedicalCheckupRequestHandler();
+            InitializeComponent();
+            InitializeEmployeeView();
+            DisplayData = _handler.GetEmployeeMedicalCheckups(employee.Id).ToList();
+            DataGrid.ItemsSource = DisplayData;
             CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e) {
-            MedicalCheckupFormView form = new MedicalCheckupFormView();
+            MedicalCheckupFormView form = new MedicalCheckupFormView(out PersonelDocument doc, UseBufor);
             form.ShowDialog();
-            DataGrid.ItemsSource = _handler.Get();
+
+            if (UseBufor) {
+                if (EmployeeFormView.MedicalCheckupBufor.Contains(doc)) {
+                    DisplayData.Add(doc);
+                    CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
+                }
+            } else {
+                DataGrid.ItemsSource = _handler.Get();
+            }
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e) {
@@ -42,7 +64,17 @@ namespace Desktop.UI.HR.Views.MedicalCheckups {
         }
 
         private async void DeleteButton_Click(object sender, RoutedEventArgs e) {
-            await ViewHelper.DeleteRowAsync(_handler, DataGrid);
+            if (DialogHelper.Delete()) {
+                PersonelDocument doc = (PersonelDocument)DataGrid.SelectedItem;
+                if (UseBufor) {
+                    EmployeeFormView.MedicalCheckupBufor.Remove(doc);
+                    DisplayData.Remove(doc);
+                    CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
+                } else {
+                    await ViewHelper.DeleteRowAsync(_handler, DataGrid);
+                    CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
+                }
+            }
         }
 
         private void FilterBox_TextChanged(object sender, TextChangedEventArgs e) {
@@ -59,9 +91,21 @@ namespace Desktop.UI.HR.Views.MedicalCheckups {
 
         private void EditRow() {
             PersonelDocument doc = (PersonelDocument)DataGrid.SelectedItem;
-            MedicalCheckupFormView form = new MedicalCheckupFormView(doc.Id);
+            MedicalCheckupFormView form = new MedicalCheckupFormView(doc, UseBufor);
             form.ShowDialog();
-            DataGrid.ItemsSource = _handler.Get();
+
+            if (UseBufor) {
+                CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
+            } else {
+                DataGrid.ItemsSource = _handler.Get();
+            }
+        }
+
+        private void InitializeEmployeeView() {
+            HeaderTextBox.Visibility = Visibility.Collapsed;
+            LastNameColumn.Visibility = Visibility.Collapsed;
+            FirstNameColumn.Visibility = Visibility.Collapsed;
+            ProfessionColumn.Visibility = Visibility.Collapsed;
         }
     }
 }
