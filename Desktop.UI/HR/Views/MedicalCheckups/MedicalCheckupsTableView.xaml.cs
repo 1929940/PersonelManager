@@ -71,7 +71,8 @@ namespace Desktop.UI.HR.Views.MedicalCheckups {
                     DisplayData.Remove(doc);
                     CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
                 } else {
-                    await ViewHelper.DeleteRowAsync(_handler, DataGrid);
+                    await _handler.DeleteAsync(doc.Id);
+                    DataGrid.ItemsSource = _handler.Get();
                     CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
                 }
             }

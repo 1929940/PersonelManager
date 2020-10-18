@@ -2,6 +2,7 @@
 using CommunicationLibrary.HR.Models;
 using CommunicationLibrary.HR.Requests;
 using Desktop.UI.Core.Helpers;
+using Desktop.UI.HR.Views.Employees;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,18 +25,43 @@ namespace Desktop.UI.HR.Views.Certificates {
     public partial class CertificatesTableView : Page {
 
         private readonly CertificateRequestHandler _handler;
+        public Employee Employee { get; set; }
+        public bool UseBufor { get; set; }
+        public List<PersonelDocument> DisplayData { get; set; }
 
         public CertificatesTableView() {
             _handler = new CertificateRequestHandler();
+
             InitializeComponent();
-            DataGrid.ItemsSource = _handler.Get();
+            DisplayData = _handler.Get().ToList();
+            DataGrid.ItemsSource = DisplayData;
             CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
 
+        public CertificatesTableView(Employee employee) {
+            Employee = employee;
+            UseBufor = true;
+            _handler = new CertificateRequestHandler();
+            InitializeComponent();
+            InitializeEmployeeView();
+            DisplayData = _handler.GetEmployeeCertificates(employee.Id).ToList();
+            DataGrid.ItemsSource = DisplayData;
+            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
+        }
+
+
         private void AddButton_Click(object sender, RoutedEventArgs e) {
-            CertificateFormView form = new CertificateFormView();
+            CertificateFormView form = new CertificateFormView(out PersonelDocument doc, UseBufor);
             form.ShowDialog();
-            DataGrid.ItemsSource = _handler.Get();
+
+            if (UseBufor) {
+                if (EmployeeFormView.CertificateBufor .Contains(doc)) {
+                    DisplayData.Add(doc);
+                    CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
+                }
+            } else {
+                DataGrid.ItemsSource = _handler.Get();
+            }
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e) {
@@ -43,8 +69,25 @@ namespace Desktop.UI.HR.Views.Certificates {
         }
 
         private async void DeleteButton_Click(object sender, RoutedEventArgs e) {
-            await ViewHelper.DeleteRowAsync(_handler, DataGrid);
+            if (DialogHelper.Delete()) {
+                PersonelDocument doc = (PersonelDocument)DataGrid.SelectedItem;
+                if (UseBufor) {
+                    EmployeeFormView.CertificateBufor.Remove(doc);
+                    DisplayData.Remove(doc);
+                    CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
+                } else {
+                    //T selectedItem = (T)dataGrid.SelectedItem;
+                    //await handler.DeleteAsync(selectedItem.Id);
+                    //dataGrid.ItemsSource = handler.Get();
+
+                    //await ViewHelper.DeleteRowAsync(_handler, DataGrid);
+                    await _handler.DeleteAsync(doc.Id);
+                    DataGrid.ItemsSource = _handler.Get();
+                    CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
+                }
+            }
         }
+
 
         private void FilterBox_TextChanged(object sender, TextChangedEventArgs e) {
             CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
@@ -60,9 +103,21 @@ namespace Desktop.UI.HR.Views.Certificates {
 
         private void EditRow() {
             PersonelDocument doc = (PersonelDocument)DataGrid.SelectedItem;
-            CertificateFormView form = new CertificateFormView(doc.Id);
+            CertificateFormView form = new CertificateFormView(doc, UseBufor);
             form.ShowDialog();
-            DataGrid.ItemsSource = _handler.Get();
+
+            if (UseBufor) {
+                CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
+            } else {
+                DataGrid.ItemsSource = _handler.Get();
+            }
+        }
+
+        private void InitializeEmployeeView() {
+            HeaderTextBox.Visibility = Visibility.Collapsed;
+            LastNameColumn.Visibility = Visibility.Collapsed;
+            FirstNameColumn.Visibility = Visibility.Collapsed;
+            ProfessionColumn.Visibility = Visibility.Collapsed;
         }
     }
 }

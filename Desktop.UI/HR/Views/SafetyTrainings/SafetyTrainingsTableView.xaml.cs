@@ -1,6 +1,7 @@
 ﻿using CommunicationLibrary.HR.Models;
 using CommunicationLibrary.HR.Requests;
 using Desktop.UI.Core.Helpers;
+using Desktop.UI.HR.Views.Employees;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,24 +18,45 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Desktop.UI.HR.Views.SafetyTrainings {
-    /// <summary>
-    /// Interaction logic for SafetyTrainingsTableView.xaml
-    /// </summary>
     public partial class SafetyTrainingsTableView : Page {
 
         private readonly SafetyTrainingRequestHandler _handler;
+        public Employee Employee { get; set; }
+        public bool UseBufor { get; set; }
+        public List<PersonelDocument> DisplayData { get; set; }
 
         public SafetyTrainingsTableView() {
             _handler = new SafetyTrainingRequestHandler();
+
             InitializeComponent();
-            DataGrid.ItemsSource = _handler.Get();
+            DisplayData = _handler.Get().ToList();
+            DataGrid.ItemsSource = DisplayData;
+            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
+        }
+
+        public SafetyTrainingsTableView(Employee employee) {
+            Employee = employee;
+            UseBufor = true;
+            _handler = new SafetyTrainingRequestHandler();
+            InitializeComponent();
+            InitializeEmployeeView();
+            DisplayData = _handler.GetEmployeeSafetyTrainings(employee.Id).ToList();
+            DataGrid.ItemsSource = DisplayData;
             CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e) {
-            SafetyTrainingFormView form = new SafetyTrainingFormView();
+            SafetyTrainingFormView form = new SafetyTrainingFormView(out PersonelDocument doc, UseBufor);
             form.ShowDialog();
-            DataGrid.ItemsSource = _handler.Get();
+
+            if (UseBufor) {
+                if (EmployeeFormView.SafetyTrainingBufor .Contains(doc)) {
+                    DisplayData.Add(doc);
+                    CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
+                }
+            } else {
+                DataGrid.ItemsSource = _handler.Get();
+            }
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e) {
@@ -42,7 +64,18 @@ namespace Desktop.UI.HR.Views.SafetyTrainings {
         }
 
         private async void DeleteButton_Click(object sender, RoutedEventArgs e) {
-            await ViewHelper.DeleteRowAsync(_handler, DataGrid);
+            if (DialogHelper.Delete()) {
+                PersonelDocument doc = (PersonelDocument)DataGrid.SelectedItem;
+                if (UseBufor) {
+                    EmployeeFormView.SafetyTrainingBufor.Remove(doc);
+                    DisplayData.Remove(doc);
+                    CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
+                } else {
+                    await _handler.DeleteAsync(doc.Id);
+                    DataGrid.ItemsSource = _handler.Get();
+                    CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
+                }
+            }
         }
 
         private void FilterBox_TextChanged(object sender, TextChangedEventArgs e) {
@@ -60,9 +93,21 @@ namespace Desktop.UI.HR.Views.SafetyTrainings {
 
         private void EditRow() {
             PersonelDocument doc = (PersonelDocument)DataGrid.SelectedItem;
-            SafetyTrainingFormView form = new SafetyTrainingFormView(doc.Id);
+            SafetyTrainingFormView form = new SafetyTrainingFormView(doc, UseBufor);
             form.ShowDialog();
-            DataGrid.ItemsSource = _handler.Get();
+
+            if (UseBufor) {
+                CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
+            } else {
+                DataGrid.ItemsSource = _handler.Get();
+            }
+        }
+
+        private void InitializeEmployeeView() {
+            HeaderTextBox.Visibility = Visibility.Collapsed;
+            LastNameColumn.Visibility = Visibility.Collapsed;
+            FirstNameColumn.Visibility = Visibility.Collapsed;
+            ProfessionColumn.Visibility = Visibility.Collapsed;
         }
     }
 }

@@ -37,6 +37,7 @@ namespace Desktop.UI.HR.Views.MedicalCheckups {
         public MedicalCheckupFormView(PersonelDocument doc, bool useBufor = false){
             UseBufor = useBufor;
             _handler = new MedicalCheckupRequestHandler();
+
             InitializeComponent();
             InitializeEditForm();
             SetDataContext(doc);

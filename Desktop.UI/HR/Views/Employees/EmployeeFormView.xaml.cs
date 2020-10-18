@@ -2,8 +2,10 @@
 using CommunicationLibrary.HR.Models;
 using CommunicationLibrary.HR.Requests;
 using Desktop.UI.Core.Helpers;
+using Desktop.UI.HR.Views.Certificates;
 using Desktop.UI.HR.Views.Employees.Tabs;
 using Desktop.UI.HR.Views.MedicalCheckups;
+using Desktop.UI.HR.Views.SafetyTrainings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +21,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace Desktop.UI.HR.Views.Employees {
-    /// <summary>
-    /// Interaction logic for EmployeeFormView.xaml
-    /// </summary>
     public partial class EmployeeFormView : Window {
         public Employee Employee { get; set; }
         public bool EditMode { get; set; }
@@ -31,7 +30,6 @@ namespace Desktop.UI.HR.Views.Employees {
         public static Bufor<PersonelDocument> MedicalCheckupBufor { get; set; }
         public static Bufor<PersonelDocument> SafetyTrainingBufor { get; set; }
         public static Bufor<PersonelDocument> CertificateBufor { get; set; }
-
 
         public EmployeeFormView() {
             _handler = new EmployeeRequestHandler();
@@ -87,7 +85,11 @@ namespace Desktop.UI.HR.Views.Employees {
                     TabFrame.Navigate(new MedicalCheckupsTableView(Employee));
                     break;
                 case "SecurityTrainingTab":
+                    TabFrame.Navigate(new SafetyTrainingsTableView(Employee));
+                    break;
                 case "CertificationTab":
+                    TabFrame.Navigate(new CertificatesTableView(Employee));
+                    break;
                 case "HistoryDataTab":
                     TabFrame.Navigate(new GeneralTab(Employee, true, true));
                     break;

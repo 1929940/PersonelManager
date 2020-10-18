@@ -1,6 +1,7 @@
 ﻿using CommunicationLibrary.HR.Models;
 using CommunicationLibrary.HR.Requests;
 using Desktop.UI.Core.Helpers;
+using Desktop.UI.HR.Views.Employees;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,46 +17,62 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace Desktop.UI.HR.Views.Certificates {
-    /// <summary>
-    /// Interaction logic for CertificateFormView.xaml
-    /// </summary>
     public partial class CertificateFormView : Window {
         public PersonelDocument Document { get; set; }
+        public bool UseBufor { get; set; }
         private readonly CertificateRequestHandler _handler;
 
-        public CertificateFormView() {
+        public CertificateFormView(out PersonelDocument doc, bool useBufor = false) {
             _handler = new CertificateRequestHandler();
-            Document = new PersonelDocument();
-            this.DataContext = Document;
+            UseBufor = useBufor;
+
             InitializeComponent();
-            HeaderText.Text = "Dodaj Certyfikat";
-            AddButton.Visibility = Visibility.Visible;
+            InitializeAddForm();
+            SetDataContext();
             BindCombobox();
             HideMetaDataRows();
+            doc = Document;
         }
 
-        public CertificateFormView(int id) {
-
+        public CertificateFormView(PersonelDocument doc, bool useBufor = false) {
+            UseBufor = useBufor;
             _handler = new CertificateRequestHandler();
-            Document = _handler.Get(id);
-            this.DataContext = Document;
+
             InitializeComponent();
-            HeaderText.Text = "Modyfikuj Certyfikat";
-            UpdateButton.Visibility = Visibility.Visible;
+            InitializeEditForm();
+            SetDataContext(doc);
             BindCombobox();
             if (!AuthorizationHelper.Authorize(Enums.Roles.Kierownik))
                 HideMetaDataRows();
         }
+
+
+        private void InitializeAddForm() {
+            HeaderText.Text = "Dodaj Certyfikat";
+            AddButton.Visibility = Visibility.Visible;
+        }
+
+        private void InitializeEditForm() {
+            HeaderText.Text = "Modyfikuj Certyfikat";
+            UpdateButton.Visibility = Visibility.Visible;
+        }
+
         private async void AddButton_Click(object sender, RoutedEventArgs e) {
             if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
-                await _handler.CreateAsync(Document);
+                if (UseBufor)
+                    EmployeeFormView.CertificateBufor.Add(Document);
+                else
+                    await _handler.CreateAsync(Document);
                 this.Close();
             }
         }
 
         private async void UpdateButton_Click(object sender, RoutedEventArgs e) {
             if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
-                await _handler.UpdateAsync(Document.Id, Document);
+                if (UseBufor)
+                    EmployeeFormView.CertificateBufor.Modify(Document);
+                else
+                    await _handler.UpdateAsync(Document.Id, Document);
                 this.Close();
             }
         }
@@ -77,8 +94,22 @@ namespace Desktop.UI.HR.Views.Certificates {
         }
 
         private void BindCombobox() {
-            EmployeeCombobox.ItemsSource = ViewHelper.GetEmployeesDictionary();
-            EmployeeCombobox.SelectedIndex = ViewHelper.GetIndexOfComboboxValue(Document.Employee.Id, EmployeeCombobox);
+            if (UseBufor)
+                EmployeeStackPanel.Visibility = Visibility.Collapsed;
+            else {
+                EmployeeCombobox.ItemsSource = ViewHelper.GetEmployeesDictionary();
+                EmployeeCombobox.SelectedIndex = ViewHelper.GetIndexOfComboboxValue(Document.Employee.Id, EmployeeCombobox);
+            }
+        }
+
+        private void SetDataContext(PersonelDocument doc = null) {
+            if (doc == null)
+                Document = new PersonelDocument();
+            else if (UseBufor)
+                Document = doc;
+            else
+                Document = _handler.Get(doc.Id);
+            this.DataContext = Document;
         }
     }
 }

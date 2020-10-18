@@ -50,7 +50,7 @@
         </Grid.RowDefinitions>
 
         <TextBlock Text="Zarządzaj Szkoleniami BHP" FontSize="22" FontWeight="Bold"
-                   Margin="5"/>
+                   Margin="5" Name="HeaderTextBox"/>
 
         <Border Grid.Row="1" BorderThickness="0,1" BorderBrush="Black">
 
@@ -101,9 +101,12 @@
                   AutoGenerateColumns="False" HeadersVisibility="Column">
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nazwisko" Binding="{Binding Employee.LastName}" Width="125" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
-                <DataGridTextColumn Header="Imię" Binding="{Binding Employee.FirstName}" Width="100" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
-                <DataGridTextColumn Header="Zawód" Binding="{Binding Employee.Profession}" Width="150" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                <DataGridTextColumn Header="Nazwisko" x:Name="LastNameColumn"
+                                    Binding="{Binding Employee.LastName}" Width="125" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                <DataGridTextColumn Header="Imię" x:Name="FirstNameColumn"
+                                    Binding="{Binding Employee.FirstName}" Width="100" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                <DataGridTextColumn Header="Zawód" x:Name="ProfessionColumn"
+                                    Binding="{Binding Employee.Profession}" Width="150" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
                 <DataGridTextColumn Header="Tytuł" Binding="{Binding Title}" Width="300" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
                 <DataGridTextColumn Header="Numer" Binding="{Binding Number}" Width="100" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
                 <DataGridTextColumn Header="Ważny od" Binding="{Binding ValidFrom, StringFormat=\{0:yyyy.MM.dd\}}" Width="100" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
