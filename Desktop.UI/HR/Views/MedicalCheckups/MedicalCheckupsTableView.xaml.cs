@@ -34,15 +34,16 @@ namespace Desktop.UI.HR.Views.MedicalCheckups {
             CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
 
-        public MedicalCheckupsTableView(Employee employee) {
+        public MedicalCheckupsTableView(Employee employee, List<PersonelDocument> displayData) {
             Employee = employee;
             UseBufor = true;
             _handler = new MedicalCheckupRequestHandler();
             InitializeComponent();
             InitializeEmployeeView();
-            DisplayData = _handler.GetEmployeeMedicalCheckups(employee.Id).ToList();
-            DataGrid.ItemsSource = DisplayData;
-            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
+            //DisplayData = _handler.GetEmployeeMedicalCheckups(employee.Id).ToList();
+            //DataGrid.ItemsSource = DisplayData;
+            BindDisplayData(displayData);
+            //CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e) {
@@ -107,6 +108,14 @@ namespace Desktop.UI.HR.Views.MedicalCheckups {
             LastNameColumn.Visibility = Visibility.Collapsed;
             FirstNameColumn.Visibility = Visibility.Collapsed;
             ProfessionColumn.Visibility = Visibility.Collapsed;
+        }
+
+        private void BindDisplayData(List<PersonelDocument> displayData) {
+            if (displayData == null || !displayData.Any())
+                displayData.AddRange(_handler.GetEmployeeMedicalCheckups(Employee?.Id ?? 0));
+            DisplayData = displayData;
+            DataGrid.ItemsSource = DisplayData;
+            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
     }
 }

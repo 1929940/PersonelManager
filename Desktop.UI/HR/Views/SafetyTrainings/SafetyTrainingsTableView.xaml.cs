@@ -34,15 +34,13 @@ namespace Desktop.UI.HR.Views.SafetyTrainings {
             CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
 
-        public SafetyTrainingsTableView(Employee employee) {
+        public SafetyTrainingsTableView(Employee employee, List<PersonelDocument> displayData) {
             Employee = employee;
             UseBufor = true;
             _handler = new SafetyTrainingRequestHandler();
             InitializeComponent();
             InitializeEmployeeView();
-            DisplayData = _handler.GetEmployeeSafetyTrainings(employee.Id).ToList();
-            DataGrid.ItemsSource = DisplayData;
-            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
+            BindDisplayData(displayData);
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e) {
@@ -108,6 +106,14 @@ namespace Desktop.UI.HR.Views.SafetyTrainings {
             LastNameColumn.Visibility = Visibility.Collapsed;
             FirstNameColumn.Visibility = Visibility.Collapsed;
             ProfessionColumn.Visibility = Visibility.Collapsed;
+        }
+
+        private void BindDisplayData(List<PersonelDocument> displayData) {
+            if (displayData == null || !displayData.Any())
+                displayData.AddRange(_handler.GetEmployeeSafetyTrainings(Employee?.Id ?? 0));
+            DisplayData = displayData;
+            DataGrid.ItemsSource = DisplayData;
+            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
     }
 }

@@ -31,7 +31,7 @@ Add Colours Blue-Grey?
 				Or just no msg box there...
 
 
-13. Co robi EditMode - nic?
+13. EmployeeView - validation happens on opened tab, even on history tab thats unabled.
  
 
 

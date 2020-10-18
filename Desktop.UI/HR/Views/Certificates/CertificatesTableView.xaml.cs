@@ -38,15 +38,13 @@ namespace Desktop.UI.HR.Views.Certificates {
             CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
 
-        public CertificatesTableView(Employee employee) {
+        public CertificatesTableView(Employee employee, List<PersonelDocument> displayData) {
             Employee = employee;
             UseBufor = true;
             _handler = new CertificateRequestHandler();
             InitializeComponent();
             InitializeEmployeeView();
-            DisplayData = _handler.GetEmployeeCertificates(employee.Id).ToList();
-            DataGrid.ItemsSource = DisplayData;
-            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
+            BindDisplayData(displayData);
         }
 
 
@@ -55,7 +53,7 @@ namespace Desktop.UI.HR.Views.Certificates {
             form.ShowDialog();
 
             if (UseBufor) {
-                if (EmployeeFormView.CertificateBufor .Contains(doc)) {
+                if (EmployeeFormView.CertificateBufor.Contains(doc)) {
                     DisplayData.Add(doc);
                     CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
                 }
@@ -76,11 +74,6 @@ namespace Desktop.UI.HR.Views.Certificates {
                     DisplayData.Remove(doc);
                     CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
                 } else {
-                    //T selectedItem = (T)dataGrid.SelectedItem;
-                    //await handler.DeleteAsync(selectedItem.Id);
-                    //dataGrid.ItemsSource = handler.Get();
-
-                    //await ViewHelper.DeleteRowAsync(_handler, DataGrid);
                     await _handler.DeleteAsync(doc.Id);
                     DataGrid.ItemsSource = _handler.Get();
                     CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
@@ -118,6 +111,14 @@ namespace Desktop.UI.HR.Views.Certificates {
             LastNameColumn.Visibility = Visibility.Collapsed;
             FirstNameColumn.Visibility = Visibility.Collapsed;
             ProfessionColumn.Visibility = Visibility.Collapsed;
+        }
+
+        private void BindDisplayData(List<PersonelDocument> displayData) {
+            if (displayData == null || !displayData.Any())
+                displayData.AddRange(_handler.GetEmployeeCertificates(Employee?.Id ?? 0));
+            DisplayData = displayData;
+            DataGrid.ItemsSource = DisplayData;
+            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
     }
 }

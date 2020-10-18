@@ -56,7 +56,7 @@ namespace Desktop.UI.HR.Views.Employees.Tabs {
 
         private void GeneralTabPage_Loaded(object sender, RoutedEventArgs e) {
             if (IsHistoryView || Employee.IsArchived)
-                ControlsHelper.DisableControls(this, new string[] { HistoryComboBox.Name });
+                ControlsHelper.DisableControls(this, new string[] { HistoryComboBox.Name, IsArchiveCheckBox.Name });
         }
 
         private void BindComboboxes() {

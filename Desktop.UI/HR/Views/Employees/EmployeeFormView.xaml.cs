@@ -31,12 +31,19 @@ namespace Desktop.UI.HR.Views.Employees {
         public static Bufor<PersonelDocument> SafetyTrainingBufor { get; set; }
         public static Bufor<PersonelDocument> CertificateBufor { get; set; }
 
+        public List<Leave> LeavesStorage { get; set; }
+        public List<PersonelDocument> MedicalCheckupsStorage { get; set; }
+        public List<PersonelDocument> SafetyTrainingsStorage { get; set; }
+        public List<PersonelDocument> CertificatesStorage { get; set; }
+
+
         public EmployeeFormView() {
             _handler = new EmployeeRequestHandler();
             Employee = new Employee();
             InitializeComponent();
             InitializeUI();
             InitializeBufors();
+            InitializeTabStorage();
         }
 
         public EmployeeFormView(int id) {
@@ -46,6 +53,7 @@ namespace Desktop.UI.HR.Views.Employees {
             InitializeComponent();
             InitializeUI();
             InitializeBufors();
+            InitializeTabStorage();
         }
 
         private void InitializeUI() {
@@ -65,6 +73,13 @@ namespace Desktop.UI.HR.Views.Employees {
             CertificateBufor = new Bufor<PersonelDocument>(new CertificateRequestHandler());
         }
 
+        private void InitializeTabStorage() {
+            LeavesStorage = new List<Leave>();
+            MedicalCheckupsStorage = new List<PersonelDocument>();
+            SafetyTrainingsStorage = new List<PersonelDocument>();
+            CertificatesStorage = new List<PersonelDocument>();
+        }
+
         private async Task FlushBuforsAsync(int id) {
             await LeaveBufor.FlushAsync(id);
             await MedicalCheckupBufor.FlushAsync(id);
@@ -79,16 +94,16 @@ namespace Desktop.UI.HR.Views.Employees {
                     TabFrame.Navigate(new GeneralTab(Employee, EditMode));
                     break;
                 case "AbsencesTab":
-                    TabFrame.Navigate(new AbsencesTab(Employee, EditMode));
+                    TabFrame.Navigate(new AbsencesTab(Employee, LeavesStorage));
                     break;
                 case "MedicalCheckupTab":
-                    TabFrame.Navigate(new MedicalCheckupsTableView(Employee));
+                    TabFrame.Navigate(new MedicalCheckupsTableView(Employee, MedicalCheckupsStorage));
                     break;
                 case "SecurityTrainingTab":
-                    TabFrame.Navigate(new SafetyTrainingsTableView(Employee));
+                    TabFrame.Navigate(new SafetyTrainingsTableView(Employee, SafetyTrainingsStorage));
                     break;
                 case "CertificationTab":
-                    TabFrame.Navigate(new CertificatesTableView(Employee));
+                    TabFrame.Navigate(new CertificatesTableView(Employee, CertificatesStorage));
                     break;
                 case "HistoryDataTab":
                     TabFrame.Navigate(new GeneralTab(Employee, true, true));

@@ -25,21 +25,16 @@ namespace Desktop.UI.HR.Views.Employees.Tabs {
     public partial class AbsencesTab : Page {
 
         public Employee Employee { get; set; }
-        public bool EditMode { get; set; }
         public List<Leave> DisplayData { get; set; }
 
         private readonly LeaveRequestHandler _handler;
 
-        public AbsencesTab(Employee employee, bool editMode) {
+        public AbsencesTab(Employee employee, List<Leave> displayData) {
             Employee = employee;
-            EditMode = editMode;
             _handler = new LeaveRequestHandler();
-            DisplayData = _handler.GetEmployeeLeaves(Employee?.Id ?? 0).ToList();
 
             InitializeComponent();
-
-            DataGrid.ItemsSource = DisplayData;
-            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
+            BindDisplayData(displayData);
         }
 
         private void FilterBox_TextChanged(object sender, TextChangedEventArgs e) {
@@ -89,6 +84,14 @@ namespace Desktop.UI.HR.Views.Employees.Tabs {
             AbsenceFormView form = new AbsenceFormView(leave);
             form.ShowDialog();
             CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
+        }
+
+        private void BindDisplayData(List<Leave> displayData) {
+            if (displayData == null || !displayData.Any())
+                displayData.AddRange(_handler.GetEmployeeLeaves(Employee?.Id ?? 0));
+            DisplayData = displayData;
+            DataGrid.ItemsSource = DisplayData;
+            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
     }
 }
