@@ -27,7 +27,7 @@ namespace Desktop.UI.HR.Views.Employees.Tabs {
             _handler = new LeaveRequestHandler();
 
             InitializeComponent();
-            BindDisplayData(Bufor.DisplayBufor);
+            BindDisplayData();
         }
 
         private void FilterBox_TextChanged(object sender, TextChangedEventArgs e) {
@@ -77,10 +77,10 @@ namespace Desktop.UI.HR.Views.Employees.Tabs {
             CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
         }
 
-        private void BindDisplayData(List<Leave> displayData) {
-            if (displayData == null || !displayData.Any())
-                displayData.AddRange(_handler.GetEmployeeLeaves(Employee?.Id ?? 0));
-            DisplayData = displayData;
+        private void BindDisplayData() {
+            if (Bufor.DisplayBufor == null || (!Bufor.DisplayBufor.Any() && Bufor.TransactionBufor.AnyQueuedRemovals()))
+                Bufor.DisplayBufor.AddRange(_handler.GetEmployeeLeaves(Employee?.Id ?? 0));
+            DisplayData = Bufor.DisplayBufor;
             DataGrid.ItemsSource = DisplayData;
             CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }

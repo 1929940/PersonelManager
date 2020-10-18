@@ -31,11 +31,7 @@
 
 18. Colour palet needs to be redone
 
-19. BUFOR - if there are 0 elements in display list, gets list from db. What if this was done on purpose?
-	FIX: If 0 get original list
-		if 0 in original list cool
-		if there are any elements to be delted in bufor
-		if so, dont download
+19. IF SELECTED ITEM IS EMPTY AND BUTTONS ARE CLICKED - BOOM
  
 
 

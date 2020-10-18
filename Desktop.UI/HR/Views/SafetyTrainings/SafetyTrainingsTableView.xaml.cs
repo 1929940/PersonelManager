@@ -41,7 +41,7 @@ namespace Desktop.UI.HR.Views.SafetyTrainings {
             _handler = new SafetyTrainingRequestHandler();
             InitializeComponent();
             InitializeEmployeeView();
-            BindDisplayData(bufor.DisplayBufor);
+            BindDisplayData();
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e) {
@@ -107,10 +107,10 @@ namespace Desktop.UI.HR.Views.SafetyTrainings {
             ProfessionColumn.Visibility = Visibility.Collapsed;
         }
 
-        private void BindDisplayData(List<PersonelDocument> displayData) {
-            if (displayData == null || !displayData.Any())
-                displayData.AddRange(_handler.GetEmployeeSafetyTrainings(Employee?.Id ?? 0));
-            DataGrid.ItemsSource = displayData;
+        private void BindDisplayData() {
+            if (Bufor.DisplayBufor == null || (!Bufor.DisplayBufor.Any() && !Bufor.TransactionBufor.AnyQueuedRemovals()))
+                Bufor.DisplayBufor.AddRange(_handler.GetEmployeeSafetyTrainings(Employee?.Id ?? 0));
+            DataGrid.ItemsSource = Bufor.DisplayBufor;
             CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
     }

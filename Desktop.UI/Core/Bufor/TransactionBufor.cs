@@ -67,6 +67,8 @@ namespace Desktop.UI.Core.Bufor {
 
         public bool Contains(T value) => BuforData.Exists(x => x.Value == value);
 
+        public bool AnyQueuedRemovals() => BuforData.Any(x => x.Status == Status.Removed);
+
         private void SetParentId(T value, int id) {
             switch (value) {
                 case PersonelDocument doc:
@@ -82,11 +84,6 @@ namespace Desktop.UI.Core.Bufor {
                     advance.Contract = new ContractSimplified() { Id = id };
                     break;
             }
-            //if (value is PersonelDocument doc) {
-            //    doc.Employee = new EmployeeSimplified() { Id = id };
-            //} else if (value is Leave leave) {
-            //    leave.Employee = new EmployeeSimplified() { Id = id };
-            //}
         }
 
         private void AddToBufor(Status status, T value) {
