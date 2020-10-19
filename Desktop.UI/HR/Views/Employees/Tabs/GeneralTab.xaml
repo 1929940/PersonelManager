@@ -141,10 +141,12 @@
                    Text="Pesel"/>
         <TextBox Grid.Row="2" Grid.Column="5"
                  Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+
             <TextBox.Text>
                 <Binding Path="Pesel" Mode="TwoWay">
                     <Binding.ValidationRules>
                         <validators:IsNotEmptyValidator/>
+                        <validators:PeselValidator/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>

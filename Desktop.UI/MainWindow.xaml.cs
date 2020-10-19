@@ -31,6 +31,7 @@ using Desktop.UI.HR.Views.Foremen;
 using Desktop.UI.Payroll.Views.Contracts;
 using Desktop.UI.Payroll.Views.Payments;
 using Desktop.UI.Payroll.Views.Advances;
+using Desktop.UI.Core.Validators;
 
 namespace PersonalManagerDesktop {
     /// <summary>
@@ -50,14 +51,8 @@ namespace PersonalManagerDesktop {
             //KIEROWNIK
             //ServerConnectionHelper.SetLoginData(new UserRequestHandler().Login("Witkowski@poczta.pl", "2897"));
 
-
             //PRACOWNIK
             //ServerConnectionHelper.SetLoginData(new UserRequestHandler().Login("wnuda@wp.pl", "5572"));
-
-            //CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("pl-PL");
-            //Thread.CurrentThread.CurrentCulture = new CultureInfo("pl-PL");
-            //Thread.CurrentThread.CurrentUICulture = new CultureInfo("pl-PL");
-
 
             InitializeComponent();
         }

@@ -124,7 +124,7 @@
     <value>Czy chcesz usunać wiersz?</value>
   </data>
   <data name="CONFIRM_EXIT" xml:space="preserve">
-    <value>Nie zapisane zmiany zostaną utracone.</value>
+    <value>Czy chcesz wyjść? Nie zapisane zmiany zostaną utracone.</value>
   </data>
   <data name="CONFIRM_SAVE" xml:space="preserve">
     <value>Czy chcesz zapisać zmiany?</value>

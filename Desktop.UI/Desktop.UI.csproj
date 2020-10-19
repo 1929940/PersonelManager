@@ -264,6 +264,7 @@
     <Compile Include="Core\Helpers\ExceptionHelper.cs" />
     <Compile Include="Core\Helpers\ServerConnectionHelper.cs" />
     <Compile Include="Core\Validators\IsPercentValue.cs" />
+    <Compile Include="Core\Validators\PeselValidator.cs" />
     <Compile Include="HR\Helper\EmployeeBufor.cs" />
     <Compile Include="HR\Views\Absences\AbsenceFormView.xaml.cs">
       <DependentUpon>AbsenceFormView.xaml</DependentUpon>

@@ -79,7 +79,7 @@ namespace Desktop.UI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nie zapisane zmiany zostaną utracone..
+        ///   Looks up a localized string similar to Czy chcesz wyjść? Nie zapisane zmiany zostaną utracone..
         /// </summary>
         internal static string CONFIRM_EXIT {
             get {

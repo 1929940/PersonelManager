@@ -32,6 +32,42 @@
 18. Colour palet needs to be redone
 
 19. IF SELECTED ITEM IS EMPTY AND BUTTONS ARE CLICKED - BOOM
+
+20. Check where to add validators
+
+
+21. Dashboard: Needs controller with only one - GET(period)
+	-employee,
+	-location,
+	-profession
+	-mistrz
+	-when doc expires 3x
+	-how many days gone
+	
+	-how much advances
+	-how much to be paid
+	-how much earned in total NETTO
+	-how much earned in total BRUTTO
+
+
+
+	-has been paid
+	-last hours report
+	-pay/hr
+
+	How much periods would work? Enter period and get all employees that have a contract within the period. 
+	Periods can be automatically displayed for periods from config
+	
+22. Simplified Contract
+	-needs to return employee data
+
+23. PESEL Validator
+
+24. What do we want to see in Contracts view?
+
+25. Salary view
+
+26. Advances view
  
 
 
