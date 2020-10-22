@@ -13,7 +13,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace Desktop.UI.HR.Views.Employees.Tabs {
-    public partial class AbsencesTab : Page {
+    public partial class LeavesTab : Page {
 
         public Employee Employee { get; set; }
         public List<Leave> DisplayData { get; set; }
@@ -21,7 +21,7 @@ namespace Desktop.UI.HR.Views.Employees.Tabs {
 
         private readonly LeaveRequestHandler _handler;
 
-        public AbsencesTab(Employee employee, Bufor<Leave> bufor) {
+        public LeavesTab(Employee employee, Bufor<Leave> bufor) {
             Employee = employee;
             Bufor = bufor;
             _handler = new LeaveRequestHandler();
@@ -47,7 +47,7 @@ namespace Desktop.UI.HR.Views.Employees.Tabs {
 
 
         private void AddButton_Click(object sender, RoutedEventArgs e) {
-            AbsenceFormView form = new AbsenceFormView(out Leave leave, Bufor);
+            LeavesFormView form = new LeavesFormView(out Leave leave, Bufor);
             form.ShowDialog();
             if (Bufor.TransactionBufor.Contains(leave)) {
                 DisplayData.Add(leave);
@@ -72,7 +72,7 @@ namespace Desktop.UI.HR.Views.Employees.Tabs {
 
         private void EditRow() {
             Leave leave = (Leave)DataGrid.SelectedItem;
-            AbsenceFormView form = new AbsenceFormView(leave, Bufor);
+            LeavesFormView form = new LeavesFormView(leave, Bufor);
             form.ShowDialog();
             CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
         }

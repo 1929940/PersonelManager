@@ -153,7 +153,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="HR\Views\Absences\AbsenceFormView.xaml">
+    <Page Include="HR\Views\Leaves\LeavesFormView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -173,7 +173,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="HR\Views\Employees\Tabs\AbsencesTab.xaml">
+    <Page Include="HR\Views\Employees\Tabs\LeavesTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -266,8 +266,8 @@
     <Compile Include="Core\Validators\IsPercentValue.cs" />
     <Compile Include="Core\Validators\PeselValidator.cs" />
     <Compile Include="HR\Helper\EmployeeBufor.cs" />
-    <Compile Include="HR\Views\Absences\AbsenceFormView.xaml.cs">
-      <DependentUpon>AbsenceFormView.xaml</DependentUpon>
+    <Compile Include="HR\Views\Leaves\LeavesFormView.xaml.cs">
+      <DependentUpon>LeavesFormView.xaml</DependentUpon>
     </Compile>
     <Compile Include="HR\Views\Certificates\CertificateFormView.xaml.cs">
       <DependentUpon>CertificateFormView.xaml</DependentUpon>
@@ -281,8 +281,8 @@
     <Compile Include="HR\Views\Employees\EmployeesTableView.xaml.cs">
       <DependentUpon>EmployeesTableView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="HR\Views\Employees\Tabs\AbsencesTab.xaml.cs">
-      <DependentUpon>AbsencesTab.xaml</DependentUpon>
+    <Compile Include="HR\Views\Employees\Tabs\LeavesTab.xaml.cs">
+      <DependentUpon>LeavesTab.xaml</DependentUpon>
     </Compile>
     <Compile Include="HR\Views\Employees\Tabs\GeneralTab.xaml.cs">
       <DependentUpon>GeneralTab.xaml</DependentUpon>
@@ -376,7 +376,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Core\ValueConverters\" />
-    <Folder Include="HR\Views\Leaves\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

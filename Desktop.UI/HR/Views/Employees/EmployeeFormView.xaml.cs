@@ -57,7 +57,7 @@ namespace Desktop.UI.HR.Views.Employees {
                     TabFrame.Navigate(new GeneralTab(Employee, EditMode));
                     break;
                 case "AbsencesTab":
-                    TabFrame.Navigate(new AbsencesTab(Employee, Bufor.LeaveBufor));
+                    TabFrame.Navigate(new LeavesTab(Employee, Bufor.LeaveBufor));
                     break;
                 case "MedicalCheckupTab":
                     TabFrame.Navigate(new MedicalCheckupsTableView(Employee, Bufor.MedicalCheckupBufor));

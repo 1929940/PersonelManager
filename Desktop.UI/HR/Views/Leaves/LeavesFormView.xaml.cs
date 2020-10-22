@@ -19,14 +19,14 @@ using System.Windows.Shapes;
 using static Desktop.UI.Core.Helpers.Enums;
 
 namespace Desktop.UI.HR.Views.Absences {
-    public partial class AbsenceFormView : Window {
+    public partial class LeavesFormView : Window {
 
         public string[] Types { get => Enum.GetNames(typeof(AbsenceTypes)); }
         public Leave Leave { get; set; }
         public Bufor<Leave> Bufor { get; set; }
 
 
-        public AbsenceFormView(out Leave leave, Bufor<Leave> bufor) {
+        public LeavesFormView(out Leave leave, Bufor<Leave> bufor) {
             Leave = new Leave() {
                 From = DateTime.Today
             };
@@ -44,7 +44,7 @@ namespace Desktop.UI.HR.Views.Absences {
             leave = Leave;
         }
 
-        public AbsenceFormView(Leave leave, Bufor<Leave> bufor) {
+        public LeavesFormView(Leave leave, Bufor<Leave> bufor) {
             Leave = leave;
             Bufor = bufor;
 
