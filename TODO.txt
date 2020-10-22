@@ -15,10 +15,6 @@
 
 	-basically need to detect and optimilize duplicates
 
-12. Dialogboxes - make em inform the user about changes being saved on saving employee?
-				Or just no msg box there...
-
-
 13. EmployeeView - validation happens on opened tab, even on history tab thats unabled.
 
 14. Rename Absences to Leave
@@ -61,7 +57,6 @@
 22. Simplified Contract
 	-needs to return employee data
 
-23. PESEL Validator
 
 24. What do we want to see in Contracts view?
 

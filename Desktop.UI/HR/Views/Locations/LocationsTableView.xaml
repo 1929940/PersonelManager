@@ -61,7 +61,7 @@
                     <Button Name="AddButton" Click="AddButton_Click">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal">
-                                <iconPacks:PackIconMaterial Kind="AccountPlusOutline"/>
+                                <iconPacks:PackIconMaterial Kind="PlusCircleOutline"/>
                                 <TextBlock Text="Dodaj"/>
                             </StackPanel>
                         </Button.Content>
@@ -70,7 +70,7 @@
                     <Button Name="EditButton" Click="EditButton_Click">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal">
-                                <iconPacks:PackIconMaterial Kind="AccountEditOutline"/>
+                                <iconPacks:PackIconMaterial Kind="CircleEditOutline"/>
                                 <TextBlock Text="Edytuj"/>
                             </StackPanel>
                         </Button.Content>
@@ -79,7 +79,7 @@
                     <Button Name="DeleteButton" Click="DeleteButton_Click">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal">
-                                <iconPacks:PackIconMaterial Kind="AccountMinusOutline"/>
+                                <iconPacks:PackIconMaterial Kind="MinusCircleOutline"/>
                                 <TextBlock Text="Usuń"/>
                             </StackPanel>
                         </Button.Content>
