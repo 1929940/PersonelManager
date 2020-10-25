@@ -17,11 +17,7 @@
 
 13. EmployeeView - validation happens on opened tab, even on history tab thats unabled.
 
-14. Rename Absences to Leave
-
 15. Archive button - does not enable on demand - requires reset
-
-16. Buttons - redo icons
 
 17. Consider adding more logos
 
@@ -54,15 +50,77 @@
 	How much periods would work? Enter period and get all employees that have a contract within the period. 
 	Periods can be automatically displayed for periods from config
 	
+	-Needs to show information: How much in total is left to be paid for the period
+								How much has been withdraw in advances
+
 22. Simplified Contract
 	-needs to return employee data
 
 
-24. What do we want to see in Contracts view?
+23. Payment Module Overview
 
-25. Salary view
+	User creates contract, sets its period, total value, hourly value.
+	When the contract is is in progress User adds advances.
+	Advances check if they can be given.
+	Advances are submited, and then realized.
+	When the contract is over, the user is able to create payment.
+	Contracts can be closed early?
+	Once payment is paid, close the contract.
+
+
+
+24. Contracts:
+
+	User can:
+		-see all contracts
+		-see all active contracts
+		-filter via box
+		-see whose contract is this
+		-see contract value (Brutto or netto?)
+		-see contract valid period
+		-see hourly wage
+	
+		-delete only if contract is not realized, there are no advances, no payment.
+
+		-contract gets realized when pay is paid
+
+		-Add Payment - allows to add payment from Contract.
+		-Add Advance - allows to add advance from Contract.
+		 (But only show buttons in edit mode)
+
+25. Payment view
+	-See all payments
+	-See all active contract payments?
+	-How much netto
+	-How much brutto
+	-How much has been withdrawn in advances
+	-How much left to be paid
+	-Who
+	-When
+
+	-Adds based on contract - Fields get automatically generated...
+	-Has button - Realize Payment..? 
+
+	-Has contract been terminated early?
+	-If so why?
+	-Was the employee charged for anything? Lost some equipment, got finned for comming drunk to work?
 
 26. Advances view
- 
+	-Who has taken it
+	-Value of advance
+	-Worked hours at time of requesting the advance
 
+	-While adding - show how much has been withdrawn
+
+	-Allow adding only to active contracts
+
+	-Allow editing/removing only unpaid.
+
+	-IsAllowed algo is: Withdrawn + requestedSum <= Worked hours * hourly pay * config%
+
+	-one can only add a advance to an open contract
+	-one can only remove unpaid advances
+
+	-show how much can be withdrawn the moment hours are filled
+ 
 
