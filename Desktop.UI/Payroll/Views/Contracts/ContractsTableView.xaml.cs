@@ -1,4 +1,5 @@
-﻿using CommunicationLibrary.Payroll.Requests;
+﻿using CommunicationLibrary.Payroll.Models;
+using CommunicationLibrary.Payroll.Requests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,8 +26,31 @@ namespace Desktop.UI.Payroll.Views.Contracts {
             _handler = new ContractRequestHandler();
             InitializeComponent();
             DataGrid.ItemsSource = _handler.Get();
-            //CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
+            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
+
+        private bool Filter(object item) {
+            string input = FilterBox.Text;
+            Contract contract = item as Contract;
+
+            bool result = contract.Employee.FirstName.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0
+                || contract.Employee.LastName.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0
+                || contract.Employee.Profession.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0
+                || contract.ContractSubject.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0
+                || contract.Title.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0
+                || contract.Number.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0;
+
+            if (ShowRealizedCheckbox.IsChecked != true)
+                result &= contract.IsRealized == false;
+
+            return result;
+        }
+
+
+        private void FilterBox_TextChanged(object sender, TextChangedEventArgs e) {
+            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
+        }
+
 
         private void AddButton_Click(object sender, RoutedEventArgs e) {
 
@@ -40,13 +64,12 @@ namespace Desktop.UI.Payroll.Views.Contracts {
 
         }
 
-        private void FilterBox_TextChanged(object sender, TextChangedEventArgs e) {
-
-        }
-
         private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
 
         }
 
+        private void ShowRealizedCheckbox_Changed(object sender, RoutedEventArgs e) {
+            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
+        }
     }
 }

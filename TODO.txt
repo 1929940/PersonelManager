@@ -122,5 +122,11 @@
 	-one can only remove unpaid advances
 
 	-show how much can be withdrawn the moment hours are filled
+
+27. CONTRACT HAS SOLVED CHECKBOX ISSUE - COPY IT EVERYWHERE
+
+28. DODAJ MOZLIWOSC FILTROWANIA PO DACIE
+
+29. TODO: CHECK THE ORDER OF COLUMNS
  
 

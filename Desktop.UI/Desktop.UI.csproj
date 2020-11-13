@@ -265,6 +265,8 @@
     <Compile Include="Core\Helpers\ServerConnectionHelper.cs" />
     <Compile Include="Core\Validators\IsPercentValue.cs" />
     <Compile Include="Core\Validators\PeselValidator.cs" />
+    <Compile Include="Core\ValueConverters\ToPercentConverter.cs" />
+    <Compile Include="Core\ValueConverters\ToPLNConverter.cs" />
     <Compile Include="HR\Helper\EmployeeBufor.cs" />
     <Compile Include="HR\Views\Leaves\LeavesFormView.xaml.cs">
       <DependentUpon>LeavesFormView.xaml</DependentUpon>
@@ -374,8 +376,6 @@
       <Name>CommunicationLibrary</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\ValueConverters\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

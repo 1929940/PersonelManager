@@ -10,6 +10,8 @@ namespace CommunicationLibrary.Payroll.Models {
         public string ContractSubject { get; set; }
         public bool IsRealized { get; set; }
         public EmployeeSimplified Employee { get; set; }
+
+        //TODO: IS THIS NEEDED?
         public Payment Payment { get; set; }
         public IEnumerable<Advance> Advances { get; set; }
     }
