@@ -65,7 +65,8 @@ namespace Desktop.UI.Payroll.Views.Contracts {
         }
 
         private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
-
+            ContractFormView form = new ContractFormView();
+            form.ShowDialog();
         }
 
         private void ShowRealizedCheckbox_Changed(object sender, RoutedEventArgs e) {

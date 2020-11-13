@@ -6,6 +6,8 @@
     <!--StartupUri="Business/Login/LoginWindow.xaml">-->
 
     <Application.Resources>
-        
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Foreground" Value="Red" />
+        </Style>
     </Application.Resources>
 </Application>
