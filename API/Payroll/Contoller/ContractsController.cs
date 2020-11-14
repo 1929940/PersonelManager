@@ -80,6 +80,8 @@ namespace API.Payroll.Contoller {
             Contract contract = new Contract();
             ContractManager.UpdateWithDTO(dto, ref contract);
             ContractManager.WriteCreationTags(requestAuthor, ref contract);
+            if (string.IsNullOrEmpty(contract.Number))
+                contract.Number = ContractManager.GenerateContractNumber(contract, _context);
 
             _context.Contracts.Add(contract);
             await _context.SaveChangesAsync();
