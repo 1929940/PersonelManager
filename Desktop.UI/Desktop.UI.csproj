@@ -337,6 +337,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Payroll\Helpers\ContractBufor.cs" />
     <Compile Include="Payroll\Views\Advances\AdvancesTableView.xaml.cs">
       <DependentUpon>AdvancesTableView.xaml</DependentUpon>
     </Compile>

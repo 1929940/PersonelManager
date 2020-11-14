@@ -3,6 +3,7 @@ using CommunicationLibrary.Business.Requests;
 using CommunicationLibrary.Payroll.Models;
 using CommunicationLibrary.Payroll.Requests;
 using Desktop.UI.Core.Helpers;
+using Desktop.UI.Payroll.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,10 +27,13 @@ namespace Desktop.UI.Payroll.Views.Contracts {
         private readonly ContractRequestHandler _handler;
         public bool EditMode { get; set; }
         public decimal AdvancesSum => Contract.Advances?.Sum(x => x.Amount) ?? 0m;
+        public ContractBufor Bufor { get; set; }
 
         public ContractFormView() {
             _handler = new ContractRequestHandler();
             Contract = new Contract();
+            Bufor = new ContractBufor();
+
 
             this.DataContext = Contract;
             InitializeComponent();
@@ -42,6 +46,7 @@ namespace Desktop.UI.Payroll.Views.Contracts {
             EditMode = true;
             _handler = new ContractRequestHandler();
             Contract = _handler.Get(id);
+            Bufor = new ContractBufor();
 
             this.DataContext = Contract;
             InitializeComponent();
@@ -130,8 +135,9 @@ namespace Desktop.UI.Payroll.Views.Contracts {
 
         private void BindCombobox() {
             if (EditMode) {
-                string employee = string.Format($"{Contract.Employee.LastName} {Contract.Employee.FirstName}");
-                EmployeeCombobox.ItemsSource = new Dictionary<int, string>() { { Contract.Employee.Id, employee } };
+                //string employee = string.Format($"{Contract.Employee.LastName} {Contract.Employee.FirstName}");
+                //EmployeeCombobox.ItemsSource = new Dictionary<int, string>() { { Contract.Employee.Id, employee } };
+                EmployeeCombobox.ItemsSource = ViewHelper.GetCurrentEmployeeDictionary(Contract.Employee);
                 EmployeeCombobox.SelectedIndex = 0;
                 EmployeeCombobox.IsEnabled = false;
             } else {
@@ -170,11 +176,11 @@ namespace Desktop.UI.Payroll.Views.Contracts {
         private async void SaveButton_Click(object sender, RoutedEventArgs e) {
             if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
                 if (EditMode) {
-                    //await _handler.UpdateAsync(Employee.Id, Employee);
-                    //await Bufor.FlushBuforsAsync(Employee.Id);
+                    await _handler.UpdateAsync(Contract.Id, Contract);
+                    await Bufor.FlushBuforsAsync(Contract.Id);
                 } else {
-                    //Employee created = await _handler.CreateAsync(Employee);
-                    //await Bufor.FlushBuforsAsync(created.Id);
+                    Contract created = await _handler.CreateAsync(Contract);
+                    await Bufor.FlushBuforsAsync(created.Id);
                 }
                 this.Close();
             }

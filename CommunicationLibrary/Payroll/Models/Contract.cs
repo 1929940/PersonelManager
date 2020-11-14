@@ -11,7 +11,7 @@ namespace CommunicationLibrary.Payroll.Models {
         public bool IsRealized { get; set; }
         public EmployeeSimplified Employee { get; set; }
 
-        //TODO: IS THIS NEEDED?
+        //TODO: IS THIS NEEDED? YES BUT NEEDS TO BE REPLACED
         public Payment Payment { get; set; }
         public IEnumerable<Advance> Advances { get; set; }
 
