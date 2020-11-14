@@ -14,5 +14,9 @@ namespace CommunicationLibrary.Payroll.Models {
         //TODO: IS THIS NEEDED?
         public Payment Payment { get; set; }
         public IEnumerable<Advance> Advances { get; set; }
+
+        public Contract() {
+            Employee = new EmployeeSimplified();
+        }
     }
 }

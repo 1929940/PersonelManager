@@ -263,8 +263,10 @@
     <Compile Include="Business\Validators\PasswordValidator.cs" />
     <Compile Include="Core\Helpers\ExceptionHelper.cs" />
     <Compile Include="Core\Helpers\ServerConnectionHelper.cs" />
+    <Compile Include="Core\Validators\IsNotZeroPLNValidator.cs" />
     <Compile Include="Core\Validators\IsPercentValue.cs" />
     <Compile Include="Core\Validators\PeselValidator.cs" />
+    <Compile Include="Core\ValueConverters\EmptyToAutomatic.cs" />
     <Compile Include="Core\ValueConverters\ToPercentConverter.cs" />
     <Compile Include="Core\ValueConverters\ToPLNConverter.cs" />
     <Compile Include="HR\Helper\EmployeeBufor.cs" />

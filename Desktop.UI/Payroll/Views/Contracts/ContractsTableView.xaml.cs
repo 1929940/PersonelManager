@@ -47,26 +47,44 @@ namespace Desktop.UI.Payroll.Views.Contracts {
         }
 
 
+        private void EditRow() {
+            Contract contract = (Contract)DataGrid.SelectedItem;
+            ContractFormView form = new ContractFormView(contract.Id);
+            form.ShowDialog();
+
+            DataGrid.ItemsSource = _handler.Get();
+
+            //if (UseBufor) {
+            //CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
+            //} else {
+            DataGrid.ItemsSource = _handler.Get();
+            //}
+        }
+
+
         private void FilterBox_TextChanged(object sender, TextChangedEventArgs e) {
             CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
         }
 
 
         private void AddButton_Click(object sender, RoutedEventArgs e) {
-
+            ContractFormView form = new ContractFormView();
+            form.ShowDialog();
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e) {
-
+            EditRow();
         }
 
-        private void DeleteButton_Click(object sender, RoutedEventArgs e) {
-
+        private async void DeleteButton_Click(object sender, RoutedEventArgs e) {
+            Contract contract = (Contract)DataGrid.SelectedItem;
+            await _handler.DeleteAsync(contract.Id);
+            DataGrid.ItemsSource = _handler.Get();
+            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
 
         private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
-            ContractFormView form = new ContractFormView();
-            form.ShowDialog();
+            EditRow();
         }
 
         private void ShowRealizedCheckbox_Changed(object sender, RoutedEventArgs e) {

@@ -4,12 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Desktop.UI.Payroll.Views.Contracts"
+        xmlns:converters="clr-namespace:Desktop.UI.Core.ValueConverters"
         mc:Ignorable="d"
         FontFamily="Calibri" FontSize="14"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
         xmlns:validators="clr-namespace:Desktop.UI.Core.Validators"
-        Title="Umowa" Height="680" Width="460">
+        Title="Umowa" Height="710" Width="460">
     <Window.Resources>
+        <converters:ToPLNConverter x:Key="ToPLNConverter"/>
+        <converters:ToPercentConverter x:Key="ToPercentConverter"/>
         <Style TargetType="{x:Type TextBlock}">
             <Setter Property="Margin" Value="5,5"/>
             <Setter Property="Width" Value="70"/>
@@ -17,7 +20,7 @@
         </Style>
 
         <Style TargetType="{x:Type TextBox}">
-            <Setter Property="Margin" Value="5,5"/>
+            <Setter Property="Margin" Value="5,5,5,10"/>
             <Setter Property="Width" Value="100"/>
             <Setter Property="Height" Value="25"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -137,12 +140,12 @@
 
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Numer"/>
-                    <TextBox Name="CityTextBox" Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+                    <TextBox Name="CityTextBox" HorizontalContentAlignment="Right">
                         <TextBox.Text>
                             <Binding Path="Number" Mode="TwoWay" UpdateSourceTrigger="Default">
-                                <Binding.ValidationRules>
-                                    <validators:IsNotEmptyValidator/>
-                                </Binding.ValidationRules>
+                                <Binding.Converter>
+                                    <converters:EmptyToAutomatic/>
+                                </Binding.Converter>
                             </Binding>
                         </TextBox.Text>
                     </TextBox>
@@ -152,22 +155,28 @@
                 <StackPanel Orientation="Horizontal">
 
                     <TextBlock Text="Wartość"/>
-                    <TextBox Name="ValueTextBox" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" HorizontalContentAlignment="Right">
+                    <TextBox Name="ValueTextBox" HorizontalContentAlignment="Right" Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
                         <TextBox.Text>
                             <Binding Path="Value" Mode="TwoWay" UpdateSourceTrigger="Default">
                                 <Binding.ValidationRules>
-                                    <validators:IsNotEmptyValidator/>
+                                    <validators:IsNotZeroPLNValidator/>
                                 </Binding.ValidationRules>
+                                <Binding.Converter>
+                                    <converters:ToPLNConverter/>
+                                </Binding.Converter>
                             </Binding>
                         </TextBox.Text>
                     </TextBox>
                     <TextBlock Text="Stawka" Width="70" Margin="50,10,0,10"/>
-                    <TextBox Name="HourlySalaryTextBox" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" HorizontalContentAlignment="Right">
+                    <TextBox Name="HourlySalaryTextBox" HorizontalContentAlignment="Right" Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
                         <TextBox.Text>
                             <Binding Path="HourlySalary" Mode="TwoWay" UpdateSourceTrigger="Default">
                                 <Binding.ValidationRules>
-                                    <validators:IsNotEmptyValidator/>
+                                    <validators:IsNotZeroPLNValidator/>
                                 </Binding.ValidationRules>
+                                <Binding.Converter>
+                                    <converters:ToPLNConverter/>
+                                </Binding.Converter>
                             </Binding>
                         </TextBox.Text>
                     </TextBox>
@@ -176,12 +185,12 @@
 
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Podatek"/>
-                    <TextBox Name="TaxTextBox" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" HorizontalContentAlignment="Right">
+                    <TextBox Name="TaxTextBox" HorizontalContentAlignment="Right">
                         <TextBox.Text>
-                            <Binding Path="Tax" Mode="TwoWay" UpdateSourceTrigger="Default">
-                                <Binding.ValidationRules>
-                                    <validators:IsNotEmptyValidator/>
-                                </Binding.ValidationRules>
+                            <Binding Path="TaxPercent" Mode="TwoWay" UpdateSourceTrigger="Default">
+                                <Binding.Converter>
+                                    <converters:ToPercentConverter/>
+                                </Binding.Converter>
                             </Binding>
                         </TextBox.Text>
                     </TextBox>
@@ -241,12 +250,12 @@
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <TextBlock Text="Suma" Width="35"/>
-                        <TextBox Name="AdvancesSumTextBox" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" HorizontalContentAlignment="Right">
+                        <TextBox Name="AdvancesSumTextBox" IsReadOnly="True" Focusable="False" IsEnabled="False" HorizontalContentAlignment="Right">
                             <TextBox.Text>
-                                <Binding Path="AdvancesSum" Mode="TwoWay" UpdateSourceTrigger="Default">
-                                    <Binding.ValidationRules>
-                                        <validators:IsNotEmptyValidator/>
-                                    </Binding.ValidationRules>
+                                <Binding Path="AdvancesSum" Mode="OneWay" UpdateSourceTrigger="Default">
+                                    <Binding.Converter>
+                                        <converters:ToPLNConverter/>
+                                    </Binding.Converter>
                                 </Binding>
                             </TextBox.Text>
                         </TextBox>
@@ -307,16 +316,7 @@
         <StackPanel Grid.Row="7" Orientation="Horizontal"
                     VerticalAlignment="Bottom" HorizontalAlignment="Right">
 
-            <Button Name="AddButton" Click="AddButton_Click" Visibility="Collapsed">
-                <Button.Content>
-                    <StackPanel Orientation="Horizontal">
-                        <iconPacks:PackIconMaterial Kind="PlusCircleOutline"/>
-                        <TextBlock Text="Dodaj" Margin="0" Width="50"/>
-                    </StackPanel>
-                </Button.Content>
-            </Button>
-
-            <Button Name="UpdateButton" Click="UpdateButton_Click" Visibility="Collapsed">
+            <Button Name="SaveButton" Click="SaveButton_Click">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <iconPacks:PackIconMaterial Kind="ContentSaveOutline"/>

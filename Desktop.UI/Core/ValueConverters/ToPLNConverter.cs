@@ -13,7 +13,18 @@ namespace Desktop.UI.Core.ValueConverters {
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
-            throw new NotImplementedException();
+            string valueStr = value.ToString();
+            int currencySymbolIndex = valueStr.LastIndexOf(" PLN");
+            if (currencySymbolIndex == -1) {
+                if (Decimal.TryParse(valueStr, out _)) {
+                    valueStr += " PLN";
+                    currencySymbolIndex = valueStr.LastIndexOf(" PLN");
+                } else {
+                    return 0;
+                }
+            }
+            valueStr = valueStr.Substring(0, currencySymbolIndex);
+            return Decimal.Round(Decimal.Parse(valueStr), 2);
         }
 
     }

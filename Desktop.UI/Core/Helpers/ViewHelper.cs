@@ -41,6 +41,7 @@ namespace Desktop.UI.Core.Helpers {
                     .Select(x => x.Key).ToList().IndexOf(id);
         }
 
+        //TODO: CHANGE INTO ENDPOINT
         public static Dictionary<int, string> GetEmployeesDictionary() =>
             new EmployeeRequestHandler().Get().ToDictionary(x => x.Id, x => string.Format($"{x.LastName} {x.FirstName}"));
 
