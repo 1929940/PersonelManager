@@ -269,7 +269,7 @@
         <GroupBox Header="Wypłata" Grid.Row="3">
             <StackPanel Orientation="Horizontal">
 
-                <Button Name="AddPayment" Click="AddPayment_Click" Width="100">
+                <Button Name="AddPayment" Click="AddPayment_Click" Width="100" Visibility="Collapsed">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal">
                             <iconPacks:PackIconMaterial Kind="PlusCircleOutline"/>
@@ -278,7 +278,7 @@
                     </Button.Content>
                 </Button>
 
-                <Button Name="EditPayment" Click="EditPayment_Click" Width="100">
+                <Button Name="EditPayment" Click="EditPayment_Click" Width="100" Visibility="Collapsed">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal">
                             <iconPacks:PackIconMaterial Kind="PencilCircleOutline"/>
@@ -287,7 +287,7 @@
                     </Button.Content>
                 </Button>
 
-                <Button Name="RemovePayment" Click="RemovePayment_Click" Width="100">
+                <Button Name="RemovePayment" Click="RemovePayment_Click" Width="100" Visibility="Collapsed">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal">
                             <iconPacks:PackIconMaterial Kind="MinusCircleOutline"/>

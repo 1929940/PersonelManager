@@ -59,6 +59,7 @@ namespace Desktop.UI.Payroll.Views.Contracts {
             InitDates();
             InitHeader();
             InitMetadata();
+            InitPaymentButtons();
         }
 
         private void InitHeader() {
@@ -84,20 +85,20 @@ namespace Desktop.UI.Payroll.Views.Contracts {
                     endingDate = startingDate.AddMonths(1);
                 }
 
-                ValidFromDatePicker.SelectedDate = CreateDate(startingDate.Year, startingDate.Month, config.BillingMonthStart);
-                ValidToDatePicker.SelectedDate = CreateDate(endingDate.Year, endingDate.Month, config.BillingMonthEnd);
+                ValidFromDatePicker.SelectedDate = DateHelper.CreateDate(startingDate.Year, startingDate.Month, config.BillingMonthStart);
+                ValidToDatePicker.SelectedDate = DateHelper.CreateDate(endingDate.Year, endingDate.Month, config.BillingMonthEnd);
 
                 TitleTextBox.Text = string.Format($"Umowa za {startingDate.ToString("MMMMMMMMMMMMM")}");
             }
         }
 
-        //TODO: THIS NEEDS TO BE SOMEHWRE ELSE - DATEHELPERS?
-        private DateTime CreateDate(int year, int month, int day) {
-            string date = string.Format($"{year}/{month}/{day}");
-            while (!DateTime.TryParse(date, out _))
-                date = string.Format($"{year}/{month}/{--day}");
-
-            return DateTime.Parse(date);
+        private void InitPaymentButtons() {
+            if(Contract.Payment == null) {
+                AddPayment.Visibility = Visibility.Visible;
+            } else {
+                EditPayment.Visibility = Visibility.Visible;
+                RemovePayment.Visibility = Visibility.Visible;
+            }
         }
 
         private void InitMetadata() {
@@ -125,7 +126,7 @@ namespace Desktop.UI.Payroll.Views.Contracts {
             if (string.IsNullOrEmpty(Contract.UpdatedBy)) {
                 UpdatedTextBlock.Visibility = Visibility.Collapsed;
             }
-            UpdatedTextBlock.Text = string.Format($"Obiekt stworzony {Contract.CreatedOn} przez {Contract.CreatedBy}");
+            UpdatedTextBlock.Text = string.Format($"Ostatniej modyfikacji dokonano {Contract.CreatedOn} przez {Contract.CreatedBy}");
         }
 
 
@@ -135,8 +136,6 @@ namespace Desktop.UI.Payroll.Views.Contracts {
 
         private void BindCombobox() {
             if (EditMode) {
-                //string employee = string.Format($"{Contract.Employee.LastName} {Contract.Employee.FirstName}");
-                //EmployeeCombobox.ItemsSource = new Dictionary<int, string>() { { Contract.Employee.Id, employee } };
                 EmployeeCombobox.ItemsSource = ViewHelper.GetCurrentEmployeeDictionary(Contract.Employee);
                 EmployeeCombobox.SelectedIndex = 0;
                 EmployeeCombobox.IsEnabled = false;
@@ -157,15 +156,15 @@ namespace Desktop.UI.Payroll.Views.Contracts {
         }
 
         private void AddPayment_Click(object sender, RoutedEventArgs e) {
-
+            InitPaymentButtons();
         }
 
         private void EditPayment_Click(object sender, RoutedEventArgs e) {
-
+            InitPaymentButtons();
         }
 
         private void RemovePayment_Click(object sender, RoutedEventArgs e) {
-
+            InitPaymentButtons();
         }
 
         private void Close_Click(object sender, RoutedEventArgs e) {

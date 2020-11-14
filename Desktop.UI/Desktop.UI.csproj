@@ -246,6 +246,7 @@
     <Compile Include="Core\Bufor\BuforObject.cs" />
     <Compile Include="Core\Bufor\TransactionBufor.cs" />
     <Compile Include="Core\Helpers\AuthorizationHelper.cs" />
+    <Compile Include="Core\Helpers\DateHelper.cs" />
     <Compile Include="Core\Helpers\DialogHelper.cs" />
     <Compile Include="Core\Helpers\Enums.cs" />
     <Compile Include="Core\Helpers\ViewHelper.cs" />

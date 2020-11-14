@@ -116,19 +116,19 @@
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn Header="Zapłacono" Binding="{Binding IsRealized}" ElementStyle="{StaticResource DataGridCell_CheckBoxStyle}" IsReadOnly="True"/>
 
+                <DataGridTextColumn Header="Numer" Binding="{Binding Number}" Width="100" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                <DataGridTextColumn Header="Tytuł" Binding="{Binding Title}" Width="150" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                
                 <DataGridTextColumn Header="Imie" Binding="{Binding Employee.FirstName}" Width="125" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
                 <DataGridTextColumn Header="Nazwisko" Binding="{Binding Employee.LastName}" Width="125" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
                 <DataGridTextColumn Header="Zawód" Binding="{Binding Employee.Profession}" Width="125" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
 
-                <DataGridTextColumn Header="Tytuł" Binding="{Binding Title}" Width="150" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
                 <DataGridTextColumn Header="Ważny od" Binding="{Binding ValidFrom, StringFormat=\{0:yyyy.MM.dd\}}" Width="100" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
                 <DataGridTextColumn Header="Ważny do" Binding="{Binding ValidTo, StringFormat=\{0:yyyy.MM.dd\}}" Width="100" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
                 <DataGridTextColumn Header="Wartość" Binding="{Binding Value, Converter={StaticResource ToPLNConverter}}" Width="90" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
                 
                 <DataGridTextColumn Header="Stawka" Binding="{Binding HourlySalary, Converter={StaticResource ToPLNConverter}}" Width="90" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
                 <DataGridTextColumn Header="Podatek" Binding="{Binding TaxPercent, Converter={StaticResource ToPercentConverter}}" Width="85" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
-
-                <DataGridTextColumn Header="Numer" Binding="{Binding Number}" Width="100" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
 
                 <DataGridTextColumn Header="Przedmiot umowy" Binding="{Binding ContractSubject}" Width="400" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
 

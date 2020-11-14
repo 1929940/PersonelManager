@@ -1,5 +1,6 @@
 ﻿using CommunicationLibrary.Payroll.Models;
 using CommunicationLibrary.Payroll.Requests;
+using Desktop.UI.Core.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,12 +53,15 @@ namespace Desktop.UI.Payroll.Views.Contracts {
             ContractFormView form = new ContractFormView(contract.Id);
             form.ShowDialog();
 
+            //DataGrid.ItemsSource = _handler.Get();
+
             DataGrid.ItemsSource = _handler.Get();
+            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
 
             //if (UseBufor) {
             //CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
             //} else {
-            DataGrid.ItemsSource = _handler.Get();
+            //DataGrid.ItemsSource = _handler.Get();
             //}
         }
 
@@ -70,6 +74,9 @@ namespace Desktop.UI.Payroll.Views.Contracts {
         private void AddButton_Click(object sender, RoutedEventArgs e) {
             ContractFormView form = new ContractFormView();
             form.ShowDialog();
+
+            DataGrid.ItemsSource = _handler.Get();
+            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e) {
@@ -77,10 +84,13 @@ namespace Desktop.UI.Payroll.Views.Contracts {
         }
 
         private async void DeleteButton_Click(object sender, RoutedEventArgs e) {
-            Contract contract = (Contract)DataGrid.SelectedItem;
-            await _handler.DeleteAsync(contract.Id);
-            DataGrid.ItemsSource = _handler.Get();
-            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
+            if (DialogHelper.Delete()) {
+                Contract contract = (Contract)DataGrid.SelectedItem;
+                await _handler.DeleteAsync(contract.Id);
+
+                DataGrid.ItemsSource = _handler.Get();
+                CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
+            }
         }
 
         private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
