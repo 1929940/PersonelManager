@@ -72,13 +72,13 @@
 24. Contracts:
 
 	User can:
-		-see all contracts
-		-see all active contracts
-		-filter via box
-		-see whose contract is this
+		-see all contracts			DONE																						
+		-see all active contracts	DONE
+		-filter via box				DONE
+		-see whose contract is this	DONE
 		-see contract value (Brutto or netto?)
 		-see contract valid period
-		-see hourly wage
+		-see hourly wage	DONE
 	
 		-delete only if contract is not realized, there are no advances, no payment.
 
@@ -86,7 +86,6 @@
 
 		-Add Payment - allows to add payment from Contract.
 		-Add Advance - allows to add advance from Contract.
-		 (But only show buttons in edit mode)
 
 25. Payment view
 	-See all payments
@@ -105,6 +104,8 @@
 	-If so why?
 	-Was the employee charged for anything? Lost some equipment, got finned for comming drunk to work?
 
+	-ADD BOOL - IsRealized (API, add to DTO, If date padion is filled true)
+
 26. Advances view
 	-Who has taken it
 	-Value of advance
@@ -122,6 +123,8 @@
 	-one can only remove unpaid advances
 
 	-show how much can be withdrawn the moment hours are filled
+
+	-kierownik can add an advance no matter what.
 
 27. CONTRACT HAS SOLVED CHECKBOX ISSUE - COPY IT EVERYWHERE
 

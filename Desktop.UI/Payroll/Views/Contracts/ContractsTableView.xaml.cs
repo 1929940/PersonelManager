@@ -53,16 +53,8 @@ namespace Desktop.UI.Payroll.Views.Contracts {
             ContractFormView form = new ContractFormView(contract.Id);
             form.ShowDialog();
 
-            //DataGrid.ItemsSource = _handler.Get();
-
             DataGrid.ItemsSource = _handler.Get();
             CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
-
-            //if (UseBufor) {
-            //CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
-            //} else {
-            //DataGrid.ItemsSource = _handler.Get();
-            //}
         }
 
 
@@ -84,8 +76,16 @@ namespace Desktop.UI.Payroll.Views.Contracts {
         }
 
         private async void DeleteButton_Click(object sender, RoutedEventArgs e) {
+            Contract contract = (Contract)DataGrid.SelectedItem;
+            if (contract == null)
+                return;
+
+            if (contract.IsRealized) {
+                MessageBox.Show("Nie można usuwać zrealizowanych umów.", "Niedozwolona akcja", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            } 
+            
             if (DialogHelper.Delete()) {
-                Contract contract = (Contract)DataGrid.SelectedItem;
                 await _handler.DeleteAsync(contract.Id);
 
                 DataGrid.ItemsSource = _handler.Get();

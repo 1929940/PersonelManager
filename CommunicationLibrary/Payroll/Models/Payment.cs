@@ -9,5 +9,6 @@ namespace CommunicationLibrary.Payroll.Models {
         public DateTime? PaidOn { get; set; }
         public decimal GrossAmount { get; set; }
         public decimal NetAmount { get; set; }
+        public bool IsRealized { get; set; }
     }
 }

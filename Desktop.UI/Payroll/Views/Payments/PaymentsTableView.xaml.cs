@@ -48,5 +48,9 @@ namespace Desktop.UI.Payroll.Views.Payments {
         private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
 
         }
+
+        private void ShowRealizedCheckbox_Changed(object sender, RoutedEventArgs e) {
+
+        }
     }
 }

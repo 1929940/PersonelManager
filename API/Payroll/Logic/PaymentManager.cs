@@ -12,7 +12,8 @@ namespace API.Payroll.Logic {
                 Id = payment.Id,
                 GrossAmount = payment.GrossAmount,
                 NetAmount = payment.NetAmount,
-                PaidOn = payment.PaidOn
+                PaidOn = payment.PaidOn,
+                IsRealized = payment.PaidOn != null
             };
 
             CopyTags(payment, ref dto);
