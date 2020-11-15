@@ -87,6 +87,8 @@
 		-Add Payment - allows to add payment from Contract.
 		-Add Advance - allows to add advance from Contract.
 
+		-IsRealized should not be a DBField but rather based on Payment-PaidOn if null leave EMPTY
+
 25. Payment view
 	-See all payments
 	-See all active contract payments?

@@ -46,7 +46,8 @@ namespace Desktop.UI.Payroll.Views.Payments {
         }
 
         private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
-
+            PaymentFormView form = new PaymentFormView();
+            form.ShowDialog();
         }
 
         private void ShowRealizedCheckbox_Changed(object sender, RoutedEventArgs e) {

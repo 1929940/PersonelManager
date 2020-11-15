@@ -119,6 +119,11 @@
                 <DataGridTextColumn Header="Zawód" Binding="{Binding Employee.Profession}" Width="125" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
                 
                 <DataGridTextColumn Header="Umowa" Binding="{Binding Contract.Number}" Width="100" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                
+                <!--TotalValue-->
+                <!--TaxValue-->
+                <!--AdvamcesValue-->
+                <!--PaidValue-->
 
                 <DataGridTextColumn Header="Brutto" Binding="{Binding GrossAmount, Converter={StaticResource ToPLNConverter}}" Width="90" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
                 <DataGridTextColumn Header="Netto" Binding="{Binding NetAmount, Converter={StaticResource ToPLNConverter}}" Width="90" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
