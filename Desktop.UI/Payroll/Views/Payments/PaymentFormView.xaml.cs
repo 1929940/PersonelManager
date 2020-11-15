@@ -32,5 +32,9 @@ namespace Desktop.UI.Payroll.Views.Payments {
         private void Close_Click(object sender, RoutedEventArgs e) {
 
         }
+
+        private void AdditionalDeductionsTextBox_TextChanged(object sender, TextChangedEventArgs e) {
+
+        }
     }
 }

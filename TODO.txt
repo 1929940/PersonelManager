@@ -90,23 +90,20 @@
 		-IsRealized should not be a DBField but rather based on Payment-PaidOn if null leave EMPTY
 
 25. Payment view
-	-See all payments
-	-See all active contract payments?
-	-How much netto
-	-How much brutto
-	-How much has been withdrawn in advances
-	-How much left to be paid
-	-Who
-	-When
 
-	-Adds based on contract - Fields get automatically generated...
-	-Has button - Realize Payment..? 
+	TotalValue
+	AdvancesValue
+	TaxValue
+	AdditionalDeductions
+	AdditionalDeductionsDescription
+	PaidValue
+	PaidOn
+	ContractSimplified - Number, Employee.LastName, ContractId
+	IsRealized - SET BY API
 
-	-Has contract been terminated early?
-	-If so why?
-	-Was the employee charged for anything? Lost some equipment, got finned for comming drunk to work?
-
-	-ADD BOOL - IsRealized (API, add to DTO, If date padion is filled true)
+	CANNOT EDIT REALIZED PAYMENTS
+	CAN DELETE REALIZED PAYMENTS
+	KIEROWNIK CAN EDIT
 
 26. Advances view
 	-Who has taken it
@@ -115,7 +112,7 @@
 
 	-While adding - show how much has been withdrawn
 
-	-Allow adding only to active contracts
+	-Allow adding only to active contracts // CHOOSE EMPLOYEE NOT CONTRACT - TWO COMBOBOXES
 
 	-Allow editing/removing only unpaid.
 

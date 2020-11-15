@@ -9,7 +9,7 @@
         FontFamily="Calibri" FontSize="14"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
         xmlns:validators="clr-namespace:Desktop.UI.Core.Validators"
-        Title="Umowa" Height="400" Width="460">
+        Title="Umowa" Height="600" Width="460">
     <Window.Resources>
         <converters:ToPLNConverter x:Key="ToPLNConverter"/>
         <converters:ToPercentConverter x:Key="ToPercentConverter"/>
@@ -107,6 +107,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -114,7 +116,7 @@
             Text="TMP" Name="HeaderText" Width="Auto"
                        FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
 
-        <GroupBox Header="Wypłata" Grid.Row="1">
+        <GroupBox Header="Ogólne" Grid.Row="1">
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Umowa"/>
@@ -132,32 +134,81 @@
                     <TextBlock Text="Suma Zaliczek" TextWrapping="Wrap" Margin="50,0,0,0"/>
                     <TextBox Name="AdvancesValueTextBox" HorizontalContentAlignment="Right" IsEnabled="False"
                              Text="{Binding TaxValue, Mode=TwoWay, Converter={StaticResource ToPLNConverter}}"/>
-                    
+
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
 
-                    <TextBlock Text="Do Zapłaty"/>
-                    <TextBox Name="PaidValueTextBox" HorizontalContentAlignment="Right" IsEnabled="False"
-                             Text="{Binding PaidValue, Mode=TwoWay, Converter={StaticResource ToPLNConverter}}"/>
-
-                    <TextBlock Text="Wartość Podatku" TextWrapping="Wrap" Margin="50,0,0,0"/>
+                    <TextBlock Text="Wartość Podatku" TextWrapping="Wrap" />
                     <TextBox Name="ValueNettoTextBox" HorizontalContentAlignment="Right" IsEnabled="False"
                              Text="{Binding TaxValue, Mode=TwoWay, Converter={StaticResource ToPLNConverter}}"/>
 
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Data Zapłaty" Margin="5,12,5,8"/>
-                    <Border Style="{StaticResource DatePickerBorder}">
-                        <DatePicker Name="ValidFromDatePicker" SelectedDate="{Binding ValidFrom}"/>
-                    </Border>
                 </StackPanel>
 
             </StackPanel>
         </GroupBox>
 
-        <GroupBox Header="Metadane" Grid.Row="2" Name="MetaDataGroupBox">
+        <GroupBox Header="Pozostałe potrącenia" Grid.Row="2">
+            <StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+
+                    <TextBlock Text="Wartość"/>
+                    <TextBox Name="AdditionalDeductionsTextBox" HorizontalContentAlignment="Right" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" 
+                             TextChanged="AdditionalDeductionsTextBox_TextChanged">
+                        <TextBox.Text>
+                            <Binding Path="AdditionalDeductions" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <validators:IsNotZeroPLNValidator/>
+                                </Binding.ValidationRules>
+                                <Binding.Converter>
+                                    <converters:ToPLNConverter/>
+                                </Binding.Converter>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                </StackPanel>
+
+                <!--COLLAPSE THIS UNLESS WARTOSC IS DIFFERENT THAN ZERO-->
+                <StackPanel Name="AdditionalDeductionsStackPanel">
+                    <TextBlock Text="Uzasadnienie" Width="Auto" Margin="5,0,0,-5"/>
+                    <TextBox Name="AdditionalDeductionsDescriptionTextBox" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" 
+                             Width="Auto" Height="50" MaxLines="3" MaxLength="180"
+                             TextWrapping="Wrap" AcceptsReturn="True" VerticalContentAlignment="Top">
+                        <TextBox.Text>
+                            <Binding Path="AdditionalDeductionsDescription" Mode="TwoWay" UpdateSourceTrigger="Default">
+                                <Binding.ValidationRules>
+                                    <validators:IsNotEmptyValidator/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                </StackPanel>
+            </StackPanel>
+
+        </GroupBox>
+
+        <GroupBox Header="Podsumowanie" Grid.Row="3">
+            <StackPanel Orientation="Horizontal">
+
+                <TextBlock Text="Wypłacono"/>
+                <TextBox Name="PaidValueTextBox" HorizontalContentAlignment="Right" IsEnabled="False"
+                             Text="{Binding PaidValue, Mode=TwoWay, Converter={StaticResource ToPLNConverter}}"/>
+                <TextBlock Text="Dnia" Margin="50,12,0,8" Width="70"/>
+                <Border Style="{StaticResource DatePickerBorder}">
+                    <DatePicker Name="ValidFromDatePicker" SelectedDate="{Binding ValidFrom}"/>
+                </Border>
+            </StackPanel>
+        </GroupBox>
+
+
+
+        <GroupBox Header="Metadane" Grid.Row="4" Name="MetaDataGroupBox">
             <StackPanel>
                 <StackPanel Name="CreatedPanel" Orientation="Horizontal">
                     <TextBlock FontSize="11" Name="CreatedTextBlock"
@@ -170,7 +221,7 @@
             </StackPanel>
         </GroupBox>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal"
+        <StackPanel Grid.Row="5" Orientation="Horizontal"
                     VerticalAlignment="Bottom" HorizontalAlignment="Right">
 
             <Button Name="SaveButton" Click="SaveButton_Click">
