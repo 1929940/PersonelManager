@@ -6,5 +6,6 @@ namespace API.Payroll.Models {
         public EmployeeSimplifiedDTO Employee {get; set;}
         public Payment Payment { get; set; }
         public IEnumerable<Advance> Advances { get; set; }
+        public decimal ValueNetto { get; set; }
     }
 }

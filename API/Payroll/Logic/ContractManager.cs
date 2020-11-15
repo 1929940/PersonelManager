@@ -21,7 +21,8 @@ namespace API.Payroll.Logic {
                 TaxPercent = contract.TaxPercent,
                 IsRealized = contract.IsRealized,
                 Payment = contract.Payment,
-                Advances = contract.Advances
+                Advances = contract.Advances,
+                ValueNetto = decimal.Round(contract.Value - (contract.Value * contract.TaxPercent / 100), 2)
             };
             CopyTags(contract, ref dto);
 

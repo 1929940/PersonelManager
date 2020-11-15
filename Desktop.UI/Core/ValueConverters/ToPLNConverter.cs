@@ -24,6 +24,8 @@ namespace Desktop.UI.Core.ValueConverters {
                 }
             }
             valueStr = valueStr.Substring(0, currencySymbolIndex);
+            if (string.IsNullOrEmpty(valueStr))
+                return 0;
             return Decimal.Round(Decimal.Parse(valueStr), 2);
         }
 

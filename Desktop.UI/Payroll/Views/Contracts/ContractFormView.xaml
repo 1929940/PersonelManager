@@ -154,10 +154,11 @@
 
                 <StackPanel Orientation="Horizontal">
 
-                    <TextBlock Text="Wartość"/>
-                    <TextBox Name="ValueTextBox" HorizontalContentAlignment="Right" Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+                    <TextBlock Text="Wartość Brutto" TextWrapping="Wrap"/>
+                    <TextBox Name="ValueTextBox" HorizontalContentAlignment="Right" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" 
+                             TextChanged="ValueTextBox_TextChanged">
                         <TextBox.Text>
-                            <Binding Path="Value" Mode="TwoWay" UpdateSourceTrigger="Default">
+                            <Binding Path="Value" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
                                     <validators:IsNotZeroPLNValidator/>
                                 </Binding.ValidationRules>
@@ -167,6 +168,33 @@
                             </Binding>
                         </TextBox.Text>
                     </TextBox>
+
+                    <TextBlock Text="Wartość Netto" TextWrapping="Wrap" Margin="50,0,0,0"/>
+                    <TextBox Name="ValueNettoTextBox" HorizontalContentAlignment="Right" IsEnabled="False">
+                        <TextBox.Text>
+                            <Binding Path="ValueNetto" Mode="TwoWay" UpdateSourceTrigger="Default">
+                                <Binding.Converter>
+                                    <converters:ToPLNConverter/>
+                                </Binding.Converter>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Podatek"/>
+                    <TextBox Name="TaxTextBox" HorizontalContentAlignment="Right" TextChanged="ValueTextBox_TextChanged">
+                        <TextBox.Text>
+                            <Binding Path="TaxPercent" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.Converter>
+                                    <converters:ToPercentConverter/>
+                                </Binding.Converter>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
                     <TextBlock Text="Stawka" Width="70" Margin="50,10,0,10"/>
                     <TextBox Name="HourlySalaryTextBox" HorizontalContentAlignment="Right" Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
                         <TextBox.Text>
@@ -181,19 +209,6 @@
                         </TextBox.Text>
                     </TextBox>
 
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Podatek"/>
-                    <TextBox Name="TaxTextBox" HorizontalContentAlignment="Right">
-                        <TextBox.Text>
-                            <Binding Path="TaxPercent" Mode="TwoWay" UpdateSourceTrigger="Default">
-                                <Binding.Converter>
-                                    <converters:ToPercentConverter/>
-                                </Binding.Converter>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Okres od" Margin="5,12,5,8"/>

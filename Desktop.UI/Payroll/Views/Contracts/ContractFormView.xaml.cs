@@ -93,7 +93,7 @@ namespace Desktop.UI.Payroll.Views.Contracts {
         }
 
         private void InitPaymentButtons() {
-            if(Contract.Payment == null) {
+            if (Contract.Payment == null) {
                 AddPayment.Visibility = Visibility.Visible;
             } else {
                 EditPayment.Visibility = Visibility.Visible;
@@ -183,6 +183,13 @@ namespace Desktop.UI.Payroll.Views.Contracts {
                 }
                 this.Close();
             }
+        }
+
+        private void ValueTextBox_TextChanged(object sender, TextChangedEventArgs e) {
+            decimal netto = Decimal.Round(Contract.Value - (Contract.Value * Contract.TaxPercent / 100), 2);
+
+            if (ValueNettoTextBox != null)
+                ValueNettoTextBox.Text = netto.ToString("0.00 PLN");
         }
     }
 }

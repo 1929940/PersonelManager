@@ -52,7 +52,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Zarządzaj wypłatami" FontSize="22" FontWeight="Bold"
+        <TextBlock Text="Zarządzaj umowami" FontSize="22" FontWeight="Bold"
                    Margin="5"/>
 
         <Border Grid.Row="1" BorderThickness="0,1" BorderBrush="Black">
