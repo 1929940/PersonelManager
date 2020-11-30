@@ -27,7 +27,13 @@
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="Margin" Value="5"/>
             <Setter Property="HorizontalContentAlignment" Value="Right"/>
+            <Style.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3" />
+                </Style>
+            </Style.Resources>
         </Style>
+
         <ControlTemplate x:Key="ErrorTemplate">
             <StackPanel Orientation="Horizontal">
                 <Border BorderBrush="Red" BorderThickness="1">

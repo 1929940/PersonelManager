@@ -15,6 +15,11 @@
             <Setter Property="Height" Value="25"/>
             <Setter Property="Width" Value="100"/>
             <Setter Property="Margin" Value="5"/>
+            <Style.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3" />
+                </Style>
+            </Style.Resources>
         </Style>
         <Style TargetType="iconPacks:PackIconMaterial">
             <Setter Property="Margin" Value="0,0,3,0"/>
@@ -31,6 +36,18 @@
                     <Setter Property="Background" Value="Gainsboro"/>
                 </Trigger>
             </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Style.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3" />
+                </Style>
+            </Style.Resources>
         </Style>
 
         <Style TargetType="{x:Type TextBlock}" x:Key="DataGridCell_TextStyle">
@@ -88,8 +105,7 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <TextBlock Text="Szukaj" FontSize="16" VerticalAlignment="Center"/>
-                    <TextBox x:Name="FilterBox" Width="150" Height="25" Margin="5" 
-                             TextChanged="FilterBox_TextChanged" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="FilterBox" TextChanged="FilterBox_TextChanged"/>
                 </StackPanel>
             </Grid>
         </Border>
