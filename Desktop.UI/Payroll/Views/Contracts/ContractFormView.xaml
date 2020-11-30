@@ -9,7 +9,7 @@
         FontFamily="Calibri" FontSize="14"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
         xmlns:validators="clr-namespace:Desktop.UI.Core.Validators"
-        Title="Umowa" Height="710" Width="460">
+        Title="Umowa" Height="740" Width="460">
     <Window.Resources>
         <converters:ToPLNConverter x:Key="ToPLNConverter"/>
         <converters:ToPercentConverter x:Key="ToPercentConverter"/>
@@ -57,7 +57,7 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
 
-        <!--<Style TargetType="Border" x:Key="DatePickerBorder">
+        <Style TargetType="Border" x:Key="DatePickerBorder">
             <Setter Property="BorderBrush" Value="DarkGray"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="CornerRadius" Value="3"/>
@@ -65,7 +65,7 @@
             <Setter Property="Width" Value="100"/>
             <Setter Property="Margin" Value="5,0"/>
             <Setter Property="Padding" Value="0,2,0,0"/>
-        </Style>-->
+        </Style>
 
         <Style TargetType="DatePicker">
             <Setter Property="BorderThickness" Value="0"/>
@@ -318,12 +318,12 @@
         <GroupBox Header="Metadane" Grid.Row="4" Name="MetaDataGroupBox">
             <StackPanel>
                 <StackPanel Name="CreatedPanel" Orientation="Horizontal">
-                    <TextBlock FontSize="11" Name="CreatedTextBlock"
-                               Text="Obiekt stworzony 2020.11.13 13:13:13 przez Magdalena Wielotowonska" Width="Auto" />
+                    <TextBlock Name="CreatedTextBlock"
+                               Text="Obiekt został stworzony dnia: 2011.11.11 11:11:11" Width="Auto" />
                 </StackPanel>
                 <StackPanel Name="UpdatedPanel" Orientation="Horizontal">
-                    <TextBlock FontSize="11" Name="UpdatedTextBlock"
-                               Text="Ostatniej modyfikacji dokonano 2020.11.13 13:13:13 przez Magdalena Wielokwiatkowska" Width="Auto"/>
+                    <TextBlock Name="UpdatedTextBlock"
+                               Text="Obiekt został ostatnio zmodyfikowany dnia: 2011.11.11 11:11:11" Width="Auto"/>
                 </StackPanel>
             </StackPanel>
         </GroupBox>

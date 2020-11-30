@@ -1,4 +1,5 @@
 ﻿using CommunicationLibrary.Core.Models;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -20,7 +21,7 @@ namespace Desktop.UI.Core.Helpers {
         private static void HideGroup(Window form) {
             GroupBox groupBox = form.FindName(GROUP_BOX) as GroupBox;
             groupBox.Visibility = Visibility.Collapsed;
-            form.Height -= 65;
+            form.Height -= 110;
         }
 
         private static void HandleCreatedLabel(Window form, BaseEntity entity) {
@@ -28,7 +29,8 @@ namespace Desktop.UI.Core.Helpers {
 
             if (string.IsNullOrEmpty(entity.CreatedBy)) 
                 textBlock.Visibility = Visibility.Collapsed;
-            textBlock.Text = string.Format($"Obiekt stworzony {entity.CreatedOn} przez {entity.CreatedBy}");
+            textBlock.Text = string.Format($"Obiekt został stworzony dnia: {entity.CreatedOn} \nPrzez użytkownika: {entity.CreatedBy}");
+
         }
 
         private static void HandleUpdatedLabel(Window form, BaseEntity entity) {
@@ -36,7 +38,8 @@ namespace Desktop.UI.Core.Helpers {
 
             if (string.IsNullOrEmpty(entity.UpdatedBy)) 
                 textBlock.Visibility = Visibility.Collapsed;
-            textBlock.Text = string.Format($"Ostatniej modyfikacji dokonano {entity.CreatedOn} przez {entity.CreatedBy}");
+            textBlock.Text = string.Format($"Obiekt został ostatnio zmodyfikowany dnia: {entity.CreatedOn} \nPrzez użytkownika: {entity.CreatedBy}");
+
         }
     }
 }
