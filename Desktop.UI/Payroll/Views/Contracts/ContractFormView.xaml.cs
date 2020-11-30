@@ -58,7 +58,7 @@ namespace Desktop.UI.Payroll.Views.Contracts {
             BindCombobox();
             InitDates();
             InitHeader();
-            InitMetadata();
+            MetadataHelper.Init(this, EditMode, Contract);
             InitPaymentButtons();
         }
 
@@ -100,35 +100,6 @@ namespace Desktop.UI.Payroll.Views.Contracts {
                 RemovePayment.Visibility = Visibility.Visible;
             }
         }
-
-        private void InitMetadata() {
-            if (!EditMode || !AuthorizationHelper.Authorize(Enums.Roles.Kierownik))
-                HideMetadata();
-            else {
-                HandleCreatedMetadata();
-                HandleUpdatedMetadata();
-            }
-        }
-
-        private void HideMetadata() {
-            MetaDataGroupBox.Visibility = Visibility.Collapsed;
-            this.Height -= 60;
-        }
-
-        private void HandleCreatedMetadata() {
-            if (string.IsNullOrEmpty(Contract.CreatedBy)) {
-                CreatedTextBlock.Visibility = Visibility.Collapsed;
-            }
-            CreatedTextBlock.Text = string.Format($"Obiekt stworzony {Contract.CreatedOn} przez {Contract.CreatedBy}");
-        }
-
-        private void HandleUpdatedMetadata() {
-            if (string.IsNullOrEmpty(Contract.UpdatedBy)) {
-                UpdatedTextBlock.Visibility = Visibility.Collapsed;
-            }
-            UpdatedTextBlock.Text = string.Format($"Ostatniej modyfikacji dokonano {Contract.CreatedOn} przez {Contract.CreatedBy}");
-        }
-
 
         private void EmployeeCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             Contract.Employee.Id = (int)EmployeeCombobox.SelectedValue;

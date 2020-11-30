@@ -57,7 +57,7 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
 
-        <Style TargetType="Border" x:Key="DatePickerBorder">
+        <!--<Style TargetType="Border" x:Key="DatePickerBorder">
             <Setter Property="BorderBrush" Value="DarkGray"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="CornerRadius" Value="3"/>
@@ -65,7 +65,7 @@
             <Setter Property="Width" Value="100"/>
             <Setter Property="Margin" Value="5,0"/>
             <Setter Property="Padding" Value="0,2,0,0"/>
-        </Style>
+        </Style>-->
 
         <Style TargetType="DatePicker">
             <Setter Property="BorderThickness" Value="0"/>

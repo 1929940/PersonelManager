@@ -23,27 +23,26 @@ namespace Desktop.UI.HR.Views.Locations {
 
         public Location Location { get; set; }
         private readonly LocationRequestHandler _handler;
+        public bool EditMode { get; set; }
 
         public LocationsFormView() {
             _handler = new LocationRequestHandler();
             Location = new Location();
             this.DataContext = Location;
             InitializeComponent();
-            HeaderText.Text = "Dodaj Lokalizacje";
-            AddButton.Visibility = Visibility.Visible;
-            HideMetaDataRows();
+            InitHeader();
+            MetadataHelper.Init(this, EditMode, Location);
         }
 
         public LocationsFormView(int id) {
 
+            EditMode = true;
             _handler = new LocationRequestHandler();
             Location = _handler.Get(id);
             this.DataContext = Location;
             InitializeComponent();
-            HeaderText.Text = "Modyfikuj Lokalizacje";
-            UpdateButton.Visibility = Visibility.Visible;
-            if (!AuthorizationHelper.Authorize(Enums.Roles.Kierownik))
-                HideMetaDataRows();
+            InitHeader();
+            MetadataHelper.Init(this, EditMode, Location);
         }
         private async void AddButton_Click(object sender, RoutedEventArgs e) {
             if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
@@ -65,10 +64,23 @@ namespace Desktop.UI.HR.Views.Locations {
                 this.Close();
         }
 
-        private void HideMetaDataRows() {
-            CreatedRow.Height = new GridLength(0);
-            UpdatedRow.Height = new GridLength(0);
-            this.Height -= 50;
+        private void InitHeader() {
+            if (EditMode) {
+                HeaderText.Text = "Modyfikuj Lokalizacje";
+            } else {
+                HeaderText.Text = "Dodaj Lokalizacje";
+            }
+        }
+
+        private async void SaveButton_Click(object sender, RoutedEventArgs e) {
+            if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
+                if (EditMode) {
+                    await _handler.UpdateAsync(Location.Id, Location);
+                } else {
+                    await _handler.CreateAsync(Location);
+                }
+                this.Close();
+            }
         }
     }
 }
