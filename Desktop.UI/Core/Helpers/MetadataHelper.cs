@@ -38,7 +38,7 @@ namespace Desktop.UI.Core.Helpers {
 
             if (string.IsNullOrEmpty(entity.UpdatedBy)) 
                 textBlock.Visibility = Visibility.Collapsed;
-            textBlock.Text = string.Format($"Obiekt został ostatnio zmodyfikowany dnia: {entity.CreatedOn} \nPrzez użytkownika: {entity.CreatedBy}");
+            textBlock.Text = string.Format($"Obiekt został ostatnio zmodyfikowany dnia: {entity.UpdatedOn} \nPrzez użytkownika: {entity.UpdatedBy}");
 
         }
     }
