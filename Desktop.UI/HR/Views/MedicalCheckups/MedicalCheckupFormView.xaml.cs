@@ -19,6 +19,8 @@ using System.Windows.Shapes;
 
 namespace Desktop.UI.HR.Views.MedicalCheckups {
     public partial class MedicalCheckupFormView : Window {
+
+        public bool EditMode { get; set; }
         public PersonelDocument Document { get; set; }
         public Bufor<PersonelDocument> Bufor { get; set; }
         public bool UseBufor { get => Bufor != null; }
@@ -29,53 +31,30 @@ namespace Desktop.UI.HR.Views.MedicalCheckups {
             Bufor = bufor;
 
             InitializeComponent();
-            InitializeAddForm();
+            InitHeader();
             SetDataContext();
             BindCombobox();
-            HideMetaDataRows();
+            MetadataHelper.Init(this, EditMode, Document);
             doc = Document;
         }
 
         public MedicalCheckupFormView(PersonelDocument doc, Bufor<PersonelDocument> bufor = null) {
             Bufor = bufor;
+            EditMode = true;
             _handler = new MedicalCheckupRequestHandler();
 
             InitializeComponent();
-            InitializeEditForm();
+            InitHeader();
             SetDataContext(doc);
             BindCombobox();
-            if (!AuthorizationHelper.Authorize(Enums.Roles.Kierownik))
-                HideMetaDataRows();
+            MetadataHelper.Init(this, EditMode, Document);
         }
 
-
-        private void InitializeAddForm() {
-            HeaderText.Text = "Dodaj Badanie Lekarskie";
-            AddButton.Visibility = Visibility.Visible;
-        }
-
-        private void InitializeEditForm() {
-            HeaderText.Text = "Modyfikuj Badanie Lekarskie";
-            UpdateButton.Visibility = Visibility.Visible;
-        }
-
-        private async void AddButton_Click(object sender, RoutedEventArgs e) {
-            if (ControlsHelper.AreTextboxesValid(this)) {
-                if (UseBufor)
-                    Bufor.TransactionBufor.Add(Document);
-                else if (DialogHelper.Save())
-                    await _handler.CreateAsync(Document);
-                this.Close();
-            }
-        }
-
-        private async void UpdateButton_Click(object sender, RoutedEventArgs e) {
-            if (ControlsHelper.AreTextboxesValid(this)) {
-                if (UseBufor)
-                    Bufor.TransactionBufor.Modify(Document);
-                else if (DialogHelper.Save())
-                    await _handler.UpdateAsync(Document.Id, Document);
-                this.Close();
+        private void InitHeader() {
+            if (EditMode) {
+                HeaderText.Text = "Modyfikuj Badanie Lekarskie";
+            } else {
+                HeaderText.Text = "Dodaj Badanie Lekarskie";
             }
         }
 
@@ -83,11 +62,21 @@ namespace Desktop.UI.HR.Views.MedicalCheckups {
             if (DialogHelper.Close())
                 this.Close();
         }
-
-        private void HideMetaDataRows() {
-            CreatedRow.Height = new GridLength(0);
-            UpdatedRow.Height = new GridLength(0);
-            this.Height -= 50;
+        private async void SaveButton_Click(object sender, RoutedEventArgs e) {
+            if (ControlsHelper.AreTextboxesValid(this)) {
+                if (EditMode) {
+                    if (UseBufor)
+                        Bufor.TransactionBufor.Modify(Document);
+                    else if (DialogHelper.Save())
+                        await _handler.UpdateAsync(Document.Id, Document);
+                } else {
+                    if (UseBufor)
+                        Bufor.TransactionBufor.Add(Document);
+                    else if (DialogHelper.Save())
+                        await _handler.CreateAsync(Document);
+                }
+                this.Close();
+            }
         }
 
         private void EmployeeCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
@@ -95,12 +84,22 @@ namespace Desktop.UI.HR.Views.MedicalCheckups {
         }
 
         private void BindCombobox() {
-            if (UseBufor)
-                EmployeeStackPanel.Visibility = Visibility.Collapsed;
-            else {
+            if (UseBufor) {
+                HideEmployeeControls();
+                ExpandNumberControls();
+            } else {
                 EmployeeCombobox.ItemsSource = ViewHelper.GetEmployeesDictionary();
                 EmployeeCombobox.SelectedIndex = ViewHelper.GetIndexOfComboboxValue(Document.Employee.Id, EmployeeCombobox);
             }
+        }
+
+        private void HideEmployeeControls() {
+            EmployeeLabel.Visibility = Visibility.Collapsed;
+            EmployeeCombobox.Visibility = Visibility.Collapsed;
+        }
+        private void ExpandNumberControls() {
+            NumberTextBox.Width = 334;
+            NumberLabel.Width = 60;
         }
 
         private void SetDataContext(PersonelDocument doc = null) {
@@ -112,5 +111,6 @@ namespace Desktop.UI.HR.Views.MedicalCheckups {
                 Document = _handler.Get(doc.Id);
             this.DataContext = Document;
         }
+
     }
 }
