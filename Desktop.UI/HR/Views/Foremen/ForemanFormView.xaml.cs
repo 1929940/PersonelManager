@@ -20,8 +20,9 @@ namespace Desktop.UI.HR.Views.Foremen {
     /// Interaction logic for ForemanFormView.xaml
     /// </summary>
     public partial class ForemanFormView : Window {
-        public Foreman Foreman { get; set; }
 
+        public bool EditMode { get; set; }
+        public Foreman Foreman { get; set; }
         private readonly ForemanRequestHandler _handler;
 
         public ForemanFormView() {
@@ -30,46 +31,32 @@ namespace Desktop.UI.HR.Views.Foremen {
             this.DataContext = Foreman;
             InitializeComponent();
             BindCombobox();
-            HeaderText.Text = "Dodaj Lokalizacje";
-            AddButton.Visibility = Visibility.Visible;
-            HideMetaDataRows();
+            InitHeader();
+            MetadataHelper.Init(this, EditMode, Foreman);
         }
 
         public ForemanFormView(int id) {
-
             _handler = new ForemanRequestHandler();
+            EditMode = true;
             Foreman = _handler.Get(id);
             this.DataContext = Foreman;
             InitializeComponent();
             BindCombobox();
-            HeaderText.Text = "Modyfikuj Lokalizacje";
-            UpdateButton.Visibility = Visibility.Visible;
-            if (!AuthorizationHelper.Authorize(Enums.Roles.Kierownik))
-                HideMetaDataRows();
-        }
-        private async void AddButton_Click(object sender, RoutedEventArgs e) {
-            if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
-                await _handler.CreateAsync(Foreman);
-                this.Close();
-            }
+            InitHeader();
+            MetadataHelper.Init(this, EditMode, Foreman);
         }
 
-        private async void UpdateButton_Click(object sender, RoutedEventArgs e) {
-            if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
-                await _handler.UpdateAsync(Foreman.Id, Foreman);
-                this.Close();
+        private void InitHeader() {
+            if (EditMode) {
+                HeaderText.Text = "Modyfikuj Mistrza";
+            } else {
+                HeaderText.Text = "Dodaj Mistrza";
             }
         }
 
         private void Close_Click(object sender, RoutedEventArgs e) {
             if (DialogHelper.Close())
                 this.Close();
-        }
-
-        private void HideMetaDataRows() {
-            CreatedRow.Height = new GridLength(0);
-            UpdatedRow.Height = new GridLength(0);
-            this.Height -= 50;
         }
 
         private void BindCombobox() {
@@ -79,6 +66,17 @@ namespace Desktop.UI.HR.Views.Foremen {
 
         private void LocationComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             Foreman.LocationId = (int)LocationComboBox.SelectedValue;
+        }
+
+        private async void SaveButton_Click(object sender, RoutedEventArgs e) {
+            if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
+                if (EditMode) {
+                    await _handler.UpdateAsync(Foreman.Id, Foreman);
+                } else {
+                    await _handler.CreateAsync(Foreman);
+                }
+                this.Close();
+            }
         }
     }
 }
