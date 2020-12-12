@@ -19,6 +19,8 @@ using System.Windows.Shapes;
 
 namespace Desktop.UI.HR.Views.Certificates {
     public partial class CertificateFormView : Window {
+
+        public bool EditMode { get; set; }
         public PersonelDocument Document { get; set; }
         public Bufor<PersonelDocument> Bufor { get; set; }
         public bool UseBufor { get => Bufor != null; }
@@ -30,53 +32,47 @@ namespace Desktop.UI.HR.Views.Certificates {
             Bufor = bufor;
 
             InitializeComponent();
-            InitializeAddForm();
+            InitHeader();
             SetDataContext();
             BindCombobox();
-            HideMetaDataRows();
+            MetadataHelper.Init(this, EditMode, Document);
             doc = Document;
         }
 
         public CertificateFormView(PersonelDocument doc, Bufor<PersonelDocument> bufor = null) {
-            _handler = new CertificateRequestHandler();
             Bufor = bufor;
+            EditMode = true;
+            _handler = new CertificateRequestHandler();
 
             InitializeComponent();
-            InitializeEditForm();
+            InitHeader();
             SetDataContext(doc);
             BindCombobox();
-            if (!AuthorizationHelper.Authorize(Enums.Roles.Kierownik))
-                HideMetaDataRows();
+            MetadataHelper.Init(this, EditMode, Document);
         }
 
 
-        private void InitializeAddForm() {
-            HeaderText.Text = "Dodaj Certyfikat";
-            AddButton.Visibility = Visibility.Visible;
-        }
-
-        private void InitializeEditForm() {
-            HeaderText.Text = "Modyfikuj Certyfikat";
-            UpdateButton.Visibility = Visibility.Visible;
-        }
-
-        private async void AddButton_Click(object sender, RoutedEventArgs e) {
-            if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
-                if (UseBufor)
-                    Bufor.TransactionBufor.Add(Document);
-                else
-                    await _handler.CreateAsync(Document);
-                this.Close();
+        private void InitHeader() {
+            if (EditMode) {
+                HeaderText.Text = "Modyfikuj Certyfikat";
+            } else {
+                HeaderText.Text = "Dodaj Certyfikat";
             }
         }
 
-        private async void UpdateButton_Click(object sender, RoutedEventArgs e) {
+        private async void SaveButton_Click(object sender, RoutedEventArgs e) {
             if (ControlsHelper.AreTextboxesValid(this)) {
-                if (UseBufor)
-                    Bufor.TransactionBufor.Modify(Document);
-                else
-                    if (DialogHelper.Save())
-                    await _handler.UpdateAsync(Document.Id, Document);
+                if (EditMode) {
+                    if (UseBufor)
+                        Bufor.TransactionBufor.Modify(Document);
+                    else if (DialogHelper.Save())
+                        await _handler.UpdateAsync(Document.Id, Document);
+                } else {
+                    if (UseBufor)
+                        Bufor.TransactionBufor.Add(Document);
+                    else if (DialogHelper.Save())
+                        await _handler.CreateAsync(Document);
+                }
                 this.Close();
             }
         }
@@ -87,23 +83,27 @@ namespace Desktop.UI.HR.Views.Certificates {
                 this.Close();
         }
 
-        private void HideMetaDataRows() {
-            CreatedRow.Height = new GridLength(0);
-            UpdatedRow.Height = new GridLength(0);
-            this.Height -= 50;
-        }
-
         private void EmployeeCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             Document.Employee.Id = (int)EmployeeCombobox.SelectedValue;
         }
 
         private void BindCombobox() {
-            if (UseBufor)
-                EmployeeStackPanel.Visibility = Visibility.Collapsed;
-            else {
+            if (UseBufor) {
+                HideEmployeeControls();
+                ExpandNumberControls();
+            } else {
                 EmployeeCombobox.ItemsSource = ViewHelper.GetEmployeesDictionary();
                 EmployeeCombobox.SelectedIndex = ViewHelper.GetIndexOfComboboxValue(Document.Employee.Id, EmployeeCombobox);
             }
+        }
+
+        private void HideEmployeeControls() {
+            EmployeeLabel.Visibility = Visibility.Collapsed;
+            EmployeeCombobox.Visibility = Visibility.Collapsed;
+        }
+        private void ExpandNumberControls() {
+            NumberTextBox.Width = 334;
+            NumberLabel.Width = 60;
         }
 
         private void SetDataContext(PersonelDocument doc = null) {

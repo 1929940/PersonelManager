@@ -115,8 +115,8 @@
                       DisplayMemberPath="Value" SelectedValuePath="Key"
                       SelectionChanged="EmployeeCombobox_SelectionChanged"/>
 
-                    <TextBlock Text="Numer" Width="45" Name="NumberLabel"/>
-                    <TextBox Name="NumberTextBox" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" Width="80">
+                    <TextBlock Text="Numer" Width="40" Name="NumberLabel"/>
+                    <TextBox Name="NumberTextBox" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" Width="85">
                         <TextBox.Text>
                             <Binding Path="Number" Mode="TwoWay" UpdateSourceTrigger="Default">
                                 <Binding.ValidationRules>

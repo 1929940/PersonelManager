@@ -21,7 +21,7 @@ namespace API.Payroll.Contoller {
         }
 
         [HttpGet("Get")]
-        public async Task<ActionResult<IEnumerable<Payment>>> GetPayment() {
+        public async Task<ActionResult<IEnumerable<PaymentDTO>>> GetPayment() {
             var payments = await _context.Payment.ToListAsync();
             return Ok(payments.Select(x => PaymentManager.CreateDTO(x)));
         }

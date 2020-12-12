@@ -8,17 +8,19 @@
         FontFamily="Calibri" FontSize="14"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
         xmlns:validators="clr-namespace:Desktop.UI.Core.Validators"
-        Title="Certyfikat" Height="410" Width="440">
+        Title="Certyfikat" Height="480" Width="450">
     <Window.Resources>
         <Style TargetType="{x:Type TextBlock}">
             <Setter Property="Margin" Value="5,10"/>
-            <Setter Property="Width" Value="40"/>
+            <Setter Property="Width" Value="60"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
 
         <Style TargetType="{x:Type TextBox}">
-            <Setter Property="Margin" Value="5,10"/>
-            <Setter Property="Height" Value="25"/>
+            <Setter Property="Margin" Value="5,5,5,10"/>
             <Setter Property="Width" Value="150"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Style.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="3" />
@@ -51,12 +53,6 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
 
-        <Style TargetType="Border">
-            <Setter Property="BorderBrush" Value="Black"/>
-            <Setter Property="BorderThickness" Value="0,0,0,1"/>
-            <Setter Property="Padding" Value="0,0,0,10"/>
-        </Style>
-
         <Style TargetType="DatePicker">
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Height" Value="30"/>
@@ -66,9 +62,27 @@
         <Style TargetType="DatePickerTextBox">
             <Setter Property="VerticalAlignment"  Value="Bottom"/>
         </Style>
+        <Style TargetType="Border" x:Key="DatePickerBorder">
+            <Setter Property="BorderBrush" Value="DarkGray"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="3"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Margin" Value="5,0"/>
+            <Setter Property="Padding" Value="0,2,0,0"/>
+        </Style>
 
-
-
+        <Style TargetType="GroupBox">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" FontWeight="Bold"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
         <ControlTemplate x:Key="ErrorTemplate">
             <StackPanel Orientation="Vertical">
@@ -86,19 +100,79 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto" Name="CreatedRow"/>
-            <RowDefinition Height="Auto" Name="UpdatedRow"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0">
-            <TextBlock Text="TMP" Name="HeaderText" Width="Auto"
+        <TextBlock Grid.Row="0" Text="TMP" Name="HeaderText" Width="Auto"
                        FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
-        </Border>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Name="EmployeeStackPanel">
+        <GroupBox Header="Ogólne" Grid.Row="1">
+            <StackPanel>
+
+                <StackPanel Orientation="Horizontal" Name="EmployeeStackPanel">
+                    <TextBlock Text="Pracownik" Name="EmployeeLabel"/>
+                    <ComboBox Name="EmployeeCombobox" Width="190"
+                      DisplayMemberPath="Value" SelectedValuePath="Key"
+                      SelectionChanged="EmployeeCombobox_SelectionChanged"/>
+
+                    <TextBlock Text="Numer" Width="40" Name="NumberLabel"/>
+                    <TextBox Name="NumberTextBox" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" Width="85">
+                        <TextBox.Text>
+                            <Binding Path="Number" Mode="TwoWay" UpdateSourceTrigger="Default">
+                                <Binding.ValidationRules>
+                                    <validators:IsNotEmptyValidator/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                    <TextBlock Text="Tytuł"/>
+                    <TextBox Name="TitleTextBox" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" Width="334">
+                        <TextBox.Text>
+                            <Binding Path="Title" Mode="TwoWay" UpdateSourceTrigger="Default">
+                                <Binding.ValidationRules>
+                                    <validators:IsNotEmptyValidator/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="3" Orientation="Horizontal">
+                    <TextBlock Text="Wydany przez" Width="60" TextWrapping="Wrap"/>
+                    <TextBox Name="IssuedByTextBox" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" Width="334">
+                        <TextBox.Text>
+                            <Binding Path="IssuedBy" Mode="TwoWay" UpdateSourceTrigger="Default">
+                                <Binding.ValidationRules>
+                                    <validators:IsNotEmptyValidator/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </StackPanel>
+
+                <!--DATE PICKER-->
+
+                <Border Grid.Row="4">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Ważne od" Width="60" Margin="5,12,5,8"/>
+                        <Border Style="{StaticResource DatePickerBorder}">
+                            <DatePicker Name="ValidFromDatePicker" SelectedDate="{Binding ValidFrom}"/>
+                        </Border>
+                        <TextBlock Text="Ważne do" Width="60" Margin="64,12,0,8"/>
+                        <Border Style="{StaticResource DatePickerBorder}">
+                            <DatePicker Name="ValidToDatePicker" SelectedDate="{Binding ValidTo}"/>
+                        </Border>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </GroupBox>
+
+        <!--<StackPanel Grid.Row="1" Orientation="Horizontal" Name="EmployeeStackPanel">
             <TextBlock Text="Pracownik" Width="70"/>
             <ComboBox Name="EmployeeCombobox" Width="329"
                       DisplayMemberPath="Value" SelectedValuePath="Key"
@@ -142,7 +216,7 @@
             </TextBox>
         </StackPanel>
 
-        <!--DATE PICKER-->
+        --><!--DATE PICKER--><!--
 
         <Border Grid.Row="4">
             <StackPanel Orientation="Horizontal">
@@ -151,9 +225,22 @@
                 <TextBlock Text="Ważne do" Width="70" Margin="60,10,0,10"/>
                 <DatePicker Name="ValidToDatePicker" SelectedDate="{Binding ValidTo}"/>
             </StackPanel>
-        </Border>
+        </Border>-->
 
-        <StackPanel Grid.Row="5" Orientation="Horizontal">
+        <GroupBox Header="Metadane" Grid.Row="2" Name="MetaDataGroupBox">
+            <StackPanel>
+                <StackPanel Name="CreatedPanel" Orientation="Horizontal">
+                    <TextBlock Name="CreatedTextBlock"
+                               Text="Obiekt został stworzony dnia: 2011.11.11 11:11:11" Width="Auto" />
+                </StackPanel>
+                <StackPanel Name="UpdatedPanel" Orientation="Horizontal">
+                    <TextBlock Name="UpdatedTextBlock"
+                                Text="Obiekt został ostatnio zmodyfikowany dnia: 2011.11.11 11:11:11" Width="Auto"/>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+
+        <!--<StackPanel Grid.Row="5" Orientation="Horizontal">
             <TextBlock Text="Stworzono" Width="90"/>
             <TextBlock FontStyle="Oblique" Width="120" Text="{Binding CreatedOn, StringFormat=\{0:yyyy.MM.dd HH:mm:ss\}}"/>
             <TextBlock Text="Przez" Width="40"/>
@@ -167,25 +254,16 @@
             <TextBlock Text="Przez" Width="40"/>
             <TextBlock FontStyle="Oblique" Width="Auto"
                  Text="{Binding UpdatedBy}"/>
-        </StackPanel>
+        </StackPanel>-->
 
-        <StackPanel Grid.Row="7" Orientation="Horizontal"
+        <StackPanel Grid.Row="3" Orientation="Horizontal"
                     VerticalAlignment="Bottom" HorizontalAlignment="Right">
 
-            <Button Name="AddButton" Click="AddButton_Click" Visibility="Collapsed">
-                <Button.Content>
-                    <StackPanel Orientation="Horizontal">
-                        <iconPacks:PackIconMaterial Kind="PlusCircleOutline"/>
-                        <TextBlock Text="Dodaj" Margin="0"/>
-                    </StackPanel>
-                </Button.Content>
-            </Button>
-
-            <Button Name="UpdateButton" Click="UpdateButton_Click" Visibility="Collapsed">
+            <Button Name="SaveButton" Click="SaveButton_Click">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <iconPacks:PackIconMaterial Kind="ContentSaveOutline"/>
-                        <TextBlock Text="Zapisz" Margin="0"/>
+                        <TextBlock Text="Zapisz" Margin="0" Width="50"/>
                     </StackPanel>
                 </Button.Content>
             </Button>
