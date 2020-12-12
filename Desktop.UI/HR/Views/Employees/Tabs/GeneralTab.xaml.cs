@@ -21,13 +21,12 @@ namespace Desktop.UI.HR.Views.Employees.Tabs {
     /// Interaction logic for GeneralTab.xaml
     /// </summary>
     public partial class GeneralTab : Page {
-
         public bool IsHistoryView { get; set; }
         public Employee Employee { get; set; }
         public Employee HistoryEmployee { get; set; }
 
 
-        public GeneralTab(Employee employee, bool EditMode, bool historyView = false) {
+        public GeneralTab(Employee employee, bool editMode, bool historyView = false) {
             InitializeComponent();
             IsHistoryView = historyView;
             Employee = employee;
@@ -37,21 +36,12 @@ namespace Desktop.UI.HR.Views.Employees.Tabs {
             if (historyView)
                 ShowHistoryControls();
 
-            if (!EditMode || !AuthorizationHelper.Authorize(Enums.Roles.Kierownik))
-                HideMetaDataRows();
-
             BindComboboxes();
         }
 
         private void ShowHistoryControls() {
             HistoryComboBox.Visibility = Visibility.Visible;
             HistoryTextBlock.Visibility = Visibility.Visible;
-        }
-
-        private void HideMetaDataRows() {
-            CreatedRow.Height = new GridLength(0);
-            UpdatedRow.Height = new GridLength(0);
-            this.Height -= 50;
         }
 
         private void GeneralTabPage_Loaded(object sender, RoutedEventArgs e) {

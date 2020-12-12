@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Desktop.UI.HR.Views.Employees.Tabs"
        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" xmlns:validators="clr-namespace:Desktop.UI.Core.Validators"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="900"
       FontSize="14" FontFamily="Calibri"
       Title="GeneralTab"
       Name="GeneralTabPage"
@@ -14,22 +14,16 @@
     <Page.Resources>
         <Style TargetType="{x:Type TextBlock}">
             <Setter Property="Margin" Value="5,10"/>
+            <Setter Property="Width" Value="72"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
         </Style>
 
         <Style TargetType="{x:Type TextBox}">
-            <Setter Property="Margin" Value="5,10"/>
-            <Setter Property="Height" Value="22"/>
-            <Style.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="3" />
-                </Style>
-            </Style.Resources>
-        </Style>
-
-        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5,5,5,10"/>
             <Setter Property="Height" Value="25"/>
-            <Setter Property="Width" Value="100"/>
-            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Width" Value="180"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Style.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="3" />
@@ -43,7 +37,20 @@
 
         <Style TargetType="ComboBox">
             <Setter Property="Margin" Value="5,10"/>
-            <Setter Property="Height" Value="22"/>
+            <Setter Property="Width" Value="180"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="GroupBox">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" FontWeight="Bold"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <Style TargetType="CheckBox">
@@ -51,19 +58,21 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
 
-        <Style TargetType="Border">
-            <Setter Property="BorderBrush" Value="Black"/>
-            <Setter Property="BorderThickness" Value="0,0,0,1"/>
-            <Setter Property="Padding" Value="0,0,0,10"/>
-        </Style>
-
         <Style TargetType="DatePicker">
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Height" Value="30"/>
-            <Setter Property="Margin" Value="5,-5,0,5"/>
         </Style>
         <Style TargetType="DatePickerTextBox">
             <Setter Property="VerticalAlignment"  Value="Bottom"/>
+        </Style>
+        <Style TargetType="Border" x:Key="DatePickerBorder">
+            <Setter Property="BorderBrush" Value="DarkGray"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="3"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Width" Value="180"/>
+            <Setter Property="Margin" Value="5,0"/>
+            <Setter Property="Padding" Value="0,2,0,0"/>
         </Style>
 
         <ControlTemplate x:Key="ErrorTemplate">
@@ -79,266 +88,186 @@
     </Page.Resources>
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto" Name="CreatedRow"/>
-            <RowDefinition Height="Auto" Name="UpdatedRow"/>
         </Grid.RowDefinitions>
 
         <!--History Header-->
 
-        <TextBlock Grid.Row="0" Grid.Column="0" Name="HistoryTextBlock"
-                Text="Stan na dzień:" Visibility="Hidden"/>
-        <ComboBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
-                  Name="HistoryComboBox" Visibility="Hidden" 
+        <Grid Grid.Row="0" Margin="5,0">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Name="HistoryTextBlock" Text="Stan na dzień:" Visibility="Hidden" Width="100"/>
+                <ComboBox Name="HistoryComboBox" Visibility="Hidden" 
                   SelectionChanged="HistoryComboBox_SelectionChanged"
                   DisplayMemberPath="CreatedOn" ItemStringFormat="{}{0:yyyy.MM.dd HH:mm:ss}"/>
+            </StackPanel>
 
-        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="6" HorizontalAlignment="Right">
-            <TextBlock Grid.Row="2" Grid.Column="4" Text="Archiwum"/>
-            <CheckBox Grid.Row="2" Grid.Column="5" Name="IsArchiveCheckBox" IsChecked="{Binding IsArchived}" Margin="0,-4,5,0"/>
-        </StackPanel>
-
-
-        <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Padding="0"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Text="Archiwum"/>
+                <CheckBox Name="IsArchiveCheckBox" IsChecked="{Binding IsArchived}" Margin="0,-4,5,0"/>
+            </StackPanel>
+        </Grid>
 
         <!--General Data-->
 
-        <!--Row 1-->
+        <GroupBox Header="Ogólne" Grid.Row="1">
+            <StackPanel>
+                <!--Row 1-->
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Imię"/>
+                    <TextBox Name="FirstNameTextBox" Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+                        <TextBox.Text>
+                            <Binding Path="FirstName" Mode="TwoWay">
+                                <Binding.ValidationRules>
+                                    <validators:IsNotEmptyValidator/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
 
-        <TextBlock Grid.Row="2" Grid.Column="0" 
-                   Text="Imię"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Name="FirstNameTextBox"
-                 Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
-            <TextBox.Text>
-                <Binding Path="FirstName" Mode="TwoWay">
-                    <Binding.ValidationRules>
-                        <validators:IsNotEmptyValidator/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
+                    <TextBlock Text="Imię Ojca"/>
+                    <TextBox Validation.ErrorTemplate="{StaticResource ErrorTemplate}" Text="{Binding Path=FatherName, Mode=TwoWay}"/>
 
-        <TextBlock Grid.Row="2" Grid.Column="2" 
-                   Text="Imię Ojca"/>
-        <TextBox Grid.Row="2" Grid.Column="3"
-                 Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
-            <TextBox.Text>
-                <Binding Path="FatherName" Mode="TwoWay"/>
-            </TextBox.Text>
-        </TextBox>
+                    <TextBlock Text="Pesel"/>
+                    <TextBox Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+                        <TextBox.Text>
+                            <Binding Path="Pesel" Mode="TwoWay">
+                                <Binding.ValidationRules>
+                                    <validators:IsNotEmptyValidator/>
+                                    <validators:PeselValidator/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </StackPanel>
 
-        <TextBlock Grid.Row="2" Grid.Column="4" 
-                   Text="Pesel"/>
-        <TextBox Grid.Row="2" Grid.Column="5"
-                 Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+                <!--Row 2-->
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Nazwisko"/>
+                    <TextBox Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+                        <TextBox.Text>
+                            <Binding Path="LastName" Mode="TwoWay">
+                                <Binding.ValidationRules>
+                                    <validators:IsNotEmptyValidator/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
 
-            <TextBox.Text>
-                <Binding Path="Pesel" Mode="TwoWay">
-                    <Binding.ValidationRules>
-                        <validators:IsNotEmptyValidator/>
-                        <validators:PeselValidator/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-        
-        <!--Row 2-->
-        <TextBlock Grid.Row="3" Grid.Column="0" 
-                   Text="Nazwisko"/>
-        <TextBox Grid.Row="3" Grid.Column="1"
-                 Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
-            <TextBox.Text>
-                <Binding Path="LastName" Mode="TwoWay">
-                    <Binding.ValidationRules>
-                        <validators:IsNotEmptyValidator/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
+                    <TextBlock Text="Imię Matki"/>
+                    <TextBox Validation.ErrorTemplate="{StaticResource ErrorTemplate}" Text="{Binding Path=MotherName, Mode=TwoWay}"/>
 
+                </StackPanel>
 
-        <TextBlock Grid.Row="3" Grid.Column="2" 
-                   Text="Imię Matki"/>
-        <TextBox Grid.Row="3" Grid.Column="3"
-                 Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
-            <TextBox.Text>
-                <Binding Path="MotherName" Mode="TwoWay"/>
-            </TextBox.Text>
-        </TextBox>
-        
-        
+                <!--Row 3-->
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Urodzony"/>
+                    <Border Style="{StaticResource DatePickerBorder}">
+                        <DatePicker Name="DateOfBirthPicker" SelectedDate="{Binding DateOfBirth}"/>
+                    </Border>
 
-
-        <!--Row 3-->
-        <TextBlock Grid.Row="4" Grid.Column="0" 
-                   Text="Urodzony"/>
-        <DatePicker Grid.Row="4" Grid.Column="1" 
-            Name="DateOfBirthPicker" SelectedDate="{Binding DateOfBirth}"/>
-
-        <TextBlock Grid.Row="4" Grid.Column="2" 
-                   Text="Narodowość"/>
-        <TextBox Grid.Row="4" Grid.Column="3"
-                 Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
-            <TextBox.Text>
-                <Binding Path="Nationality" Mode="TwoWay">
-                    <Binding.ValidationRules>
-                        <validators:IsNotEmptyValidator/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-
-        <Border Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="6"/>
+                    <TextBlock Text="Narodowość"/>
+                    <TextBox Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+                        <TextBox.Text>
+                            <Binding Path="Nationality" Mode="TwoWay">
+                                <Binding.ValidationRules>
+                                    <validators:IsNotEmptyValidator/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
 
         <!--Zatrudnienie-->
 
-        <TextBlock Grid.Row="6" Grid.Column="0" 
-                   Text="Zawód"/>
-        <TextBox Grid.Row="6" Grid.Column="1"
-                 Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
-            <TextBox.Text>
-                <Binding Path="Profession" Mode="TwoWay">
-                    <Binding.ValidationRules>
-                        <validators:IsNotEmptyValidator/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
+        <GroupBox Header="Zatrudnienie" Grid.Row="2">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Zawód"/>
+                <TextBox Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+                    <TextBox.Text>
+                        <Binding Path="Profession" Mode="TwoWay">
+                            <Binding.ValidationRules>
+                                <validators:IsNotEmptyValidator/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
 
-        <TextBlock Grid.Row="6" Grid.Column="2" 
-                   Text="Lokalizacja"/>
+                <TextBlock Text="Lokalizacja"/>
 
-        <ComboBox Grid.Row="6" Grid.Column="3" Name="LocationCombobox"
+                <ComboBox Name="LocationCombobox"
                   DisplayMemberPath="Value" SelectedValuePath="Key"
                   SelectionChanged="LocationCombobox_SelectionChanged"/>
 
+                <TextBlock Text="Mistrz"/>
 
-        <TextBlock Grid.Row="6" Grid.Column="4" 
-                   Text="Mistrz"/>
-
-        <ComboBox Grid.Row="6" Grid.Column="5" Name="ForemanCombobox"
+                <ComboBox Name="ForemanCombobox"
                   DisplayMemberPath="Value" SelectedValuePath="Key"
                   SelectionChanged="ForemanCombobox_SelectionChanged"/>
+            </StackPanel>
+        </GroupBox>
 
-        <Border Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="6"/>
+
 
         <!--Kontakt-->
+        <GroupBox Header="Kontakt" Grid.Row="3">
 
-        <!--Row 1-->
+            <StackPanel>
+                <!--Row 1-->
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Kraj"/>
+                    <TextBox Validation.ErrorTemplate="{StaticResource ErrorTemplate}" Text="{Binding Path=Country, Mode=TwoWay}"/>
 
-        <TextBlock Grid.Row="8" Grid.Column="0" 
-                   Text="Kraj"/>
-        <TextBox Grid.Row="8" Grid.Column="1"
-                 Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
-            <TextBox.Text>
-                <Binding Path="Country" Mode="TwoWay"/>
-            </TextBox.Text>
-        </TextBox>
+                    <TextBlock Text="Region"/>
+                    <TextBox Validation.ErrorTemplate="{StaticResource ErrorTemplate}" Text="{Binding Path=Region, Mode=TwoWay}"/>
 
-        <TextBlock Grid.Row="8" Grid.Column="2" 
-                   Text="Region"/>
-        <TextBox Grid.Row="8" Grid.Column="3"
-                 Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
-            <TextBox.Text>
-                <Binding Path="Region" Mode="TwoWay"/>
-            </TextBox.Text>
-        </TextBox>
-        
-        <TextBlock Grid.Row="8" Grid.Column="4" 
-                   Text="Telefon"/>
-        <TextBox Grid.Row="8" Grid.Column="5"
-                 Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
-            <TextBox.Text>
-                <Binding Path="PhoneNo" Mode="TwoWay">
-                    <Binding.ValidationRules>
-                        <validators:IsNotEmptyValidator/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
+                    <TextBlock Text="Telefon"/>
+                    <TextBox Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+                        <TextBox.Text>
+                            <Binding Path="PhoneNo" Mode="TwoWay">
+                                <Binding.ValidationRules>
+                                    <validators:IsNotEmptyValidator/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </StackPanel>
 
-        <!--Row 2-->
+                <!--Row 2-->
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Miasto"/>
+                    <TextBox Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+                        <TextBox.Text>
+                            <Binding Path="City" Mode="TwoWay"/>
+                        </TextBox.Text>
+                    </TextBox>
 
-        <TextBlock Grid.Row="9" Grid.Column="0" 
-                   Text="Miasto"/>
-        <TextBox Grid.Row="9" Grid.Column="1"
-                 Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
-            <TextBox.Text>
-                <Binding Path="City" Mode="TwoWay"/>
-            </TextBox.Text>
-        </TextBox>
+                    <TextBlock Text="Ulica"/>
+                    <TextBox Validation.ErrorTemplate="{StaticResource ErrorTemplate}" Text="{Binding Path=Street, Mode=TwoWay}"/>
+                </StackPanel>
 
-        <TextBlock Grid.Row="9" Grid.Column="2" 
-                   Text="Ulica"/>
-        <TextBox Grid.Row="9" Grid.Column="3"
-                 Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
-            <TextBox.Text>
-                <Binding Path="Street" Mode="TwoWay"/>
-            </TextBox.Text>
-        </TextBox>
+                <!--Row 3-->
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Kod Pocztowy"/>
+                    <TextBox Validation.ErrorTemplate="{StaticResource ErrorTemplate}" Text="{Binding Path=Zip, Mode=TwoWay}"/>
 
-        <!--Row 3-->
+                    <TextBlock Text="Numer"/>
+                    <TextBox Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+                        <TextBox.Text>
+                            <Binding Path="Number" Mode="TwoWay"/>
+                        </TextBox.Text>
+                    </TextBox>
+                </StackPanel>
 
-        <TextBlock Grid.Row="10" Grid.Column="0" 
-                   Text="Kod Pocztowy"/>
-        <TextBox Grid.Row="10" Grid.Column="1"
-                 Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
-            <TextBox.Text>
-                <Binding Path="Zip" Mode="TwoWay"/>
-            </TextBox.Text>
-        </TextBox>
+            </StackPanel>
 
-        <TextBlock Grid.Row="10" Grid.Column="2" 
-                   Text="Numer"/>
-        <TextBox Grid.Row="10" Grid.Column="3"
-                 Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
-            <TextBox.Text>
-                <Binding Path="Number" Mode="TwoWay"/>
-            </TextBox.Text>
-        </TextBox>
-
-        <Border Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="6"/>
-
-        <!--Meta Data-->
-
-        <!--Row 1-->
-
-        <TextBlock Grid.Row="12" Grid.Column="0" Text="Stworzono"/>
-        <TextBlock Grid.Row="12" Grid.Column="1" FontStyle="Oblique"
-                 Text="{Binding CreatedOn, StringFormat=\{0:yyyy.MM.dd HH:mm:ss\}}"/>
-        <TextBlock Grid.Row="12" Grid.Column="2" Text="Przez"/>
-        <TextBlock Grid.Row="12" Grid.Column="3" FontStyle="Oblique"
-                 Text="{Binding CreatedBy}"/>
-
-        <!--Row 2-->
-
-        <TextBlock Grid.Row="13" Grid.Column="0" Text="Modyfikowano"/>
-        <TextBlock Grid.Row="13" Grid.Column="1" FontStyle="Oblique"
-                 Text="{Binding UpdatedOn, StringFormat=\{0:yyyy.MM.dd HH:mm:ss\}}"/>
-        <TextBlock Grid.Row="13" Grid.Column="2" Text="Przez"/>
-        <TextBlock Grid.Row="13" Grid.Column="3" FontStyle="Oblique"
-                 Text="{Binding UpdatedBy}"/>
-
+        </GroupBox>
 
     </Grid>
 

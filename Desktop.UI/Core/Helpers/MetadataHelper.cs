@@ -9,6 +9,8 @@ namespace Desktop.UI.Core.Helpers {
         const string CREATED_LABEL = "CreatedTextBlock";
         const string UPDATED_LABEL = "UpdatedTextBlock";
 
+
+        //TOOD: Needs to be rewritten for window and page
         public static void Init(Window form, bool editMode, BaseEntity entity) {
             if (!editMode || !AuthorizationHelper.Authorize(Enums.Roles.Kierownik))
                 HideGroup(form);
