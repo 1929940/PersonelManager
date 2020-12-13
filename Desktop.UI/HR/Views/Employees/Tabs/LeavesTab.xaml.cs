@@ -78,7 +78,11 @@ namespace Desktop.UI.HR.Views.Employees.Tabs {
         }
 
         private void BindDisplayData() {
-            if (Bufor.DisplayBufor == null || (!Bufor.DisplayBufor.Any() && Bufor.TransactionBufor.AnyQueuedRemovals()))
+            //TODO: DEBUG
+            //if (Bufor.DisplayBufor == null || (!Bufor.DisplayBufor.Any() && Bufor.TransactionBufor.AnyQueuedRemovals()))
+
+
+            if (Bufor.DisplayBufor == null || (!Bufor.DisplayBufor.Any() && !Bufor.TransactionBufor.AnyQueuedRemovals()))
                 Bufor.DisplayBufor.AddRange(_handler.GetEmployeeLeaves(Employee?.Id ?? 0));
             DisplayData = Bufor.DisplayBufor;
             DataGrid.ItemsSource = DisplayData;
