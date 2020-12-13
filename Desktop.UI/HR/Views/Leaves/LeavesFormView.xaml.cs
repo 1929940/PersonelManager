@@ -21,25 +21,21 @@ using static Desktop.UI.Core.Helpers.Enums;
 namespace Desktop.UI.HR.Views.Absences {
     public partial class LeavesFormView : Window {
 
+        public bool EditMode { get; set; }
         public string[] Types { get => Enum.GetNames(typeof(AbsenceTypes)); }
         public Leave Leave { get; set; }
         public Bufor<Leave> Bufor { get; set; }
 
 
         public LeavesFormView(out Leave leave, Bufor<Leave> bufor) {
-            Leave = new Leave() {
-                From = DateTime.Today
-            };
+            Leave = new Leave();
             Bufor = bufor;
 
             this.DataContext = Leave;
             InitializeComponent();
             InitializeComboboxes();
-
-            HeaderText.Text = "Dodaj Nieobecność";
-            AddButton.Visibility = Visibility.Visible;
-
-            HideMetaDataRows();
+            InitHeader();
+            MetadataHelper.Init(this, EditMode, Leave);
 
             leave = Leave;
         }
@@ -47,21 +43,26 @@ namespace Desktop.UI.HR.Views.Absences {
         public LeavesFormView(Leave leave, Bufor<Leave> bufor) {
             Leave = leave;
             Bufor = bufor;
+            EditMode = true;
 
             this.DataContext = Leave;
             InitializeComponent();
             InitializeComboboxes();
-
-            HeaderText.Text = "Modyfikuj Nieobecność";
-            UpdateButton.Visibility = Visibility.Visible;
-
-            if (!AuthorizationHelper.Authorize(Enums.Roles.Kierownik))
-                HideMetaDataRows();
+            InitHeader();
+            MetadataHelper.Init(this, EditMode, Leave);
         }
 
         private void InitializeComboboxes() {
             TypeCombobox.ItemsSource = Types;
             AssignValueToCombobox();
+        }
+
+        private void InitHeader() {
+            if (EditMode) {
+                HeaderText.Text = "Modyfikuj Nieobecność";
+            } else {
+                HeaderText.Text = "Dodaj Nieobecność";
+            }
         }
 
         private void AssignValueToCombobox() {
@@ -76,25 +77,18 @@ namespace Desktop.UI.HR.Views.Absences {
             Leave.Type = TypeCombobox.SelectedValue as string;
         }
 
+        private void SaveButton_Click(object sender, RoutedEventArgs e) {
+            if (EditMode) {
+                Bufor.TransactionBufor.Modify(Leave);
+            } else {
+                Bufor.TransactionBufor.Add(Leave);
+            }
+            this.Close();
+        }
+
         private void Close_Click(object sender, RoutedEventArgs e) {
             if (DialogHelper.Close())
                 this.Close();
-        }
-
-        private void UpdateButton_Click(object sender, RoutedEventArgs e) {
-            Bufor.TransactionBufor.Modify(Leave);
-            this.Close();
-        }
-
-        private void AddButton_Click(object sender, RoutedEventArgs e) {
-            Bufor.TransactionBufor.Add(Leave);
-            this.Close();
-        }
-
-        private void HideMetaDataRows() {
-            CreatedRow.Height = new GridLength(0);
-            UpdatedRow.Height = new GridLength(0);
-            this.Height -= 50;
         }
     }
 }

@@ -29,7 +29,6 @@
                     <Setter Property="CornerRadius" Value="3" />
                 </Style>
             </Style.Resources>
-
         </Style>
 
         <Style TargetType="Button">

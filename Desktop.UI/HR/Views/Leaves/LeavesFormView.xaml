@@ -7,11 +7,13 @@
         mc:Ignorable="d"
         FontFamily="Calibri" FontSize="14"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
-        Title="Nieobecnosci" Height="400" Width="400">
+        Title="Nieobecnosci" Height="460" Width="450">
     <Window.Resources>
         <Style TargetType="{x:Type TextBlock}">
             <Setter Property="Margin" Value="5,10"/>
-            <Setter Property="Width" Value="Auto"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
         </Style>
 
         <Style TargetType="{x:Type TextBox}">
@@ -43,23 +45,36 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
 
-        <Style TargetType="Border">
-            <Setter Property="BorderBrush" Value="Black"/>
-            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        <Style TargetType="Border" x:Key="DatePickerBorder">
+            <Setter Property="BorderBrush" Value="DarkGray"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="3"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Margin" Value="5,0"/>
+            <Setter Property="Padding" Value="0,2,0,0"/>
         </Style>
 
         <Style TargetType="DatePicker">
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Height" Value="30"/>
             <Setter Property="Margin" Value="0,-5,0,0"/>
-            <Setter Property="Width" Value="120"/>
+            <Setter Property="Width" Value="100"/>
         </Style>
         <Style TargetType="DatePickerTextBox">
             <Setter Property="VerticalAlignment"  Value="Bottom"/>
         </Style>
-
-
-
+        <Style TargetType="GroupBox">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" FontWeight="Bold"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
         <ControlTemplate x:Key="ErrorTemplate">
             <StackPanel Orientation="Vertical">
@@ -71,86 +86,68 @@
         </ControlTemplate>
     </Window.Resources>
 
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto" Name="CreatedRow"/>
-            <RowDefinition Height="Auto" Name="UpdatedRow"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0">
-            <TextBlock Text="TMP" Name="HeaderText" Width="Auto"
+        <TextBlock Grid.Row="0" Text="TMP" Name="HeaderText" Width="Auto"
                        FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
-        </Border>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <TextBlock Text="Typ nieobecności" Width="100"/>
-            <ComboBox Name="TypeCombobox" Width="262"
+        <GroupBox Header="Ogólne" Grid.Row="1">
+            <StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Typ Nieobecności"/>
+                    <ComboBox Name="TypeCombobox" Width="294"
                       SelectionChanged="TypeCombobox_SelectionChanged"/>
 
-        </StackPanel>
+                </StackPanel>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="2">
-            <TextBlock Text="Od" Width="30"/>
-            <DatePicker Name="ValidFromDatePicker" SelectedDate="{Binding From}"/>
-            <TextBlock Text="Do" Width="30" Margin="70,10,0,10"/>
-            <DatePicker Name="ValidToDatePicker" SelectedDate="{Binding To}"/>
-        </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Od"/>
+                    <Border Style="{StaticResource DatePickerBorder}">
+                        <DatePicker Name="ValidFromDatePicker" SelectedDate="{Binding From}"/>
+                    </Border>
+                    <TextBlock Text="Do" Margin="10,10,0,10" Width="74"/>
+                    <Border Style="{StaticResource DatePickerBorder}">
+                        <DatePicker Name="ValidToDatePicker" SelectedDate="{Binding To}"/>
+                    </Border>
+                </StackPanel>
 
-
-
-        <Border Grid.Row="3">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Komentarz"/>
-                <TextBox Name="CommentTextbox" Text="{Binding Comment, Mode=TwoWay}"
-                     Width="300" Height="80" 
-                     TextWrapping="Wrap" AcceptsReturn="True"
-                     MaxLines="2" MaxLength="180"/>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Komentarz" Width="100" Margin="5,10,0,-5" HorizontalAlignment="Left"/>
+                    <TextBox Name="CommentTextbox" Text="{Binding Comment, Mode=TwoWay}"
+                             Width="Auto" Height="50" MaxLines="3" MaxLength="180"
+                             TextWrapping="Wrap" AcceptsReturn="True" VerticalContentAlignment="Top"/>
+                </StackPanel>
             </StackPanel>
-        </Border>
+        </GroupBox>
 
+        <GroupBox Header="Metadane" Grid.Row="2" Name="MetaDataGroupBox">
+            <StackPanel>
+                <StackPanel Name="CreatedPanel" Orientation="Horizontal">
+                    <TextBlock Name="CreatedTextBlock"
+                               Text="Obiekt został stworzony dnia: 2011.11.11 11:11:11" Width="Auto" />
+                </StackPanel>
+                <StackPanel Name="UpdatedPanel" Orientation="Horizontal">
+                    <TextBlock Name="UpdatedTextBlock"
+                               Text="Obiekt został ostatnio zmodyfikowany dnia: 2011.11.11 11:11:11" Width="Auto"/>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
 
-        <StackPanel Grid.Row="4" Orientation="Horizontal">
-            <TextBlock Text="Stworzono" Width="90"/>
-            <TextBlock FontStyle="Oblique" Width="120"
-                 Text="{Binding CreatedOn, StringFormat=\{0:yyyy.MM.dd HH:mm:ss\}}"/>
-            <TextBlock Text="Przez" Width="40"/>
-            <TextBlock FontStyle="Oblique" Width="Auto"
-                 Text="{Binding CreatedBy}"/>
-        </StackPanel>
-
-
-        <StackPanel Grid.Row="5" Orientation="Horizontal">
-            <TextBlock Text="Modyfikowano" Width="90"/>
-            <TextBlock FontStyle="Oblique" Width="120"
-                 Text="{Binding UpdatedOn, StringFormat=\{0:yyyy.MM.dd HH:mm:ss\}}"/>
-            <TextBlock Text="Przez" Width="40"/>
-            <TextBlock FontStyle="Oblique" Width="Auto"
-                 Text="{Binding UpdatedBy}"/>
-        </StackPanel>
-
-        <StackPanel Grid.Row="6" Orientation="Horizontal"
+        <StackPanel Grid.Row="3" Orientation="Horizontal"
                     VerticalAlignment="Bottom" HorizontalAlignment="Right">
 
-            <Button Name="AddButton" Click="AddButton_Click" Visibility="Collapsed">
-                <Button.Content>
-                    <StackPanel Orientation="Horizontal">
-                        <iconPacks:PackIconMaterial Kind="PlusCircleOutline"/>
-                        <TextBlock Text="Dodaj" Margin="0"/>
-                    </StackPanel>
-                </Button.Content>
-            </Button>
-
-            <Button Name="UpdateButton" Click="UpdateButton_Click" Visibility="Collapsed">
+            <Button Name="SaveButton" Click="SaveButton_Click">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <iconPacks:PackIconMaterial Kind="ContentSaveOutline"/>
-                        <TextBlock Text="Zapisz" Margin="0"/>
+                        <TextBlock Text="Zapisz" Margin="0" Width="50"/>
                     </StackPanel>
                 </Button.Content>
             </Button>
