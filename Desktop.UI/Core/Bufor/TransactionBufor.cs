@@ -77,9 +77,6 @@ namespace Desktop.UI.Core.Bufor {
                 case Leave leave:
                     leave.Employee = new EmployeeSimplified() { Id = id };
                     break;
-                case Payment payment:
-                    payment.Contract = new ContractSimplified() { Id = id };
-                    break;
                 case Advance advance:
                     advance.Contract = new ContractSimplified() { Id = id };
                     break;

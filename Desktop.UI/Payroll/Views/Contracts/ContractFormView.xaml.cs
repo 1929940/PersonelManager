@@ -26,18 +26,14 @@ namespace Desktop.UI.Payroll.Views.Contracts {
         public Contract Contract { get; set; }
         private readonly ContractRequestHandler _handler;
         public bool EditMode { get; set; }
-        public decimal AdvancesSum => Contract.Advances?.Sum(x => x.Amount) ?? 0m;
         public ContractBufor Bufor { get; set; }
 
         public ContractFormView() {
             _handler = new ContractRequestHandler();
             Contract = new Contract();
             Bufor = new ContractBufor();
-
-
             this.DataContext = Contract;
             InitializeComponent();
-            AdvancesSumTextBox.DataContext = this;
 
             InitUI();
         }
@@ -50,7 +46,6 @@ namespace Desktop.UI.Payroll.Views.Contracts {
 
             this.DataContext = Contract;
             InitializeComponent();
-            AdvancesSumTextBox.DataContext = this;
             InitUI();
         }
 
@@ -93,12 +88,12 @@ namespace Desktop.UI.Payroll.Views.Contracts {
         }
 
         private void InitPaymentButtons() {
-            if (Contract.Payment == null) {
-                AddPayment.Visibility = Visibility.Visible;
-            } else {
-                EditPayment.Visibility = Visibility.Visible;
-                RemovePayment.Visibility = Visibility.Visible;
-            }
+            //if (Contract.Payment == null) {
+            AddPayment.Visibility = Visibility.Visible;
+            //} else {
+            EditPayment.Visibility = Visibility.Visible;
+            RemovePayment.Visibility = Visibility.Visible;
+            //}
         }
 
         private void EmployeeCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
@@ -115,8 +110,6 @@ namespace Desktop.UI.Payroll.Views.Contracts {
                 EmployeeCombobox.SelectedIndex = ViewHelper.GetIndexOfComboboxValue(Contract.Employee.Id, EmployeeCombobox);
             }
         }
-
-
 
         private void AddAdvance_Click(object sender, RoutedEventArgs e) {
 
@@ -157,7 +150,7 @@ namespace Desktop.UI.Payroll.Views.Contracts {
         }
 
         private void ValueTextBox_TextChanged(object sender, TextChangedEventArgs e) {
-            decimal netto = Decimal.Round(Contract.Value - (Contract.Value * Contract.TaxPercent / 100), 2);
+            decimal netto = Decimal.Round(Contract.TotalValue - (Contract.TotalValue * Contract.TaxPercent / 100), 2);
 
             if (ValueNettoTextBox != null)
                 ValueNettoTextBox.Text = netto.ToString("0.00 PLN");

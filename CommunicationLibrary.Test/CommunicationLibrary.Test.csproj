@@ -72,7 +72,6 @@
     <Compile Include="HR\SafetyTrainingTest.cs" />
     <Compile Include="Payroll\AdvancesTest.cs" />
     <Compile Include="Payroll\ContractsTest.cs" />
-    <Compile Include="Payroll\PaymentsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

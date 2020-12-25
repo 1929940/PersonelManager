@@ -11,10 +11,10 @@ namespace CommunicationLibrary.Payroll.Comparers {
             x.ValidFrom == y.ValidFrom &&
             x.ValidTo == y.ValidTo &&
             x.HourlySalary == y.HourlySalary &&
-            x.Value == y.Value &&
+            x.TotalValue == y.TotalValue &&
             x.TaxPercent == y.TaxPercent &&
-            x.IsRealized == y.IsRealized;
-
+            x.IsRealized == y.IsRealized &&
+            x.PaidOn == y.PaidOn;
 
         public int GetHashCode(Contract obj) => obj.GetHashCode();
     }

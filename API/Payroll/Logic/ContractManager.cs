@@ -9,6 +9,11 @@ using System.Linq;
 namespace API.Payroll.Logic {
     public class ContractManager : BaseEntityManager {
         public static ContractDTO CreateDTO(Contract contract) {
+            decimal nettoValue = decimal.Round(contract.TotalValue - (contract.TotalValue * contract.TaxPercent / 100), 2);
+            decimal taxValue = decimal.Round(contract.TotalValue - nettoValue);
+            decimal advancesTotalValue = contract.Advances.Sum(x => x.Amount);
+            decimal paymentValue = contract.TotalValue - taxValue - advancesTotalValue;
+
             ContractDTO dto = new ContractDTO() {
                 Employee = EmployeeManager.CreateSimplifiedDTO(contract.Employee),
                 Title = contract.Title,
@@ -16,13 +21,15 @@ namespace API.Payroll.Logic {
                 ValidFrom = contract.ValidFrom,
                 ValidTo = contract.ValidTo,
                 ContractSubject = contract.ContractSubject,
-                Value = contract.Value,
+                TotalValue = contract.TotalValue,
                 HourlySalary = contract.HourlySalary,
                 TaxPercent = contract.TaxPercent,
                 IsRealized = contract.IsRealized,
-                Payment = contract.Payment,
-                Advances = contract.Advances,
-                ValueNetto = decimal.Round(contract.Value - (contract.Value * contract.TaxPercent / 100), 2)
+                PaidOn = contract.PaidOn,
+                NettoValue = nettoValue,
+                TaxValue = taxValue,
+                AdvancesTotalValue = advancesTotalValue,
+                Paymentvalue = paymentValue
             };
             CopyTags(contract, ref dto);
 
@@ -47,10 +54,11 @@ namespace API.Payroll.Logic {
             contract.ValidFrom = dto.ValidFrom;
             contract.ValidTo = dto.ValidTo;
             contract.ContractSubject = dto.ContractSubject;
-            contract.Value = dto.Value;
+            contract.TotalValue = dto.TotalValue;
             contract.HourlySalary = dto.HourlySalary;
             contract.TaxPercent = dto.TaxPercent;
-            contract.IsRealized = dto.IsRealized;
+            contract.PaidOn = dto.PaidOn;
+            contract.IsRealized = dto.PaidOn != null;
 
             CopyTags(dto, ref contract);
         }

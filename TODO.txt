@@ -91,12 +91,12 @@
 
 25. Payment view
 
-	TotalValue
-	AdvancesValue
-	TaxValue
-	AdditionalDeductions
-	AdditionalDeductionsDescription
-	PaidValue
+	TotalValue - store on Contract
+	AdvancesValue - Either create ENDPOINT for sum of advances of contract, or create ENDPOINT for filling contract combobox with Employee Name, Surname, ContractNumber, Tax Value, Contract Value, Advances Value.
+	TaxValue - Total * Tax% NON EDITABLE
+	AdditionalDeductions	- Taken from Netto	EDITABLE
+	AdditionalDeductionsDescription	- 
+	PaidValue	- COUNTER NON EDITABLE
 	PaidOn
 	ContractSimplified - Number, Employee.LastName, ContractId
 	IsRealized - SET BY API
@@ -104,6 +104,14 @@
 	CANNOT EDIT REALIZED PAYMENTS
 	CAN DELETE REALIZED PAYMENTS
 	KIEROWNIK CAN EDIT
+
+	REALIZED ARE CONTRACTS NOT PAYMENTS. REALIZE CONTRACT WHEN PAYMENT IS SUBMITED.
+
+	WHAT DO WE CONSIDER SUBMITTED? PERHAPS A BUTTON? "ZATWIERDZ P£ATNOŒÆ"
+
+	DATE ALWAYS TODAY IF EMPTY - FILL DATE ONLY ON ZATWIERDZ
+
+	IN PAYMENTS VIEW - USER NEEDS TO BE ABLE TO TELL IF IT WAS PAID, AND HOW MUCH ONE WILL HAVE TO PAY, REST IS IRRELEAVANT
 
 26. Advances view
 	-Who has taken it
@@ -140,4 +148,6 @@
 	DO AT API LVL
  
 33. REMOVE POSSIBILITY TO CHANGE EMPLOYEE WHILE EDITING ANYTHING.
+
+34. CONTRACT - REMOVE
 

@@ -136,14 +136,14 @@
                         </TreeViewItem.Header>
                     </TreeViewItem>
 
-                    <TreeViewItem>
+                    <!--<TreeViewItem>
                         <TreeViewItem.Header>
                             <StackPanel Name="Pay_Panel" Orientation="Horizontal" VerticalAlignment="Center">
                                 <iconPacks:PackIconMaterial Kind="CurrencyEur" VerticalAlignment="Center"/>
                                 <TextBlock Text="Wypłaty" VerticalAlignment="Center"/>
                             </StackPanel>
                         </TreeViewItem.Header>
-                    </TreeViewItem>
+                    </TreeViewItem>-->
 
                     <TreeViewItem>
                         <TreeViewItem.Header>

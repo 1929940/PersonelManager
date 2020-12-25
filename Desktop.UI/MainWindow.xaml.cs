@@ -29,7 +29,6 @@ using Desktop.UI.HR.Views.Certificates;
 using Desktop.UI.HR.Views.Locations;
 using Desktop.UI.HR.Views.Foremen;
 using Desktop.UI.Payroll.Views.Contracts;
-using Desktop.UI.Payroll.Views.Payments;
 using Desktop.UI.Payroll.Views.Advances;
 using Desktop.UI.Core.Validators;
 
@@ -46,7 +45,7 @@ namespace PersonalManagerDesktop {
             //Settings.Token = new UserRequestHandler().Login("1929940@gmail.com", "1111").Token;
 
             //ADMIN
-            ServerConnectionHelper.SetLoginData(new UserRequestHandler().Login("1929940@gmail.com", "1111"));
+            ServerConnectionHelper.SetLoginData(new UserRequestHandler().Login("1929940@gmail.com", "QWER"));
 
             //KIEROWNIK
             //ServerConnectionHelper.SetLoginData(new UserRequestHandler().Login("Witkowski@poczta.pl", "2897"));
@@ -87,9 +86,6 @@ namespace PersonalManagerDesktop {
                         break;
                     case "Contracts_Panel":
                         ContentFrame.Navigate(new ContractsTableView());
-                        break;
-                    case "Pay_Panel":
-                        ContentFrame.Navigate(new PaymentsTableView());
                         break;
                     case "Advances_Panel":
                         ContentFrame.Navigate(new AdvancesTableView());

@@ -4,8 +4,9 @@ using System.Collections.Generic;
 namespace API.Payroll.Models {
     public class ContractDTO : ContractBase {
         public EmployeeSimplifiedDTO Employee {get; set;}
-        public Payment Payment { get; set; }
-        public IEnumerable<Advance> Advances { get; set; }
-        public decimal ValueNetto { get; set; }
+        public decimal Paymentvalue { get; set; }
+        public decimal AdvancesTotalValue { get; set; }
+        public decimal NettoValue { get; set; }
+        public decimal TaxValue { get; set; }
     }
 }

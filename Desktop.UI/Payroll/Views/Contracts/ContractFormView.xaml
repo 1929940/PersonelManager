@@ -157,7 +157,7 @@
                     <TextBox Name="ValueTextBox" HorizontalContentAlignment="Right" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" 
                              TextChanged="ValueTextBox_TextChanged">
                         <TextBox.Text>
-                            <Binding Path="Value" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                            <Binding Path="TotalValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
                                     <validators:IsNotZeroPLNValidator/>
                                 </Binding.ValidationRules>
@@ -171,7 +171,7 @@
                     <TextBlock Text="Wartość Netto" TextWrapping="Wrap" Margin="50,0,0,0"/>
                     <TextBox Name="ValueNettoTextBox" HorizontalContentAlignment="Right" IsEnabled="False">
                         <TextBox.Text>
-                            <Binding Path="ValueNetto" Mode="TwoWay" UpdateSourceTrigger="Default">
+                            <Binding Path="NettoValue" Mode="TwoWay" UpdateSourceTrigger="Default">
                                 <Binding.Converter>
                                     <converters:ToPLNConverter/>
                                 </Binding.Converter>
@@ -266,7 +266,7 @@
                         <TextBlock Text="Suma" Width="35"/>
                         <TextBox Name="AdvancesSumTextBox" IsReadOnly="True" Focusable="False" IsEnabled="False" HorizontalContentAlignment="Right">
                             <TextBox.Text>
-                                <Binding Path="AdvancesSum" Mode="OneWay" UpdateSourceTrigger="Default">
+                                <Binding Path="AdvancesTotalValue" Mode="TwoWay" UpdateSourceTrigger="Default">
                                     <Binding.Converter>
                                         <converters:ToPLNConverter/>
                                     </Binding.Converter>

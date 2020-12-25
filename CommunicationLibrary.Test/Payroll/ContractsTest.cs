@@ -26,7 +26,7 @@ namespace CommunicationLibrary.Test.Payroll {
                 ValidTo = DateTime.Today,
                 HourlySalary = 10,
                 TaxPercent = 0.1m,
-                Value = 4000
+                TotalValue = 4000
             };
 
             _updatedRow = new Contract() {
@@ -38,7 +38,7 @@ namespace CommunicationLibrary.Test.Payroll {
                 ValidTo = DateTime.Today,
                 HourlySalary = 12,
                 TaxPercent = 0.2m,
-                Value = 4500
+                TotalValue = 4500
             };
         }
 

@@ -333,14 +333,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Payroll\Views\Payments\PaymentFormView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Payroll\Views\Payments\PaymentsTableView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Payroll\Helpers\ContractBufor.cs" />
@@ -352,12 +344,6 @@
     </Compile>
     <Compile Include="Payroll\Views\Contracts\ContractsTableView.xaml.cs">
       <DependentUpon>ContractsTableView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Payroll\Views\Payments\PaymentFormView.xaml.cs">
-      <DependentUpon>PaymentFormView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Payroll\Views\Payments\PaymentsTableView.xaml.cs">
-      <DependentUpon>PaymentsTableView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

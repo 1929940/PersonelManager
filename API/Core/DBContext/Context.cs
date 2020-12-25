@@ -27,7 +27,6 @@ namespace API.Core.DBContext {
 
             modelBuilder.Entity<Contract>().HasData(SeedPayroll.GetDummyContracts());
             modelBuilder.Entity<Advance>().HasData(SeedPayroll.GetDummyAdvances());
-            modelBuilder.Entity<Payment>().HasData(SeedPayroll.GetDummyPayment());
         }
 
         public DbSet<User> Users { get; set; }
@@ -45,8 +44,6 @@ namespace API.Core.DBContext {
         public DbSet<SafetyTraining> SafetyTrainings { get; set; }
 
         public DbSet<Contract> Contracts { get; set; }
-        public DbSet<Payment> Payment { get; set; }
         public DbSet<Advance> Advances { get; set; }
-
     }
 }
