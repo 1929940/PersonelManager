@@ -19,8 +19,6 @@ namespace CommunicationLibrary.Payroll.Models {
         public DateTime? PaidOn { get; set; }
         public IEnumerable<Advance> Advances { get; set; }
 
-        //TODO: IS THIS NEEDED? YES BUT NEEDS TO BE REPLACED
-
         public Contract() {
             Employee = new EmployeeSimplified();
         }
