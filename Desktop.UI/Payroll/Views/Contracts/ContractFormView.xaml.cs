@@ -57,7 +57,6 @@ namespace Desktop.UI.Payroll.Views.Contracts {
             InitDates();
             InitHeader();
             MetadataHelper.Init(this, EditMode, Contract);
-            InitPaymentButtons();
         }
 
         private void InitHeader() {
@@ -104,18 +103,11 @@ namespace Desktop.UI.Payroll.Views.Contracts {
             } else {
                 if (PaidTextBox != null) {
                     ToBePaidStackPanel.Visibility = Visibility.Collapsed;
+                    this.Height -= 20;
                     PaidTextBox.Text = paymentValue.ToString("0.00 PLN");
+                    PaidOnDatePicker.SelectedDate = Contract.PaidOn;
                 }
             }
-        }
-
-        private void InitPaymentButtons() {
-            //if (Contract.Payment == null) {
-            //AddPayment.Visibility = Visibility.Visible;
-            //} else {
-            //EditPayment.Visibility = Visibility.Visible;
-            //RemovePayment.Visibility = Visibility.Visible;
-            //}
         }
 
         private void EmployeeCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
@@ -141,20 +133,8 @@ namespace Desktop.UI.Payroll.Views.Contracts {
 
         }
 
-        private void AddPayment_Click(object sender, RoutedEventArgs e) {
-            InitPaymentButtons();
-        }
-
-        private void EditPayment_Click(object sender, RoutedEventArgs e) {
-            InitPaymentButtons();
-        }
-
-        private void RemovePayment_Click(object sender, RoutedEventArgs e) {
-            InitPaymentButtons();
-        }
-
-        private void Close_Click(object sender, RoutedEventArgs e) {
-            if (DialogHelper.Close())
+        private void CloseButton_Click(object sender, RoutedEventArgs e) {
+            if (Contract.IsRealized || DialogHelper.Close())
                 this.Close();
         }
 
@@ -184,6 +164,12 @@ namespace Desktop.UI.Payroll.Views.Contracts {
         private void ConfirmPayment_Click(object sender, RoutedEventArgs e) {
             Contract.PaidOn = PaidOn;
             InitPaymentSection();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e) {
+            if (Contract.IsRealized) {
+                ControlsHelper.DisableControls(this, new string[] { "ShowAdvances", "CloseButton"});
+            }
         }
     }
 }

@@ -9,7 +9,8 @@
         FontFamily="Calibri" FontSize="14"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
         xmlns:validators="clr-namespace:Desktop.UI.Core.Validators"
-        Title="Umowa" Height="760" Width="460">
+        Title="Umowa" Height="790" Width="460"
+        Loaded="Window_Loaded">
     <Window.Resources>
         <converters:ToPLNConverter x:Key="ToPLNConverter"/>
         <converters:ToPercentConverter x:Key="ToPercentConverter"/>
@@ -340,7 +341,7 @@
                 </Button.Content>
             </Button>
 
-            <Button Name="Close" Click="Close_Click">
+            <Button Name="CloseButton" Click="CloseButton_Click">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <iconPacks:PackIconMaterial Kind="LocationExit"/>

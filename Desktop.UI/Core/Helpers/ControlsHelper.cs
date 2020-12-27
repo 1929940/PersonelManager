@@ -41,7 +41,7 @@ namespace Desktop.UI.Core.Helpers {
 
         public static void DisableControls(DependencyObject depObt, string[] ignored) {
 
-            List<Control> controls = GetAllVisualChildren(depObt).OfType<Control>().ToList();
+            List<Control> controls = GetAllVisualChildren(depObt).Where(x => !(x is GroupBox)).OfType<Control>().ToList();
 
             List<Control> ignoredControls = controls.Where(x => ignored.Contains(x.Name)).ToList();
 
