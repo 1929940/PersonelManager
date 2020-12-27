@@ -167,7 +167,7 @@ namespace Desktop.UI.Payroll.Views.Contracts {
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
-            if (Contract.IsRealized && !AuthorizationHelper.Authorize(Enums.Roles.Kierownik)) {
+            if (Contract.IsRealized && !AuthorizationHelper.Authorize(Enums.Roles.Administrator)) {
                 ControlsHelper.DisableControls(this, new string[] { "ShowAdvances", "CloseButton"});
             }
         }

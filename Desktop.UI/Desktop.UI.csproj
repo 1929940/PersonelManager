@@ -269,6 +269,7 @@
     <Compile Include="Core\Validators\IsPercentValue.cs" />
     <Compile Include="Core\Validators\PeselValidator.cs" />
     <Compile Include="Core\ValueConverters\EmptyToAutomatic.cs" />
+    <Compile Include="Core\ValueConverters\ToHourConverter.cs" />
     <Compile Include="Core\ValueConverters\ToPercentConverter.cs" />
     <Compile Include="Core\ValueConverters\ToPLNConverter.cs" />
     <Compile Include="HR\Helper\EmployeeBufor.cs" />
@@ -321,6 +322,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Payroll\Views\Advances\AdvancesFormView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Payroll\Views\Advances\AdvancesTableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -336,6 +341,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Payroll\Helpers\ContractBufor.cs" />
+    <Compile Include="Payroll\Views\Advances\AdvancesFormView.xaml.cs">
+      <DependentUpon>AdvancesFormView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Payroll\Views\Advances\AdvancesTableView.xaml.cs">
       <DependentUpon>AdvancesTableView.xaml</DependentUpon>
     </Compile>

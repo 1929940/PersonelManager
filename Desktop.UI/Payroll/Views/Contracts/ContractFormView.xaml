@@ -88,9 +88,6 @@
             </Setter>
         </Style>
 
-
-
-
         <ControlTemplate x:Key="ErrorTemplate">
             <StackPanel Orientation="Vertical">
                 <Border BorderBrush="Red" BorderThickness="1">

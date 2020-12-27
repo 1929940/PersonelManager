@@ -61,6 +61,10 @@ namespace Desktop.UI.Payroll.Views.Contracts {
             CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
         }
 
+        private void ShowRealizedCheckbox_Changed(object sender, RoutedEventArgs e) {
+            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
+        }
+
 
         private void AddButton_Click(object sender, RoutedEventArgs e) {
             ContractFormView form = new ContractFormView();
@@ -79,7 +83,7 @@ namespace Desktop.UI.Payroll.Views.Contracts {
             if (contract == null)
                 return;
 
-            if (contract.IsRealized) {
+            if (contract.IsRealized && !AuthorizationHelper.Authorize(Enums.Roles.Administrator)) {
                 MessageBox.Show("Nie można usuwać zrealizowanych umów.", "Niedozwolona akcja", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             } 
@@ -94,10 +98,6 @@ namespace Desktop.UI.Payroll.Views.Contracts {
 
         private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
             EditRow();
-        }
-
-        private void ShowRealizedCheckbox_Changed(object sender, RoutedEventArgs e) {
-            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
         }
     }
 }
