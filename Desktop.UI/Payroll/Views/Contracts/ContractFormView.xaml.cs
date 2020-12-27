@@ -28,6 +28,8 @@ namespace Desktop.UI.Payroll.Views.Contracts {
         public bool EditMode { get; set; }
         public ContractBufor Bufor { get; set; }
 
+        public DateTime PaidOn { get; set; }
+
         public ContractFormView() {
             _handler = new ContractRequestHandler();
             Contract = new Contract();
@@ -50,6 +52,7 @@ namespace Desktop.UI.Payroll.Views.Contracts {
         }
 
         private void InitUI() {
+            InitPaymentSection();
             BindCombobox();
             InitDates();
             InitHeader();
@@ -87,12 +90,31 @@ namespace Desktop.UI.Payroll.Views.Contracts {
             }
         }
 
+        private void InitPaymentSection() {
+            decimal paymentValue = Contract.NettoValue - Contract.AdvancesTotalValue;
+            if (PaidOnDatePicker != null)
+                PaidOnDatePicker.DataContext = this;
+
+            if (Contract.PaidOn == null) {
+                if (ToBePaidTextBox != null && PaidTextBox != null && PaidOnDatePicker != null) {
+                    ToBePaidTextBox.Text = paymentValue.ToString("0.00 PLN");
+                    PaidTextBox.Text = "0.00 PLN";
+                    PaidOnDatePicker.SelectedDate = DateTime.Today;
+                }
+            } else {
+                if (PaidTextBox != null) {
+                    ToBePaidStackPanel.Visibility = Visibility.Collapsed;
+                    PaidTextBox.Text = paymentValue.ToString("0.00 PLN");
+                }
+            }
+        }
+
         private void InitPaymentButtons() {
             //if (Contract.Payment == null) {
-            AddPayment.Visibility = Visibility.Visible;
+            //AddPayment.Visibility = Visibility.Visible;
             //} else {
-            EditPayment.Visibility = Visibility.Visible;
-            RemovePayment.Visibility = Visibility.Visible;
+            //EditPayment.Visibility = Visibility.Visible;
+            //RemovePayment.Visibility = Visibility.Visible;
             //}
         }
 
@@ -152,8 +174,16 @@ namespace Desktop.UI.Payroll.Views.Contracts {
         private void ValueTextBox_TextChanged(object sender, TextChangedEventArgs e) {
             decimal netto = Decimal.Round(Contract.TotalValue - (Contract.TotalValue * Contract.TaxPercent / 100), 2);
 
-            if (ValueNettoTextBox != null)
+            if (ValueNettoTextBox != null) {
                 ValueNettoTextBox.Text = netto.ToString("0.00 PLN");
+                Contract.NettoValue = netto;
+                InitPaymentSection();
+            }
+        }
+
+        private void ConfirmPayment_Click(object sender, RoutedEventArgs e) {
+            Contract.PaidOn = PaidOn;
+            InitPaymentSection();
         }
     }
 }

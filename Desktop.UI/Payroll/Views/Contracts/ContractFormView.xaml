@@ -9,7 +9,7 @@
         FontFamily="Calibri" FontSize="14"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
         xmlns:validators="clr-namespace:Desktop.UI.Core.Validators"
-        Title="Umowa" Height="740" Width="460">
+        Title="Umowa" Height="760" Width="460">
     <Window.Resources>
         <converters:ToPLNConverter x:Key="ToPLNConverter"/>
         <converters:ToPercentConverter x:Key="ToPercentConverter"/>
@@ -263,7 +263,7 @@
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <TextBlock Text="Suma" Width="35"/>
+                        <TextBlock Text="Suma" Width="55"/>
                         <TextBox Name="AdvancesSumTextBox" IsReadOnly="True" Focusable="False" IsEnabled="False" HorizontalContentAlignment="Right">
                             <TextBox.Text>
                                 <Binding Path="AdvancesTotalValue" Mode="TwoWay" UpdateSourceTrigger="Default">
@@ -281,35 +281,36 @@
         </GroupBox>
 
         <GroupBox Header="Wypłata" Grid.Row="3">
-            <StackPanel Orientation="Horizontal">
+            <StackPanel>
 
-                <Button Name="AddPayment" Click="AddPayment_Click" Width="100" Visibility="Collapsed">
-                    <Button.Content>
-                        <StackPanel Orientation="Horizontal">
-                            <iconPacks:PackIconMaterial Kind="PlusCircleOutline"/>
-                            <TextBlock Text="Dodaj" Margin="0" Width="Auto"/>
-                        </StackPanel>
-                    </Button.Content>
-                </Button>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Zapłacono"/>
+                    <TextBox Name="PaidTextBox" HorizontalContentAlignment="Right"
+                             IsReadOnly="True" Focusable="False" IsEnabled="False"/>
 
-                <Button Name="EditPayment" Click="EditPayment_Click" Width="100" Visibility="Collapsed">
-                    <Button.Content>
-                        <StackPanel Orientation="Horizontal">
-                            <iconPacks:PackIconMaterial Kind="PencilCircleOutline"/>
-                            <TextBlock Text="Edytuj" Margin="0" Width="Auto"/>
-                        </StackPanel>
-                    </Button.Content>
-                </Button>
+                    <TextBlock Text="Data" Margin="65,12,0,8" Width="55"/>
+                    <Border Style="{StaticResource DatePickerBorder}">
+                        <DatePicker Name="PaidOnDatePicker" SelectedDate="{Binding PaidOn}"/>
+                    </Border>
 
-                <Button Name="RemovePayment" Click="RemovePayment_Click" Width="100" Visibility="Collapsed">
-                    <Button.Content>
-                        <StackPanel Orientation="Horizontal">
-                            <iconPacks:PackIconMaterial Kind="MinusCircleOutline"/>
-                            <TextBlock Text="Usuń" Margin="0" Width="Auto"/>
-                        </StackPanel>
-                    </Button.Content>
-                </Button>
+                </StackPanel>
 
+                <StackPanel Orientation="Horizontal" Name="ToBePaidStackPanel">
+
+                    <TextBlock Text="Do zapłaty"/>
+                    <TextBox Name="ToBePaidTextBox" HorizontalContentAlignment="Right"
+                             IsReadOnly="True" Focusable="False" IsEnabled="False"/>
+
+                    <Button Name="ConfirmPayment" Click="ConfirmPayment_Click" Width="165" Margin="60,5,5,10">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <iconPacks:PackIconMaterial Kind="CurrencyUsdCircleOutline"/>
+                                <TextBlock Text="Zatwierdź wypłatę" Margin="0" Width="Auto"/>
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+
+                </StackPanel>
             </StackPanel>
 
         </GroupBox>

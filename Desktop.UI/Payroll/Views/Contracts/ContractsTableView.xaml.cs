@@ -36,7 +36,6 @@ namespace Desktop.UI.Payroll.Views.Contracts {
 
             bool result = contract.Employee.FirstName.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0
                 || contract.Employee.LastName.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0
-                || contract.Employee.Profession.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0
                 || contract.ContractSubject.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0
                 || contract.Title.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0
                 || contract.Number.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0;
