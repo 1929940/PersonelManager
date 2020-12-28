@@ -4,6 +4,7 @@ using CommunicationLibrary.Payroll.Models;
 using CommunicationLibrary.Payroll.Requests;
 using Desktop.UI.Core.Helpers;
 using Desktop.UI.Payroll.Helpers;
+using Desktop.UI.Payroll.Views.Advances;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,14 +25,16 @@ namespace Desktop.UI.Payroll.Views.Contracts {
     /// </summary>
     public partial class ContractFormView : Window {
         public Contract Contract { get; set; }
-        private readonly ContractRequestHandler _handler;
+        private readonly ContractRequestHandler _contractHandler;
+        private readonly AdvanceRequestHandler _advanceHandler;
         public bool EditMode { get; set; }
         public ContractBufor Bufor { get; set; }
         public bool IsReadOnly => Contract.PaidOn != null;
         public DateTime PaidOn { get; set; }
 
         public ContractFormView() {
-            _handler = new ContractRequestHandler();
+            _contractHandler = new ContractRequestHandler();
+            _advanceHandler = new AdvanceRequestHandler();
             Contract = new Contract();
             Bufor = new ContractBufor();
             this.DataContext = Contract;
@@ -42,8 +45,9 @@ namespace Desktop.UI.Payroll.Views.Contracts {
 
         public ContractFormView(int id) {
             EditMode = true;
-            _handler = new ContractRequestHandler();
-            Contract = _handler.Get(id);
+            _contractHandler = new ContractRequestHandler();
+            _advanceHandler = new AdvanceRequestHandler();
+            Contract = _contractHandler.Get(id);
             Bufor = new ContractBufor();
 
             this.DataContext = Contract;
@@ -125,14 +129,32 @@ namespace Desktop.UI.Payroll.Views.Contracts {
             }
         }
 
-        private void AddAdvance_Click(object sender, RoutedEventArgs e) {
+        private async void AddAdvance_Click(object sender, RoutedEventArgs e) {
+            AdvancesFormView form = new AdvancesFormView(out Advance advance, Bufor.AdvancesBufor);
+            form.ShowDialog();
 
+            Bufor.AdvancesBufor.TransactionBufor.Add(advance);
+
+            //if no list get it
+            if (Contract.Advances == null) {
+                if (Contract.Id > 0) {
+                    Contract.Advances = await _advanceHandler.GetContractAdvancesAsync(Contract.Id); //What if contract has no id - then there are no advances besides the ones in memory
+                } else {
+                    Contract.Advances = new List<Advance>();
+                    //Contract.Advances.Add(Advance); //Cant add?
+                }
+            }
+
+            //add this advance
+            //update Advances total
         }
 
         private void ShowAdvances_Click(object sender, RoutedEventArgs e) {
-
+            //if no list get it
+            //show advances: {Amount, Worked, PaidOn} - Create new window just for this - Only show
         }
 
+        //TODO: CHANGE TO READONLY
         private void CloseButton_Click(object sender, RoutedEventArgs e) {
             if (Contract.IsRealized || DialogHelper.Close())
                 this.Close();
@@ -141,10 +163,10 @@ namespace Desktop.UI.Payroll.Views.Contracts {
         private async void SaveButton_Click(object sender, RoutedEventArgs e) {
             if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
                 if (EditMode) {
-                    await _handler.UpdateAsync(Contract.Id, Contract);
+                    await _contractHandler.UpdateAsync(Contract.Id, Contract);
                     await Bufor.FlushBuforsAsync(Contract.Id);
                 } else {
-                    Contract created = await _handler.CreateAsync(Contract);
+                    Contract created = await _contractHandler.CreateAsync(Contract);
                     await Bufor.FlushBuforsAsync(created.Id);
                 }
                 this.Close();
@@ -168,7 +190,7 @@ namespace Desktop.UI.Payroll.Views.Contracts {
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
             if (Contract.IsRealized && !AuthorizationHelper.Authorize(Enums.Roles.Administrator)) {
-                ControlsHelper.DisableControls(this, new string[] { "ShowAdvances", "CloseButton"});
+                ControlsHelper.DisableControls(this, new string[] { "ShowAdvances", "CloseButton" });
             }
         }
     }

@@ -24,6 +24,7 @@ namespace Desktop.UI.Payroll.Views.Advances {
 
         public Advance Advance { get; set; }
         public ContractAdvanceData AdvanceContractData { get; set; }
+        public decimal AdvanceLimit { get; set; }
         public bool EditMode { get; set; }
         public Bufor<Advance> Bufor { get; set; }
         public bool IsReadOnly => Advance.PaidOn != null;
@@ -42,12 +43,6 @@ namespace Desktop.UI.Payroll.Views.Advances {
             InitializeComponent();
             InitUI();
 
-            //InitializeComponent();
-            //InitHeader();
-            //SetDataContext();
-            //BindCombobox();
-            //MetadataHelper.Init(this, EditMode, Advance);
-
             advance = Advance;
         }
 
@@ -61,17 +56,10 @@ namespace Desktop.UI.Payroll.Views.Advances {
 
             InitializeComponent();
             InitUI();
-
-            //SetDataContext(doc);
-            //BindCombobox();
-            //MetadataHelper.Init(this, EditMode, Advance);
-
         }
 
         private void InitUI() {
-            //InitPaymentSection();
             BindCombobox();
-            //InitDates();
             InitHeader();
             InitConfirmSection();
             MetadataHelper.Init(this, EditMode, Advance);
@@ -108,11 +96,46 @@ namespace Desktop.UI.Payroll.Views.Advances {
         }
 
         private void WorkedTextBox_TextChanged(object sender, TextChangedEventArgs e) {
+            CalculateAdvanceLimit();
+            //decimal value = 0;
+            //decimal allowedValue = 0;
 
+            //if (AdvanceLimitTextbox == null)
+            //    return;
+
+            //if (AdvanceContractData != null) {
+            //    value = Advance.WorkedHours * AdvanceContractData.Wage * AdvanceContractData.Modifier - AdvanceContractData.ContractCharges; // minus
+            //    allowedValue = AdvanceContractData.MaximumContractCharges - AdvanceContractData.ContractCharges;
+
+            //    if (value > allowedValue)
+            //        value = allowedValue;
+
+            //    if (value < 0)
+            //        value = 0;
+            //}
+            //AdvanceLimit = value;
+            //AdvanceLimitTextbox.Text = value.ToString("0.00 PLN");
         }
 
-        private void AmountTextBox_TextChanged(object sender, TextChangedEventArgs e) {
+        private void CalculateAdvanceLimit() {
+            decimal value = 0;
+            decimal allowedValue = 0;
 
+            if (AdvanceLimitTextbox == null)
+                return;
+
+            if (AdvanceContractData != null) {
+                value = Advance.WorkedHours * AdvanceContractData.Wage * AdvanceContractData.Modifier - AdvanceContractData.ContractCharges; // minus
+                allowedValue = AdvanceContractData.MaximumContractCharges - AdvanceContractData.ContractCharges;
+
+                if (value > allowedValue)
+                    value = allowedValue;
+
+                if (value < 0)
+                    value = 0;
+            }
+            AdvanceLimit = value;
+            AdvanceLimitTextbox.Text = value.ToString("0.00 PLN");
         }
 
         private void ConfirmAdvanceButton_Click(object sender, RoutedEventArgs e) {
@@ -121,33 +144,48 @@ namespace Desktop.UI.Payroll.Views.Advances {
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e) {
-
+            if (IsReadOnly || DialogHelper.Close())
+                this.Close();
         }
 
         private async void SaveButton_Click(object sender, RoutedEventArgs e) {
-            var handler = new CommunicationLibrary.HR.Requests.EmployeeRequestHandler();
-
-            var employees = handler.GetEmployeeHeaders();
-            var employeesAsync = await handler.GetEmployeeHeadersAsync();
-
-            var headers = _contractHandler.GetContractHeaders();
-            var headersAsync = await _contractHandler.GetContractHeadersAsync();
-
-            var advData = _contractHandler.GetContractAdvanceData(Advance.Contract.Id);
-            var advDataAsync = await _contractHandler.GetContractAdvanceDataAsync(Advance.Contract.Id);
-
+            if (ControlsHelper.AreTextboxesValid(this) && IsAmountCorrect()) {
+                if (EditMode) {
+                    if (UseBufor)
+                        Bufor.TransactionBufor.Modify(Advance);
+                    else if (DialogHelper.Save())
+                        await _advanceHandler.UpdateAsync(Advance.Id, Advance);
+                } else {
+                    if (UseBufor)
+                        Bufor.TransactionBufor.Add(Advance);
+                    else if (DialogHelper.Save())
+                        await _advanceHandler.CreateAsync(Advance);
+                }
+                this.Close();
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
             if (IsReadOnly && !AuthorizationHelper.Authorize(Enums.Roles.Administrator)) {
                 ControlsHelper.DisableControls(this, new string[] { "CloseButton" });
             }
+            CalculateAdvanceLimit();
         }
 
         private void ContractCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             Advance.Contract.Id = (int)ContractCombobox.SelectedValue;
             AdvanceContractData = _contractHandler.GetContractAdvanceData(Advance.Contract.Id);
             AdvanceDataGroupBox.DataContext = AdvanceContractData;
+        }
+
+        private bool IsAmountCorrect() {
+            if (Advance.Amount > AdvanceLimit) {
+                AmountWarningLabel.Visibility = Visibility.Visible;
+                return false;
+            } else {
+                AmountWarningLabel.Visibility = Visibility.Hidden;
+                return true;
+            }
         }
     }
 }

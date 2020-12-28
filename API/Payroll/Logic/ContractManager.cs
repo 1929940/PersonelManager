@@ -62,9 +62,9 @@ namespace API.Payroll.Logic {
             decimal limit = decimal.Round(modifier * contract.TotalValue, 2);
             return new ContractAdvanceData() {
                 Modifier = modifier,
-                AdvancesSum = advancesTotalValue,
+                ContractCharges = advancesTotalValue,
                 ContractValue = contract.TotalValue,
-                AdvancesLimit = limit,
+                MaximumContractCharges = limit,
                 Wage = contract.HourlySalary
             };
         }

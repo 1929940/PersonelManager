@@ -9,14 +9,14 @@
         FontFamily="Calibri" FontSize="14"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
         xmlns:validators="clr-namespace:Desktop.UI.Core.Validators"
-        Title="Zaliczki" Height="520" Width="470"
+        Title="Zaliczki" Height="560" Width="510"
         Loaded="Window_Loaded">
     <Window.Resources>
         <converters:ToPLNConverter x:Key="ToPLNConverter"/>
         <converters:ToPercentConverter x:Key="ToPercentConverter"/>
         <Style TargetType="{x:Type TextBlock}">
             <Setter Property="Margin" Value="5,5"/>
-            <Setter Property="Width" Value="90"/>
+            <Setter Property="Width" Value="110"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
 
@@ -114,38 +114,11 @@
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Umowa"/>
-                    <ComboBox Name="ContractCombobox" Width="320"
+                    <ComboBox Name="ContractCombobox" Width="340"
                       DisplayMemberPath="Value" SelectedValuePath="Key"
                       SelectionChanged="ContractCombobox_SelectionChanged"/>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal">
-
-                    <TextBlock Text="Aktualna   suma zaliczek" TextWrapping="Wrap"/>
-                    <TextBox Name="AdvancesSumTextBox" HorizontalContentAlignment="Right" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" 
-                             IsReadOnly="True" Focusable="False" IsEnabled="False">
-                        <TextBox.Text>
-                            <Binding Path="AdvancesSum" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                <Binding.Converter>
-                                    <converters:ToPLNConverter/>
-                                </Binding.Converter>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
-
-                    <TextBlock Text="Dopuszczana suma zaliczek" TextWrapping="Wrap" Margin="15,5,5,5"/>
-                    <TextBox Name="AdvancesLimitTextBox" HorizontalContentAlignment="Right" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" 
-                             IsReadOnly="True" Focusable="False" IsEnabled="False">
-                        <TextBox.Text>
-                            <Binding Path="AdvancesLimit" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                <Binding.Converter>
-                                    <converters:ToPLNConverter/>
-                                </Binding.Converter>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
-
-                </StackPanel>
-
+                
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Wartość umowy" TextWrapping="Wrap"/>
                     <TextBox Name="ContractValueTextBox" HorizontalContentAlignment="Right" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" 
@@ -159,6 +132,35 @@
                         </TextBox.Text>
                     </TextBox>
                 </StackPanel>
+                
+                
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Aktualne obciążenie umowy" TextWrapping="Wrap"/>
+                    <TextBox Name="ContractChargesTextBox" HorizontalContentAlignment="Right" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" 
+                             IsReadOnly="True" Focusable="False" IsEnabled="False">
+                        <TextBox.Text>
+                            <Binding Path="ContractCharges" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.Converter>
+                                    <converters:ToPLNConverter/>
+                                </Binding.Converter>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                    <TextBlock Text="Dopuszczalne obciążenie umowy" TextWrapping="Wrap" Margin="15,5,5,5"/>
+                    <TextBox Name="MaximumContractChargesTextBox" HorizontalContentAlignment="Right" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" 
+                             IsReadOnly="True" Focusable="False" IsEnabled="False">
+                        <TextBox.Text>
+                            <Binding Path="MaximumContractCharges" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.Converter>
+                                    <converters:ToPLNConverter/>
+                                </Binding.Converter>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                </StackPanel>
+
 
             </StackPanel>
         </GroupBox>
@@ -179,9 +181,17 @@
                         </TextBox.Text>
                     </TextBox>
 
-                    <TextBlock Text="Wnioskowana kwota" TextWrapping="Wrap" Margin="15,5,5,5"/>
-                    <TextBox Name="AmountTextBox" HorizontalContentAlignment="Right" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" 
-                             TextChanged="AmountTextBox_TextChanged">
+                    <TextBlock Text="Dopuszczalna wartość zaliczki" TextWrapping="Wrap" Margin="15,5,5,5"/>
+                    <TextBox Name="AdvanceLimitTextbox" HorizontalContentAlignment="Right" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" 
+                             IsReadOnly="True" Focusable="False" IsEnabled="False">
+                    </TextBox>
+
+
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Wnioskowana kwota" TextWrapping="Wrap" />
+                    <TextBox Name="AmountTextBox" HorizontalContentAlignment="Right" Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
                         <TextBox.Text>
                             <Binding Path="Amount" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.Converter>
@@ -191,6 +201,9 @@
                         </TextBox.Text>
                     </TextBox>
 
+                    <TextBlock Text="Kwota wniosku przekracza dopuszczalną wartość zaliczki." TextWrapping="Wrap"
+                               Name="AmountWarningLabel" Width="210" Margin="15,5,5,5"
+                               Foreground="Red" Visibility="Hidden"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
@@ -199,7 +212,7 @@
                         <DatePicker Name="PaidOnDatePicker"/>
                     </Border>
 
-                    <Button Name="ConfirmAdvanceButton" Click="ConfirmAdvanceButton_Click" Width="200" Margin="15,12,5,10">
+                    <Button Name="ConfirmAdvanceButton" Click="ConfirmAdvanceButton_Click" Width="220" Margin="15,12,5,10">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal">
                                 <iconPacks:PackIconMaterial Kind="CurrencyUsdCircleOutline"/>
