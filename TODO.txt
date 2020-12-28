@@ -53,6 +53,22 @@
 	-Needs to show information: How much in total is left to be paid for the period
 								How much has been withdraw in advances
 
+
+								!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+								Create an endpoint that accepts two dates, from and to, and returns rows with all employee data:
+								bhp, medical, amount of advances, contract value, number, left to pay, tax to pay, etc
+								return also if the field status: correct, warning, alert
+
+								Make sure this holds sum data.
+
+								Allow UI to pick two dates. 
+
+								All active employees that have a contract. - This will require some thinking
+
+
+
+
 22. Simplified Contract
 	-needs to return employee data
 

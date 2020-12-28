@@ -129,28 +129,36 @@ namespace Desktop.UI.Payroll.Views.Contracts {
             }
         }
 
+        private async Task InitAdvances() {
+            if (Contract.Advances == null) {
+                if (Contract.Id > 0) {
+                    Contract.Advances = await _advanceHandler.GetContractAdvancesAsync(Contract.Id);
+                } else {
+                    Contract.Advances = new List<Advance>();
+                }
+            }
+        }
+
         private async void AddAdvance_Click(object sender, RoutedEventArgs e) {
             AdvancesFormView form = new AdvancesFormView(out Advance advance, Bufor.AdvancesBufor);
             form.ShowDialog();
 
             Bufor.AdvancesBufor.TransactionBufor.Add(advance);
 
-            //if no list get it
-            if (Contract.Advances == null) {
-                if (Contract.Id > 0) {
-                    Contract.Advances = await _advanceHandler.GetContractAdvancesAsync(Contract.Id); //What if contract has no id - then there are no advances besides the ones in memory
-                } else {
-                    Contract.Advances = new List<Advance>();
-                    //Contract.Advances.Add(Advance); //Cant add?
-                }
-            }
+            await InitAdvances();
 
-            //add this advance
-            //update Advances total
+            List<Advance> updatedAdvances = Contract.Advances.ToList();
+            updatedAdvances.Add(advance);
+            Contract.Advances = updatedAdvances;
+
+            Contract.AdvancesTotalValue = Contract.Advances.Where(x => x.PaidOn != null).Sum(x => x.Amount);
+            AdvancesSumTextBox.Text = Contract.AdvancesTotalValue.ToString("0.00 PLN");
         }
 
-        private void ShowAdvances_Click(object sender, RoutedEventArgs e) {
+        private async void ShowAdvances_Click(object sender, RoutedEventArgs e) {
             //if no list get it
+            await InitAdvances();
+
             //show advances: {Amount, Worked, PaidOn} - Create new window just for this - Only show
         }
 

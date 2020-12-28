@@ -88,33 +88,16 @@ namespace Desktop.UI.Payroll.Views.Advances {
             if (EditMode) {
                 ContractCombobox.ItemsSource = ViewHelper.GetCurrentContractHeader(Advance);
                 ContractCombobox.SelectedIndex = 0;
-                ContractCombobox.IsEnabled = false;
             } else {
                 ContractCombobox.ItemsSource = ViewHelper.GetContractHeaders();
                 ContractCombobox.SelectedIndex = ViewHelper.GetIndexOfComboboxValue(Advance.Contract.Id, ContractCombobox);
             }
+            if (UseBufor || EditMode)
+                ContractCombobox.IsEnabled = false;
         }
 
         private void WorkedTextBox_TextChanged(object sender, TextChangedEventArgs e) {
             CalculateAdvanceLimit();
-            //decimal value = 0;
-            //decimal allowedValue = 0;
-
-            //if (AdvanceLimitTextbox == null)
-            //    return;
-
-            //if (AdvanceContractData != null) {
-            //    value = Advance.WorkedHours * AdvanceContractData.Wage * AdvanceContractData.Modifier - AdvanceContractData.ContractCharges; // minus
-            //    allowedValue = AdvanceContractData.MaximumContractCharges - AdvanceContractData.ContractCharges;
-
-            //    if (value > allowedValue)
-            //        value = allowedValue;
-
-            //    if (value < 0)
-            //        value = 0;
-            //}
-            //AdvanceLimit = value;
-            //AdvanceLimitTextbox.Text = value.ToString("0.00 PLN");
         }
 
         private void CalculateAdvanceLimit() {
