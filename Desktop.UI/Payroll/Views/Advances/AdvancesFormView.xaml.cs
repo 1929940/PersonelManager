@@ -25,11 +25,14 @@ namespace Desktop.UI.Payroll.Views.Advances {
         public Advance Advance { get; set; }
         public bool EditMode { get; set; }
         public Bufor<Advance> Bufor { get; set; }
+        public bool IsReadOnly => Advance.PaidOn != null;
         public bool UseBufor { get => Bufor != null; }
-        private readonly AdvanceRequestHandler _handler;
+        private readonly AdvanceRequestHandler _advanceHandler;
+        private readonly ContractRequestHandler _contractHandler;
 
         public AdvancesFormView(out Advance advance, Bufor<Advance> bufor = null) {
-            _handler = new AdvanceRequestHandler();
+            _advanceHandler = new AdvanceRequestHandler();
+            _contractHandler = new ContractRequestHandler();
             Bufor = bufor;
 
             Advance = new Advance();
@@ -49,9 +52,10 @@ namespace Desktop.UI.Payroll.Views.Advances {
 
         public AdvancesFormView(int id) {
             EditMode = true;
-            _handler = new AdvanceRequestHandler();
+            _advanceHandler = new AdvanceRequestHandler();
+            _contractHandler = new ContractRequestHandler();
 
-            Advance = _handler.Get(id);
+            Advance = _advanceHandler.Get(id);
             this.DataContext = Advance;
 
             InitializeComponent();
@@ -85,6 +89,8 @@ namespace Desktop.UI.Payroll.Views.Advances {
                 PaidOnDatePicker.SelectedDate = DateTime.Today;
             } else {
                 PaidOnDatePicker.SelectedDate = Advance.PaidOn;
+                PaidOnDatePicker.Focusable = false;
+                PaidOnDatePicker.IsHitTestVisible = false;
                 ConfirmAdvanceButton.Visibility = Visibility.Hidden;
             }
         }
@@ -110,7 +116,17 @@ namespace Desktop.UI.Payroll.Views.Advances {
 
         }
 
-        private void SaveButton_Click(object sender, RoutedEventArgs e) {
+        private async void SaveButton_Click(object sender, RoutedEventArgs e) {
+            var handler = new CommunicationLibrary.HR.Requests.EmployeeRequestHandler();
+
+            var employees = handler.GetEmployeeHeaders();
+            var employeesAsync = await handler.GetEmployeeHeadersAsync();
+
+            var headers = _contractHandler.GetContractHeaders();
+            var headersAsync = await _contractHandler.GetContractHeadersAsync();
+
+            var advData = _contractHandler.GetContractAdvanceData(Advance.Contract.Id);
+            var advDataAsync = await _contractHandler.GetContractAdvanceDataAsync(Advance.Contract.Id);
 
         }
 

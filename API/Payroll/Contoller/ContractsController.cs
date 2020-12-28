@@ -106,5 +106,23 @@ namespace API.Payroll.Contoller {
         private bool ContractExists(int id) {
             return _context.Contracts.Any(e => e.Id == id);
         }
+
+        [HttpGet("GetContractHeaders")]
+        public async Task<ActionResult<IEnumerable<ContractHeader>>> GetContractHeaders() {
+            var contracts = await _context.Contracts.Where(x => !x.IsRealized).ToListAsync();
+            return Ok(contracts.Select(x => ContractManager.CreateContractHeader(x)));
+        }
+
+        [HttpGet("GetContractAdvanceData/{id}")]
+        public async Task<ActionResult<ContractAdvanceData>> GetContractAdvanceData(int id) {
+            var contract = await _context.Contracts.FindAsync(id);
+
+            if (contract == null)
+                return NotFound();
+
+            var configPage = await _context.ConfigurationPage.FindAsync(1);
+
+            return ContractManager.CreateContractAdvanceData(contract, configPage);
+        }
     }
 }

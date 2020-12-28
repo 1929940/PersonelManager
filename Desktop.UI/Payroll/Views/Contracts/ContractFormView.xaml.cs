@@ -27,7 +27,7 @@ namespace Desktop.UI.Payroll.Views.Contracts {
         private readonly ContractRequestHandler _handler;
         public bool EditMode { get; set; }
         public ContractBufor Bufor { get; set; }
-
+        public bool IsReadOnly => Contract.PaidOn != null;
         public DateTime PaidOn { get; set; }
 
         public ContractFormView() {
@@ -94,18 +94,34 @@ namespace Desktop.UI.Payroll.Views.Contracts {
             if (PaidOnDatePicker != null)
                 PaidOnDatePicker.DataContext = this;
 
-            if (Contract.PaidOn == null) {
-                if (ToBePaidTextBox != null && PaidTextBox != null && PaidOnDatePicker != null) {
-                    ToBePaidTextBox.Text = paymentValue.ToString("0.00 PLN");
-                    PaidTextBox.Text = "0.00 PLN";
-                    PaidOnDatePicker.SelectedDate = DateTime.Today;
-                }
-            } else {
+            //if (Contract.PaidOn == null) {
+            //    if (ToBePaidTextBox != null && PaidTextBox != null && PaidOnDatePicker != null) {
+            //        ToBePaidTextBox.Text = paymentValue.ToString("0.00 PLN");
+            //        PaidTextBox.Text = "0.00 PLN";
+            //        PaidOnDatePicker.SelectedDate = DateTime.Today;
+            //    }
+            //} else {
+            //    if (PaidTextBox != null) {
+            //        ToBePaidStackPanel.Visibility = Visibility.Collapsed;
+            //        this.Height -= 20;
+            //        PaidTextBox.Text = paymentValue.ToString("0.00 PLN");
+            //        PaidOnDatePicker.SelectedDate = Contract.PaidOn;
+            //    }
+            //}
+
+
+            if (IsReadOnly) {
                 if (PaidTextBox != null) {
                     ToBePaidStackPanel.Visibility = Visibility.Collapsed;
                     this.Height -= 20;
                     PaidTextBox.Text = paymentValue.ToString("0.00 PLN");
                     PaidOnDatePicker.SelectedDate = Contract.PaidOn;
+                }
+            } else {
+                if (ToBePaidTextBox != null && PaidTextBox != null && PaidOnDatePicker != null) {
+                    ToBePaidTextBox.Text = paymentValue.ToString("0.00 PLN");
+                    PaidTextBox.Text = "0.00 PLN";
+                    PaidOnDatePicker.SelectedDate = DateTime.Today;
                 }
             }
         }

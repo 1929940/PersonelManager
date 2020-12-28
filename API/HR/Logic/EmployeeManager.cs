@@ -37,6 +37,13 @@ namespace API.HR.Logic {
             return dto;
         }
 
+        public static EmployeeHeader CreateEmployeeHeader(Employee employee) {
+            return new EmployeeHeader() {
+                Id = employee.Id,
+                DisplayValue = string.Format($"{employee.History.Last().LastName} {employee.FirstName}")
+            };
+        }
+
         private static EmployeeDTO CreateBaseDTO(Employee employee, EmployeeHistory history) =>
             new EmployeeDTO() {
                 FirstName = employee.FirstName,
@@ -76,7 +83,7 @@ namespace API.HR.Logic {
 
         public static EmployeeHistory CreateEmployeeHistoryEntry(EmployeeDTO dto, EmployeeHistory current = null) {
 
-            if (! IsEqual(dto, current))
+            if (!IsEqual(dto, current))
                 return new EmployeeHistory() {
                     LastName = dto.LastName,
                     PhoneNo = dto.PhoneNo,

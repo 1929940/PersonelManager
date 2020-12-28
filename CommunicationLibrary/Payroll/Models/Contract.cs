@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 namespace CommunicationLibrary.Payroll.Models {
     public class Contract : DocumentEntity {
-        //TODO: RENAME VALUE TO VALUEGROSS
         public decimal TotalValue { get; set; }
         public decimal NettoValue { get; set; }
         public decimal TaxValue { get; set; }

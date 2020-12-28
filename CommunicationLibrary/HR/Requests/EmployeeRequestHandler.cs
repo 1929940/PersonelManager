@@ -64,5 +64,35 @@ namespace CommunicationLibrary.HR.Requests {
                 }
             }
         }
+
+        public async Task<IEnumerable<EmployeeHeader>> GetEmployeeHeadersAsync() {
+            List<EmployeeHeader> output = new List<EmployeeHeader>();
+            using (var httpClient = new HttpClient()) {
+                SetToken(httpClient);
+
+                string requestUri = GetUri(_controllerName, RouteVerbs.GET_EMPLOYEE_HEADERS);
+
+                using (var response = await httpClient.GetAsync(requestUri)) {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    output = JsonConvert.DeserializeObject<List<EmployeeHeader>>(apiResponse);
+                }
+            }
+            return output;
+        }
+
+        public IEnumerable<EmployeeHeader> GetEmployeeHeaders() {
+            List<EmployeeHeader> output = new List<EmployeeHeader>();
+            using (var httpClient = new HttpClient()) {
+                SetToken(httpClient);
+
+                string requestUri = GetUri(_controllerName, RouteVerbs.GET_EMPLOYEE_HEADERS);
+
+                using (var response = httpClient.GetAsync(requestUri).Result) {
+                    string apiResponse = response.Content.ReadAsStringAsync().Result;
+                    output = JsonConvert.DeserializeObject<List<EmployeeHeader>>(apiResponse);
+                }
+            }
+            return output;
+        }
     }
 }

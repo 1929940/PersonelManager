@@ -37,13 +37,20 @@ namespace API.HR.Controller {
 
             return EmployeeManager.CreateDTO(employee);
         }
-
+        //TODO: SHOULD THIS RETURN A LIST?
         [HttpGet("GetEmployeeHistory/{id}")]
         public async Task<ActionResult<EmployeeDTO>> GetEmployeeHistory(int id) {
             var employee = await _context.Employees.FindAsync(id);
             var histories = await _context.EmployeesHistory.Where(x => x.EmployeeId == id).ToListAsync();
 
             return Ok(histories.Select(x => EmployeeManager.CreateHistoryDTO(employee, x)));
+        }
+
+        [HttpGet("GetEmployeeHeaders")]
+        public async Task<ActionResult<IEnumerable<EmployeeHeader>>> GetEmployeeHeaders() {
+            var employees = await _context.Employees.Where(x => !x.IsArchived).ToListAsync();
+
+            return Ok(employees.Select(x => EmployeeManager.CreateEmployeeHeader(x)));
         }
 
 

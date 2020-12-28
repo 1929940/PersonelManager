@@ -53,7 +53,7 @@ namespace Desktop.UI.Core.Helpers {
             ignoredControls.AddRange(ignoredChildren);
 
             controls.Except(ignoredControls).ToList()
-                .ForEach(x => x.IsEnabled = false);
+                .ForEach(x => { x.IsHitTestVisible = false; x.Focusable = false; });
         }
 
         public static bool AreTextboxesValid(DependencyObject depObt) {
