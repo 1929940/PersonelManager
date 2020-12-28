@@ -23,6 +23,7 @@ namespace Desktop.UI.Payroll.Views.Advances {
     public partial class AdvancesFormView : Window {
 
         public Advance Advance { get; set; }
+        public ContractAdvanceData AdvanceContractData { get; set; }
         public bool EditMode { get; set; }
         public Bufor<Advance> Bufor { get; set; }
         public bool IsReadOnly => Advance.PaidOn != null;
@@ -69,7 +70,7 @@ namespace Desktop.UI.Payroll.Views.Advances {
 
         private void InitUI() {
             //InitPaymentSection();
-            //BindCombobox();
+            BindCombobox();
             //InitDates();
             InitHeader();
             InitConfirmSection();
@@ -95,8 +96,15 @@ namespace Desktop.UI.Payroll.Views.Advances {
             }
         }
 
-        private void EmployeeCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-
+        private void BindCombobox() {
+            if (EditMode) {
+                ContractCombobox.ItemsSource = ViewHelper.GetCurrentContractHeader(Advance);
+                ContractCombobox.SelectedIndex = 0;
+                ContractCombobox.IsEnabled = false;
+            } else {
+                ContractCombobox.ItemsSource = ViewHelper.GetContractHeaders();
+                ContractCombobox.SelectedIndex = ViewHelper.GetIndexOfComboboxValue(Advance.Contract.Id, ContractCombobox);
+            }
         }
 
         private void WorkedTextBox_TextChanged(object sender, TextChangedEventArgs e) {
@@ -131,7 +139,15 @@ namespace Desktop.UI.Payroll.Views.Advances {
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
+            if (IsReadOnly && !AuthorizationHelper.Authorize(Enums.Roles.Administrator)) {
+                ControlsHelper.DisableControls(this, new string[] { "CloseButton" });
+            }
+        }
 
+        private void ContractCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            Advance.Contract.Id = (int)ContractCombobox.SelectedValue;
+            AdvanceContractData = _contractHandler.GetContractAdvanceData(Advance.Contract.Id);
+            AdvanceDataGroupBox.DataContext = AdvanceContractData;
         }
     }
 }

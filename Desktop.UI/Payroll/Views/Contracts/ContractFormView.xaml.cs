@@ -94,22 +94,6 @@ namespace Desktop.UI.Payroll.Views.Contracts {
             if (PaidOnDatePicker != null)
                 PaidOnDatePicker.DataContext = this;
 
-            //if (Contract.PaidOn == null) {
-            //    if (ToBePaidTextBox != null && PaidTextBox != null && PaidOnDatePicker != null) {
-            //        ToBePaidTextBox.Text = paymentValue.ToString("0.00 PLN");
-            //        PaidTextBox.Text = "0.00 PLN";
-            //        PaidOnDatePicker.SelectedDate = DateTime.Today;
-            //    }
-            //} else {
-            //    if (PaidTextBox != null) {
-            //        ToBePaidStackPanel.Visibility = Visibility.Collapsed;
-            //        this.Height -= 20;
-            //        PaidTextBox.Text = paymentValue.ToString("0.00 PLN");
-            //        PaidOnDatePicker.SelectedDate = Contract.PaidOn;
-            //    }
-            //}
-
-
             if (IsReadOnly) {
                 if (PaidTextBox != null) {
                     ToBePaidStackPanel.Visibility = Visibility.Collapsed;
@@ -132,11 +116,11 @@ namespace Desktop.UI.Payroll.Views.Contracts {
 
         private void BindCombobox() {
             if (EditMode) {
-                EmployeeCombobox.ItemsSource = ViewHelper.GetCurrentEmployeeDictionary(Contract.Employee);
+                EmployeeCombobox.ItemsSource = ViewHelper.GetCurrentEmployeeHeader(Contract.Employee);
                 EmployeeCombobox.SelectedIndex = 0;
                 EmployeeCombobox.IsEnabled = false;
             } else {
-                EmployeeCombobox.ItemsSource = ViewHelper.GetEmployeesDictionary();
+                EmployeeCombobox.ItemsSource = ViewHelper.GetEmployeeHeaders();
                 EmployeeCombobox.SelectedIndex = ViewHelper.GetIndexOfComboboxValue(Contract.Employee.Id, EmployeeCombobox);
             }
         }

@@ -88,7 +88,7 @@ namespace Desktop.UI.HR.Views.MedicalCheckups {
                 HideEmployeeControls();
                 ExpandNumberControls();
             } else {
-                EmployeeCombobox.ItemsSource = ViewHelper.GetEmployeesDictionary();
+                EmployeeCombobox.ItemsSource = ViewHelper.GetEmployeeHeaders();
                 EmployeeCombobox.SelectedIndex = ViewHelper.GetIndexOfComboboxValue(Document.Employee.Id, EmployeeCombobox);
             }
         }

@@ -9,5 +9,10 @@ namespace CommunicationLibrary.Payroll.Models {
         public int WorkedHours { get; set; }
         public decimal Amount { get; set; }
         public DateTime? PaidOn { get; set; }
+
+        public Advance() {
+            Contract = new ContractSimplified();
+            Employee = new EmployeeSimplified();
+        }
     }
 }

@@ -9,7 +9,7 @@
         FontFamily="Calibri" FontSize="14"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
         xmlns:validators="clr-namespace:Desktop.UI.Core.Validators"
-        Title="Zaliczki" Height="480" Width="470"
+        Title="Zaliczki" Height="520" Width="470"
         Loaded="Window_Loaded">
     <Window.Resources>
         <converters:ToPLNConverter x:Key="ToPLNConverter"/>
@@ -102,6 +102,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -109,20 +110,21 @@
             Text="TMP" Name="HeaderText" Width="Auto"
                        FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
 
-        <GroupBox Header="Ogólne" Grid.Row="1">
+        <GroupBox Header="Umowa" Grid.Row="1" Name="AdvanceDataGroupBox">
             <StackPanel>
-                <StackPanel Orientation="Horizontal" Name="ContractStackPanel">
+                <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Umowa"/>
-                    <ComboBox Name="EmployeeCombobox" Width="320"
+                    <ComboBox Name="ContractCombobox" Width="320"
                       DisplayMemberPath="Value" SelectedValuePath="Key"
-                      SelectionChanged="EmployeeCombobox_SelectionChanged"/>
+                      SelectionChanged="ContractCombobox_SelectionChanged"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
 
-                    <TextBlock Text="Pobrano dotychczas" TextWrapping="Wrap"/>
-                    <TextBox Name="AmountWithdrawnTextBox" HorizontalContentAlignment="Right" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" >
+                    <TextBlock Text="Aktualna   suma zaliczek" TextWrapping="Wrap"/>
+                    <TextBox Name="AdvancesSumTextBox" HorizontalContentAlignment="Right" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" 
+                             IsReadOnly="True" Focusable="False" IsEnabled="False">
                         <TextBox.Text>
-                            <Binding Path="MKX.TW1" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                            <Binding Path="AdvancesSum" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.Converter>
                                     <converters:ToPLNConverter/>
                                 </Binding.Converter>
@@ -131,9 +133,10 @@
                     </TextBox>
 
                     <TextBlock Text="Dopuszczana suma zaliczek" TextWrapping="Wrap" Margin="15,5,5,5"/>
-                    <TextBox Name="LimitTextBox" HorizontalContentAlignment="Right" Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+                    <TextBox Name="AdvancesLimitTextBox" HorizontalContentAlignment="Right" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" 
+                             IsReadOnly="True" Focusable="False" IsEnabled="False">
                         <TextBox.Text>
-                            <Binding Path="TW2" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                            <Binding Path="AdvancesLimit" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.Converter>
                                     <converters:ToPLNConverter/>
                                 </Binding.Converter>
@@ -143,6 +146,25 @@
 
                 </StackPanel>
 
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Wartość umowy" TextWrapping="Wrap"/>
+                    <TextBox Name="ContractValueTextBox" HorizontalContentAlignment="Right" Validation.ErrorTemplate="{StaticResource ErrorTemplate}" 
+                             IsReadOnly="True" Focusable="False" IsEnabled="False">
+                        <TextBox.Text>
+                            <Binding Path="ContractValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.Converter>
+                                    <converters:ToPLNConverter/>
+                                </Binding.Converter>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </StackPanel>
+
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Grid.Row="2" Header="Wniosek">
+            <StackPanel>
                 <StackPanel Orientation="Horizontal">
 
                     <TextBlock Text="Godziny przepracowane" TextWrapping="Wrap"/>
@@ -186,15 +208,15 @@
                         </Button.Content>
                     </Button>
                 </StackPanel>
-
             </StackPanel>
-
-
         </GroupBox>
 
 
 
-        <GroupBox Header="Metadane" Grid.Row="2" Name="MetaDataGroupBox">
+
+
+
+        <GroupBox Header="Metadane" Grid.Row="3" Name="MetaDataGroupBox">
             <StackPanel>
                 <StackPanel Name="CreatedPanel" Orientation="Horizontal">
                     <TextBlock Name="CreatedTextBlock"
@@ -207,7 +229,7 @@
             </StackPanel>
         </GroupBox>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal"
+        <StackPanel Grid.Row="4" Orientation="Horizontal"
                     VerticalAlignment="Bottom" HorizontalAlignment="Right">
 
             <Button Name="SaveButton" Click="SaveButton_Click">

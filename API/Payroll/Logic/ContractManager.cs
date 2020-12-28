@@ -12,7 +12,7 @@ namespace API.Payroll.Logic {
         public static ContractDTO CreateDTO(Contract contract) {
             decimal nettoValue = decimal.Round(contract.TotalValue - (contract.TotalValue * contract.TaxPercent / 100), 2);
             decimal taxValue = decimal.Round(contract.TotalValue - nettoValue);
-            decimal advancesTotalValue = contract.Advances?.Sum(x => x.Amount) ?? 0;
+            decimal advancesTotalValue = contract.Advances?.Where(x => x.PaidOn != null).Sum(x => x.Amount) ?? 0;
             decimal paymentValue = contract.TotalValue - taxValue - advancesTotalValue;
 
             ContractDTO dto = new ContractDTO() {
@@ -56,7 +56,7 @@ namespace API.Payroll.Logic {
         }
 
         public static ContractAdvanceData CreateContractAdvanceData(Contract contract, ConfigurationPage configurationPage) {
-            decimal advancesTotalValue = contract.Advances.Sum(x => x.Amount);
+            decimal advancesTotalValue = contract.Advances?.Where(x => x.PaidOn != null).Sum(x => x.Amount) ?? 0;
             decimal modifier = (decimal)configurationPage.PercentOfAdvancesAllowed / 100;
 
             decimal limit = decimal.Round(modifier * contract.TotalValue, 2);

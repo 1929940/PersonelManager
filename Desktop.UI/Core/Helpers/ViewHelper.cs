@@ -2,6 +2,8 @@
 using CommunicationLibrary.Core.Models;
 using CommunicationLibrary.HR.Models;
 using CommunicationLibrary.HR.Requests;
+using CommunicationLibrary.Payroll.Models;
+using CommunicationLibrary.Payroll.Requests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,14 +44,23 @@ namespace Desktop.UI.Core.Helpers {
         }
 
         //TODO: CHANGE INTO ENDPOINT
-        public static Dictionary<int, string> GetEmployeesDictionary() =>
-            new EmployeeRequestHandler().Get().ToDictionary(x => x.Id, x => string.Format($"{x.LastName} {x.FirstName}"));
+        public static Dictionary<int, string> GetEmployeeHeaders() =>
+             new EmployeeRequestHandler().GetEmployeeHeaders().ToDictionary(x => x.Id, x => x.DisplayValue);
+        //new EmployeeRequestHandler().Get().ToDictionary(x => x.Id, x => string.Format($"{x.LastName} {x.FirstName}"));
 
-        public static Dictionary<int, string> GetCurrentEmployeeDictionary(Employee employee) => 
+        public static Dictionary<int, string> GetCurrentEmployeeHeader(Employee employee) =>
             new Dictionary<int, string>() { { employee.Id, string.Format($"{employee.LastName} {employee.FirstName}") } };
 
-        public static Dictionary<int, string> GetCurrentEmployeeDictionary(EmployeeSimplified employee) =>
+        public static Dictionary<int, string> GetCurrentEmployeeHeader(EmployeeSimplified employee) =>
             new Dictionary<int, string>() { { employee.Id, string.Format($"{employee.LastName} {employee.FirstName}") } };
+
+
+        public static Dictionary<int, string> GetContractHeaders() =>
+            new ContractRequestHandler().GetContractHeaders().ToDictionary(x => x.Id, x => x.DisplayValue);
+
+        public static Dictionary<int, string> GetCurrentContractHeader(Advance advance) =>
+            new Dictionary<int, string>() { { advance.Contract.Id, string.Format($"{advance.Employee.LastName} {advance.Employee.FirstName} {advance.Contract.Number}") } };
+
 
         public static Dictionary<int, string> GetLocations() {
             var locations = new LocationRequestHandler().Get();
@@ -65,7 +76,7 @@ namespace Desktop.UI.Core.Helpers {
             return output;
         }
 
-        public static List <string> GetEmployeeHistory(int employeeId) {
+        public static List<string> GetEmployeeHistory(int employeeId) {
             var history = new EmployeeRequestHandler().GetEmployeeHistory(employeeId);
             List<string> output = history.Select(x => string.Format($"{x.CreatedOn.ToString("yyyy-MM-dd")}")).ToList();
             return output;
