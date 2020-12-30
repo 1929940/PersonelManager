@@ -15,6 +15,11 @@
             <Setter Property="Height" Value="25"/>
             <Setter Property="Width" Value="100"/>
             <Setter Property="Margin" Value="5"/>
+            <Style.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3" />
+                </Style>
+            </Style.Resources>
         </Style>
         <Style TargetType="iconPacks:PackIconMaterial">
             <Setter Property="Margin" Value="0,0,3,0"/>

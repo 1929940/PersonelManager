@@ -8,7 +8,7 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         Background="White"
         FontSize="14" FontFamily="Calibri"
-        Title="EmployeeFormView" Height="520" Width="1000">
+        Title="Pracownik" Height="520" Width="1000">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Height" Value="25"/>
@@ -28,6 +28,7 @@
         <Style TargetType="TabItem">
             <Setter Property="Width" Value="140"/>
             <Setter Property="FontSize" Value="15"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
         </Style>
     </Window.Resources>
 

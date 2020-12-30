@@ -25,44 +25,38 @@ namespace Desktop.UI.Business.Users {
     public partial class UserFormView : Window {
 
         public User User { get; set; }
+        public bool EditMode { get; set; }
         private readonly UserRequestHandler _handler;
 
         public UserFormView() {
-
             _handler = new UserRequestHandler();
-            User = new User() {
-                IsActive = true
-            };
+            User = new User() { IsActive = true };
             this.DataContext = User;
             InitializeComponent();
-            HeaderText.Text = "Dodaj Użytkownika";
-            AddUser.Visibility = Visibility.Visible;
-            InitRoleComboBox();
-            HideMetaDataRows();
+            InitUI();
         }
 
         public UserFormView(int id) {
-
             _handler = new UserRequestHandler();
+            EditMode = true;
             User = _handler.Get(id);
+
             this.DataContext = User;
             InitializeComponent();
-            HeaderText.Text = "Modyfikuj Użytkownika";
-            UpdateUser.Visibility = Visibility.Visible;
+            InitUI();
+        }
+
+        private void InitUI() {
+            InitHeader();
             InitRoleComboBox();
+            MetadataHelper.Init(this, EditMode, User);
         }
 
-        private async void AddUser_Click(object sender, RoutedEventArgs e) {
-            if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
-                await _handler.CreateAsync(User);
-                this.Close();
-            }
-        }
-
-        private async void UpdateUser_Click(object sender, RoutedEventArgs e) {
-            if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
-                await _handler.UpdateAsync(User.Id, User);
-                this.Close();
+        private void InitHeader() {
+            if (EditMode) {
+                HeaderText.Text = "Modyfikuj Użytkownika";
+            } else {
+                HeaderText.Text = "Dodaj Użytkownika";
             }
         }
 
@@ -89,10 +83,15 @@ namespace Desktop.UI.Business.Users {
             User.Role = RoleComboBox.SelectedValue as string;
         }
 
-        private void HideMetaDataRows() {
-            CreatedRow.Height = new GridLength(0);
-            UpdatedRow.Height = new GridLength(0);
-            this.Height -= 50;
+        private async void SaveButton_Click(object sender, RoutedEventArgs e) {
+            if (ControlsHelper.AreTextboxesValid(this) && DialogHelper.Save()) {
+                if (EditMode) {
+                    await _handler.UpdateAsync(User.Id, User);
+                } else {
+                    await _handler.CreateAsync(User);
+                }
+                this.Close();
+            }
         }
     }
 }
