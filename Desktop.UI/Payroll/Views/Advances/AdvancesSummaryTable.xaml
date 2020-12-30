@@ -1,0 +1,55 @@
+﻿<Window x:Class="Desktop.UI.Payroll.Views.Advances.AdvancesSummaryTable"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Desktop.UI.Payroll.Views.Advances"
+        xmlns:converters="clr-namespace:Desktop.UI.Core.ValueConverters"
+        mc:Ignorable="d"
+        Background="White"
+        FontSize="14" FontFamily="Calibri"
+        Title="Zaliczki" Height="250" Width="400">
+    <Window.Resources>
+        <converters:ToPLNConverter x:Key="ToPLNConverter"/>
+        <converters:ToHourConverter x:Key="ToHourConverter"/>
+
+        <Style TargetType="{x:Type DataGridCell}">
+            <Setter Property="Height" Value="25"/>
+
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="BorderBrush" Value="Gainsboro"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Background" Value="Gainsboro"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type TextBlock}" x:Key="DataGridCell_TextStyle">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5,0"/>
+        </Style>
+
+        <Style TargetType="{x:Type TextBlock}" x:Key="DataGridCellValue_TextStyle">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Margin" Value="5,0"/>
+        </Style>
+
+    </Window.Resources>
+    <Border BorderBrush="Black" BorderThickness="0,1,0,0">
+        <DataGrid Grid.Row="2" Name="DataGrid" IsReadOnly="True"
+                  BorderThickness="0" GridLinesVisibility="Horizontal" RowHeight="25"
+                  SelectionMode="Single" SelectionUnit="FullRow"
+                  AutoGenerateColumns="False" HeadersVisibility="Column">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Wypłacono" Binding="{Binding PaidOn, StringFormat=\{0:yyyy.MM.dd\}}" Width="*" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                <DataGridTextColumn Header="Wartość" Binding="{Binding Amount, Converter={StaticResource ToPLNConverter}}" Width="*" ElementStyle="{StaticResource DataGridCellValue_TextStyle}"/>
+                <DataGridTextColumn Header="Przepracowano" Binding="{Binding WorkedHours, Converter={StaticResource ToHourConverter}}" Width="*" ElementStyle="{StaticResource DataGridCellValue_TextStyle}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Border>
+</Window>

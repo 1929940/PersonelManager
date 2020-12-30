@@ -156,10 +156,8 @@ namespace Desktop.UI.Payroll.Views.Contracts {
         }
 
         private async void ShowAdvances_Click(object sender, RoutedEventArgs e) {
-            //if no list get it
             await InitAdvances();
-
-            //show advances: {Amount, Worked, PaidOn} - Create new window just for this - Only show
+            new AdvancesSummaryTable(Contract.Advances).ShowDialog();
         }
 
         //TODO: CHANGE TO READONLY

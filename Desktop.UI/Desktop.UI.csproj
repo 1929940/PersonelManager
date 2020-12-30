@@ -326,6 +326,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Payroll\Views\Advances\AdvancesSummaryTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Payroll\Views\Advances\AdvancesTableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -343,6 +347,9 @@
     <Compile Include="Payroll\Helpers\ContractBufor.cs" />
     <Compile Include="Payroll\Views\Advances\AdvancesFormView.xaml.cs">
       <DependentUpon>AdvancesFormView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Payroll\Views\Advances\AdvancesSummaryTable.xaml.cs">
+      <DependentUpon>AdvancesSummaryTable.xaml</DependentUpon>
     </Compile>
     <Compile Include="Payroll\Views\Advances\AdvancesTableView.xaml.cs">
       <DependentUpon>AdvancesTableView.xaml</DependentUpon>
