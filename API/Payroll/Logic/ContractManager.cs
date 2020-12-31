@@ -9,11 +9,16 @@ using System.Linq;
 
 namespace API.Payroll.Logic {
     public class ContractManager : BaseEntityManager {
+        public static decimal GetAdvancesTotalValue(Contract contract) => contract.Advances?.Where(x => x.PaidOn != null).Sum(x => x.Amount) ?? 0;
+        public static decimal GetNettoValue(Contract contract) => decimal.Round(contract.TotalValue * (100 - (contract.TaxPercent / 100)), 2);
+        public static decimal GetTaxValue(Contract contract) => decimal.Round(contract.TotalValue * (contract.TaxPercent / 100), 2);
+        public static decimal GetPaymentValue(Contract contract) => contract.TotalValue - GetTaxValue(contract) - GetAdvancesTotalValue(contract);
+
         public static ContractDTO CreateDTO(Contract contract) {
-            decimal nettoValue = decimal.Round(contract.TotalValue - (contract.TotalValue * contract.TaxPercent / 100), 2);
-            decimal taxValue = decimal.Round(contract.TotalValue - nettoValue);
-            decimal advancesTotalValue = contract.Advances?.Where(x => x.PaidOn != null).Sum(x => x.Amount) ?? 0;
-            decimal paymentValue = contract.TotalValue - taxValue - advancesTotalValue;
+            decimal nettoValue = GetNettoValue(contract);
+            decimal taxValue = GetTaxValue(contract);
+            decimal advancesTotalValue = GetAdvancesTotalValue(contract);
+            decimal paymentValue = GetPaymentValue(contract);
 
             ContractDTO dto = new ContractDTO() {
                 Employee = EmployeeManager.CreateSimplifiedDTO(contract.Employee),
@@ -56,7 +61,7 @@ namespace API.Payroll.Logic {
         }
 
         public static ContractAdvanceData CreateContractAdvanceData(Contract contract, ConfigurationPage configurationPage) {
-            decimal advancesTotalValue = contract.Advances?.Where(x => x.PaidOn != null).Sum(x => x.Amount) ?? 0;
+            decimal advancesTotalValue = GetAdvancesTotalValue(contract);
             decimal modifier = (decimal)configurationPage.PercentOfAdvancesAllowed / 100;
 
             decimal limit = decimal.Round(modifier * contract.TotalValue, 2);
@@ -68,6 +73,8 @@ namespace API.Payroll.Logic {
                 Wage = contract.HourlySalary
             };
         }
+
+
 
         public static void UpdateWithDTO(ContractDTO dto, ref Contract contract) {
             contract.EmployeeId = dto.Employee.Id;

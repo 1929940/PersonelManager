@@ -3,19 +3,17 @@ using API.HR.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace API.HR.Logic {
     public class LeaveManager : BaseEntityManager {
-
-        //createdto
 
         public static LeaveDTO CreateDTO(Leave leave) {
             var dto = new LeaveDTO() {
                 Id = leave.Id,
                 Employee = EmployeeManager.CreateSimplifiedDTO(leave.Employee),
                 From = leave.From,
-                To = leave.To,
+                ExpectedTo = leave.ExpectedTo,
+                ActualTo = leave.ActualTo,
                 Type = leave.Type,
                 Comment = leave.Comment
             };
@@ -23,20 +21,19 @@ namespace API.HR.Logic {
             return dto;
         }
 
-        //updatewithdto
-
         public static void UpdateWithDTO(LeaveDTO dto, ref Leave leave) {
             leave.Id = dto.Id;
             leave.EmployeeId = dto.Employee.Id;
             leave.From = dto.From;
-            leave.To = dto.To;
+            leave.ExpectedTo = dto.ExpectedTo;
+            leave.ActualTo = dto.ActualTo;
             leave.Type = dto.Type;
             leave.Comment = dto.Comment;
 
             CopyTags(dto, ref leave);
         }
-
-        //foreman, locations, and leave need getallemployees foremen
-        //with the data when it changed...
+        
+        public static Leave GetClosestLeave(IEnumerable<Leave> leaves) =>
+            leaves.Where(x => x.ActualTo == null || x.ActualTo > DateTime.Today).OrderBy(x => x.From).FirstOrDefault();
     }
 }

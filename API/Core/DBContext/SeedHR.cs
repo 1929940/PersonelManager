@@ -358,7 +358,7 @@ namespace API.Core.DBContext {
                 CreatedOn = DateTime.Now.AddDays(-250),
                 EmployeeId = 1,
                 From = DateTime.Now.AddDays(-234),
-                To = DateTime.Now.AddDays(-220),
+                ExpectedTo = DateTime.Now.AddDays(-220),
                 Type = "Wypoczynkowy",
                 Comment = "Urlop wypoczynkowy, 14 dni"
             },
@@ -368,7 +368,7 @@ namespace API.Core.DBContext {
                 CreatedOn = DateTime.Now.AddDays(-157),
                 EmployeeId = 2,
                 From = DateTime.Now.AddDays(-150),
-                To = DateTime.Now.AddDays(-80),
+                ExpectedTo = DateTime.Now.AddDays(-80),
                 Type = "Administracyjny",
                 Comment = "Urlop Administracyjny, wymiana paszporty, wizy"
             },
@@ -378,7 +378,7 @@ namespace API.Core.DBContext {
                 CreatedOn = DateTime.Now.AddDays(-61),
                 EmployeeId = 1,
                 From = DateTime.Now.AddDays(-61),
-                To = null,
+                ExpectedTo = null,
                 Type = "Nieusprawiedliwiony",
                 Comment = "Obecność nieusprawiedliwiona"
             },

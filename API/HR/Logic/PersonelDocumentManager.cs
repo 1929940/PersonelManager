@@ -33,5 +33,8 @@ namespace API.HR.Logic {
 
             CopyTags(dto, ref document);
         }
+
+        public static PersonelDocumentEntity GetOldestDoc(IEnumerable<PersonelDocumentEntity> docs) =>
+            docs.OrderByDescending(x => x.ValidTo).FirstOrDefault();
     }
 }
