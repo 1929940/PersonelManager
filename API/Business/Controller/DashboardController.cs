@@ -28,7 +28,7 @@ namespace API.Business.Controller {
 
             //Should get all active employees and those that have an active contract
 
-            var contract = _context.Contracts.Where(x => x.ValidFrom >= dateFrom && x.ValidTo <= dateTo);
+            var contract = _context.Contracts.Where(x => x.ValidFrom >= dateFrom && x.ValidTo <= dateTo).ToList();
             var configuration = await _context.ConfigurationPage.FindAsync(1);
 
             return Ok(contract.Select(x => DashboardManager.CreateDashboardDTO(x, configuration)));

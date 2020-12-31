@@ -61,8 +61,6 @@ namespace API.Core.DBContext {
                 BillingMonthStart = 26,
                 BillingMonthEnd = 25,
                 PercentOfAdvancesAllowed = 75,
-                MaximumLeaveTimeInDays = 90,
-                WarningBeforeLeaveReachesLimit = 60,
                 WarningBeforeCertificateExpires = 30,
                 WarningBeforeMedicalCheckupExpires = 30,
                 WarningBeforeSafetyTrainingExpires = 30,

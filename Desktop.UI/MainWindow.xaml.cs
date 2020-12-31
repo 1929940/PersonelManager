@@ -31,6 +31,7 @@ using Desktop.UI.HR.Views.Foremen;
 using Desktop.UI.Payroll.Views.Contracts;
 using Desktop.UI.Payroll.Views.Advances;
 using Desktop.UI.Core.Validators;
+using Desktop.UI.Business.Dashboard;
 
 namespace PersonalManagerDesktop {
     /// <summary>
@@ -66,6 +67,8 @@ namespace PersonalManagerDesktop {
             if (tvi.Header is StackPanel panel) {
                 switch (panel.Name) {
                     case "Dashboard_Panel":
+                        ContentFrame.Navigate(new DashboardTableView());
+                        break;
                     case "Employees_Panel":
                         ContentFrame.Navigate(new EmployeesTableView());
                         break;

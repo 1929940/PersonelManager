@@ -129,6 +129,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Business\Dashboard\DashboardTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Business\Login\UpdatePasswordPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -223,6 +227,9 @@
     </Compile>
     <Compile Include="Business\Configuration\ConfigurationView.xaml.cs">
       <DependentUpon>ConfigurationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Business\Dashboard\DashboardTableView.xaml.cs">
+      <DependentUpon>DashboardTableView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Business\Login\UpdatePasswordPage.xaml.cs">
       <DependentUpon>UpdatePasswordPage.xaml</DependentUpon>

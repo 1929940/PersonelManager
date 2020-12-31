@@ -1,7 +1,7 @@
 ﻿using System;
 
-namespace API.Business.Models {
-    public class DashboardDTO {
+namespace CommunicationLibrary.Business.Models {
+    public class Dashboard {
         public string EmployeeFullName { get; set; }
         public string Profession { get; set; }
         public string LocalizationName { get; set; }

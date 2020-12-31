@@ -6,10 +6,8 @@ namespace CommunicationLibrary.Business.Comparers {
         public bool Equals(ConfigurationPage x, ConfigurationPage y) =>
             x.BillingMonthEnd == y.BillingMonthStart &&
             x.BillingMonthStart == y.BillingMonthStart &&
-            x.MaximumLeaveTimeInDays == y.MaximumLeaveTimeInDays &&
             x.PercentOfAdvancesAllowed == y.PercentOfAdvancesAllowed &&
             x.WarningBeforeCertificateExpires == y.WarningBeforeCertificateExpires &&
-            x.WarningBeforeLeaveReachesLimit == y.WarningBeforeLeaveReachesLimit &&
             x.WarningBeforeMedicalCheckupExpires == y.WarningBeforeMedicalCheckupExpires &&
             x.WarningBeforeSafetyTrainingExpires == y.WarningBeforeSafetyTrainingExpires;
 

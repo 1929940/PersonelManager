@@ -12,8 +12,7 @@ namespace API.HR.Logic {
                 Id = leave.Id,
                 Employee = EmployeeManager.CreateSimplifiedDTO(leave.Employee),
                 From = leave.From,
-                ExpectedTo = leave.ExpectedTo,
-                ActualTo = leave.ActualTo,
+                To = leave.To,
                 Type = leave.Type,
                 Comment = leave.Comment
             };
@@ -25,15 +24,11 @@ namespace API.HR.Logic {
             leave.Id = dto.Id;
             leave.EmployeeId = dto.Employee.Id;
             leave.From = dto.From;
-            leave.ExpectedTo = dto.ExpectedTo;
-            leave.ActualTo = dto.ActualTo;
+            leave.To = dto.To;
             leave.Type = dto.Type;
             leave.Comment = dto.Comment;
 
             CopyTags(dto, ref leave);
         }
-        
-        public static Leave GetClosestLeave(IEnumerable<Leave> leaves) =>
-            leaves.Where(x => x.ActualTo == null || x.ActualTo > DateTime.Today).OrderBy(x => x.From).FirstOrDefault();
     }
 }
