@@ -1,4 +1,6 @@
 ﻿using CommunicationLibrary.Business.Requests;
+using CommunicationLibrary.Business.Models;
+using Desktop.UI.Core.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +26,41 @@ namespace Desktop.UI.Business.Dashboard {
             _handler = new DashboardRequestHandler();
 
             InitializeComponent();
-            DataGrid.ItemsSource = _handler.GetDashboard(DateTime.Today.AddDays(-230), DateTime.Today.AddDays(30));
+            InitDatePickers();
+            InitDataGrid();
+        }
+
+        private bool Filter(object item) {
+            string input = FilterBox.Text;
+            CommunicationLibrary.Business.Models.Dashboard dashboard = item as CommunicationLibrary.Business.Models.Dashboard;
+
+            bool result = dashboard.EmployeeFullName.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0
+                || dashboard.Profession.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0
+                || dashboard.LocalizationName.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0
+                || dashboard.ForemanName.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0
+                || dashboard.ContractNumber.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0;
+
+            return result;
+        }
+
+        private void FilterBox_TextChanged(object sender, TextChangedEventArgs e) {
+            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();
+        }
+
+        private void FilterByDatesButton_Click(object sender, RoutedEventArgs e) {
+            InitDataGrid();
+        }
+
+        private void InitDatePickers() {
+            var billingPeriod = DateHelper.GetBillingPeriod();
+
+            FilterFromDatePicker.SelectedDate = billingPeriod.From;
+            FilterToDatePicker.SelectedDate = billingPeriod.To;
+        }
+
+        private void InitDataGrid() {
+            DataGrid.ItemsSource = _handler.GetDashboard((DateTime)FilterFromDatePicker.SelectedDate, (DateTime)FilterToDatePicker.SelectedDate);
+            CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
         }
     }
 }

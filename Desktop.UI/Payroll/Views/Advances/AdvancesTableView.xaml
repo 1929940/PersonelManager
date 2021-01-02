@@ -24,9 +24,11 @@
                 </Style>
             </Style.Resources>
         </Style>
+        
         <Style TargetType="iconPacks:PackIconMaterial">
             <Setter Property="Margin" Value="0,0,3,0"/>
         </Style>
+        
         <Style TargetType="{x:Type DataGridCell}">
             <Setter Property="Height" Value="25"/>
 
@@ -51,7 +53,6 @@
                     <Setter Property="CornerRadius" Value="3" />
                 </Style>
             </Style.Resources>
-
         </Style>
 
         <Style TargetType="{x:Type TextBlock}" x:Key="DataGridCell_TextStyle">

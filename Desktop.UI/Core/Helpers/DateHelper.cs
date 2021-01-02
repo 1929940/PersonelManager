@@ -26,7 +26,7 @@ namespace Desktop.UI.Core.Helpers {
                     to = CreateDate(date.Year, month, toDay);
                 } else {
                     int month = to.AddMonths(-1).Month;
-                    from = CreateDate(date.Year, month, toDay);
+                    from = CreateDate(date.Year, month, fromDay);
                 }
             }
             return new BillingPeriod() { From = from, To = to };

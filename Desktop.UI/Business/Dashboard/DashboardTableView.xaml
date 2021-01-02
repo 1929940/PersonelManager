@@ -9,24 +9,136 @@
         mc:Ignorable="d"
         Background="White"
         FontSize="14" FontFamily="Calibri"
-        Title="DashboardTableView" Height="450" Width="800">
+        Title="DashboardTableView" d:DesignHeight="450" d:DesignWidth="800">
     <Page.Resources>
         <converters:ToPLNConverter x:Key="ToPLNConverter"/>
+
+        <Style TargetType="Button">
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Width" Value="150"/>
+            <Style.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3" />
+                </Style>
+            </Style.Resources>
+        </Style>
+
+        <Style TargetType="iconPacks:PackIconMaterial">
+            <Setter Property="Margin" Value="0,0,3,0"/>
+        </Style>
+
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Style.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3" />
+                </Style>
+            </Style.Resources>
+        </Style>
+
+        <Style TargetType="DatePicker">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Margin" Value="0,2,0,0"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Style.Resources>
+                <Style TargetType="{x:Type DatePickerTextBox}" >
+                    <Setter Property="Background" Value="Transparent" />
+                </Style>
+            </Style.Resources>
+        </Style>
+
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="{x:Type DataGridCell}">
+            <Setter Property="Height" Value="25"/>
+
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="BorderBrush" Value="Gainsboro"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Background" Value="Gainsboro"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type TextBlock}" x:Key="DataGridCell_TextStyle">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5,0"/>
+        </Style>
+
+        <Style TargetType="{x:Type TextBlock}" x:Key="DataGridCellValue_TextStyle">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Margin" Value="5,0"/>
+        </Style>
+
+
+
     </Page.Resources>
     <Grid>
-        <DataGrid Grid.Row="2" Name="DataGrid" IsReadOnly="True"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="WhiteSmoke">
+
+            <StackPanel Orientation="Horizontal">
+                <Border BorderBrush="Black" BorderThickness="1" CornerRadius="3" Padding="10,2" Margin="3">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Od" Width="30" Margin="5"/>
+                        <DatePicker Name="FilterFromDatePicker"/>
+                        <TextBlock Text="Do" Width="30" Margin="15,5,5,5"/>
+                        <DatePicker Name="FilterToDatePicker"/>
+
+                        <Button Name="FilterByDatesButton" Click="FilterByDatesButton_Click">
+                            <Button.Content>
+                                <StackPanel Orientation="Horizontal">
+                                    <iconPacks:PackIconMaterial Kind="CalendarCheckOutline"/>
+                                    <TextBlock Text="Filtruj wg. Dat"/>
+                                </StackPanel>
+                            </Button.Content>
+                        </Button>
+
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Text="Szukaj" FontSize="16" VerticalAlignment="Center"/>
+                <TextBox x:Name="FilterBox" TextChanged="FilterBox_TextChanged"/>
+            </StackPanel>
+        </Grid>
+
+        <DataGrid Grid.Row="1" Name="DataGrid" IsReadOnly="True"
                   BorderThickness="0" GridLinesVisibility="Horizontal" RowHeight="25"
                   SelectionMode="Single" SelectionUnit="FullRow"
-                  AutoGenerateColumns="True" HeadersVisibility="Column">
+                  AutoGenerateColumns="False" HeadersVisibility="Column">
 
-            <!--<DataGrid.Columns>
-                <DataGridTextColumn Header="Nazwisko" Binding="{Binding Employee.LastName}" Width="*" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
-                <DataGridTextColumn Header="Imię" Binding="{Binding Employee.FirstName}" Width="*" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
-                <DataGridTextColumn Header="Numer umowy" Binding="{Binding Contract.Number}" Width="*" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
-                <DataGridTextColumn Header="Wartość" Binding="{Binding Amount, Converter={StaticResource ToPLNConverter}}" Width="*" ElementStyle="{StaticResource DataGridCellValue_TextStyle}"/>
-                <DataGridTextColumn Header="Przepracowano" Binding="{Binding WorkedHours, Converter={StaticResource ToHourConverter}}" Width="*" ElementStyle="{StaticResource DataGridCellValue_TextStyle}"/>
-                <DataGridTextColumn Header="Wypłacono" Binding="{Binding PaidOn, StringFormat=\{0:yyyy.MM.dd\}}" Width="*" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
-            </DataGrid.Columns>-->
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Pracownik" Binding="{Binding EmployeeFullName}" Width="150" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                <DataGridTextColumn Header="Zawód" Binding="{Binding Profession}" Width="125" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                <DataGridTextColumn Header="Lokalizacja" Binding="{Binding LocalizationName}" Width="175" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                <DataGridTextColumn Header="Mistrz" Binding="{Binding ForemanName}" Width="155" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                <DataGridTextColumn Header="Numer umowy" Binding="{Binding ContractNumber}" Width="100" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                <DataGridTextColumn Header="Podatek" Binding="{Binding ContractTaxValue, Converter={StaticResource ToPLNConverter}}" Width="100" ElementStyle="{StaticResource DataGridCellValue_TextStyle}"/>
+                <DataGridTextColumn Header="Zaliczki" Binding="{Binding ContractAdvancesValue, Converter={StaticResource ToPLNConverter}}" Width="100" ElementStyle="{StaticResource DataGridCellValue_TextStyle}"/>
+                <DataGridTextColumn Header="Wypłata" Binding="{Binding ContractPaymentValue, Converter={StaticResource ToPLNConverter}}" Width="100" ElementStyle="{StaticResource DataGridCellValue_TextStyle}"/>
+                <DataGridTextColumn Header="Umowa Od" Binding="{Binding ContractFrom, StringFormat=\{0:yyyy.MM.dd\}}" Width="100" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                <DataGridTextColumn Header="Umowa Do" Binding="{Binding ContractTo, StringFormat=\{0:yyyy.MM.dd\}}" Width="100" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                <DataGridTextColumn Header="Termin Badania" Binding="{Binding MedicalCheckupExpirationDate, StringFormat=\{0:yyyy.MM.dd\}}" Width="125" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                <DataGridTextColumn Header="Termin BHP" Binding="{Binding SafetyTrainingExpirationDate, StringFormat=\{0:yyyy.MM.dd\}}" Width="125" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                <DataGridTextColumn Header="Termin Certyfikatu" Binding="{Binding CertificateExpirationDate, StringFormat=\{0:yyyy.MM.dd\}}" Width="125" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+            </DataGrid.Columns>
         </DataGrid>
     </Grid>
 </Page>

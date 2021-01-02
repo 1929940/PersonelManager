@@ -73,23 +73,19 @@ namespace Desktop.UI.Payroll.Views.Contracts {
 
         private void InitDates() {
             if (!EditMode) {
-                DateTime startingDate = DateTime.Today;
-                DateTime endingDate = DateTime.Today;
+                BillingPeriod billingPeriod;
 
                 ConfigurationPage config = new ConfigurationPageRequestHandler().Get();
                 if (config.BillingMonthStart < DateTime.Today.Day) {
-                    startingDate = startingDate.AddMonths(1);
-                    endingDate = endingDate.AddMonths(1);
+                    billingPeriod = DateHelper.GetBillingPeriod(config.BillingMonthStart, config.BillingMonthEnd, DateTime.Today.AddMonths(1));
+                } else {
+                    billingPeriod = DateHelper.GetBillingPeriod(config.BillingMonthStart, config.BillingMonthEnd, DateTime.Today);
                 }
 
-                if (config.BillingMonthStart > config.BillingMonthEnd) {
-                    endingDate = startingDate.AddMonths(1);
-                }
+                ValidFromDatePicker.SelectedDate = billingPeriod.From;
+                ValidToDatePicker.SelectedDate = billingPeriod.To;
 
-                ValidFromDatePicker.SelectedDate = DateHelper.CreateDate(startingDate.Year, startingDate.Month, config.BillingMonthStart);
-                ValidToDatePicker.SelectedDate = DateHelper.CreateDate(endingDate.Year, endingDate.Month, config.BillingMonthEnd);
-
-                TitleTextBox.Text = string.Format($"Umowa za {startingDate.ToString("MMMMMMMMMMMMM")}");
+                TitleTextBox.Text = string.Format($"Umowa za {billingPeriod.From.ToString("MMMMMMMMMMMMM")}");
             }
         }
 
