@@ -103,16 +103,28 @@
             <Setter Property="Margin" Value="5,0"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=MedicalCheckupStatus}" Value="Expired">
-                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="Red" Opacity="0.1"/>
+                        </Setter.Value>
+                    </Setter>
                     <Setter Property="Foreground" Value="Black"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Path=MedicalCheckupStatus}" Value="NoData">
-                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="Red" Opacity="0.1"/>
+                        </Setter.Value>
+                    </Setter>
                     <Setter Property="Foreground" Value="Black"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Path=MedicalCheckupStatus}" Value="Expiring">
                     <Setter Property="Foreground" Value="Black"/>
-                    <Setter Property="Background" Value="Orange"/>
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="Orange" Opacity="0.1"/>
+                        </Setter.Value>
+                    </Setter>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -122,16 +134,28 @@
             <Setter Property="Margin" Value="5,0"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=SafetyTrainingStatus}" Value="Expired">
-                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="Red" Opacity="0.1"/>
+                        </Setter.Value>
+                    </Setter>
                     <Setter Property="Foreground" Value="Black"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Path=SafetyTrainingStatus}" Value="NoData">
-                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="Red" Opacity="0.1"/>
+                        </Setter.Value>
+                    </Setter>
                     <Setter Property="Foreground" Value="Black"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Path=SafetyTrainingStatus}" Value="Expiring">
                     <Setter Property="Foreground" Value="Black"/>
-                    <Setter Property="Background" Value="Orange"/>
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="Orange" Opacity="0.1"/>
+                        </Setter.Value>
+                    </Setter>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -141,12 +165,20 @@
             <Setter Property="Margin" Value="5,0"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=CertificateStatus}" Value="Expired">
-                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="Red" Opacity="0.1"/>
+                        </Setter.Value>
+                    </Setter>
                     <Setter Property="Foreground" Value="Black"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Path=CertificateStatus}" Value="Expiring">
                     <Setter Property="Foreground" Value="Black"/>
-                    <Setter Property="Background" Value="Orange"/>
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="Orange" Opacity="0.1"/>
+                        </Setter.Value>
+                    </Setter>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
