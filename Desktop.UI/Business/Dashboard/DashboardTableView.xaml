@@ -67,8 +67,90 @@
                     <Setter Property="Foreground" Value="Black"/>
                     <Setter Property="Background" Value="Gainsboro"/>
                 </Trigger>
+
+                <DataTrigger Binding="{Binding Path=CertificateStatus}" Value="Expiring">
+                    <Setter Property="Foreground" Value="Orange"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=MedicalCheckupStatus}" Value="Expiring">
+                    <Setter Property="Foreground" Value="Orange"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=SafetyTrainingStatus}" Value="Expiring">
+                    <Setter Property="Foreground" Value="Orange"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding Path=CertificateStatus}" Value="Expired">
+                    <Setter Property="Foreground" Value="Red"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=MedicalCheckupStatus}" Value="Expired">
+                    <Setter Property="Foreground" Value="Red"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=SafetyTrainingStatus}" Value="Expired">
+                    <Setter Property="Foreground" Value="Red"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding Path=MedicalCheckupStatus}" Value="NoData">
+                    <Setter Property="Foreground" Value="Red"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=SafetyTrainingStatus}" Value="NoData">
+                    <Setter Property="Foreground" Value="Red"/>
+                </DataTrigger>
+
             </Style.Triggers>
         </Style>
+
+        <Style TargetType="{x:Type TextBlock}" x:Key="DataGridMedicalDate_TextStyle">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5,0"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=MedicalCheckupStatus}" Value="Expired">
+                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=MedicalCheckupStatus}" Value="NoData">
+                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=MedicalCheckupStatus}" Value="Expiring">
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Background" Value="Orange"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type TextBlock}" x:Key="DataGridSafetyTrainingDate_TextStyle">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5,0"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=SafetyTrainingStatus}" Value="Expired">
+                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=SafetyTrainingStatus}" Value="NoData">
+                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=SafetyTrainingStatus}" Value="Expiring">
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Background" Value="Orange"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type TextBlock}" x:Key="DataGridCertificateDate_TextStyle">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5,0"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=CertificateStatus}" Value="Expired">
+                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=CertificateStatus}" Value="Expiring">
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Background" Value="Orange"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
 
         <Style TargetType="{x:Type TextBlock}" x:Key="DataGridCell_TextStyle">
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -135,9 +217,9 @@
                 <DataGridTextColumn Header="Wypłata" Binding="{Binding ContractPaymentValue, Converter={StaticResource ToPLNConverter}}" Width="100" ElementStyle="{StaticResource DataGridCellValue_TextStyle}"/>
                 <DataGridTextColumn Header="Umowa Od" Binding="{Binding ContractFrom, StringFormat=\{0:yyyy.MM.dd\}}" Width="100" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
                 <DataGridTextColumn Header="Umowa Do" Binding="{Binding ContractTo, StringFormat=\{0:yyyy.MM.dd\}}" Width="100" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
-                <DataGridTextColumn Header="Termin Badania" Binding="{Binding MedicalCheckupExpirationDate, StringFormat=\{0:yyyy.MM.dd\}}" Width="125" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
-                <DataGridTextColumn Header="Termin BHP" Binding="{Binding SafetyTrainingExpirationDate, StringFormat=\{0:yyyy.MM.dd\}}" Width="125" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
-                <DataGridTextColumn Header="Termin Certyfikatu" Binding="{Binding CertificateExpirationDate, StringFormat=\{0:yyyy.MM.dd\}}" Width="125" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
+                <DataGridTextColumn Header="Termin Badania" Binding="{Binding MedicalCheckupExpirationDate, StringFormat=\{0:yyyy.MM.dd\}}" Width="125" ElementStyle="{StaticResource DataGridMedicalDate_TextStyle}"/>
+                <DataGridTextColumn Header="Termin BHP" Binding="{Binding SafetyTrainingExpirationDate, StringFormat=\{0:yyyy.MM.dd\}}" Width="125" ElementStyle="{StaticResource DataGridSafetyTrainingDate_TextStyle}"/>
+                <DataGridTextColumn Header="Termin Certyfikatu" Binding="{Binding CertificateExpirationDate, StringFormat=\{0:yyyy.MM.dd\}}" Width="125" ElementStyle="{StaticResource DataGridCertificateDate_TextStyle}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

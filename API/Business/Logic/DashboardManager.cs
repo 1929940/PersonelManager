@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace API.Business.Logic {
     public class DashboardManager {
+
         public static DashboardDTO CreateDashboardDTO(Contract contract, ConfigurationPage configuration) {
             var employee = contract.Employee;
             var history = contract.Employee.History.Last();
