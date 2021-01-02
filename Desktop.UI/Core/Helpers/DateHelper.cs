@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommunicationLibrary.Business.Requests;
+using System;
 
 namespace Desktop.UI.Core.Helpers {
     public class DateHelper {
@@ -9,5 +10,31 @@ namespace Desktop.UI.Core.Helpers {
 
             return DateTime.Parse(date);
         }
+
+        public static BillingPeriod GetBillingPeriod() {
+            var configuration = new ConfigurationPageRequestHandler().Get();
+            return GetBillingPeriod(configuration.BillingMonthStart, configuration.BillingMonthEnd, DateTime.Today);
+        }
+
+        public static BillingPeriod GetBillingPeriod(int fromDay, int toDay, DateTime date) {
+            DateTime from = CreateDate(date.Year, date.Month, fromDay);
+            DateTime to = CreateDate(date.Year, date.Month, toDay);
+
+            if (fromDay > toDay) {
+                if (date.Day >= fromDay) {
+                    int month = to.AddMonths(1).Month;
+                    to = CreateDate(date.Year, month, toDay);
+                } else {
+                    int month = to.AddMonths(-1).Month;
+                    from = CreateDate(date.Year, month, toDay);
+                }
+            }
+            return new BillingPeriod() { From = from, To = to };
+        }
+    }
+
+    public class BillingPeriod {
+        public DateTime From { get; set; }
+        public DateTime To { get; set; }
     }
 }
