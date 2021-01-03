@@ -14,7 +14,7 @@ using System.Security.Claims;
 
 namespace API.Business.Controller {
 
-    [Authorize(Roles = "Kierownik,Administrator")]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase {
@@ -43,6 +43,7 @@ namespace API.Business.Controller {
             return UserManager.CreateDTO(user);
         }
 
+        [Authorize(Roles = "Kierownik,Administrator")]
         [HttpPost("Create")]
         public async Task<ActionResult<UserDTO>> CreateUser(UserDTO dto) {
             string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value.ToString();
@@ -62,6 +63,7 @@ namespace API.Business.Controller {
             return Created(string.Empty, UserManager.CreateDTO(user));
         }
 
+        [Authorize(Roles = "Kierownik,Administrator")]
         [HttpPut("Update/{id}")]
         public async Task<IActionResult> UpdateUser(int id, UserDTO dto) {
             string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value.ToString();
@@ -93,6 +95,7 @@ namespace API.Business.Controller {
             return NoContent();
         }
 
+        [Authorize(Roles = "Kierownik,Administrator")]
         [HttpDelete("Delete/{id}")]
         public async Task<ActionResult<User>> DeleteUser(int id) {
             var user = await _context.Users.FindAsync(id);
@@ -132,9 +135,7 @@ namespace API.Business.Controller {
         [HttpPut("RequestPasswordReset/{login}")]
         public async Task<IActionResult> RequestPasswordReset(string login) {
             User user = await _context.Users.FirstOrDefaultAsync(x => x.Email == login && x.IsActive);
-            //TODO:
-            //if (user == null)
-            //    return NotFound();
+
             if (user == null)
                 return NoContent();
 

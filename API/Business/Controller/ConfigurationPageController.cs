@@ -10,7 +10,7 @@ using API.Core.Logic;
 using Microsoft.AspNetCore.Authorization;
 
 namespace API.Business.Controller {
-    [Authorize(Roles = "Kierownik,Administrator")]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ConfigurationPageController : ControllerBase {
@@ -36,6 +36,7 @@ namespace API.Business.Controller {
             return configurationPage;
         }
 
+        [Authorize(Roles = "Kierownik,Administrator")]
         [HttpPut("Update/{id}")]
         public async Task<IActionResult> PutConfigurationPage(ConfigurationPage configurationPage) {
             string requestAuthor = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value.ToString();
