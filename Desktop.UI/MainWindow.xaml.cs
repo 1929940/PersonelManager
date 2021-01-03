@@ -41,12 +41,12 @@ namespace PersonalManagerDesktop {
         public MainWindow() {
 
             //TODO: REMOVE
-            ServerConnectionData.Url = @"https://localhost:44345";
+            //ServerConnectionData.Url = @"https://localhost:44345";
 
             //Settings.Token = new UserRequestHandler().Login("1929940@gmail.com", "1111").Token;
 
             //ADMIN
-            ServerConnectionHelper.SetLoginData(new UserRequestHandler().Login("1929940@gmail.com", "QWER"));
+            //ServerConnectionHelper.SetLoginData(new UserRequestHandler().Login("1929940@gmail.com", "QWER"));
 
             //KIEROWNIK
             //ServerConnectionHelper.SetLoginData(new UserRequestHandler().Login("Witkowski@poczta.pl", "2897"));
@@ -55,10 +55,6 @@ namespace PersonalManagerDesktop {
             //ServerConnectionHelper.SetLoginData(new UserRequestHandler().Login("wnuda@wp.pl", "5572"));
 
             InitializeComponent();
-        }
-
-        private void StackPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
-            Console.WriteLine("h3h3");
         }
 
         private void TreeViewItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
@@ -108,6 +104,7 @@ namespace PersonalManagerDesktop {
 
         private void AdminTreeViewItem_Loaded(object sender, RoutedEventArgs e) {
             AdminTreeViewItem.Visibility = (AuthorizationHelper.Authorize(Enums.Roles.Kierownik)) ? Visibility.Visible : Visibility.Collapsed;
+            ContentFrame.Navigate(new DashboardTableView());
         }
     }
 }

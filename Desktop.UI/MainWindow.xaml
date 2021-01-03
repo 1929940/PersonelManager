@@ -136,15 +136,6 @@
                         </TreeViewItem.Header>
                     </TreeViewItem>
 
-                    <!--<TreeViewItem>
-                        <TreeViewItem.Header>
-                            <StackPanel Name="Pay_Panel" Orientation="Horizontal" VerticalAlignment="Center">
-                                <iconPacks:PackIconMaterial Kind="CurrencyEur" VerticalAlignment="Center"/>
-                                <TextBlock Text="Wypłaty" VerticalAlignment="Center"/>
-                            </StackPanel>
-                        </TreeViewItem.Header>
-                    </TreeViewItem>-->
-
                     <TreeViewItem>
                         <TreeViewItem.Header>
                             <StackPanel Name="Advances_Panel" Orientation="Horizontal" VerticalAlignment="Center">
@@ -188,10 +179,6 @@
             <Frame Name="ContentFrame" NavigationUIVisibility="Hidden"/>
 
         </Border>
-
-        <!--<Border Grid.Row="1" Grid.Column="1"
-                BorderBrush="Black" BorderThickness="0,0,1,1">
-        </Border>-->
 
     </Grid>
 </Window>
