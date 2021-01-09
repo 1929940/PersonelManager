@@ -27,48 +27,8 @@
                 </Style>
             </Style.Resources>
         </Style>
-
-        <Style TargetType="Button">
-            <Setter Property="Height" Value="25"/>
-            <Setter Property="Width" Value="100"/>
-            <Setter Property="Margin" Value="5"/>
-            <Style.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="3" />
-                </Style>
-            </Style.Resources>
-        </Style>
-
-        <Style TargetType="iconPacks:PackIconMaterial">
-            <Setter Property="Margin" Value="0,0,3,0"/>
-        </Style>
-
-        <Style TargetType="ComboBox">
-            <Setter Property="Margin" Value="5,10"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>
-
-        <Style TargetType="GroupBox">
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="BorderBrush" Value="Black"/>
-            <Setter Property="HeaderTemplate">
-                <Setter.Value>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding}" FontWeight="Bold"/>
-                    </DataTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <ControlTemplate x:Key="ErrorTemplate">
-            <StackPanel Orientation="Vertical">
-                <Border BorderBrush="Red" BorderThickness="1">
-                    <AdornedElementPlaceholder/>
-                </Border>
-                <TextBlock Text="{Binding CurrentItem.ErrorContent}" Foreground="Red" FontSize="10" Padding="2,0,0,0"/>
-            </StackPanel>
-        </ControlTemplate>
     </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
