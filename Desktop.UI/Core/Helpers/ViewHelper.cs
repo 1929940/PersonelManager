@@ -3,7 +3,6 @@ using CommunicationAndCommonsLibrary.Core.Requests;
 using CommunicationAndCommonsLibrary.HR.Models;
 using CommunicationAndCommonsLibrary.HR.Requests;
 using CommunicationAndCommonsLibrary.Payroll.Models;
-using CommunicationAndCommonsLibrary.Payroll.Requests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,21 +41,13 @@ namespace Desktop.UI.Core.Helpers {
                     .Select(x => x.Key).ToList().IndexOf(id);
         }
 
-        //TODO: What? Just get dictionary... duh
-        public static Dictionary<int, string> GetEmployeeHeaders() =>
-             new EmployeeRequestHandler().GetEmployeeHeaders().ToDictionary(x => x.Id, x => x.DisplayValue);
-
-        public static Dictionary<int, string> GetCurrentEmployeeHeader(Employee employee) =>
+        public static Dictionary<int, string> ConvertToDictionary(Employee employee) =>
             new Dictionary<int, string>() { { employee.Id, string.Format($"{employee.LastName} {employee.FirstName}") } };
 
-        public static Dictionary<int, string> GetCurrentEmployeeHeader(EmployeeSimplified employee) =>
+        public static Dictionary<int, string> ConvertToDictionary(EmployeeSimplified employee) =>
             new Dictionary<int, string>() { { employee.Id, string.Format($"{employee.LastName} {employee.FirstName}") } };
 
-
-        public static Dictionary<int, string> GetContractHeaders() =>
-            new ContractRequestHandler().GetContractHeaders().ToDictionary(x => x.Id, x => x.DisplayValue);
-
-        public static Dictionary<int, string> GetCurrentContractHeader(Advance advance) =>
+        public static Dictionary<int, string> ConverToDictionary(Advance advance) =>
             new Dictionary<int, string>() { { advance.Contract.Id, string.Format($"{advance.Employee.LastName} {advance.Employee.FirstName} {advance.Contract.Number}") } };
 
 

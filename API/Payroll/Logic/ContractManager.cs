@@ -4,6 +4,7 @@ using API.Core.Logic;
 using API.HR.Logic;
 using API.Payroll.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
@@ -53,12 +54,8 @@ namespace API.Payroll.Logic {
             };
         }
 
-        public static ContractHeader CreateContractHeader(Contract contract) {
-            return new ContractHeader() {
-                Id = contract.Id,
-                DisplayValue = string.Format($"{contract.Employee.History.LastOrDefault()?.LastName} {contract.Employee.FirstName} {contract.Number}")
-            };
-        }
+        public static string GetHeaderValue(Contract contract) =>
+            string.Format($"{contract.Employee.History.LastOrDefault()?.LastName} {contract.Employee.FirstName} {contract.Number}");
 
         public static ContractAdvanceData CreateContractAdvanceData(Contract contract, ConfigurationPage configurationPage) {
             decimal advancesTotalValue = GetAdvancesTotalValue(contract);

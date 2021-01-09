@@ -2,6 +2,7 @@
 using CommunicationAndCommonsLibrary.Business.Models;
 using CommunicationAndCommonsLibrary.Business.Requests;
 using CommunicationAndCommonsLibrary.Core.Logic;
+using CommunicationAndCommonsLibrary.HR.Requests;
 using CommunicationAndCommonsLibrary.Payroll.Models;
 using CommunicationAndCommonsLibrary.Payroll.Requests;
 using Desktop.UI.Core.Helpers;
@@ -118,11 +119,11 @@ namespace Desktop.UI.Payroll.Views.Contracts {
 
         private void BindCombobox() {
             if (EditMode) {
-                EmployeeCombobox.ItemsSource = ViewHelper.GetCurrentEmployeeHeader(Contract.Employee);
+                EmployeeCombobox.ItemsSource = ViewHelper.ConvertToDictionary(Contract.Employee);
                 EmployeeCombobox.SelectedIndex = 0;
                 EmployeeCombobox.IsEnabled = false;
             } else {
-                EmployeeCombobox.ItemsSource = ViewHelper.GetEmployeeHeaders();
+                EmployeeCombobox.ItemsSource = new EmployeeRequestHandler().GetEmployeesDictionary();
                 EmployeeCombobox.SelectedIndex = ViewHelper.GetIndexOfComboboxValue(Contract.Employee.Id, EmployeeCombobox);
             }
         }

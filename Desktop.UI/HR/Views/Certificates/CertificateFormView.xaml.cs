@@ -92,7 +92,7 @@ namespace Desktop.UI.HR.Views.Certificates {
                 HideEmployeeControls();
                 ExpandNumberControls();
             } else {
-                EmployeeCombobox.ItemsSource = ViewHelper.GetEmployeeHeaders();
+                EmployeeCombobox.ItemsSource = new EmployeeRequestHandler().GetEmployeesDictionary();
                 EmployeeCombobox.SelectedIndex = ViewHelper.GetIndexOfComboboxValue(Document.Employee.Id, EmployeeCombobox);
             }
         }

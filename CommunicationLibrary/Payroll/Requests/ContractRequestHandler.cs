@@ -21,8 +21,8 @@ namespace CommunicationAndCommonsLibrary.Payroll.Requests {
             return await base.GetAsync(id, RouteVerbs.GET_EMPLOYEE_CONTRACTS);
         }
 
-        public async Task<IEnumerable<ContractHeader>> GetContractHeadersAsync() {
-            List<ContractHeader> output = new List<ContractHeader>();
+        public async Task<IDictionary<int, string>> GetContractsDictionaryAsync() {
+            Dictionary<int, string> output = new Dictionary<int, string>();
             using (var httpClient = new HttpClient()) {
                 SetToken(httpClient);
 
@@ -31,14 +31,14 @@ namespace CommunicationAndCommonsLibrary.Payroll.Requests {
                 using (var response = await httpClient.GetAsync(requestUri)) {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     response.EnsureSuccessStatusCode();
-                    output = JsonConvert.DeserializeObject<List<ContractHeader>>(apiResponse);
+                    output = JsonConvert.DeserializeObject<Dictionary<int, string>>(apiResponse);
                 }
             }
             return output;
         }
 
-        public IEnumerable<ContractHeader> GetContractHeaders() {
-            List<ContractHeader> output = new List<ContractHeader>();
+        public IDictionary<int, string> GetContractsDictionary() {
+            Dictionary<int, string> output = new Dictionary<int, string>();
             using (var httpClient = new HttpClient()) {
                 SetToken(httpClient);
 
@@ -47,7 +47,7 @@ namespace CommunicationAndCommonsLibrary.Payroll.Requests {
                 using (var response = httpClient.GetAsync(requestUri).Result) {
                     string apiResponse = response.Content.ReadAsStringAsync().Result;
                     response.EnsureSuccessStatusCode();
-                    output = JsonConvert.DeserializeObject<List<ContractHeader>>(apiResponse);
+                    output = JsonConvert.DeserializeObject<Dictionary<int, string>>(apiResponse);
                 }
             }
             return output;

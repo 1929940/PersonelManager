@@ -46,11 +46,11 @@ namespace API.HR.Controller {
             return Ok(histories.Select(x => EmployeeManager.CreateHistoryDTO(employee, x)));
         }
 
-        [HttpGet("GetEmployeeHeaders")]
-        public async Task<ActionResult<IEnumerable<EmployeeHeader>>> GetEmployeeHeaders() {
+        [HttpGet("GetEmployeesDictionary")]
+        public async Task<ActionResult<Dictionary<int, string>>> GetEmployeesDictionary() {
             var employees = await _context.Employees.Where(x => !x.IsArchived).ToListAsync();
 
-            return Ok(employees.Select(x => EmployeeManager.CreateEmployeeHeader(x)));
+            return Ok(employees.ToDictionary(x => x.Id, x => EmployeeManager.GetHeaderValue(x)));
         }
 
 

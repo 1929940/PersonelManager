@@ -69,8 +69,8 @@ namespace CommunicationAndCommonsLibrary.HR.Requests {
             }
         }
 
-        public async Task<IEnumerable<EmployeeHeader>> GetEmployeeHeadersAsync() {
-            List<EmployeeHeader> output = new List<EmployeeHeader>();
+        public async Task<IDictionary<int, string>> GetEmployeesDictionaryAsync() {
+            Dictionary<int, string> output = new Dictionary<int, string>();
             using (var httpClient = new HttpClient()) {
                 SetToken(httpClient);
 
@@ -79,14 +79,14 @@ namespace CommunicationAndCommonsLibrary.HR.Requests {
                 using (var response = await httpClient.GetAsync(requestUri)) {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     response.EnsureSuccessStatusCode();
-                    output = JsonConvert.DeserializeObject<List<EmployeeHeader>>(apiResponse);
+                    output = JsonConvert.DeserializeObject<Dictionary<int, string>>(apiResponse);
                 }
             }
             return output;
         }
 
-        public IEnumerable<EmployeeHeader> GetEmployeeHeaders() {
-            List<EmployeeHeader> output = new List<EmployeeHeader>();
+        public IDictionary<int, string> GetEmployeesDictionary() {
+            Dictionary<int, string> output = new Dictionary<int, string>();
             using (var httpClient = new HttpClient()) {
                 SetToken(httpClient);
 
@@ -95,7 +95,7 @@ namespace CommunicationAndCommonsLibrary.HR.Requests {
                 using (var response = httpClient.GetAsync(requestUri).Result) {
                     string apiResponse = response.Content.ReadAsStringAsync().Result;
                     response.EnsureSuccessStatusCode();
-                    output = JsonConvert.DeserializeObject<List<EmployeeHeader>>(apiResponse);
+                    output = JsonConvert.DeserializeObject<Dictionary<int, string>>(apiResponse);
                 }
             }
             return output;

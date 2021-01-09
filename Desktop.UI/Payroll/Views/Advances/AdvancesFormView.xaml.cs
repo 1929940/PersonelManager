@@ -88,10 +88,10 @@ namespace Desktop.UI.Payroll.Views.Advances {
 
         private void BindCombobox() {
             if (EditMode) {
-                ContractCombobox.ItemsSource = ViewHelper.GetCurrentContractHeader(Advance);
+                ContractCombobox.ItemsSource = ViewHelper.ConverToDictionary(Advance);
                 ContractCombobox.SelectedIndex = 0;
             } else {
-                ContractCombobox.ItemsSource = ViewHelper.GetContractHeaders();
+                ContractCombobox.ItemsSource = _contractHandler.GetContractsDictionary();
                 ContractCombobox.SelectedIndex = ViewHelper.GetIndexOfComboboxValue(Advance.Contract.Id, ContractCombobox);
             }
             if (UseBufor || EditMode)

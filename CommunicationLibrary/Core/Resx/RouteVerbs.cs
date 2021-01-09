@@ -22,8 +22,8 @@
         internal const string GET_EMPLOYEE_PAYMENTS = "GetEmployeePayments";
         internal const string GET_CONTRACT_ADVANCES = "GetContractAdvances";
 
-        internal const string GET_EMPLOYEE_HEADERS = "GetEmployeeHeaders";
-        internal const string GET_CONTRACT_HEADERS = "GetContractHeaders";
+        internal const string GET_EMPLOYEE_HEADERS = "GetEmployeesDictionary";
+        internal const string GET_CONTRACT_HEADERS = "GetContractsDictionary";
         internal const string GET_CONTRACT_ADVANCE_DATA = "GetContractAdvanceData";
     }
 }

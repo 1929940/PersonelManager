@@ -107,10 +107,10 @@ namespace API.Payroll.Contoller {
             return _context.Contracts.Any(e => e.Id == id);
         }
 
-        [HttpGet("GetContractHeaders")]
-        public async Task<ActionResult<IEnumerable<ContractHeader>>> GetContractHeaders() {
+        [HttpGet("GetContractsDictionary")]
+        public async Task<ActionResult<Dictionary<int, string>>> GetContractsDictionary() {
             var contracts = await _context.Contracts.Where(x => !x.IsRealized).ToListAsync();
-            return Ok(contracts.Select(x => ContractManager.CreateContractHeader(x)));
+            return Ok(contracts.ToDictionary(x => x.Id, x => ContractManager.GetHeaderValue(x)));
         }
 
         [HttpGet("GetContractAdvanceData/{id}")]

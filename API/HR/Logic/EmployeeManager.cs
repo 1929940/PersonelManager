@@ -37,12 +37,8 @@ namespace API.HR.Logic {
             return dto;
         }
 
-        public static EmployeeHeader CreateEmployeeHeader(Employee employee) {
-            return new EmployeeHeader() {
-                Id = employee.Id,
-                DisplayValue = string.Format($"{employee.History.Last().LastName} {employee.FirstName}")
-            };
-        }
+        public static string GetHeaderValue(Employee employee) =>
+            string.Format($"{employee.History.Last().LastName} {employee.FirstName}");
 
         private static EmployeeDTO CreateBaseDTO(Employee employee, EmployeeHistory history) =>
             new EmployeeDTO() {
