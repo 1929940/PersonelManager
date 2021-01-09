@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CommunicationLibrary.Business.Models {
+namespace CommunicationAndCommonsLibrary.Business.Models {
     public class Dashboard {
         public string EmployeeFullName { get; set; }
         public string Profession { get; set; }

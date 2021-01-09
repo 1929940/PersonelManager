@@ -1,7 +1,6 @@
-﻿using CommunicationLibrary.HR.Models;
-using Desktop.UI.Core.Bufor;
+﻿using CommunicationAndCommonsLibrary.Core.Bufor;
+using CommunicationAndCommonsLibrary.HR.Models;
 using Desktop.UI.Core.Helpers;
-using Desktop.UI.HR.Helper;
 using Desktop.UI.HR.Views.Employees;
 using System;
 using System.Collections.Generic;
@@ -16,7 +15,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using static Desktop.UI.Core.Helpers.Enums;
 
 namespace Desktop.UI.HR.Views.Absences {
     public partial class LeavesFormView : Window {

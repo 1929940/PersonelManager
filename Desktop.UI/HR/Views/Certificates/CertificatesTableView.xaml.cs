@@ -1,7 +1,7 @@
-﻿using CommunicationLibrary.Business.Models;
-using CommunicationLibrary.HR.Models;
-using CommunicationLibrary.HR.Requests;
-using Desktop.UI.Core.Bufor;
+﻿using CommunicationAndCommonsLibrary.Business.Models;
+using CommunicationAndCommonsLibrary.Core.Bufor;
+using CommunicationAndCommonsLibrary.HR.Models;
+using CommunicationAndCommonsLibrary.HR.Requests;
 using Desktop.UI.Core.Helpers;
 using Desktop.UI.HR.Views.Employees;
 using System;
@@ -79,7 +79,6 @@ namespace Desktop.UI.HR.Views.Certificates {
                 CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Filter = Filter;
             }
         }
-
 
         private void FilterBox_TextChanged(object sender, TextChangedEventArgs e) {
             CollectionViewSource.GetDefaultView(DataGrid.ItemsSource).Refresh();

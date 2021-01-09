@@ -1,6 +1,6 @@
-﻿using CommunicationLibrary.Core.Models;
+﻿using CommunicationAndCommonsLibrary.Core.Models;
 
-namespace CommunicationLibrary.HR.Models {
+namespace CommunicationAndCommonsLibrary.HR.Models {
     public class PersonelDocument : DocumentEntity  {
         public EmployeeSimplified Employee { get; set; }
 

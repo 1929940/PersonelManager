@@ -1,6 +1,5 @@
-﻿using CommunicationLibrary.Business.Requests;
-using CommunicationLibrary.Business.Models;
-using Desktop.UI.Core.Helpers;
+﻿using CommunicationAndCommonsLibrary.Business.Requests;
+using CommunicationAndCommonsLibrary.Core.Logic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +31,7 @@ namespace Desktop.UI.Business.Dashboard {
 
         private bool Filter(object item) {
             string input = FilterBox.Text;
-            CommunicationLibrary.Business.Models.Dashboard dashboard = item as CommunicationLibrary.Business.Models.Dashboard;
+            CommunicationAndCommonsLibrary.Business.Models.Dashboard dashboard = item as CommunicationAndCommonsLibrary.Business.Models.Dashboard;
 
             bool result = dashboard.EmployeeFullName.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0
                 || dashboard.Profession.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0

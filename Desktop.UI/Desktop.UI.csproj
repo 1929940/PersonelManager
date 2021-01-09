@@ -249,13 +249,7 @@
     <Compile Include="Business\Users\UserFormView.xaml.cs">
       <DependentUpon>UserFormView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Core\Bufor\Bufor.cs" />
-    <Compile Include="Core\Bufor\BuforObject.cs" />
-    <Compile Include="Core\Bufor\TransactionBufor.cs" />
-    <Compile Include="Core\Helpers\AuthorizationHelper.cs" />
-    <Compile Include="Core\Helpers\DateHelper.cs" />
     <Compile Include="Core\Helpers\DialogHelper.cs" />
-    <Compile Include="Core\Helpers\Enums.cs" />
     <Compile Include="Core\Helpers\MetadataHelper.cs" />
     <Compile Include="Core\Helpers\ViewHelper.cs" />
     <Compile Include="Core\Helpers\ControlsHelper.cs" />
@@ -270,8 +264,6 @@
     <Compile Include="Core\Validators\IsIntValidator.cs" />
     <Compile Include="Core\Validators\IsNotEmptyValidator.cs" />
     <Compile Include="Business\Validators\PasswordValidator.cs" />
-    <Compile Include="Core\Helpers\ExceptionHelper.cs" />
-    <Compile Include="Core\Helpers\ServerConnectionHelper.cs" />
     <Compile Include="Core\Validators\IsNotZeroPLNValidator.cs" />
     <Compile Include="Core\Validators\IsPercentValue.cs" />
     <Compile Include="Core\Validators\PeselValidator.cs" />
@@ -279,7 +271,6 @@
     <Compile Include="Core\ValueConverters\ToHourConverter.cs" />
     <Compile Include="Core\ValueConverters\ToPercentConverter.cs" />
     <Compile Include="Core\ValueConverters\ToPLNConverter.cs" />
-    <Compile Include="HR\Helper\EmployeeBufor.cs" />
     <Compile Include="HR\Views\Leaves\LeavesFormView.xaml.cs">
       <DependentUpon>LeavesFormView.xaml</DependentUpon>
     </Compile>
@@ -351,7 +342,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Payroll\Helpers\ContractBufor.cs" />
     <Compile Include="Payroll\Views\Advances\AdvancesFormView.xaml.cs">
       <DependentUpon>AdvancesFormView.xaml</DependentUpon>
     </Compile>
@@ -398,11 +388,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CommunicationLibrary\CommunicationLibrary.csproj">
-      <Project>{39baef4a-b8e9-4286-9af7-4c232c4e22be}</Project>
-      <Name>CommunicationLibrary</Name>
+    <ProjectReference Include="..\CommunicationLibrary\CommunicationAndCommonsLibrary.csproj">
+      <Project>{39BAEF4A-B8E9-4286-9AF7-4C232C4E22BE}</Project>
+      <Name>CommunicationAndCommonsLibrary</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

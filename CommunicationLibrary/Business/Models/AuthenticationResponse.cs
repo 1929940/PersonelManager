@@ -1,4 +1,4 @@
-﻿namespace CommunicationLibrary.Business.Models {
+﻿namespace CommunicationAndCommonsLibrary.Business.Models {
     public class AuthenticationReponse {
         public string Token { get; set; }
         public bool RequestedPasswordReset { get; set; }

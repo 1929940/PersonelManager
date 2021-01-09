@@ -1,4 +1,4 @@
-﻿namespace CommunicationLibrary.Core.Resx {
+﻿namespace CommunicationAndCommonsLibrary.Core.Resx {
     internal class RouteVerbs {
         internal const string GET = "Get";
         internal const string CREATE = "Create";

@@ -1,13 +1,12 @@
-﻿using CommunicationLibrary.Core.Logic;
-using CommunicationLibrary.Core.Models;
-using CommunicationLibrary.HR.Models;
-using CommunicationLibrary.HR.Requests;
-using CommunicationLibrary.Payroll.Models;
-using CommunicationLibrary.Payroll.Requests;
+﻿using CommunicationAndCommonsLibrary.Core.Models;
+using CommunicationAndCommonsLibrary.Core.Requests;
+using CommunicationAndCommonsLibrary.HR.Models;
+using CommunicationAndCommonsLibrary.HR.Requests;
+using CommunicationAndCommonsLibrary.Payroll.Models;
+using CommunicationAndCommonsLibrary.Payroll.Requests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
@@ -43,10 +42,9 @@ namespace Desktop.UI.Core.Helpers {
                     .Select(x => x.Key).ToList().IndexOf(id);
         }
 
-        //TODO: CHANGE INTO ENDPOINT
+        //TODO: What? Just get dictionary... duh
         public static Dictionary<int, string> GetEmployeeHeaders() =>
              new EmployeeRequestHandler().GetEmployeeHeaders().ToDictionary(x => x.Id, x => x.DisplayValue);
-        //new EmployeeRequestHandler().Get().ToDictionary(x => x.Id, x => string.Format($"{x.LastName} {x.FirstName}"));
 
         public static Dictionary<int, string> GetCurrentEmployeeHeader(Employee employee) =>
             new Dictionary<int, string>() { { employee.Id, string.Format($"{employee.LastName} {employee.FirstName}") } };

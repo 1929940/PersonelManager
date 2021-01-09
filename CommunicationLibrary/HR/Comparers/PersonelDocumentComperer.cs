@@ -1,7 +1,7 @@
-﻿using CommunicationLibrary.HR.Models;
+﻿using CommunicationAndCommonsLibrary.HR.Models;
 using System.Collections.Generic;
 
-namespace CommunicationLibrary.HR.Comparers {
+namespace CommunicationAndCommonsLibrary.HR.Comparers {
     public class PersonelDocumentComperer :  IEqualityComparer<PersonelDocument> {
         public bool Equals(PersonelDocument x, PersonelDocument y) =>
             x.Title == y.Title &&

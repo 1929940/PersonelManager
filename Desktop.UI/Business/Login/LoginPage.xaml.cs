@@ -1,5 +1,6 @@
-﻿using CommunicationLibrary.Business.Requests;
-using CommunicationLibrary.Core.Logic;
+﻿using CommunicationAndCommonsLibrary.Business.Logic;
+using CommunicationAndCommonsLibrary.Business.Requests;
+using CommunicationAndCommonsLibrary.Core.Logic;
 using Desktop.UI.Core.Helpers;
 using System;
 using System.Threading.Tasks;
@@ -49,10 +50,8 @@ namespace Desktop.UI.Business.Login {
 
         private async Task AttemptLogin(string login, string password) {
             try {
-                string hashedPassword = PasswordManager.EncryptPassword(password);
-
-                var response = await _handler.LoginAsync(login, hashedPassword);
-                ServerConnectionHelper.SetLoginData(response);
+                var response = await _handler.LoginAsync(login, password);
+                ConnectionManager.Login(response);
                 if (response.RequestedPasswordReset) {
                     _frame.Navigate(new UpdatePasswordPage(_frame, Login));
                 } else {
@@ -62,7 +61,7 @@ namespace Desktop.UI.Business.Login {
                 string exceptionMsg = "Niepoprawny login lub hasło.";
                 MessageBox.Show(exceptionMsg, "Uwaga", MessageBoxButton.OK, MessageBoxImage.Warning);
             } catch (Exception ex) {
-                string exceptionMsg = ExceptionHelper.GenerateExceptionMsg(ex);
+                string exceptionMsg = ExceptionHelper.GetMessage(ex);
                 MessageBox.Show(exceptionMsg, "Uwaga", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

@@ -1,32 +1,32 @@
-﻿using CommunicationLibrary.Core.Resx;
+﻿using CommunicationAndCommonsLibrary.Business.Logic;
+using CommunicationAndCommonsLibrary.Core.Resx;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CommunicationLibrary.Core.Logic {
+namespace CommunicationAndCommonsLibrary.Core.Requests {
 
     public abstract class BaseRequestHandler<T> where T : class {
         protected string _controllerName { get; set; }
 
         protected void SetToken(HttpClient httpClient) =>
             httpClient.DefaultRequestHeaders.Authorization =
-            new AuthenticationHeaderValue("Bearer", ServerConnectionData.Token);
+            new AuthenticationHeaderValue("Bearer", ConnectionManager.Token);
 
         protected string GetUri(string controller, string routeVerb) =>
-            string.Format($"{ServerConnectionData.Url}/api/{controller}/{routeVerb}");
+            string.Format($"{ConnectionManager.Url}/api/{controller}/{routeVerb}");
 
         protected string GetUri(string controller, string routeVerb, int id) =>
-            string.Format($"{ServerConnectionData.Url}/api/{controller}/{routeVerb}/{id}");
+            string.Format($"{ConnectionManager.Url}/api/{controller}/{routeVerb}/{id}");
 
         protected string GetUri(string controller, string routeVerb, string login) =>
-            string.Format($"{ServerConnectionData.Url}/api/{controller}/{routeVerb}/{login}");
+            string.Format($"{ConnectionManager.Url}/api/{controller}/{routeVerb}/{login}");
 
         protected string GetUri(string controller, string routeVerb, string login, string password) =>
-            string.Format($"{ServerConnectionData.Url}/api/{controller}/{routeVerb}/{login}&{password}");
+            string.Format($"{ConnectionManager.Url}/api/{controller}/{routeVerb}/{login}&{password}");
 
         protected StringContent CreateStringContent(T input) {
             string body = JsonConvert.SerializeObject(input);

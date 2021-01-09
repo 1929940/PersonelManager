@@ -1,4 +1,6 @@
-﻿using CommunicationLibrary.Core.Models;
+﻿using CommunicationAndCommonsLibrary.Business.Logic;
+using CommunicationAndCommonsLibrary.Business.Models;
+using CommunicationAndCommonsLibrary.Core.Models;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,7 +14,7 @@ namespace Desktop.UI.Core.Helpers {
 
         //TOOD: Needs to be rewritten for window and page
         public static void Init(Window form, bool editMode, BaseEntity entity) {
-            if (!editMode || !AuthorizationHelper.Authorize(Enums.Roles.Kierownik))
+            if (!editMode || !ConnectionManager.IsUserAuthorized(Roles.Kierownik))
                 HideGroup(form);
             else {
                 HandleCreatedLabel(form, entity);

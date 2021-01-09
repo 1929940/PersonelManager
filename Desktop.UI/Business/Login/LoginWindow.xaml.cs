@@ -1,7 +1,7 @@
-﻿using CommunicationLibrary.Business.Models;
-using CommunicationLibrary.Business.Requests;
-using CommunicationLibrary.Core;
-using CommunicationLibrary.Core.Logic;
+﻿using CommunicationAndCommonsLibrary.Business.Models;
+using CommunicationAndCommonsLibrary.Business.Requests;
+using CommunicationAndCommonsLibrary.Core;
+using CommunicationAndCommonsLibrary.Core.Logic;
 using PersonalManagerDesktop;
 using System;
 using System.Collections.Generic;
@@ -25,7 +25,7 @@ namespace Desktop.UI.Business.Login {
             InitializeComponent();
 
             //This needs local memory, perhaps to a file? or xml file? 
-            ServerConnectionData.Url = @"https://localhost:44345";
+            //ServerConnectionData.Url = @"https://localhost:44345";
 
 
             LoginFrame.Navigate(new LoginPage(LoginFrame, string.Empty));

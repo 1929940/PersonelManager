@@ -1,15 +1,13 @@
-﻿using CommunicationLibrary.Business.Models;
-using CommunicationLibrary.Core.Logic;
-using CommunicationLibrary.Core.Resx;
+﻿using CommunicationAndCommonsLibrary.Business.Models;
+using CommunicationAndCommonsLibrary.Core.Logic;
+using CommunicationAndCommonsLibrary.Core.Requests;
+using CommunicationAndCommonsLibrary.Core.Resx;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace CommunicationLibrary.Business.Requests {
+namespace CommunicationAndCommonsLibrary.Business.Requests {
     public class UserRequestHandler : BaseRequestHandler<User> {
 
         public UserRequestHandler() {
@@ -21,10 +19,9 @@ namespace CommunicationLibrary.Business.Requests {
         public AuthenticationReponse Login(string login, string password) {
 
             AuthenticationReponse output = null;
-            var input = new AuthenticationRequest() { Login = login, Password = password };
+            var input = new AuthenticationRequest() { Login = login, Password = PasswordManager.Encrypt(password) };
 
             using (var httpClient = new HttpClient()) {
-
                 string requestUri = GetUri(_controllerName, RouteVerbs.LOGIN);
 
                 using (var response = httpClient.PostAsync(requestUri, CreateStringContent(input)).Result) {
@@ -41,10 +38,9 @@ namespace CommunicationLibrary.Business.Requests {
         public async Task<AuthenticationReponse> LoginAsync(string login, string password) {
 
             AuthenticationReponse output = null;
-            var input = new AuthenticationRequest() { Login = login, Password = password };
+            var input = new AuthenticationRequest() { Login = login, Password = PasswordManager.Encrypt(password) };
 
             using (var httpClient = new HttpClient()) {
-
                 string requestUri = GetUri(_controllerName, RouteVerbs.LOGIN);
 
                 using (var response = await httpClient.PostAsync(requestUri, CreateStringContent(input))) {

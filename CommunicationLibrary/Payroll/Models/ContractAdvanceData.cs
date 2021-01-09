@@ -1,4 +1,4 @@
-﻿namespace CommunicationLibrary.Payroll.Models {
+﻿namespace CommunicationAndCommonsLibrary.Payroll.Models {
     public class ContractAdvanceData {
         public decimal Wage { get; set; }
         public decimal ContractCharges { get; set; }

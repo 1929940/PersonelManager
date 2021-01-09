@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CommunicationLibrary.Core.Models {
+namespace CommunicationAndCommonsLibrary.Core.Models {
     public class DocumentEntity : BaseEntity{
         public string Title { get; set; }
         public DateTime ValidFrom { get; set; }

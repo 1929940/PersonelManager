@@ -1,7 +1,7 @@
-﻿using CommunicationLibrary.HR.Models;
+﻿using CommunicationAndCommonsLibrary.HR.Models;
 using System.Collections.Generic;
 
-namespace CommunicationLibrary.HR.Comparers {
+namespace CommunicationAndCommonsLibrary.HR.Comparers {
     public class LocationComparer : IEqualityComparer<Location> {
         public bool Equals(Location x, Location y) =>
             x.Name == y.Name &&

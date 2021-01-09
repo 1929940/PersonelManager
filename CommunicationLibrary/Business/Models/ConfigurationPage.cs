@@ -1,6 +1,6 @@
-﻿using CommunicationLibrary.Core.Models;
+﻿using CommunicationAndCommonsLibrary.Core.Models;
 
-namespace CommunicationLibrary.Business.Models {
+namespace CommunicationAndCommonsLibrary.Business.Models {
     public class ConfigurationPage : BaseEntity {
         public int BillingMonthStart { get; set; }
         public int BillingMonthEnd { get; set; }

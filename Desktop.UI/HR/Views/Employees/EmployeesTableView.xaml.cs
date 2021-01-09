@@ -1,5 +1,5 @@
-﻿using CommunicationLibrary.HR.Models;
-using CommunicationLibrary.HR.Requests;
+﻿using CommunicationAndCommonsLibrary.HR.Models;
+using CommunicationAndCommonsLibrary.HR.Requests;
 using Desktop.UI.Core.Helpers;
 using System;
 using System.Collections.Generic;

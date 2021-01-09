@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CommunicationLibrary.Payroll.Models {
+namespace CommunicationAndCommonsLibrary.Payroll.Models {
     public class ContractSimplified {
         public int Id { get; set; }
         public string Title { get; set; }

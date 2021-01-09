@@ -1,7 +1,6 @@
-﻿using CommunicationLibrary.Business.Models;
-using CommunicationLibrary.Business.Requests;
+﻿using CommunicationAndCommonsLibrary.Business.Models;
+using CommunicationAndCommonsLibrary.Business.Requests;
 using Desktop.UI.Core.Helpers;
-using Desktop.UI.Core.Resources;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -65,7 +64,7 @@ namespace Desktop.UI.Business.Users {
                 this.Close();
         }
 
-        private string[] GetRoles() => Enum.GetNames(typeof(Enums.Roles));
+        private string[] GetRoles() => Enum.GetNames(typeof(Roles));
 
         private void InitRoleComboBox() {
             RoleComboBox.ItemsSource = GetRoles();

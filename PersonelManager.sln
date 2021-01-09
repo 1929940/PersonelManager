@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Desktop.UI", "Desktop.UI\Desktop.UI.csproj", "{91E9D3DC-10E4-43DF-9536-795C727C1BDB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommunicationLibrary", "CommunicationLibrary\CommunicationLibrary.csproj", "{39BAEF4A-B8E9-4286-9AF7-4C232C4E22BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommunicationAndCommonsLibrary", "CommunicationLibrary\CommunicationAndCommonsLibrary.csproj", "{39BAEF4A-B8E9-4286-9AF7-4C232C4E22BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommunicationLibrary.Test", "CommunicationLibrary.Test\CommunicationLibrary.Test.csproj", "{3CCDBE53-DEB3-4540-9284-DFCC678293CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommunicationAndCommonsLibrary.Test", "CommunicationLibrary.Test\CommunicationAndCommonsLibrary.Test.csproj", "{3CCDBE53-DEB3-4540-9284-DFCC678293CD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{44885314-7D75-45D6-9DE3-B39D49F9FBF0}"
 	ProjectSection(SolutionItems) = preProject

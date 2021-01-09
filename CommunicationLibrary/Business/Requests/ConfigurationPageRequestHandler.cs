@@ -1,9 +1,9 @@
-﻿using CommunicationLibrary.Business.Models;
-using CommunicationLibrary.Core.Logic;
+﻿using CommunicationAndCommonsLibrary.Business.Models;
+using CommunicationAndCommonsLibrary.Core.Requests;
 using System;
 using System.Threading.Tasks;
 
-namespace CommunicationLibrary.Business.Requests {
+namespace CommunicationAndCommonsLibrary.Business.Requests {
     public class ConfigurationPageRequestHandler : BaseRequestHandler<ConfigurationPage> {
 
         public ConfigurationPageRequestHandler() {

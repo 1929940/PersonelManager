@@ -1,9 +1,9 @@
-﻿using CommunicationLibrary.Payroll.Models;
-using CommunicationLibrary.Payroll.Requests;
-using Desktop.UI.Core.Bufor;
+﻿using CommunicationAndCommonsLibrary.Core.Bufor;
+using CommunicationAndCommonsLibrary.Payroll.Models;
+using CommunicationAndCommonsLibrary.Payroll.Requests;
 using System.Threading.Tasks;
 
-namespace Desktop.UI.Payroll.Helpers {
+namespace Desktop.UI.Payroll.Bufor {
     public class ContractBufor {
         public Bufor<Advance> AdvancesBufor { get; set; }
 

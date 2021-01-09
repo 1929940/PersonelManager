@@ -1,7 +1,7 @@
-﻿using CommunicationLibrary.Business.Models;
+﻿using CommunicationAndCommonsLibrary.Business.Models;
 using System.Collections.Generic;
 
-namespace CommunicationLibrary.Business.Comparers {
+namespace CommunicationAndCommonsLibrary.Business.Comparers {
     public class UserComparer : IEqualityComparer<User> {
         public bool Equals(User x, User y) =>
             x.FirstName == y.FirstName &&

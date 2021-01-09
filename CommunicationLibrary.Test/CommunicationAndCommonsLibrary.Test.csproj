@@ -85,9 +85,9 @@
     <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CommunicationLibrary\CommunicationLibrary.csproj">
+    <ProjectReference Include="..\CommunicationLibrary\CommunicationAndCommonsLibrary.csproj">
       <Project>{39baef4a-b8e9-4286-9af7-4c232c4e22be}</Project>
-      <Name>CommunicationLibrary</Name>
+      <Name>CommunicationAndCommonsLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

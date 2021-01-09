@@ -1,9 +1,9 @@
-﻿using CommunicationLibrary.HR.Comparers;
-using CommunicationLibrary.HR.Models;
-using CommunicationLibrary.HR.Requests;
-using CommunicationLibrary.Test.Core;
+﻿using CommunicationAndCommonsLibrary.HR.Comparers;
+using CommunicationAndCommonsLibrary.HR.Models;
+using CommunicationAndCommonsLibrary.HR.Requests;
+using CommunicationAndCommonsLibrary.Test.Core;
 
-namespace CommunicationLibrary.Test.HR {
+namespace CommunicationAndCommonsLibrary.Test.HR {
     //TODO: Change RequestHandler names to singular form, make sure everything is singular besides controller
     public class ForemanTest : BaseTest<Foreman> {
 

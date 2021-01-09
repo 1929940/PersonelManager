@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CommunicationLibrary.Core.Models {
+namespace CommunicationAndCommonsLibrary.Core.Models {
     public class BaseEntity {
         public int Id { get; set; }
         public DateTime CreatedOn { get; set; }

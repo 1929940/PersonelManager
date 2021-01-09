@@ -1,9 +1,11 @@
-﻿using CommunicationLibrary.Business.Models;
-using CommunicationLibrary.Business.Requests;
-using CommunicationLibrary.Payroll.Models;
-using CommunicationLibrary.Payroll.Requests;
+﻿using CommunicationAndCommonsLibrary.Business.Logic;
+using CommunicationAndCommonsLibrary.Business.Models;
+using CommunicationAndCommonsLibrary.Business.Requests;
+using CommunicationAndCommonsLibrary.Core.Logic;
+using CommunicationAndCommonsLibrary.Payroll.Models;
+using CommunicationAndCommonsLibrary.Payroll.Requests;
 using Desktop.UI.Core.Helpers;
-using Desktop.UI.Payroll.Helpers;
+using Desktop.UI.Payroll.Bufor;
 using Desktop.UI.Payroll.Views.Advances;
 using System;
 using System.Collections.Generic;
@@ -191,7 +193,7 @@ namespace Desktop.UI.Payroll.Views.Contracts {
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
-            if (Contract.IsRealized && !AuthorizationHelper.Authorize(Enums.Roles.Administrator)) {
+            if (Contract.IsRealized && !ConnectionManager.IsUserAuthorized(Roles.Administrator)) {
                 ControlsHelper.DisableControls(this, new string[] { "ShowAdvances", "CloseButton" });
             }
         }

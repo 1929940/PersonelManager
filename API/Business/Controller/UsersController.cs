@@ -58,7 +58,7 @@ namespace API.Business.Controller {
             user.Hash = password;
             _context.Entry(user).Property(x => x.Hash).IsModified = true;
             await _context.SaveChangesAsync();
-            await PasswordResetHandler.Sent(_appSettings, user.Email, password);
+            await PasswordResetHandler.SentEmail(_appSettings, user.Email, password);
 
             return Created(string.Empty, UserManager.CreateDTO(user));
         }
@@ -140,10 +140,10 @@ namespace API.Business.Controller {
                 return NoContent();
 
             string password = PasswordResetHandler.GeneratePassword(4);
-            await PasswordResetHandler.Sent(_appSettings, user.Email, password);
+            await PasswordResetHandler.SentEmail(_appSettings, user.Email, password);
 
             user.RequestedPasswordReset = true;
-            user.Hash = password;
+            user.Hash = PasswordResetHandler.EncryptPassword(password);
             _context.Users.Attach(user);
             _context.Entry(user).Property(x => x.RequestedPasswordReset).IsModified = true;
             _context.Entry(user).Property(x => x.Hash).IsModified = true;

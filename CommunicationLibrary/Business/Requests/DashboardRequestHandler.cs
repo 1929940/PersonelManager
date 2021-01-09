@@ -1,5 +1,6 @@
-﻿using CommunicationLibrary.Business.Models;
-using CommunicationLibrary.Core;
+﻿using CommunicationAndCommonsLibrary.Business.Logic;
+using CommunicationAndCommonsLibrary.Business.Models;
+using CommunicationAndCommonsLibrary.Core;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
-namespace CommunicationLibrary.Business.Requests {
+namespace CommunicationAndCommonsLibrary.Business.Requests {
     public class DashboardRequestHandler {
 
         public List<Dashboard> GetDashboard(DateTime from, DateTime to) {
@@ -15,7 +16,7 @@ namespace CommunicationLibrary.Business.Requests {
             using (var httpClient = new HttpClient()) {
                 SetToken(httpClient);
 
-                string requestUri = string.Format($"{ServerConnectionData.Url}/api/Dashboard/GetDashboard?from={from.ToShortDateString()}&to={to.ToShortDateString()}");
+                string requestUri = string.Format($"{ConnectionManager.Url}/api/Dashboard/GetDashboard?from={from.ToShortDateString()}&to={to.ToShortDateString()}");
 
                 using (var response = httpClient.GetAsync(requestUri).Result) {
                     string apiResponse = response.Content.ReadAsStringAsync().Result;
@@ -31,7 +32,7 @@ namespace CommunicationLibrary.Business.Requests {
             using (var httpClient = new HttpClient()) {
                 SetToken(httpClient);
 
-                string requestUri = string.Format($"{ServerConnectionData.Url}/api/Dashboard/GetDashboard?from={from.ToShortDateString()}&to={to.ToShortDateString()}");
+                string requestUri = string.Format($"{ConnectionManager.Url}/api/Dashboard/GetDashboard?from={from.ToShortDateString()}&to={to.ToShortDateString()}");
 
                 using (var response = await httpClient.GetAsync(requestUri)) {
                     string apiResponse = await response.Content.ReadAsStringAsync();
@@ -44,6 +45,6 @@ namespace CommunicationLibrary.Business.Requests {
 
         private void SetToken(HttpClient httpClient) =>
             httpClient.DefaultRequestHeaders.Authorization =
-            new AuthenticationHeaderValue("Bearer", ServerConnectionData.Token);
+            new AuthenticationHeaderValue("Bearer", ConnectionManager.Token);
     }
 }

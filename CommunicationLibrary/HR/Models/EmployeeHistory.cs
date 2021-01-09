@@ -1,6 +1,6 @@
-﻿using CommunicationLibrary.Core.Models;
+﻿using CommunicationAndCommonsLibrary.Core.Models;
 
-namespace CommunicationLibrary.HR.Models {
+namespace CommunicationAndCommonsLibrary.HR.Models {
     public class EmployeeHistory : AddressEntity {
         public string LastName { get; set; }
         public string Profession { get; set; }

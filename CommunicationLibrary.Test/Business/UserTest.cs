@@ -1,11 +1,11 @@
-﻿using CommunicationLibrary.Business.Comparers;
-using CommunicationLibrary.Business.Models;
-using CommunicationLibrary.Business.Requests;
-using CommunicationLibrary.Test.Core;
+﻿using CommunicationAndCommonsLibrary.Business.Comparers;
+using CommunicationAndCommonsLibrary.Business.Models;
+using CommunicationAndCommonsLibrary.Business.Requests;
+using CommunicationAndCommonsLibrary.Test.Core;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace CommunicationLibrary.Test.Business {
+namespace CommunicationAndCommonsLibrary.Test.Business {
     public class UserTest : BaseTest<User> {
         private UserRequestHandler _userRequestHandler;
 

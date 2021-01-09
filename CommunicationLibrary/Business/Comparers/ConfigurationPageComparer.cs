@@ -1,7 +1,7 @@
-﻿using CommunicationLibrary.Business.Models;
+﻿using CommunicationAndCommonsLibrary.Business.Models;
 using System.Collections.Generic;
 
-namespace CommunicationLibrary.Business.Comparers {
+namespace CommunicationAndCommonsLibrary.Business.Comparers {
     public class ConfigurationPageComparer : IEqualityComparer<ConfigurationPage> {
         public bool Equals(ConfigurationPage x, ConfigurationPage y) =>
             x.BillingMonthEnd == y.BillingMonthStart &&

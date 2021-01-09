@@ -1,12 +1,12 @@
-﻿using CommunicationLibrary.Payroll.Comparers;
-using CommunicationLibrary.Payroll.Models;
-using CommunicationLibrary.Payroll.Requests;
-using CommunicationLibrary.Test.Core;
+﻿using CommunicationAndCommonsLibrary.Payroll.Comparers;
+using CommunicationAndCommonsLibrary.Payroll.Models;
+using CommunicationAndCommonsLibrary.Payroll.Requests;
+using CommunicationAndCommonsLibrary.Test.Core;
 using System;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace CommunicationLibrary.Test.Payroll {
+namespace CommunicationAndCommonsLibrary.Test.Payroll {
     public class AdvancesTest : BaseTest<Advance>{
 
         private readonly int employeeId;

@@ -3,6 +3,8 @@ using MailKit.Net.Smtp;
 using MimeKit;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace API.Business.Logic {
@@ -19,8 +21,14 @@ namespace API.Business.Logic {
             return password;
         }
 
+        public static string EncryptPassword(string input) {
+            using (var sha256 = new SHA256Managed()) {
+                return BitConverter.ToString(sha256.ComputeHash(Encoding.UTF8.GetBytes(input))).Replace("-", string.Empty);
+            }
+        }
+
         //TODO: Try catch, return bool, if false dont do anything?
-        public static async Task Sent(AppSettings appSettings, string emailTo, string newPassword) {
+        public static async Task SentEmail(AppSettings appSettings, string emailTo, string newPassword) {
             if (!IsValidEmailAddress(emailTo))
                 return;
 

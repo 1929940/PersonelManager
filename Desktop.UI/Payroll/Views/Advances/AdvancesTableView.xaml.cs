@@ -1,5 +1,7 @@
-﻿using CommunicationLibrary.Payroll.Models;
-using CommunicationLibrary.Payroll.Requests;
+﻿using CommunicationAndCommonsLibrary.Business.Logic;
+using CommunicationAndCommonsLibrary.Business.Models;
+using CommunicationAndCommonsLibrary.Payroll.Models;
+using CommunicationAndCommonsLibrary.Payroll.Requests;
 using Desktop.UI.Core.Helpers;
 using System;
 using System.Collections.Generic;
@@ -62,7 +64,7 @@ namespace Desktop.UI.Payroll.Views.Advances {
             if (advance == null)
                 return;
 
-            if (advance.PaidOn == null && !AuthorizationHelper.Authorize(Enums.Roles.Administrator)) {
+            if (advance.PaidOn == null && !ConnectionManager.IsUserAuthorized(Roles.Administrator)) {
                 MessageBox.Show("Nie można usuwać wypłaconych zaliczek", "Niedozwolona akcja", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }

@@ -1,4 +1,5 @@
-﻿using CommunicationLibrary.Business.Requests;
+﻿using CommunicationAndCommonsLibrary.Business.Requests;
+using CommunicationAndCommonsLibrary.Core.Logic;
 using Desktop.UI.Core.Helpers;
 using System;
 using System.Threading.Tasks;
@@ -36,7 +37,7 @@ namespace Desktop.UI.Business.Login {
                 MessageBox.Show("Hasło zostało wysłane. Sprawdź skrzynke odbiorczą.", "Sukces", MessageBoxButton.OK, MessageBoxImage.Information);
                 _frame.Navigate(new LoginPage(_frame, login));
             } catch (Exception ex) {
-                string exceptionMsg = ExceptionHelper.GenerateExceptionMsg(ex);
+                string exceptionMsg = ExceptionHelper.GetMessage(ex);
                 MessageBox.Show(exceptionMsg, "Uwaga", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

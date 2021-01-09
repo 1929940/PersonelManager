@@ -1,10 +1,7 @@
-﻿using CommunicationLibrary.HR.Models;
-using CommunicationLibrary.HR.Requests;
-using Desktop.UI.Core.Bufor;
+﻿using CommunicationAndCommonsLibrary.HR.Models;
+using CommunicationAndCommonsLibrary.HR.Requests;
+using CommunicationAndCommonsLibrary.Core.Bufor;
 using Desktop.UI.Core.Helpers;
-using Desktop.UI.HR.Views.Employees;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;

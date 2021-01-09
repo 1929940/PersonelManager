@@ -1,4 +1,4 @@
-﻿namespace CommunicationLibrary.HR.Models {
+﻿namespace CommunicationAndCommonsLibrary.HR.Models {
     public class EmployeeSimplified {
         public int Id { get; set; }
         public string FirstName { get; set; }

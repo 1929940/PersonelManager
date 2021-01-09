@@ -1,12 +1,12 @@
-﻿using CommunicationLibrary.Core.Logic;
-using CommunicationLibrary.Core.Resx;
-using CommunicationLibrary.Payroll.Models;
+﻿using CommunicationAndCommonsLibrary.Core.Requests;
+using CommunicationAndCommonsLibrary.Core.Resx;
+using CommunicationAndCommonsLibrary.Payroll.Models;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace CommunicationLibrary.Payroll.Requests {
+namespace CommunicationAndCommonsLibrary.Payroll.Requests {
     public class ContractRequestHandler : BaseRequestHandler<Contract>{
 
         public ContractRequestHandler() {

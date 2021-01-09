@@ -1,4 +1,4 @@
-﻿namespace CommunicationLibrary.Core.Models {
+﻿namespace CommunicationAndCommonsLibrary.Core.Models {
     public class AddressEntity : BaseEntity{
         public string Country { get; set; }
         public string Region { get; set; }

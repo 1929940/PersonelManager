@@ -1,15 +1,12 @@
-﻿using CommunicationLibrary.Core.Logic;
-using CommunicationLibrary.Core.Models;
-using CommunicationLibrary.HR.Models;
-using CommunicationLibrary.Payroll.Models;
-using System;
+﻿using CommunicationAndCommonsLibrary.Core.Models;
+using CommunicationAndCommonsLibrary.Core.Requests;
+using CommunicationAndCommonsLibrary.HR.Models;
+using CommunicationAndCommonsLibrary.Payroll.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using static Desktop.UI.Core.Helpers.Enums;
 
-namespace Desktop.UI.Core.Bufor {
+namespace CommunicationAndCommonsLibrary.Core.Bufor {
     public class TransactionBufor<T> where T : BaseEntity {
 
         private List<BuforObject<T>> BuforData { get; set; }

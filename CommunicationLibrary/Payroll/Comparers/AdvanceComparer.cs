@@ -1,7 +1,7 @@
-﻿using CommunicationLibrary.Payroll.Models;
+﻿using CommunicationAndCommonsLibrary.Payroll.Models;
 using System.Collections.Generic;
 
-namespace CommunicationLibrary.Payroll.Comparers {
+namespace CommunicationAndCommonsLibrary.Payroll.Comparers {
     public class AdvanceComparer : IEqualityComparer<Advance> {
         public bool Equals(Advance x, Advance y) =>
             x.Contract?.Id == y.Contract?.Id &&

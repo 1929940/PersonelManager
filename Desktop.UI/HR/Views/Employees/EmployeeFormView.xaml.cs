@@ -1,7 +1,7 @@
-﻿using CommunicationLibrary.HR.Models;
-using CommunicationLibrary.HR.Requests;
+﻿using CommunicationAndCommonsLibrary.HR.Bufor;
+using CommunicationAndCommonsLibrary.HR.Models;
+using CommunicationAndCommonsLibrary.HR.Requests;
 using Desktop.UI.Core.Helpers;
-using Desktop.UI.HR.Helper;
 using Desktop.UI.HR.Views.Certificates;
 using Desktop.UI.HR.Views.Employees.Tabs;
 using Desktop.UI.HR.Views.MedicalCheckups;

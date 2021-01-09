@@ -1,9 +1,9 @@
-﻿using CommunicationLibrary.Core.Models;
+﻿using CommunicationAndCommonsLibrary.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CommunicationLibrary.HR.Models {
+namespace CommunicationAndCommonsLibrary.HR.Models {
     public class Foreman : BaseEntity{
         public string FirstName { get; set; }
         public string LastName { get; set; }

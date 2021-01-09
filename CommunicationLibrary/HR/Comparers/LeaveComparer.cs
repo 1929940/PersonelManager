@@ -1,7 +1,7 @@
-﻿using CommunicationLibrary.HR.Models;
+﻿using CommunicationAndCommonsLibrary.HR.Models;
 using System.Collections.Generic;
 
-namespace CommunicationLibrary.HR.Comparers {
+namespace CommunicationAndCommonsLibrary.HR.Comparers {
     public class LeaveComparer : IEqualityComparer<Leave> {
         public bool Equals(Leave x, Leave y) =>
             x.Employee?.Id == y.Employee?.Id &&

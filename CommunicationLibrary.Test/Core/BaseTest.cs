@@ -1,12 +1,12 @@
-﻿using CommunicationLibrary.Business.Requests;
-using CommunicationLibrary.Core;
-using CommunicationLibrary.Core.Logic;
-using CommunicationLibrary.Core.Models;
+﻿using CommunicationAndCommonsLibrary.Business.Logic;
+using CommunicationAndCommonsLibrary.Business.Requests;
+using CommunicationAndCommonsLibrary.Core.Models;
+using CommunicationAndCommonsLibrary.Core.Requests;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace CommunicationLibrary.Test.Core {
+namespace CommunicationAndCommonsLibrary.Test.Core {
     public abstract class BaseTest<T> where T : BaseEntity {
         protected BaseRequestHandler<T> _requestHandler;
         protected T _baseRow;
@@ -14,11 +14,12 @@ namespace CommunicationLibrary.Test.Core {
         protected int _id;
         protected IEqualityComparer<T> _comparer;
         public BaseTest() {
-            ServerConnectionData.Url = @"https://localhost:44345";
+            ConnectionManager.Url = @"https://localhost:44345";
 
-            if (ServerConnectionData.Token == null) {
+            //TODO: Need a test user
+            if (ConnectionManager.Token == null) {
                 var login = new UserRequestHandler().Login("Jan.Kowalski@PersonelManager.pl", "Macko");
-                ServerConnectionData.Token = login.Token;
+                ConnectionManager.Token = login.Token;
             }
         }
 

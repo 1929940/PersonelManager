@@ -12,10 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using CommunicationLibrary.Business.Models;
-using CommunicationLibrary.Core;
-using CommunicationLibrary.Core.Logic;
-using CommunicationLibrary.Business.Requests;
+using CommunicationAndCommonsLibrary.Business.Models;
+using CommunicationAndCommonsLibrary.Core;
+using CommunicationAndCommonsLibrary.Core.Logic;
+using CommunicationAndCommonsLibrary.Business.Requests;
 using Desktop.UI.Business.Login;
 using Desktop.UI.Business.Users;
 using System.Globalization;
@@ -32,6 +32,7 @@ using Desktop.UI.Payroll.Views.Contracts;
 using Desktop.UI.Payroll.Views.Advances;
 using Desktop.UI.Core.Validators;
 using Desktop.UI.Business.Dashboard;
+using CommunicationAndCommonsLibrary.Business.Logic;
 
 namespace PersonalManagerDesktop {
     /// <summary>
@@ -103,7 +104,7 @@ namespace PersonalManagerDesktop {
         }
 
         private void AdminTreeViewItem_Loaded(object sender, RoutedEventArgs e) {
-            AdminTreeViewItem.Visibility = (AuthorizationHelper.Authorize(Enums.Roles.Kierownik)) ? Visibility.Visible : Visibility.Collapsed;
+            AdminTreeViewItem.Visibility = ConnectionManager.IsUserAuthorized(Roles.Kierownik) ? Visibility.Visible : Visibility.Collapsed;
             ContentFrame.Navigate(new DashboardTableView());
         }
     }

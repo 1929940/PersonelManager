@@ -1,13 +1,13 @@
-﻿using CommunicationLibrary.HR.Comparers;
-using CommunicationLibrary.HR.Models;
-using CommunicationLibrary.HR.Requests;
-using CommunicationLibrary.Test.Core;
+﻿using CommunicationAndCommonsLibrary.HR.Comparers;
+using CommunicationAndCommonsLibrary.HR.Models;
+using CommunicationAndCommonsLibrary.HR.Requests;
+using CommunicationAndCommonsLibrary.Test.Core;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace CommunicationLibrary.Test.HR {
+namespace CommunicationAndCommonsLibrary.Test.HR {
     public class EmployeeTest : BaseTest<Employee> {
         private readonly EmployeeRequestHandler _employeesRequestHandler;
 

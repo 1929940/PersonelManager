@@ -1,10 +1,10 @@
-﻿using CommunicationLibrary.Core.Logic;
-using CommunicationLibrary.Core.Resx;
-using CommunicationLibrary.HR.Models;
+﻿using CommunicationAndCommonsLibrary.Core.Requests;
+using CommunicationAndCommonsLibrary.Core.Resx;
+using CommunicationAndCommonsLibrary.HR.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace CommunicationLibrary.HR.Requests {
+namespace CommunicationAndCommonsLibrary.HR.Requests {
     public class ForemanRequestHandler : BaseRequestHandler<Foreman> {
 
         public ForemanRequestHandler() {

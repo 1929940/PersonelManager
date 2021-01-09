@@ -1,6 +1,6 @@
-﻿using CommunicationLibrary.Core.Models;
+﻿using CommunicationAndCommonsLibrary.Core.Models;
 
-namespace CommunicationLibrary.Business.Models {
+namespace CommunicationAndCommonsLibrary.Business.Models {
     public class User : BaseEntity {
         public string FirstName { get; set; }
         public string LastName { get; set; }

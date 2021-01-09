@@ -1,8 +1,8 @@
-﻿using CommunicationLibrary.Core.Models;
-using CommunicationLibrary.HR.Models;
+﻿using CommunicationAndCommonsLibrary.Core.Models;
+using CommunicationAndCommonsLibrary.HR.Models;
 using System;
 
-namespace CommunicationLibrary.Payroll.Models {
+namespace CommunicationAndCommonsLibrary.Payroll.Models {
     public class Advance : BaseEntity{
         public ContractSimplified Contract { get; set; }
         public EmployeeSimplified Employee { get; set; }

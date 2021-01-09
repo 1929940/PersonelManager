@@ -1,9 +1,9 @@
-﻿using CommunicationLibrary.Core.Models;
-using CommunicationLibrary.HR.Models;
+﻿using CommunicationAndCommonsLibrary.Core.Models;
+using CommunicationAndCommonsLibrary.HR.Models;
 using System;
 using System.Collections.Generic;
 
-namespace CommunicationLibrary.Payroll.Models {
+namespace CommunicationAndCommonsLibrary.Payroll.Models {
     public class Contract : DocumentEntity {
         public decimal TotalValue { get; set; }
         public decimal NettoValue { get; set; }

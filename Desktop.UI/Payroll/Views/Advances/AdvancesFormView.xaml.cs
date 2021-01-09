@@ -1,6 +1,8 @@
-﻿using CommunicationLibrary.Payroll.Models;
-using CommunicationLibrary.Payroll.Requests;
-using Desktop.UI.Core.Bufor;
+﻿using CommunicationAndCommonsLibrary.Business.Logic;
+using CommunicationAndCommonsLibrary.Business.Models;
+using CommunicationAndCommonsLibrary.Core.Bufor;
+using CommunicationAndCommonsLibrary.Payroll.Models;
+using CommunicationAndCommonsLibrary.Payroll.Requests;
 using Desktop.UI.Core.Helpers;
 using System;
 using System.Collections.Generic;
@@ -149,7 +151,7 @@ namespace Desktop.UI.Payroll.Views.Advances {
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
-            if (IsReadOnly && !AuthorizationHelper.Authorize(Enums.Roles.Administrator)) {
+            if (IsReadOnly && !ConnectionManager.IsUserAuthorized(Roles.Administrator)) {
                 ControlsHelper.DisableControls(this, new string[] { "CloseButton" });
             }
             CalculateAdvanceLimit();

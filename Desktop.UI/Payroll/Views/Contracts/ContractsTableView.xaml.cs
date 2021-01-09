@@ -1,5 +1,7 @@
-﻿using CommunicationLibrary.Payroll.Models;
-using CommunicationLibrary.Payroll.Requests;
+﻿using CommunicationAndCommonsLibrary.Business.Logic;
+using CommunicationAndCommonsLibrary.Business.Models;
+using CommunicationAndCommonsLibrary.Payroll.Models;
+using CommunicationAndCommonsLibrary.Payroll.Requests;
 using Desktop.UI.Core.Helpers;
 using System;
 using System.Collections.Generic;
@@ -83,7 +85,7 @@ namespace Desktop.UI.Payroll.Views.Contracts {
             if (contract == null)
                 return;
 
-            if (contract.IsRealized && !AuthorizationHelper.Authorize(Enums.Roles.Administrator)) {
+            if (contract.IsRealized && !ConnectionManager.IsUserAuthorized(Roles.Administrator)) {
                 MessageBox.Show("Nie można usuwać zrealizowanych umów.", "Niedozwolona akcja", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             } 

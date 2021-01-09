@@ -1,5 +1,5 @@
-﻿using CommunicationLibrary.Business.Requests;
-using CommunicationLibrary.Core.Logic;
+﻿using CommunicationAndCommonsLibrary.Business.Requests;
+using CommunicationAndCommonsLibrary.Core.Logic;
 using Desktop.UI.Core.Helpers;
 using System;
 using System.Threading.Tasks;
@@ -31,14 +31,12 @@ namespace Desktop.UI.Business.Login {
                 if (password != confirmPassword) {
                     MessageBox.Show("Podane hasła muszą być identyczne.", "Uwaga", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 } else {
-                    string hashedPassword = PasswordManager.EncryptPassword(password);
-
-                    await _handler.UpdatePasswordAsync(login, hashedPassword);
+                    await _handler.UpdatePasswordAsync(login, PasswordManager.Encrypt(password));
                     MessageBox.Show("Hasło zostało zaktualizowane.", "Sukces", MessageBoxButton.OK, MessageBoxImage.Information);
                     LoginWindow.StartMainWindow();
                 }
             } catch (Exception ex) {
-                string exceptionMsg = ExceptionHelper.GenerateExceptionMsg(ex);
+                string exceptionMsg = ExceptionHelper.GetMessage(ex);
                 MessageBox.Show(exceptionMsg, "Uwaga", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

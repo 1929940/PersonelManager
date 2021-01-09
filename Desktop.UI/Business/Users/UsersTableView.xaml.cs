@@ -1,5 +1,5 @@
-﻿using CommunicationLibrary.Business.Models;
-using CommunicationLibrary.Business.Requests;
+﻿using CommunicationAndCommonsLibrary.Business.Models;
+using CommunicationAndCommonsLibrary.Business.Requests;
 using Desktop.UI.Core;
 using Desktop.UI.Core.Helpers;
 using System;

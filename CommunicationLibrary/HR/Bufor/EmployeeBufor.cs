@@ -1,9 +1,9 @@
-﻿using CommunicationLibrary.HR.Models;
-using CommunicationLibrary.HR.Requests;
-using System.Threading.Tasks;
-using Desktop.UI.Core.Bufor;
+﻿using System.Threading.Tasks;
+using CommunicationAndCommonsLibrary.HR.Models;
+using CommunicationAndCommonsLibrary.HR.Requests;
+using CommunicationAndCommonsLibrary.Core.Bufor;
 
-namespace Desktop.UI.HR.Helper {
+namespace CommunicationAndCommonsLibrary.HR.Bufor {
     public class EmployeeBufor {
         public Bufor<Leave> LeaveBufor { get; set; }
         public Bufor<PersonelDocument> MedicalCheckupBufor { get; set; }
