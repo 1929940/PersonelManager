@@ -14,62 +14,6 @@
     <Page.Resources>
         <converters:ToPLNConverter x:Key="ToPLNConverter"/>
         <converters:ToHourConverter x:Key="ToHourConverter"/>
-        <Style TargetType="Button">
-            <Setter Property="Height" Value="25"/>
-            <Setter Property="Width" Value="100"/>
-            <Setter Property="Margin" Value="5"/>
-            <Style.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="3" />
-                </Style>
-            </Style.Resources>
-        </Style>
-        
-        <Style TargetType="iconPacks:PackIconMaterial">
-            <Setter Property="Margin" Value="0,0,3,0"/>
-        </Style>
-        
-        <Style TargetType="{x:Type DataGridCell}">
-            <Setter Property="Height" Value="25"/>
-
-            <Style.Triggers>
-                <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="FontWeight" Value="Bold"/>
-                    <Setter Property="BorderThickness" Value="0"/>
-                    <Setter Property="BorderBrush" Value="Gainsboro"/>
-                    <Setter Property="Foreground" Value="Black"/>
-                    <Setter Property="Background" Value="Gainsboro"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style TargetType="{x:Type TextBox}">
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="Width" Value="150"/>
-            <Setter Property="Height" Value="25"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Style.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="3" />
-                </Style>
-            </Style.Resources>
-        </Style>
-
-        <Style TargetType="{x:Type TextBlock}" x:Key="DataGridCell_TextStyle">
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Margin" Value="5,0"/>
-        </Style>
-
-        <Style TargetType="{x:Type TextBlock}" x:Key="DataGridCellValue_TextStyle">
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalAlignment" Value="Right"/>
-            <Setter Property="Margin" Value="5,0"/>
-        </Style>
-
-        <Style TargetType="{x:Type CheckBox}" x:Key="DataGridCell_CheckBoxStyle">
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-        </Style>
     </Page.Resources>
 
     <Grid>
@@ -135,7 +79,8 @@
                   BorderThickness="0" GridLinesVisibility="Horizontal" RowHeight="25"
                   SelectionMode="Single" SelectionUnit="FullRow"
                   MouseDoubleClick="DataGrid_MouseDoubleClick"
-                  AutoGenerateColumns="False" HeadersVisibility="Column">
+                  AutoGenerateColumns="False" HeadersVisibility="Column"
+                  CellStyle="{StaticResource DataGrid_CellStyle}">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nazwisko" Binding="{Binding Employee.LastName}" Width="*" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>

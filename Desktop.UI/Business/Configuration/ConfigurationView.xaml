@@ -11,14 +11,6 @@
       Title="DashboardConfigurationPage"
       Background="White" FontFamily="Calibri" FontSize="14">
     <Page.Resources>
-        <Style TargetType="Button">
-            <Setter Property="Height" Value="25"/>
-            <Setter Property="Width" Value="100"/>
-            <Setter Property="Margin" Value="5"/>
-        </Style>
-        <Style TargetType="iconPacks:PackIconMaterial">
-            <Setter Property="Margin" Value="0,0,3,0"/>
-        </Style>
         <Style TargetType="TextBlock">
             <Setter Property="Margin" Value="5"/>
         </Style>

@@ -10,57 +10,6 @@
       Background="White"
       FontSize="14" FontFamily="Calibri"
       Title="UserManagmentPage">
-    <Page.Resources>
-        <Style TargetType="Button">
-            <Setter Property="Height" Value="25"/>
-            <Setter Property="Width" Value="100"/>
-            <Setter Property="Margin" Value="5"/>
-            <Style.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="3" />
-                </Style>
-            </Style.Resources>
-        </Style>
-        <Style TargetType="iconPacks:PackIconMaterial">
-            <Setter Property="Margin" Value="0,0,3,0"/>
-        </Style>
-        <Style TargetType="{x:Type DataGridCell}">
-            <Setter Property="Height" Value="25"/>
-
-            <Style.Triggers>
-                <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="FontWeight" Value="Bold"/>
-                    <Setter Property="BorderThickness" Value="0"/>
-                    <Setter Property="BorderBrush" Value="Gainsboro"/>
-                    <Setter Property="Foreground" Value="Black"/>
-                    <Setter Property="Background" Value="Gainsboro"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style TargetType="{x:Type TextBox}">
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="Width" Value="150"/>
-            <Setter Property="Height" Value="25"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Style.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="3" />
-                </Style>
-            </Style.Resources>
-
-        </Style>
-
-        <Style TargetType="{x:Type TextBlock}" x:Key="DataGridCell_TextStyle">
-            <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>
-        <Style TargetType="{x:Type CheckBox}" x:Key="DataGridCell_CheckBoxStyle">
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-        </Style>
-    </Page.Resources>
-
-
 
     <Grid>
         <Grid.RowDefinitions>
@@ -75,7 +24,6 @@
         <Border Grid.Row="1" BorderThickness="0,1" BorderBrush="Black">
 
             <Grid Background="WhiteSmoke">
-                
             
             <StackPanel Orientation="Horizontal">
                 <Button Name="AddUser" Click="AddUser_Click">
@@ -117,7 +65,8 @@
                   BorderThickness="0" GridLinesVisibility="Horizontal" RowHeight="25"
                   SelectionMode="Single" SelectionUnit="FullRow"
                   MouseDoubleClick="UsersDataGrid_MouseDoubleClick"
-                  AutoGenerateColumns="False" HeadersVisibility="Column">
+                  AutoGenerateColumns="False" HeadersVisibility="Column"
+                  CellStyle="{StaticResource DataGrid_CellStyle}">
 
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn Header="Aktywny" Binding="{Binding IsActive}" ElementStyle="{StaticResource DataGridCell_CheckBoxStyle}"/>
@@ -126,9 +75,6 @@
                 <DataGridTextColumn Header="E-Mail" Binding="{Binding Email}" Width="2*" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
                 <DataGridTextColumn Header="Rola" Binding="{Binding Role}" Width="*" ElementStyle="{StaticResource DataGridCell_TextStyle}"/>
             </DataGrid.Columns>
-
-
-
         </DataGrid>
         
     </Grid>

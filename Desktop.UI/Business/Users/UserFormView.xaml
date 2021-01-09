@@ -11,9 +11,6 @@
         FontFamily="Calibri" FontSize="14"
         ResizeMode="NoResize">
     <Window.Resources>
-        <Style TargetType="Separator">
-            <Setter Property="Height" Value="10"/>
-        </Style>
 
         <Style TargetType="{x:Type TextBlock}">
             <Setter Property="Margin" Value="5,5"/>
@@ -33,34 +30,7 @@
             </Style.Resources>
         </Style>
 
-        <Style TargetType="Button">
-            <Setter Property="Height" Value="25"/>
-            <Setter Property="Width" Value="100"/>
-            <Setter Property="Margin" Value="5"/>
-            <Style.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="3" />
-                </Style>
-            </Style.Resources>
-        </Style>
-
-        <Style TargetType="iconPacks:PackIconMaterial">
-            <Setter Property="Margin" Value="0,0,3,0"/>
-        </Style>
-
-        <Style TargetType="GroupBox">
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="BorderBrush" Value="Black"/>
-            <Setter Property="HeaderTemplate">
-                <Setter.Value>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding}" FontWeight="Bold"/>
-                    </DataTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style TargetType="ComboBox">
+        <!--<Style TargetType="ComboBox">
             <Setter Property="Margin" Value="5,10"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
@@ -68,7 +38,7 @@
         <Style TargetType="CheckBox">
             <Setter Property="Margin" Value="5,10"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>
+        </Style>-->
 
         <ControlTemplate x:Key="ErrorTemplate">
             <StackPanel Orientation="Vertical">
