@@ -32,25 +32,25 @@ namespace CommunicationAndCommonsLibrary.Test.Business {
         }
         [Fact]
         public void LoginSuccessful_ShouldPass() {
-            var loginResponse = _userRequestHandler.Login("Jan.Kowalski@PersonelManager.pl", "Macko");
+            var loginResponse = _userRequestHandler.Login("employee@pm-tester.pl", "macko12");
             Assert.False(string.IsNullOrEmpty(loginResponse.Token));
         }
 
         [Fact]
         public async Task LoginSuccessfulAsync_ShouldPass() {
-            var loginResponse = await _userRequestHandler.LoginAsync("Jan.Kowalski@PersonelManager.pl", "Macko");
+            var loginResponse = await _userRequestHandler.LoginAsync("employee@pm-tester.pl", "macko12");
             Assert.False(string.IsNullOrEmpty(loginResponse.Token));
         }
 
         [Fact]
         public async Task LoginFailed_ShouldPass() {
-            var loginResponse = await _userRequestHandler.LoginAsync("Kwiaty@wp.pl", "Tulipan");
+            var loginResponse = await _userRequestHandler.LoginAsync("employee@pm-tester.pl", "Tulipan");
             Assert.True(string.IsNullOrEmpty(loginResponse.Token));
         }
 
         [Fact]
         public async Task LoginFailedAsync_ShouldPass() {
-            var loginResponse = await _userRequestHandler.LoginAsync("Kwiaty@wp.pl", "Tulipan");
+            var loginResponse = await _userRequestHandler.LoginAsync("employee@pm-tester.pl", "Tulipan");
             Assert.True(string.IsNullOrEmpty(loginResponse.Token));
         }
 

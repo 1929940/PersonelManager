@@ -13,10 +13,10 @@ namespace API.Core.DBContext {
                 CreatedBy = "Initial",
                 CreatedOn = DateTime.Now,
                 Email = "Jan.Kowalski@PersonelManager.pl",
-                Hash = "1111",
+                Hash = "ECC1DD30FAE7C0D8A891953B0DCF883ECAE21ECD0576BF9E00B3A279AB351BA3",
                 Role = Roles.MANAGER,
                 IsActive = true,
-                RequestedPasswordReset = false
+                RequestedPasswordReset = true
             },
             new User() {
                 Id = 2,
@@ -25,10 +25,10 @@ namespace API.Core.DBContext {
                 CreatedBy = "Initial",
                 CreatedOn = DateTime.Now,
                 Email = "Jan.Nowak@PersonelManager.pl",
-                Hash = "YYY",
+                Hash = "ECC1DD30FAE7C0D8A891953B0DCF883ECAE21ECD0576BF9E00B3A279AB351BA3",
                 Role = Roles.EMPLOYEE,
                 IsActive = true,
-                RequestedPasswordReset = true
+                RequestedPasswordReset = false
             },
             new User() {
                 Id = 3,
@@ -37,18 +37,46 @@ namespace API.Core.DBContext {
                 CreatedBy = "Initial",
                 CreatedOn = DateTime.Now,
                 Email = "Maria.Niziolek@PersonelManager.pl",
-                Hash = "ZZZ",
+                Hash = "ECC1DD30FAE7C0D8A891953B0DCF883ECAE21ECD0576BF9E00B3A279AB351BA3",
                 Role = Roles.EMPLOYEE,
                 IsActive = false,
-                RequestedPasswordReset = false
+                RequestedPasswordReset = true
             },
             new User() {
-                Id = 4, 
+                Id = 4,
                 FirstName = "Administrator",
                 LastName = string.Empty,
-                Email = "Administrator",
-                Hash = "QWER",
+                Email = "1929940@gmail.com",
+                Hash = "ECC1DD30FAE7C0D8A891953B0DCF883ECAE21ECD0576BF9E00B3A279AB351BA3",
                 Role = Roles.ADMIN,
+                IsActive = true
+            },
+                
+            new User() {
+                Id = 5,
+                FirstName = "Tester",
+                LastName = "Admin",
+                Email = "admin@pm-tester.pl",
+                Hash = "ECC1DD30FAE7C0D8A891953B0DCF883ECAE21ECD0576BF9E00B3A279AB351BA3",
+                Role = Roles.ADMIN,
+                IsActive = true
+            }, 
+            new User() {
+                Id = 6,
+                FirstName = "Test2",
+                LastName = "Manager",
+                Email = "manager@pm-tester.pl",
+                Hash = "ECC1DD30FAE7C0D8A891953B0DCF883ECAE21ECD0576BF9E00B3A279AB351BA3",
+                Role = Roles.MANAGER,
+                IsActive = true
+            },    
+            new User() {
+                Id = 7,
+                FirstName = "Test3",
+                LastName = "Employee",
+                Email = "employee@pm-tester.pl",
+                Hash = "ECC1DD30FAE7C0D8A891953B0DCF883ECAE21ECD0576BF9E00B3A279AB351BA3",
+                Role = Roles.EMPLOYEE,
                 IsActive = true
             }
 
