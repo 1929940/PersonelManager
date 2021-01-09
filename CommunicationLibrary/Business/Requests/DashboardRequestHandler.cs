@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CommunicationLibrary.Business.Requests {
@@ -20,6 +19,7 @@ namespace CommunicationLibrary.Business.Requests {
 
                 using (var response = httpClient.GetAsync(requestUri).Result) {
                     string apiResponse = response.Content.ReadAsStringAsync().Result;
+                    response.EnsureSuccessStatusCode();
                     output = JsonConvert.DeserializeObject<List<Dashboard>>(apiResponse);
                 }
             }
@@ -35,6 +35,7 @@ namespace CommunicationLibrary.Business.Requests {
 
                 using (var response = await httpClient.GetAsync(requestUri)) {
                     string apiResponse = await response.Content.ReadAsStringAsync();
+                    response.EnsureSuccessStatusCode();
                     output = JsonConvert.DeserializeObject<List<Dashboard>>(apiResponse);
                 }
             }
@@ -46,18 +47,3 @@ namespace CommunicationLibrary.Business.Requests {
             new AuthenticationHeaderValue("Bearer", ServerConnectionData.Token);
     }
 }
-
-//public IEnumerable<T> Get() {
-//    List<T> output = new List<T>();
-//    using (var httpClient = new HttpClient()) {
-//        SetToken(httpClient);
-
-//        string requestUri = GetUri(_controllerName, RouteVerbs.GET);
-
-//        using (var response = httpClient.GetAsync(requestUri).Result) {
-//            string apiResponse = response.Content.ReadAsStringAsync().Result;
-//            output = JsonConvert.DeserializeObject<List<T>>(apiResponse);
-//        }
-//    }
-//    return output;
-//}

@@ -30,6 +30,7 @@ namespace CommunicationLibrary.Payroll.Requests {
 
                 using (var response = await httpClient.GetAsync(requestUri)) {
                     string apiResponse = await response.Content.ReadAsStringAsync();
+                    response.EnsureSuccessStatusCode();
                     output = JsonConvert.DeserializeObject<List<ContractHeader>>(apiResponse);
                 }
             }
@@ -45,6 +46,7 @@ namespace CommunicationLibrary.Payroll.Requests {
 
                 using (var response = httpClient.GetAsync(requestUri).Result) {
                     string apiResponse = response.Content.ReadAsStringAsync().Result;
+                    response.EnsureSuccessStatusCode();
                     output = JsonConvert.DeserializeObject<List<ContractHeader>>(apiResponse);
                 }
             }
@@ -60,6 +62,7 @@ namespace CommunicationLibrary.Payroll.Requests {
 
                 using (var response = await httpClient.GetAsync(requestUri)) {
                     string apiResponse = await response.Content.ReadAsStringAsync();
+                    response.EnsureSuccessStatusCode();
                     output = JsonConvert.DeserializeObject<ContractAdvanceData>(apiResponse);
                 }
             }
@@ -75,6 +78,7 @@ namespace CommunicationLibrary.Payroll.Requests {
 
                 using (var response = httpClient.GetAsync(requestUri).Result) {
                     string apiResponse = response.Content.ReadAsStringAsync().Result;
+                    response.EnsureSuccessStatusCode();
                     output = JsonConvert.DeserializeObject<ContractAdvanceData>(apiResponse);
                 }
             }

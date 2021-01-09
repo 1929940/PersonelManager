@@ -49,6 +49,7 @@ namespace CommunicationLibrary.Core.Logic {
 
                 using (var response = httpClient.GetAsync(requestUri).Result) {
                     string apiResponse = response.Content.ReadAsStringAsync().Result;
+                    response.EnsureSuccessStatusCode();
                     output = JsonConvert.DeserializeObject<List<T>>(apiResponse);
                 }
             }
@@ -65,6 +66,7 @@ namespace CommunicationLibrary.Core.Logic {
 
                 using (var response = await httpClient.GetAsync(requestUri)) {
                     string apiResponse = await response.Content.ReadAsStringAsync();
+                    response.EnsureSuccessStatusCode();
                     output = JsonConvert.DeserializeObject<List<T>>(apiResponse);
                 }
             }
@@ -84,6 +86,7 @@ namespace CommunicationLibrary.Core.Logic {
 
                 using (var response = httpClient.GetAsync(requestUri).Result) {
                     string apiResponse = response.Content.ReadAsStringAsync().Result;
+                    response.EnsureSuccessStatusCode();
                     output = JsonConvert.DeserializeObject<T>(apiResponse);
                 }
             }
@@ -99,6 +102,7 @@ namespace CommunicationLibrary.Core.Logic {
 
                 using (var response = await httpClient.GetAsync(requestUri)) {
                     string apiResponse = await response.Content.ReadAsStringAsync();
+                    response.EnsureSuccessStatusCode();
                     output = JsonConvert.DeserializeObject<T>(apiResponse);
                 }
             }
@@ -115,6 +119,7 @@ namespace CommunicationLibrary.Core.Logic {
 
                 using (var response = httpClient.PutAsync(requestUri, CreateStringContent(input)).Result) {
                     string apiResponse = response.Content.ReadAsStringAsync().Result;
+                    response.EnsureSuccessStatusCode();
                 }
             }
         }
@@ -126,6 +131,7 @@ namespace CommunicationLibrary.Core.Logic {
 
                 using (var response = await httpClient.PutAsync(requestUri, CreateStringContent(input))) {
                     string apiResponse = await response.Content.ReadAsStringAsync();
+                    response.EnsureSuccessStatusCode();
                 }
             }
         }
@@ -141,6 +147,7 @@ namespace CommunicationLibrary.Core.Logic {
 
                 using (var response = httpClient.PostAsync(requestUri, CreateStringContent(input)).Result) {
                     string apiResponse = response.Content.ReadAsStringAsync().Result;
+                    response.EnsureSuccessStatusCode();
                     output = JsonConvert.DeserializeObject<T>(apiResponse);
                 }
             }
@@ -155,6 +162,7 @@ namespace CommunicationLibrary.Core.Logic {
 
                 using (var response = await httpClient.PostAsync(requestUri, CreateStringContent(input))) {
                     string apiResponse = await response.Content.ReadAsStringAsync();
+                    response.EnsureSuccessStatusCode();
                     output = JsonConvert.DeserializeObject<T>(apiResponse);
                 }
             }
@@ -170,6 +178,7 @@ namespace CommunicationLibrary.Core.Logic {
 
                 using (var response = httpClient.DeleteAsync(requestUri).Result) {
                     string apiResponse = response.Content.ReadAsStringAsync().Result;
+                    response.EnsureSuccessStatusCode();
                 }
             }
         }
@@ -181,6 +190,7 @@ namespace CommunicationLibrary.Core.Logic {
 
                 using (var response = await httpClient.DeleteAsync(requestUri)) {
                     string apiResponse = await response.Content.ReadAsStringAsync();
+                    response.EnsureSuccessStatusCode();
                 }
             }
         }
@@ -196,6 +206,7 @@ namespace CommunicationLibrary.Core.Logic {
 
                 using (var response = httpClient.GetAsync(requestUri).Result) {
                     string apiResponse = response.Content.ReadAsStringAsync().Result;
+                    response.EnsureSuccessStatusCode();
                     output = JsonConvert.DeserializeObject<List<T>>(apiResponse);
                 }
             }
@@ -211,6 +222,7 @@ namespace CommunicationLibrary.Core.Logic {
 
                 using (var response = await httpClient.GetAsync(requestUri)) {
                     string apiResponse = await response.Content.ReadAsStringAsync();
+                    response.EnsureSuccessStatusCode();
                     output = JsonConvert.DeserializeObject<List<T>>(apiResponse);
                 }
             }

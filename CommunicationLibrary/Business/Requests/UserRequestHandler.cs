@@ -98,6 +98,7 @@ namespace CommunicationLibrary.Business.Requests {
 
                 using (var response = httpClient.PutAsync(requestUri, CreateStringContent(password)).Result) {
                     string apiResponse = response.Content.ReadAsStringAsync().Result;
+                    response.EnsureSuccessStatusCode();
                 }
             }
         }
@@ -110,6 +111,7 @@ namespace CommunicationLibrary.Business.Requests {
 
                 using (var response = await httpClient.PutAsync(requestUri, CreateStringContent(password))) {
                     string apiResponse = await response.Content.ReadAsStringAsync();
+                    response.EnsureSuccessStatusCode();
                 }
             }
         }

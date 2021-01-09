@@ -21,6 +21,7 @@ namespace CommunicationLibrary.HR.Requests {
 
                 using (var response = httpClient.GetAsync(requestUri).Result) {
                     string apiResponse = response.Content.ReadAsStringAsync().Result;
+                    response.EnsureSuccessStatusCode();
                     output = JsonConvert.DeserializeObject<List<Employee>>(apiResponse);
                 }
             }
@@ -36,6 +37,7 @@ namespace CommunicationLibrary.HR.Requests {
 
                 using (var response = await httpClient.GetAsync(requestUri)) {
                     string apiResponse = await response.Content.ReadAsStringAsync();
+                    response.EnsureSuccessStatusCode();
                     output = JsonConvert.DeserializeObject<List<Employee>>(apiResponse);
                 }
             }
@@ -50,6 +52,7 @@ namespace CommunicationLibrary.HR.Requests {
 
                 using (var response = httpClient.PutAsync(requestUri, CreateStringContent(input)).Result) {
                     string apiResponse = response.Content.ReadAsStringAsync().Result;
+                    response.EnsureSuccessStatusCode();
                 }
             }
         }
@@ -61,6 +64,7 @@ namespace CommunicationLibrary.HR.Requests {
 
                 using (var response = await httpClient.PutAsync(requestUri, CreateStringContent(input))) {
                     string apiResponse = await response.Content.ReadAsStringAsync();
+                    response.EnsureSuccessStatusCode();
                 }
             }
         }
@@ -74,6 +78,7 @@ namespace CommunicationLibrary.HR.Requests {
 
                 using (var response = await httpClient.GetAsync(requestUri)) {
                     string apiResponse = await response.Content.ReadAsStringAsync();
+                    response.EnsureSuccessStatusCode();
                     output = JsonConvert.DeserializeObject<List<EmployeeHeader>>(apiResponse);
                 }
             }
@@ -89,6 +94,7 @@ namespace CommunicationLibrary.HR.Requests {
 
                 using (var response = httpClient.GetAsync(requestUri).Result) {
                     string apiResponse = response.Content.ReadAsStringAsync().Result;
+                    response.EnsureSuccessStatusCode();
                     output = JsonConvert.DeserializeObject<List<EmployeeHeader>>(apiResponse);
                 }
             }
