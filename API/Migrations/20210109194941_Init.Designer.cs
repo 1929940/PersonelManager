@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20200723100333_AddressChange")]
-    partial class AddressChange
+    [Migration("20210109194941_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,9 +40,6 @@ namespace API.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("MaximumLeaveTimeInDays")
-                        .HasColumnType("int");
-
                     b.Property<double>("PercentOfAdvancesAllowed")
                         .HasColumnType("float");
 
@@ -55,22 +52,10 @@ namespace API.Migrations
                     b.Property<int>("WarningBeforeCertificateExpires")
                         .HasColumnType("int");
 
-                    b.Property<int>("WarningBeforeLeaveReachesLimit")
-                        .HasColumnType("int");
-
                     b.Property<int>("WarningBeforeMedicalCheckupExpires")
                         .HasColumnType("int");
 
-                    b.Property<int>("WarningBeforePassportExpires")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WarningBeforePermitExpires")
-                        .HasColumnType("int");
-
                     b.Property<int>("WarningBeforeSafetyTrainingExpires")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WarningBeforeVisaExpires")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -84,16 +69,11 @@ namespace API.Migrations
                             BillingMonthEnd = 25,
                             BillingMonthStart = 26,
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 7, 23, 12, 3, 32, 225, DateTimeKind.Local).AddTicks(8735),
-                            MaximumLeaveTimeInDays = 90,
+                            CreatedOn = new DateTime(2021, 1, 9, 20, 49, 41, 48, DateTimeKind.Local).AddTicks(7500),
                             PercentOfAdvancesAllowed = 75.0,
                             WarningBeforeCertificateExpires = 30,
-                            WarningBeforeLeaveReachesLimit = 60,
                             WarningBeforeMedicalCheckupExpires = 30,
-                            WarningBeforePassportExpires = 30,
-                            WarningBeforePermitExpires = 30,
-                            WarningBeforeSafetyTrainingExpires = 30,
-                            WarningBeforeVisaExpires = 30
+                            WarningBeforeSafetyTrainingExpires = 30
                         });
                 });
 
@@ -146,52 +126,100 @@ namespace API.Migrations
                         {
                             Id = 1,
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 7, 23, 12, 3, 32, 221, DateTimeKind.Local).AddTicks(3326),
+                            CreatedOn = new DateTime(2021, 1, 9, 20, 49, 41, 44, DateTimeKind.Local).AddTicks(992),
                             Email = "Jan.Kowalski@PersonelManager.pl",
                             FirstName = "Jan",
-                            Hash = "WWW",
+                            Hash = "ECC1DD30FAE7C0D8A891953B0DCF883ECAE21ECD0576BF9E00B3A279AB351BA3",
                             IsActive = true,
                             LastName = "Kowalski",
-                            RequestedPasswordReset = false,
+                            RequestedPasswordReset = true,
                             Role = "Kierownik"
                         },
                         new
                         {
                             Id = 2,
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 7, 23, 12, 3, 32, 224, DateTimeKind.Local).AddTicks(6711),
+                            CreatedOn = new DateTime(2021, 1, 9, 20, 49, 41, 47, DateTimeKind.Local).AddTicks(2580),
                             Email = "Jan.Nowak@PersonelManager.pl",
                             FirstName = "Jan",
-                            Hash = "YYY",
+                            Hash = "ECC1DD30FAE7C0D8A891953B0DCF883ECAE21ECD0576BF9E00B3A279AB351BA3",
                             IsActive = true,
                             LastName = "Nowak",
-                            RequestedPasswordReset = true,
+                            RequestedPasswordReset = false,
                             Role = "Pracownik"
                         },
                         new
                         {
                             Id = 3,
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 7, 23, 12, 3, 32, 224, DateTimeKind.Local).AddTicks(6781),
+                            CreatedOn = new DateTime(2021, 1, 9, 20, 49, 41, 47, DateTimeKind.Local).AddTicks(2657),
                             Email = "Maria.Niziolek@PersonelManager.pl",
                             FirstName = "Maria",
-                            Hash = "ZZZ",
+                            Hash = "ECC1DD30FAE7C0D8A891953B0DCF883ECAE21ECD0576BF9E00B3A279AB351BA3",
                             IsActive = false,
                             LastName = "Niziolek",
-                            RequestedPasswordReset = false,
+                            RequestedPasswordReset = true,
                             Role = "Pracownik"
                         },
                         new
                         {
                             Id = 4,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Administrator",
+                            Email = "1929940@gmail.com",
                             FirstName = "Administrator",
-                            Hash = "WSX_09",
+                            Hash = "ECC1DD30FAE7C0D8A891953B0DCF883ECAE21ECD0576BF9E00B3A279AB351BA3",
                             IsActive = true,
                             LastName = "",
                             RequestedPasswordReset = false,
                             Role = "Administrator"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "admin@pm-tester.pl",
+                            FirstName = "Tester1",
+                            Hash = "ECC1DD30FAE7C0D8A891953B0DCF883ECAE21ECD0576BF9E00B3A279AB351BA3",
+                            IsActive = true,
+                            LastName = "Admin",
+                            RequestedPasswordReset = false,
+                            Role = "Administrator"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "manager@pm-tester.pl",
+                            FirstName = "Tester2",
+                            Hash = "ECC1DD30FAE7C0D8A891953B0DCF883ECAE21ECD0576BF9E00B3A279AB351BA3",
+                            IsActive = true,
+                            LastName = "Manager",
+                            RequestedPasswordReset = false,
+                            Role = "Kierownik"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "employee@pm-tester.pl",
+                            FirstName = "Tester3",
+                            Hash = "ECC1DD30FAE7C0D8A891953B0DCF883ECAE21ECD0576BF9E00B3A279AB351BA3",
+                            IsActive = true,
+                            LastName = "Employee",
+                            RequestedPasswordReset = false,
+                            Role = "Pracownik"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "inactive@pm-tester.pl",
+                            FirstName = "Tester4",
+                            Hash = "ECC1DD30FAE7C0D8A891953B0DCF883ECAE21ECD0576BF9E00B3A279AB351BA3",
+                            IsActive = false,
+                            LastName = "Employee",
+                            RequestedPasswordReset = false,
+                            Role = "Pracownik"
                         });
                 });
 
@@ -243,37 +271,37 @@ namespace API.Migrations
                         {
                             Id = 1,
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2019, 9, 27, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(5196),
+                            CreatedOn = new DateTime(2020, 3, 15, 20, 49, 41, 53, DateTimeKind.Local).AddTicks(3242),
                             EmployeeId = 1,
                             IssuedBy = "Szkółka monterów Jastrząb",
                             Number = "PS/34/20",
                             Title = "Kurs palenia i szczepiania palnikiem gazowym",
-                            ValidFrom = new DateTime(2018, 7, 23, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(5211),
-                            ValidTo = new DateTime(2023, 7, 23, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(5216)
+                            ValidFrom = new DateTime(2019, 1, 9, 20, 49, 41, 53, DateTimeKind.Local).AddTicks(3258),
+                            ValidTo = new DateTime(2024, 1, 9, 20, 49, 41, 53, DateTimeKind.Local).AddTicks(3263)
                         },
                         new
                         {
                             Id = 2,
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 1, 5, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(5232),
+                            CreatedOn = new DateTime(2020, 6, 23, 20, 49, 41, 53, DateTimeKind.Local).AddTicks(3281),
                             EmployeeId = 1,
                             IssuedBy = "DNV",
                             Number = "DNV/086/2020",
                             Title = "Placówka szkoleniowa spawaczy - Stocznia Gdańsk",
-                            ValidFrom = new DateTime(2020, 1, 5, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(5235),
-                            ValidTo = new DateTime(2023, 1, 4, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(5238)
+                            ValidFrom = new DateTime(2020, 6, 23, 20, 49, 41, 53, DateTimeKind.Local).AddTicks(3284),
+                            ValidTo = new DateTime(2023, 6, 23, 20, 49, 41, 53, DateTimeKind.Local).AddTicks(3287)
                         },
                         new
                         {
                             Id = 3,
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 2, 24, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(5242),
+                            CreatedOn = new DateTime(2020, 8, 12, 20, 49, 41, 53, DateTimeKind.Local).AddTicks(3290),
                             EmployeeId = 4,
                             IssuedBy = "Zakład szkolenia monterów w Harkowie",
                             Number = "HR/127/20",
                             Title = "Kurs palenia i szczepiania palnikiem gazowym",
-                            ValidFrom = new DateTime(2016, 2, 24, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(5244),
-                            ValidTo = new DateTime(2020, 8, 21, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(5247)
+                            ValidFrom = new DateTime(2016, 8, 12, 20, 49, 41, 53, DateTimeKind.Local).AddTicks(3293),
+                            ValidTo = new DateTime(2021, 2, 7, 20, 49, 41, 53, DateTimeKind.Local).AddTicks(3296)
                         });
                 });
 
@@ -326,7 +354,7 @@ namespace API.Migrations
                         {
                             Id = 1,
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2019, 9, 27, 12, 3, 32, 226, DateTimeKind.Local).AddTicks(8556),
+                            CreatedOn = new DateTime(2020, 3, 15, 20, 49, 41, 49, DateTimeKind.Local).AddTicks(4363),
                             DateOfBirth = new DateTime(1980, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FatherName = "Mariusz",
                             FirstName = "Maciej",
@@ -339,7 +367,7 @@ namespace API.Migrations
                         {
                             Id = 2,
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2019, 11, 16, 12, 3, 32, 227, DateTimeKind.Local).AddTicks(1007),
+                            CreatedOn = new DateTime(2020, 5, 4, 20, 49, 41, 49, DateTimeKind.Local).AddTicks(6988),
                             DateOfBirth = new DateTime(1997, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FatherName = "Vitalii",
                             FirstName = "Dmyto",
@@ -352,7 +380,7 @@ namespace API.Migrations
                         {
                             Id = 3,
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2019, 11, 16, 12, 3, 32, 227, DateTimeKind.Local).AddTicks(1063),
+                            CreatedOn = new DateTime(2020, 5, 4, 20, 49, 41, 49, DateTimeKind.Local).AddTicks(7049),
                             DateOfBirth = new DateTime(1993, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FatherName = "Oleksii",
                             FirstName = "Oleksandr",
@@ -365,7 +393,7 @@ namespace API.Migrations
                         {
                             Id = 4,
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 2, 24, 12, 3, 32, 227, DateTimeKind.Local).AddTicks(1068),
+                            CreatedOn = new DateTime(2020, 8, 12, 20, 49, 41, 49, DateTimeKind.Local).AddTicks(7054),
                             DateOfBirth = new DateTime(1997, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FatherName = "Maxim",
                             FirstName = "Yevhenii",
@@ -448,7 +476,7 @@ namespace API.Migrations
                             City = "Kosokowo",
                             Country = "Polska",
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2019, 9, 27, 12, 3, 32, 228, DateTimeKind.Local).AddTicks(7445),
+                            CreatedOn = new DateTime(2020, 3, 15, 20, 49, 41, 51, DateTimeKind.Local).AddTicks(4460),
                             EmployeeId = 1,
                             ForemanId = 1,
                             LastName = "Maciejewski",
@@ -466,7 +494,7 @@ namespace API.Migrations
                             City = "Rumia",
                             Country = "Polska",
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2019, 11, 16, 12, 3, 32, 228, DateTimeKind.Local).AddTicks(9937),
+                            CreatedOn = new DateTime(2020, 5, 4, 20, 49, 41, 51, DateTimeKind.Local).AddTicks(7127),
                             EmployeeId = 2,
                             ForemanId = 2,
                             LastName = "Kravchuk",
@@ -484,7 +512,7 @@ namespace API.Migrations
                             City = "Gdynia",
                             Country = "Polska",
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2019, 11, 16, 12, 3, 32, 228, DateTimeKind.Local).AddTicks(9986),
+                            CreatedOn = new DateTime(2020, 5, 4, 20, 49, 41, 51, DateTimeKind.Local).AddTicks(7185),
                             EmployeeId = 3,
                             ForemanId = 2,
                             LastName = "Kuchna",
@@ -502,7 +530,7 @@ namespace API.Migrations
                             City = "Gdańsk",
                             Country = "Polska",
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 1, 5, 12, 3, 32, 228, DateTimeKind.Local).AddTicks(9991),
+                            CreatedOn = new DateTime(2020, 6, 23, 20, 49, 41, 51, DateTimeKind.Local).AddTicks(7190),
                             EmployeeId = 1,
                             ForemanId = 3,
                             LastName = "Maciejewski",
@@ -519,7 +547,7 @@ namespace API.Migrations
                             City = "Pogórze",
                             Country = "Polska",
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 2, 24, 12, 3, 32, 228, DateTimeKind.Local).AddTicks(9995),
+                            CreatedOn = new DateTime(2020, 8, 12, 20, 49, 41, 51, DateTimeKind.Local).AddTicks(7194),
                             EmployeeId = 4,
                             ForemanId = 2,
                             LastName = "Yushchenko",
@@ -537,7 +565,7 @@ namespace API.Migrations
                             City = "Gdańsk",
                             Country = "Polska",
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 4, 14, 12, 3, 32, 228, DateTimeKind.Local).AddTicks(9998),
+                            CreatedOn = new DateTime(2020, 10, 1, 20, 49, 41, 51, DateTimeKind.Local).AddTicks(7197),
                             EmployeeId = 1,
                             ForemanId = 3,
                             LastName = "Maciejewski",
@@ -596,7 +624,7 @@ namespace API.Migrations
                         {
                             Id = 1,
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2019, 9, 27, 12, 3, 32, 227, DateTimeKind.Local).AddTicks(9396),
+                            CreatedOn = new DateTime(2020, 3, 15, 20, 49, 41, 50, DateTimeKind.Local).AddTicks(5793),
                             FirstName = "Grzegorz",
                             LastName = "Grzegorczuk",
                             LocationId = 1,
@@ -607,7 +635,7 @@ namespace API.Migrations
                         {
                             Id = 2,
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2019, 11, 16, 12, 3, 32, 228, DateTimeKind.Local).AddTicks(1349),
+                            CreatedOn = new DateTime(2020, 5, 4, 20, 49, 41, 50, DateTimeKind.Local).AddTicks(7908),
                             FirstName = "Jakub",
                             LastName = "Jakubczyk",
                             LocationId = 1,
@@ -618,7 +646,7 @@ namespace API.Migrations
                         {
                             Id = 3,
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 1, 5, 12, 3, 32, 228, DateTimeKind.Local).AddTicks(1403),
+                            CreatedOn = new DateTime(2020, 6, 23, 20, 49, 41, 50, DateTimeKind.Local).AddTicks(7967),
                             FirstName = "Filip",
                             LastName = "Filipiak",
                             LocationId = 2,
@@ -673,10 +701,10 @@ namespace API.Migrations
                             Id = 1,
                             Comment = "Urlop wypoczynkowy, 14 dni",
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2019, 11, 16, 12, 3, 32, 232, DateTimeKind.Local).AddTicks(2017),
+                            CreatedOn = new DateTime(2020, 5, 4, 20, 49, 41, 53, DateTimeKind.Local).AddTicks(7246),
                             EmployeeId = 1,
-                            From = new DateTime(2019, 12, 2, 12, 3, 32, 232, DateTimeKind.Local).AddTicks(2473),
-                            To = new DateTime(2019, 12, 16, 12, 3, 32, 232, DateTimeKind.Local).AddTicks(2925),
+                            From = new DateTime(2020, 5, 20, 20, 49, 41, 53, DateTimeKind.Local).AddTicks(7721),
+                            To = new DateTime(2020, 6, 3, 20, 49, 41, 53, DateTimeKind.Local).AddTicks(8207),
                             Type = "Wypoczynkowy"
                         },
                         new
@@ -684,10 +712,10 @@ namespace API.Migrations
                             Id = 2,
                             Comment = "Urlop Administracyjny, wymiana paszporty, wizy",
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 2, 17, 12, 3, 32, 232, DateTimeKind.Local).AddTicks(4268),
+                            CreatedOn = new DateTime(2020, 8, 5, 20, 49, 41, 53, DateTimeKind.Local).AddTicks(9647),
                             EmployeeId = 2,
-                            From = new DateTime(2020, 2, 24, 12, 3, 32, 232, DateTimeKind.Local).AddTicks(4285),
-                            To = new DateTime(2020, 5, 4, 12, 3, 32, 232, DateTimeKind.Local).AddTicks(4294),
+                            From = new DateTime(2020, 8, 12, 20, 49, 41, 53, DateTimeKind.Local).AddTicks(9665),
+                            To = new DateTime(2020, 10, 21, 20, 49, 41, 53, DateTimeKind.Local).AddTicks(9676),
                             Type = "Administracyjny"
                         },
                         new
@@ -695,9 +723,9 @@ namespace API.Migrations
                             Id = 3,
                             Comment = "Obecność nieusprawiedliwiona",
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 5, 23, 12, 3, 32, 232, DateTimeKind.Local).AddTicks(4315),
+                            CreatedOn = new DateTime(2020, 11, 9, 20, 49, 41, 53, DateTimeKind.Local).AddTicks(9698),
                             EmployeeId = 1,
-                            From = new DateTime(2020, 5, 23, 12, 3, 32, 232, DateTimeKind.Local).AddTicks(4318),
+                            From = new DateTime(2020, 11, 9, 20, 49, 41, 53, DateTimeKind.Local).AddTicks(9701),
                             Type = "Nieusprawiedliwiony"
                         });
                 });
@@ -753,7 +781,7 @@ namespace API.Migrations
                             City = "Gdynia",
                             Country = "Polska",
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2019, 9, 27, 12, 3, 32, 227, DateTimeKind.Local).AddTicks(3910),
+                            CreatedOn = new DateTime(2020, 3, 15, 20, 49, 41, 50, DateTimeKind.Local).AddTicks(57),
                             Name = "Stocznia Gdynia SA",
                             Number = "3",
                             Region = "Pomorze",
@@ -766,7 +794,7 @@ namespace API.Migrations
                             City = "Gdańsk",
                             Country = "Polska",
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2019, 11, 16, 12, 3, 32, 227, DateTimeKind.Local).AddTicks(6523),
+                            CreatedOn = new DateTime(2020, 5, 4, 20, 49, 41, 50, DateTimeKind.Local).AddTicks(2887),
                             Name = "Stocznia Remontowa Gdańsk",
                             Number = "8",
                             Region = "Pomorze",
@@ -823,246 +851,49 @@ namespace API.Migrations
                         {
                             Id = 1,
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2019, 9, 27, 12, 3, 32, 229, DateTimeKind.Local).AddTicks(4878),
+                            CreatedOn = new DateTime(2020, 3, 15, 20, 49, 41, 52, DateTimeKind.Local).AddTicks(2235),
                             EmployeeId = 1,
                             IssuedBy = "Prywatna praktyka - Dr Kamiński",
                             Number = "MD/016/19",
                             Title = "Badanie lekarskie wstępne",
-                            ValidFrom = new DateTime(2018, 8, 21, 12, 3, 32, 229, DateTimeKind.Local).AddTicks(6440),
-                            ValidTo = new DateTime(2020, 8, 21, 12, 3, 32, 229, DateTimeKind.Local).AddTicks(6919)
+                            ValidFrom = new DateTime(2019, 2, 7, 20, 49, 41, 52, DateTimeKind.Local).AddTicks(4019),
+                            ValidTo = new DateTime(2021, 2, 7, 20, 49, 41, 52, DateTimeKind.Local).AddTicks(4560)
                         },
                         new
                         {
                             Id = 2,
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2019, 11, 16, 12, 3, 32, 229, DateTimeKind.Local).AddTicks(7355),
+                            CreatedOn = new DateTime(2020, 5, 4, 20, 49, 41, 52, DateTimeKind.Local).AddTicks(5053),
                             EmployeeId = 2,
                             IssuedBy = "DiamentMed sp. z o.o.",
                             Number = "DM-076-19",
                             Title = "Badanie lekarskie wstępne",
-                            ValidFrom = new DateTime(2018, 8, 22, 12, 3, 32, 229, DateTimeKind.Local).AddTicks(7410),
-                            ValidTo = new DateTime(2020, 8, 22, 12, 3, 32, 229, DateTimeKind.Local).AddTicks(7447)
+                            ValidFrom = new DateTime(2019, 2, 8, 20, 49, 41, 52, DateTimeKind.Local).AddTicks(5107),
+                            ValidTo = new DateTime(2021, 2, 8, 20, 49, 41, 52, DateTimeKind.Local).AddTicks(5122)
                         },
                         new
                         {
                             Id = 3,
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2019, 11, 16, 12, 3, 32, 229, DateTimeKind.Local).AddTicks(7457),
+                            CreatedOn = new DateTime(2020, 5, 4, 20, 49, 41, 52, DateTimeKind.Local).AddTicks(5131),
                             EmployeeId = 2,
                             IssuedBy = "DiamentMed sp. z o.o.",
                             Number = "DM-177-19",
                             Title = "Badanie lekarskie wstępne",
-                            ValidFrom = new DateTime(2018, 11, 15, 12, 3, 32, 229, DateTimeKind.Local).AddTicks(7461),
-                            ValidTo = new DateTime(2020, 11, 15, 12, 3, 32, 229, DateTimeKind.Local).AddTicks(7464)
+                            ValidFrom = new DateTime(2019, 5, 4, 20, 49, 41, 52, DateTimeKind.Local).AddTicks(5134),
+                            ValidTo = new DateTime(2021, 5, 4, 20, 49, 41, 52, DateTimeKind.Local).AddTicks(5138)
                         },
                         new
                         {
                             Id = 4,
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2019, 11, 16, 12, 3, 32, 229, DateTimeKind.Local).AddTicks(7468),
+                            CreatedOn = new DateTime(2020, 5, 4, 20, 49, 41, 52, DateTimeKind.Local).AddTicks(5142),
                             EmployeeId = 2,
                             IssuedBy = "DiamentMed sp. z o.o.",
                             Number = "DM-178-19",
                             Title = "Badanie lekarskie wstępne",
-                            ValidFrom = new DateTime(2019, 2, 23, 12, 3, 32, 229, DateTimeKind.Local).AddTicks(7471),
-                            ValidTo = new DateTime(2021, 2, 23, 12, 3, 32, 229, DateTimeKind.Local).AddTicks(7474)
-                        });
-                });
-
-            modelBuilder.Entity("API.HR.Models.Passport", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("IssuedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Number")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("ValidFrom")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("ValidTo")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.ToTable("Passports");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2019, 11, 16, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(9083),
-                            EmployeeId = 2,
-                            IssuedBy = "Biuro Paszportowe w Kijowie",
-                            Number = "UKR090909",
-                            Title = "Paszport Ukraina",
-                            ValidFrom = new DateTime(2010, 2, 23, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(9098),
-                            ValidTo = new DateTime(2020, 2, 24, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(9103)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2019, 11, 16, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(9118),
-                            EmployeeId = 3,
-                            IssuedBy = "Biuro Paszportowe w Harkowie",
-                            Number = "HKR05409",
-                            Title = "Paszport Ukraina",
-                            ValidFrom = new DateTime(2019, 7, 23, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(9122),
-                            ValidTo = new DateTime(2029, 7, 23, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(9125)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 2, 24, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(9128),
-                            EmployeeId = 4,
-                            IssuedBy = "Biuro Paszportowe w Lwowie",
-                            Number = "LWR12309",
-                            Title = "Paszport Ukraina",
-                            ValidFrom = new DateTime(2010, 8, 21, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(9131),
-                            ValidTo = new DateTime(2049, 7, 23, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(9134)
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 5, 4, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(9137),
-                            EmployeeId = 2,
-                            IssuedBy = "Biuro Paszportowe w Kijowie",
-                            Number = "UKR191919",
-                            Title = "Paszport Ukraina",
-                            ValidFrom = new DateTime(2020, 4, 14, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(9140),
-                            ValidTo = new DateTime(2030, 4, 14, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(9142)
-                        });
-                });
-
-            modelBuilder.Entity("API.HR.Models.Permit", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("IssuedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("LocationId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Number")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("ValidFrom")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("ValidTo")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.HasIndex("LocationId");
-
-                    b.ToTable("Permits");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2019, 11, 16, 12, 3, 32, 231, DateTimeKind.Local).AddTicks(8203),
-                            EmployeeId = 2,
-                            IssuedBy = "Panśtwowy Urząd Pracy w Gdyni",
-                            LocationId = 1,
-                            Number = "OSW/575/2019",
-                            Title = "Oświadczenie o zamiarze powierzenia pracy",
-                            ValidFrom = new DateTime(2019, 11, 16, 12, 3, 32, 231, DateTimeKind.Local).AddTicks(8658),
-                            ValidTo = new DateTime(2020, 2, 24, 12, 3, 32, 231, DateTimeKind.Local).AddTicks(8669)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 2, 24, 12, 3, 32, 231, DateTimeKind.Local).AddTicks(8686),
-                            EmployeeId = 3,
-                            IssuedBy = "Urząd wojewódzki w Gdańsku, wydział ds. cudzoziemców",
-                            LocationId = 1,
-                            Number = "KP/55/2020",
-                            Title = "Karta Pobytu",
-                            ValidFrom = new DateTime(2020, 2, 24, 12, 3, 32, 231, DateTimeKind.Local).AddTicks(8698),
-                            ValidTo = new DateTime(2025, 2, 23, 12, 3, 32, 231, DateTimeKind.Local).AddTicks(8701)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 2, 24, 12, 3, 32, 231, DateTimeKind.Local).AddTicks(8706),
-                            EmployeeId = 4,
-                            IssuedBy = "Urząd wojewódzki w Gdańsku, wydział ds. cudzoziemców",
-                            LocationId = 1,
-                            Number = "A/196/2020",
-                            Title = "Zezwolenie na pracę typ A",
-                            ValidFrom = new DateTime(2019, 8, 21, 12, 3, 32, 231, DateTimeKind.Local).AddTicks(8709),
-                            ValidTo = new DateTime(2020, 8, 21, 12, 3, 32, 231, DateTimeKind.Local).AddTicks(8712)
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 4, 14, 12, 3, 32, 231, DateTimeKind.Local).AddTicks(8715),
-                            EmployeeId = 2,
-                            IssuedBy = "Urząd wojewódzki w Gdańsku, wydział ds. cudzoziemców",
-                            LocationId = 1,
-                            Number = "A/216/2020",
-                            Title = "Zezwolenie na pracę typ A",
-                            ValidFrom = new DateTime(2020, 4, 14, 12, 3, 32, 231, DateTimeKind.Local).AddTicks(8718),
-                            ValidTo = new DateTime(2023, 4, 14, 12, 3, 32, 231, DateTimeKind.Local).AddTicks(8721)
+                            ValidFrom = new DateTime(2019, 8, 12, 20, 49, 41, 52, DateTimeKind.Local).AddTicks(5144),
+                            ValidTo = new DateTime(2021, 8, 12, 20, 49, 41, 52, DateTimeKind.Local).AddTicks(5147)
                         });
                 });
 
@@ -1114,162 +945,61 @@ namespace API.Migrations
                         {
                             Id = 1,
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2019, 9, 27, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(1928),
+                            CreatedOn = new DateTime(2020, 3, 15, 20, 49, 41, 52, DateTimeKind.Local).AddTicks(9779),
                             EmployeeId = 1,
                             IssuedBy = "Dział BHP - Stocznia Gdynia",
                             Number = "BHP/99/19",
                             Title = "Szkolenie BHP - Stocznia Gdynia",
-                            ValidFrom = new DateTime(2019, 9, 27, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(1944),
-                            ValidTo = new DateTime(2021, 9, 26, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(1947)
+                            ValidFrom = new DateTime(2020, 3, 15, 20, 49, 41, 52, DateTimeKind.Local).AddTicks(9795),
+                            ValidTo = new DateTime(2022, 3, 15, 20, 49, 41, 52, DateTimeKind.Local).AddTicks(9798)
                         },
                         new
                         {
                             Id = 2,
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2019, 11, 16, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(1966),
+                            CreatedOn = new DateTime(2020, 5, 4, 20, 49, 41, 52, DateTimeKind.Local).AddTicks(9817),
                             EmployeeId = 2,
                             IssuedBy = "Dział BHP - Stocznia Gdynia",
                             Number = "BHP/339/19",
                             Title = "Szkolenie BHP - Stocznia Gdynia",
-                            ValidFrom = new DateTime(2019, 11, 16, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(1969),
-                            ValidTo = new DateTime(2021, 11, 15, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(1972)
+                            ValidFrom = new DateTime(2020, 5, 4, 20, 49, 41, 52, DateTimeKind.Local).AddTicks(9820),
+                            ValidTo = new DateTime(2022, 5, 4, 20, 49, 41, 52, DateTimeKind.Local).AddTicks(9823)
                         },
                         new
                         {
                             Id = 3,
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2019, 11, 16, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(1975),
+                            CreatedOn = new DateTime(2020, 5, 4, 20, 49, 41, 52, DateTimeKind.Local).AddTicks(9827),
                             EmployeeId = 3,
                             IssuedBy = "Dział BHP - Stocznia Gdynia",
                             Number = "BHP/340/19",
                             Title = "Szkolenie BHP - Stocznia Gdynia",
-                            ValidFrom = new DateTime(2019, 11, 16, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(1978),
-                            ValidTo = new DateTime(2021, 11, 15, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(1981)
+                            ValidFrom = new DateTime(2020, 5, 4, 20, 49, 41, 52, DateTimeKind.Local).AddTicks(9829),
+                            ValidTo = new DateTime(2022, 5, 4, 20, 49, 41, 52, DateTimeKind.Local).AddTicks(9832)
                         },
                         new
                         {
                             Id = 4,
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 1, 5, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(1984),
+                            CreatedOn = new DateTime(2020, 6, 23, 20, 49, 41, 52, DateTimeKind.Local).AddTicks(9835),
                             EmployeeId = 1,
                             IssuedBy = "Kierownik działu BHP - Ignacy Krasiński",
                             Number = "BHP-940-19",
                             Title = "Szkolenie Wstępne BHP - Stocznia Gdańsk",
-                            ValidFrom = new DateTime(2020, 1, 5, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(1986),
-                            ValidTo = new DateTime(2021, 1, 4, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(1989)
+                            ValidFrom = new DateTime(2020, 6, 23, 20, 49, 41, 52, DateTimeKind.Local).AddTicks(9837),
+                            ValidTo = new DateTime(2021, 6, 23, 20, 49, 41, 52, DateTimeKind.Local).AddTicks(9840)
                         },
                         new
                         {
                             Id = 5,
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 1, 5, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(1992),
+                            CreatedOn = new DateTime(2020, 6, 23, 20, 49, 41, 52, DateTimeKind.Local).AddTicks(9843),
                             EmployeeId = 4,
                             IssuedBy = "Dział BHP - Stocznia Gdynia",
                             Number = "BHP/440/19",
                             Title = "Szkolenie BHP - Stocznia Gdynia",
-                            ValidFrom = new DateTime(2020, 2, 24, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(1995),
-                            ValidTo = new DateTime(2022, 2, 23, 12, 3, 32, 230, DateTimeKind.Local).AddTicks(1997)
-                        });
-                });
-
-            modelBuilder.Entity("API.HR.Models.Visa", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("IssuedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Number")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("ValidFrom")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("ValidTo")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.ToTable("Visas");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2019, 11, 16, 12, 3, 32, 231, DateTimeKind.Local).AddTicks(3717),
-                            EmployeeId = 2,
-                            IssuedBy = "Konsul w Kijowie",
-                            Number = "PL053452",
-                            Title = "Wiza krajowa",
-                            Type = "D",
-                            ValidFrom = new DateTime(2019, 2, 23, 12, 3, 32, 231, DateTimeKind.Local).AddTicks(3746),
-                            ValidTo = new DateTime(2020, 2, 24, 12, 3, 32, 231, DateTimeKind.Local).AddTicks(3751)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 2, 24, 12, 3, 32, 231, DateTimeKind.Local).AddTicks(3762),
-                            EmployeeId = 3,
-                            IssuedBy = "Konsul w Kijowie",
-                            Number = "PL053452",
-                            Title = "Wiza krajowa",
-                            Type = "D",
-                            ValidFrom = new DateTime(2020, 2, 24, 12, 3, 32, 231, DateTimeKind.Local).AddTicks(3765),
-                            ValidTo = new DateTime(2021, 2, 23, 12, 3, 32, 231, DateTimeKind.Local).AddTicks(3767)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 2, 24, 12, 3, 32, 231, DateTimeKind.Local).AddTicks(3771),
-                            EmployeeId = 4,
-                            IssuedBy = "Konsul w Kijowie",
-                            Number = "PL053452",
-                            Title = "Wiza krajowa",
-                            Type = "D",
-                            ValidFrom = new DateTime(2019, 8, 21, 12, 3, 32, 231, DateTimeKind.Local).AddTicks(3774),
-                            ValidTo = new DateTime(2020, 8, 21, 12, 3, 32, 231, DateTimeKind.Local).AddTicks(3778)
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 5, 4, 12, 3, 32, 231, DateTimeKind.Local).AddTicks(3780),
-                            EmployeeId = 2,
-                            IssuedBy = "Konsul w Kijowie",
-                            Number = "PL053452",
-                            Title = "Wiza krajowa",
-                            Type = "D",
-                            ValidFrom = new DateTime(2020, 4, 14, 12, 3, 32, 231, DateTimeKind.Local).AddTicks(3783),
-                            ValidTo = new DateTime(2021, 4, 14, 12, 3, 32, 231, DateTimeKind.Local).AddTicks(3786)
+                            ValidFrom = new DateTime(2020, 8, 12, 20, 49, 41, 52, DateTimeKind.Local).AddTicks(9846),
+                            ValidTo = new DateTime(2022, 8, 12, 20, 49, 41, 52, DateTimeKind.Local).AddTicks(9848)
                         });
                 });
 
@@ -1317,8 +1047,8 @@ namespace API.Migrations
                             Amount = 1100m,
                             ContractId = 14,
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 6, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaidOn = new DateTime(2020, 6, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(2020, 12, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PaidOn = new DateTime(2020, 12, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             WorkedHours = 70
                         },
                         new
@@ -1327,8 +1057,8 @@ namespace API.Migrations
                             Amount = 900m,
                             ContractId = 15,
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 6, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaidOn = new DateTime(2020, 6, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(2020, 12, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PaidOn = new DateTime(2020, 12, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             WorkedHours = 80
                         },
                         new
@@ -1337,8 +1067,8 @@ namespace API.Migrations
                             Amount = 1000m,
                             ContractId = 16,
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PaidOn = new DateTime(2020, 6, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(2020, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PaidOn = new DateTime(2020, 12, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             WorkedHours = 86
                         },
                         new
@@ -1347,7 +1077,7 @@ namespace API.Migrations
                             Amount = 2000m,
                             ContractId = 17,
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 7, 23, 12, 3, 32, 237, DateTimeKind.Local).AddTicks(7127),
+                            CreatedOn = new DateTime(2021, 1, 9, 20, 49, 41, 59, DateTimeKind.Local).AddTicks(2179),
                             WorkedHours = 10
                         },
                         new
@@ -1356,7 +1086,7 @@ namespace API.Migrations
                             Amount = 2500m,
                             ContractId = 18,
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 7, 23, 12, 3, 32, 237, DateTimeKind.Local).AddTicks(7130),
+                            CreatedOn = new DateTime(2021, 1, 9, 20, 49, 41, 59, DateTimeKind.Local).AddTicks(2182),
                             WorkedHours = 10
                         },
                         new
@@ -1365,8 +1095,8 @@ namespace API.Migrations
                             Amount = 500m,
                             ContractId = 19,
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 7, 23, 12, 3, 32, 237, DateTimeKind.Local).AddTicks(7133),
-                            PaidOn = new DateTime(2020, 7, 23, 12, 3, 32, 237, DateTimeKind.Local).AddTicks(7136),
+                            CreatedOn = new DateTime(2021, 1, 9, 20, 49, 41, 59, DateTimeKind.Local).AddTicks(2185),
+                            PaidOn = new DateTime(2021, 1, 9, 20, 49, 41, 59, DateTimeKind.Local).AddTicks(2188),
                             WorkedHours = 16
                         });
                 });
@@ -1402,11 +1132,17 @@ namespace API.Migrations
                     b.Property<string>("Number")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("PaidOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<decimal>("TaxPercent")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("TotalValue")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -1420,9 +1156,6 @@ namespace API.Migrations
                     b.Property<DateTime>("ValidTo")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("Value")
-                        .HasColumnType("decimal(18,2)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("EmployeeId");
@@ -1435,405 +1168,304 @@ namespace API.Migrations
                             Id = 1,
                             ContractSubject = "Montaż obarierowania ochronnego na jednostce NB230",
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2019, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(2020, 6, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmployeeId = 1,
                             HourlySalary = 20m,
                             IsRealized = true,
-                            Number = "1/01/2020",
+                            Number = "1/07/2020",
                             TaxPercent = 14.0m,
-                            Title = "Umowa za styczeń",
-                            ValidFrom = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ValidTo = new DateTime(2020, 2, 22, 12, 3, 32, 236, DateTimeKind.Local).AddTicks(7428),
-                            Value = 4000m
+                            Title = "Umowa za lipiec",
+                            TotalValue = 4000m,
+                            ValidFrom = new DateTime(2020, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ValidTo = new DateTime(2020, 8, 8, 20, 49, 41, 58, DateTimeKind.Local).AddTicks(2711)
                         },
                         new
                         {
                             Id = 2,
                             ContractSubject = "Przyspawanie wręgów 11-201 na jednostce WZ211",
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 1, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(2020, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmployeeId = 1,
                             HourlySalary = 25m,
                             IsRealized = true,
-                            Number = "1/02/2020",
+                            Number = "1/08/2020",
                             TaxPercent = 14.0m,
-                            Title = "Umowa za luty",
-                            ValidFrom = new DateTime(2020, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ValidTo = new DateTime(2020, 3, 22, 12, 3, 32, 236, DateTimeKind.Local).AddTicks(8829),
-                            Value = 5000m
+                            Title = "Umowa za sierpień",
+                            TotalValue = 5000m,
+                            ValidFrom = new DateTime(2020, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ValidTo = new DateTime(2020, 9, 8, 20, 49, 41, 58, DateTimeKind.Local).AddTicks(4039)
                         },
                         new
                         {
                             Id = 3,
                             ContractSubject = "Oszlifowanie trapa na jednostce NB230",
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 1, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(2020, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmployeeId = 2,
                             HourlySalary = 15m,
                             IsRealized = true,
-                            Number = "2/02/2020",
+                            Number = "2/08/2020",
                             TaxPercent = 14.0m,
-                            Title = "Umowa za luty",
-                            ValidFrom = new DateTime(2020, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ValidTo = new DateTime(2020, 3, 22, 12, 3, 32, 236, DateTimeKind.Local).AddTicks(8864),
-                            Value = 3000m
+                            Title = "Umowa za sierpień",
+                            TotalValue = 3000m,
+                            ValidFrom = new DateTime(2020, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ValidTo = new DateTime(2020, 9, 8, 20, 49, 41, 58, DateTimeKind.Local).AddTicks(4076)
                         },
                         new
                         {
                             Id = 4,
                             ContractSubject = "Oszlifowanie zbiornika ZL15",
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 1, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(2020, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmployeeId = 3,
                             HourlySalary = 15m,
                             IsRealized = true,
-                            Number = "3/02/2020",
+                            Number = "3/08/2020",
                             TaxPercent = 14.0m,
-                            Title = "Umowa za luty",
-                            ValidFrom = new DateTime(2020, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ValidTo = new DateTime(2020, 3, 22, 12, 3, 32, 236, DateTimeKind.Local).AddTicks(8937),
-                            Value = 3000m
+                            Title = "Umowa za sierpień",
+                            TotalValue = 3000m,
+                            ValidFrom = new DateTime(2020, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ValidTo = new DateTime(2020, 9, 8, 20, 49, 41, 58, DateTimeKind.Local).AddTicks(4097)
                         },
                         new
                         {
                             Id = 5,
                             ContractSubject = "Przyspawanie wręgów 201-421 na jednostce WZ211",
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(2020, 8, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmployeeId = 1,
                             HourlySalary = 25m,
                             IsRealized = true,
-                            Number = "1/03/2020",
+                            Number = "1/09/2020",
                             TaxPercent = 14.0m,
-                            Title = "Umowa za marzec",
-                            ValidFrom = new DateTime(2020, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ValidTo = new DateTime(2020, 4, 22, 12, 3, 32, 236, DateTimeKind.Local).AddTicks(8958),
-                            Value = 5000m
+                            Title = "Umowa za wrzesień",
+                            TotalValue = 5000m,
+                            ValidFrom = new DateTime(2020, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ValidTo = new DateTime(2020, 10, 8, 20, 49, 41, 58, DateTimeKind.Local).AddTicks(4116)
                         },
                         new
                         {
                             Id = 6,
                             ContractSubject = "Oszlifowanie schodów na jednostce NB230",
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(2020, 8, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmployeeId = 3,
                             HourlySalary = 15m,
                             IsRealized = true,
-                            Number = "2/03/2020",
+                            Number = "2/09/2020",
                             TaxPercent = 14.0m,
-                            Title = "Umowa za marzec",
-                            ValidFrom = new DateTime(2020, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ValidTo = new DateTime(2020, 4, 22, 12, 3, 32, 236, DateTimeKind.Local).AddTicks(8977),
-                            Value = 3000m
+                            Title = "Umowa za wrzesień",
+                            TotalValue = 3000m,
+                            ValidFrom = new DateTime(2020, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ValidTo = new DateTime(2020, 10, 8, 20, 49, 41, 58, DateTimeKind.Local).AddTicks(4135)
                         },
                         new
                         {
                             Id = 7,
                             ContractSubject = "Wypalenie otworu technicznego 23 na jednostce NB230",
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(2020, 8, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmployeeId = 4,
                             HourlySalary = 20m,
                             IsRealized = true,
-                            Number = "3/03/2020",
+                            Number = "3/09/2020",
                             TaxPercent = 14.0m,
-                            Title = "Umowa za marzec",
-                            ValidFrom = new DateTime(2020, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ValidTo = new DateTime(2020, 4, 22, 12, 3, 32, 236, DateTimeKind.Local).AddTicks(8996),
-                            Value = 4000m
+                            Title = "Umowa za wrzesień",
+                            TotalValue = 4000m,
+                            ValidFrom = new DateTime(2020, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ValidTo = new DateTime(2020, 10, 8, 20, 49, 41, 58, DateTimeKind.Local).AddTicks(4154)
                         },
                         new
                         {
                             Id = 8,
                             ContractSubject = "Przyspawanie haków technocznych do płatu P11",
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 3, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(2020, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmployeeId = 1,
                             HourlySalary = 25m,
                             IsRealized = true,
-                            Number = "1/04/2020",
+                            Number = "1/10/2020",
                             TaxPercent = 14.0m,
-                            Title = "Umowa za kwiecień",
-                            ValidFrom = new DateTime(2020, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ValidTo = new DateTime(2020, 5, 22, 12, 3, 32, 236, DateTimeKind.Local).AddTicks(9015),
-                            Value = 5000m
+                            Title = "Umowa za październik",
+                            TotalValue = 5000m,
+                            ValidFrom = new DateTime(2020, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ValidTo = new DateTime(2020, 11, 8, 20, 49, 41, 58, DateTimeKind.Local).AddTicks(4173)
                         },
                         new
                         {
                             Id = 9,
                             ContractSubject = "Oszlifowanie wręgów 11-201 na jednostce NB230",
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 3, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(2020, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmployeeId = 3,
                             HourlySalary = 15m,
                             IsRealized = true,
-                            Number = "2/04/2020",
+                            Number = "2/10/2020",
                             TaxPercent = 14.0m,
-                            Title = "Umowa za kwiecień",
-                            ValidFrom = new DateTime(2020, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ValidTo = new DateTime(2020, 5, 22, 12, 3, 32, 236, DateTimeKind.Local).AddTicks(9034),
-                            Value = 3000m
+                            Title = "Umowa za październik",
+                            TotalValue = 3000m,
+                            ValidFrom = new DateTime(2020, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ValidTo = new DateTime(2020, 11, 8, 20, 49, 41, 58, DateTimeKind.Local).AddTicks(4192)
                         },
                         new
                         {
                             Id = 10,
                             ContractSubject = "Montaż trapu na jednostce NB230",
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 3, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(2020, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmployeeId = 4,
                             HourlySalary = 20m,
                             IsRealized = true,
-                            Number = "3/04/2020",
+                            Number = "3/10/2020",
                             TaxPercent = 14.0m,
-                            Title = "Umowa za kwiecień",
-                            ValidFrom = new DateTime(2020, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ValidTo = new DateTime(2020, 5, 22, 12, 3, 32, 236, DateTimeKind.Local).AddTicks(9054),
-                            Value = 4000m
+                            Title = "Umowa za październik",
+                            TotalValue = 4000m,
+                            ValidFrom = new DateTime(2020, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ValidTo = new DateTime(2020, 11, 8, 20, 49, 41, 58, DateTimeKind.Local).AddTicks(4211)
                         },
                         new
                         {
                             Id = 11,
                             ContractSubject = "Przyspawanie haków technocznych do płatu P12",
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(2020, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmployeeId = 1,
                             HourlySalary = 25m,
                             IsRealized = true,
-                            Number = "1/05/2020",
+                            Number = "1/11/2020",
                             TaxPercent = 14.0m,
-                            Title = "Umowa za maj",
-                            ValidFrom = new DateTime(2020, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ValidTo = new DateTime(2020, 6, 22, 12, 3, 32, 236, DateTimeKind.Local).AddTicks(9073),
-                            Value = 5000m
+                            Title = "Umowa za listopad",
+                            TotalValue = 5000m,
+                            ValidFrom = new DateTime(2020, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ValidTo = new DateTime(2020, 12, 8, 20, 49, 41, 58, DateTimeKind.Local).AddTicks(4230)
                         },
                         new
                         {
                             Id = 12,
                             ContractSubject = "Oszlifowanie wręgów 11-201 na jednostce NB231",
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(2020, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmployeeId = 2,
                             HourlySalary = 15m,
                             IsRealized = true,
-                            Number = "2/05/2020",
+                            Number = "2/11/2020",
                             TaxPercent = 14.0m,
-                            Title = "Umowa za maj",
-                            ValidFrom = new DateTime(2020, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ValidTo = new DateTime(2020, 6, 22, 12, 3, 32, 236, DateTimeKind.Local).AddTicks(9092),
-                            Value = 3000m
+                            Title = "Umowa za listopad",
+                            TotalValue = 3000m,
+                            ValidFrom = new DateTime(2020, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ValidTo = new DateTime(2020, 12, 8, 20, 49, 41, 58, DateTimeKind.Local).AddTicks(4249)
                         },
                         new
                         {
                             Id = 13,
                             ContractSubject = "Montaż trapu na jednostce NB231",
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(2020, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmployeeId = 4,
                             HourlySalary = 20m,
                             IsRealized = true,
-                            Number = "3/05/2020",
+                            Number = "3/11/2020",
                             TaxPercent = 14.0m,
-                            Title = "Umowa za maj",
-                            ValidFrom = new DateTime(2020, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ValidTo = new DateTime(2020, 6, 22, 12, 3, 32, 236, DateTimeKind.Local).AddTicks(9111),
-                            Value = 4000m
+                            Title = "Umowa za listopad",
+                            TotalValue = 4000m,
+                            ValidFrom = new DateTime(2020, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ValidTo = new DateTime(2020, 12, 8, 20, 49, 41, 58, DateTimeKind.Local).AddTicks(4268)
                         },
                         new
                         {
                             Id = 14,
                             ContractSubject = "Przyspawanie sekcji okętowych NW23-NW24",
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(2020, 11, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmployeeId = 1,
                             HourlySalary = 25m,
                             IsRealized = true,
-                            Number = "1/06/2020",
+                            Number = "1/12/2020",
                             TaxPercent = 14.0m,
-                            Title = "Umowa za czerwiec",
-                            ValidFrom = new DateTime(2020, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ValidTo = new DateTime(2020, 7, 22, 12, 3, 32, 236, DateTimeKind.Local).AddTicks(9130),
-                            Value = 5000m
+                            Title = "Umowa za grudzień",
+                            TotalValue = 5000m,
+                            ValidFrom = new DateTime(2020, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ValidTo = new DateTime(2021, 1, 8, 20, 49, 41, 58, DateTimeKind.Local).AddTicks(4410)
                         },
                         new
                         {
                             Id = 15,
                             ContractSubject = "Oszlifowanie wręgów zbiorników wody pitnej P12-P32",
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(2020, 11, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmployeeId = 2,
                             HourlySalary = 15m,
                             IsRealized = true,
-                            Number = "2/06/2020",
+                            Number = "2/12/2020",
                             TaxPercent = 14.0m,
-                            Title = "Umowa za czerwiec",
-                            ValidFrom = new DateTime(2020, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ValidTo = new DateTime(2020, 7, 22, 12, 3, 32, 236, DateTimeKind.Local).AddTicks(9150),
-                            Value = 3000m
+                            Title = "Umowa za grudzień",
+                            TotalValue = 3000m,
+                            ValidFrom = new DateTime(2020, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ValidTo = new DateTime(2021, 1, 8, 20, 49, 41, 58, DateTimeKind.Local).AddTicks(4429)
                         },
                         new
                         {
                             Id = 16,
                             ContractSubject = "Montaż barierek ochronnych na jednostce NB231",
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(2020, 11, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmployeeId = 4,
                             HourlySalary = 20m,
                             IsRealized = true,
-                            Number = "3/06/2020",
+                            Number = "3/12/2020",
                             TaxPercent = 14.0m,
-                            Title = "Umowa za czerwiec",
-                            ValidFrom = new DateTime(2020, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ValidTo = new DateTime(2020, 7, 22, 12, 3, 32, 236, DateTimeKind.Local).AddTicks(9169),
-                            Value = 4000m
+                            Title = "Umowa za grudzień",
+                            TotalValue = 4000m,
+                            ValidFrom = new DateTime(2020, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ValidTo = new DateTime(2021, 1, 8, 20, 49, 41, 58, DateTimeKind.Local).AddTicks(4448)
                         },
                         new
                         {
                             Id = 17,
                             ContractSubject = "Przyspawanie sekcji okętowych NW23-NW24",
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(2020, 11, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmployeeId = 1,
                             HourlySalary = 25m,
                             IsRealized = false,
-                            Number = "1/07/2020",
+                            Number = "1/01/2020",
                             TaxPercent = 14.0m,
-                            Title = "Umowa za lipiec",
-                            ValidFrom = new DateTime(2020, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ValidTo = new DateTime(2020, 8, 22, 12, 3, 32, 236, DateTimeKind.Local).AddTicks(9187),
-                            Value = 5000m
+                            Title = "Umowa za styczeń",
+                            TotalValue = 5000m,
+                            ValidFrom = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ValidTo = new DateTime(2021, 2, 8, 20, 49, 41, 58, DateTimeKind.Local).AddTicks(4466)
                         },
                         new
                         {
                             Id = 18,
                             ContractSubject = "Oszlifowanie wręgów zbiorników wody pitnej P12-P32",
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(2020, 11, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmployeeId = 2,
                             HourlySalary = 15m,
                             IsRealized = false,
-                            Number = "2/07/2020",
+                            Number = "2/01/2020",
                             TaxPercent = 14.0m,
-                            Title = "Umowa za lipiec",
-                            ValidFrom = new DateTime(2020, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ValidTo = new DateTime(2020, 8, 22, 12, 3, 32, 236, DateTimeKind.Local).AddTicks(9205),
-                            Value = 3000m
+                            Title = "Umowa za styczeń",
+                            TotalValue = 3000m,
+                            ValidFrom = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ValidTo = new DateTime(2021, 2, 8, 20, 49, 41, 58, DateTimeKind.Local).AddTicks(4484)
                         },
                         new
                         {
                             Id = 19,
                             ContractSubject = "Montaż barierek ochronnych na jednostce NB231",
                             CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(2020, 11, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmployeeId = 4,
                             HourlySalary = 20m,
                             IsRealized = false,
-                            Number = "3/07/2020",
+                            Number = "3/01/2020",
                             TaxPercent = 14.0m,
-                            Title = "Umowa za lipiec",
-                            ValidFrom = new DateTime(2020, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ValidTo = new DateTime(2020, 8, 22, 12, 3, 32, 236, DateTimeKind.Local).AddTicks(9222),
-                            Value = 4000m
-                        });
-                });
-
-            modelBuilder.Entity("API.Payroll.Models.Payment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ContractId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal>("GrossAmount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("NetAmount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime?>("PaidOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ContractId")
-                        .IsUnique();
-
-                    b.ToTable("Payment");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ContractId = 11,
-                            CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 6, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GrossAmount = 5000m,
-                            NetAmount = 4300.00m,
-                            PaidOn = new DateTime(2020, 6, 11, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ContractId = 12,
-                            CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 6, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GrossAmount = 3000m,
-                            NetAmount = 2580.00m,
-                            PaidOn = new DateTime(2020, 6, 11, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ContractId = 13,
-                            CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 6, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GrossAmount = 4000m,
-                            NetAmount = 3440.00m,
-                            PaidOn = new DateTime(2020, 6, 11, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ContractId = 14,
-                            CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 7, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GrossAmount = 5000m,
-                            NetAmount = 4300.00m,
-                            PaidOn = new DateTime(2020, 7, 11, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 5,
-                            ContractId = 15,
-                            CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 7, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GrossAmount = 3000m,
-                            NetAmount = 2580.00m,
-                            PaidOn = new DateTime(2020, 7, 11, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 6,
-                            ContractId = 16,
-                            CreatedBy = "Initial",
-                            CreatedOn = new DateTime(2020, 7, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GrossAmount = 4000m,
-                            NetAmount = 3440.00m,
-                            PaidOn = new DateTime(2020, 7, 11, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            Title = "Umowa za styczeń",
+                            TotalValue = 4000m,
+                            ValidFrom = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ValidTo = new DateTime(2021, 2, 8, 20, 49, 41, 58, DateTimeKind.Local).AddTicks(4502)
                         });
                 });
 
@@ -1890,43 +1522,10 @@ namespace API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("API.HR.Models.Passport", b =>
-                {
-                    b.HasOne("API.HR.Models.Employee", "Employee")
-                        .WithMany("Passports")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("API.HR.Models.Permit", b =>
-                {
-                    b.HasOne("API.HR.Models.Employee", "Employee")
-                        .WithMany("Permits")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("API.HR.Models.Location", "Location")
-                        .WithMany()
-                        .HasForeignKey("LocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("API.HR.Models.SafetyTraining", b =>
                 {
                     b.HasOne("API.HR.Models.Employee", "Employee")
                         .WithMany("SafetyTrainings")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("API.HR.Models.Visa", b =>
-                {
-                    b.HasOne("API.HR.Models.Employee", "Employee")
-                        .WithMany("Visas")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1946,15 +1545,6 @@ namespace API.Migrations
                     b.HasOne("API.HR.Models.Employee", "Employee")
                         .WithMany("Contracts")
                         .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("API.Payroll.Models.Payment", b =>
-                {
-                    b.HasOne("API.Payroll.Models.Contract", "Contract")
-                        .WithOne("Payment")
-                        .HasForeignKey("API.Payroll.Models.Payment", "ContractId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

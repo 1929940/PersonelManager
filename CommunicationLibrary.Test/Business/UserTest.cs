@@ -55,6 +55,18 @@ namespace CommunicationAndCommonsLibrary.Test.Business {
         }
 
         [Fact]
+        public void LoginInactiveUser_ShouldPass() {
+            var loginResponse = _userRequestHandler.Login("inactive@pm-tester.pl", "macko12");
+            Assert.False(string.IsNullOrEmpty(loginResponse.Token));
+        }
+
+        [Fact]
+        public async Task LoginInactiveUserAsync_ShouldPass() {
+            var loginResponse = await _userRequestHandler.LoginAsync("inactive@pm-tester.pl", "macko12");
+            Assert.False(string.IsNullOrEmpty(loginResponse.Token));
+        }
+
+        [Fact]
         public void RequestPasswordReset_ShouldPass() {
             _userRequestHandler.RequestPasswordReset("Jan.Nowak@PersonelManager.pl");
             Assert.True(true);

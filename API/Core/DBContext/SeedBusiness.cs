@@ -54,7 +54,7 @@ namespace API.Core.DBContext {
                 
             new User() {
                 Id = 5,
-                FirstName = "Tester",
+                FirstName = "Tester1",
                 LastName = "Admin",
                 Email = "admin@pm-tester.pl",
                 Hash = "ECC1DD30FAE7C0D8A891953B0DCF883ECAE21ECD0576BF9E00B3A279AB351BA3",
@@ -63,7 +63,7 @@ namespace API.Core.DBContext {
             }, 
             new User() {
                 Id = 6,
-                FirstName = "Test2",
+                FirstName = "Tester2",
                 LastName = "Manager",
                 Email = "manager@pm-tester.pl",
                 Hash = "ECC1DD30FAE7C0D8A891953B0DCF883ECAE21ECD0576BF9E00B3A279AB351BA3",
@@ -72,12 +72,21 @@ namespace API.Core.DBContext {
             },    
             new User() {
                 Id = 7,
-                FirstName = "Test3",
+                FirstName = "Tester3",
                 LastName = "Employee",
                 Email = "employee@pm-tester.pl",
                 Hash = "ECC1DD30FAE7C0D8A891953B0DCF883ECAE21ECD0576BF9E00B3A279AB351BA3",
                 Role = Roles.EMPLOYEE,
                 IsActive = true
+            },
+                new User() {
+                Id = 8,
+                FirstName = "Tester4",
+                LastName = "Employee",
+                Email = "inactive@pm-tester.pl",
+                Hash = "ECC1DD30FAE7C0D8A891953B0DCF883ECAE21ECD0576BF9E00B3A279AB351BA3",
+                Role = Roles.EMPLOYEE,
+                IsActive = false
             }
 
         };
