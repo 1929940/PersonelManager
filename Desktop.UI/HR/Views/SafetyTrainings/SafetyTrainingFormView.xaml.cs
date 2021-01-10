@@ -89,6 +89,10 @@ namespace Desktop.UI.HR.Views.SafetyTrainings {
             if (UseBufor) {
                 HideEmployeeControls();
                 ExpandNumberControls();
+            } else if (EditMode) {
+                EmployeeCombobox.IsEnabled = false;
+                EmployeeCombobox.ItemsSource = ViewHelper.ConvertToDictionary(Document.Employee);
+                EmployeeCombobox.SelectedIndex = 0;
             } else {
                 EmployeeCombobox.ItemsSource = new EmployeeRequestHandler().GetEmployeesDictionary();
                 EmployeeCombobox.SelectedIndex = ViewHelper.GetIndexOfComboboxValue(Document.Employee.Id, EmployeeCombobox);

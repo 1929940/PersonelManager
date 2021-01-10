@@ -62,6 +62,8 @@ namespace Desktop.UI.HR.Views.Foremen {
         private void BindCombobox() {
             LocationComboBox.ItemsSource = ViewHelper.GetLocations();
             LocationComboBox.SelectedIndex = ViewHelper.GetIndexOfComboboxValue(Foreman.LocationId, LocationComboBox);
+            if (EditMode)
+                LocationComboBox.IsEnabled = false;
         }
 
         private void LocationComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {

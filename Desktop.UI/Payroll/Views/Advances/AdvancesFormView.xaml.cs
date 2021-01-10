@@ -88,7 +88,7 @@ namespace Desktop.UI.Payroll.Views.Advances {
 
         private void BindCombobox() {
             if (EditMode) {
-                ContractCombobox.ItemsSource = ViewHelper.ConverToDictionary(Advance);
+                ContractCombobox.ItemsSource = ViewHelper.ConvertToDictionary(Advance);
                 ContractCombobox.SelectedIndex = 0;
             } else {
                 ContractCombobox.ItemsSource = _contractHandler.GetContractsDictionary();

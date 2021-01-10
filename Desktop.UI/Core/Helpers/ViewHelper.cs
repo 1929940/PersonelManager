@@ -47,7 +47,7 @@ namespace Desktop.UI.Core.Helpers {
         public static Dictionary<int, string> ConvertToDictionary(EmployeeSimplified employee) =>
             new Dictionary<int, string>() { { employee.Id, string.Format($"{employee.LastName} {employee.FirstName}") } };
 
-        public static Dictionary<int, string> ConverToDictionary(Advance advance) =>
+        public static Dictionary<int, string> ConvertToDictionary(Advance advance) =>
             new Dictionary<int, string>() { { advance.Contract.Id, string.Format($"{advance.Employee.LastName} {advance.Employee.FirstName} {advance.Contract.Number}") } };
 
 
