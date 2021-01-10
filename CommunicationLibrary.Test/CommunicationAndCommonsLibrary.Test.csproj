@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Business\UserTest.cs" />
     <Compile Include="Core\BaseTest.cs" />
+    <Compile Include="Core\DateHelperTest.cs" />
     <Compile Include="HR\CertificateTest.cs" />
     <Compile Include="HR\EmployeeTest.cs" />
     <Compile Include="HR\ForemanTest.cs" />

@@ -22,11 +22,11 @@ namespace CommunicationAndCommonsLibrary.Core.Logic {
 
             if (fromDay > toDay) {
                 if (date.Day >= fromDay) {
-                    int month = to.AddMonths(1).Month;
-                    to = CreateDate(date.Year, month, toDay);
+                    var tmp = to.AddMonths(1);
+                    to = CreateDate(tmp.Year, tmp.Month, toDay);
                 } else {
-                    int month = to.AddMonths(-1).Month;
-                    from = CreateDate(date.Year, month, fromDay);
+                    var tmp = to.AddMonths(-1);
+                    from = CreateDate(tmp.Year, tmp.Month, fromDay);
                 }
             }
             return new BillingPeriod() { From = from, To = to };

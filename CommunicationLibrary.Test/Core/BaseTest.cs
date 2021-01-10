@@ -16,7 +16,6 @@ namespace CommunicationAndCommonsLibrary.Test.Core {
         public BaseTest() {
             ConnectionManager.Url = @"https://localhost:44345";
 
-            //TODO: Need a test user
             if (ConnectionManager.Token == null) {
                 var login = new UserRequestHandler().Login("Jan.Kowalski@PersonelManager.pl", "Macko");
                 ConnectionManager.Token = login.Token;
