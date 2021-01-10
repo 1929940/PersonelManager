@@ -79,11 +79,7 @@ namespace Desktop.UI.Payroll.Views.Contracts {
                 BillingPeriod billingPeriod;
 
                 ConfigurationPage config = new ConfigurationPageRequestHandler().Get();
-                if (config.BillingMonthStart < DateTime.Today.Day) {
-                    billingPeriod = DateHelper.GetBillingPeriod(config.BillingMonthStart, config.BillingMonthEnd, DateTime.Today.AddMonths(1));
-                } else {
-                    billingPeriod = DateHelper.GetBillingPeriod(config.BillingMonthStart, config.BillingMonthEnd, DateTime.Today);
-                }
+                billingPeriod = DateHelper.GetBillingPeriod(config.BillingMonthStart, config.BillingMonthEnd, DateTime.Today.AddMonths(1));
 
                 ValidFromDatePicker.SelectedDate = billingPeriod.From;
                 ValidToDatePicker.SelectedDate = billingPeriod.To;
