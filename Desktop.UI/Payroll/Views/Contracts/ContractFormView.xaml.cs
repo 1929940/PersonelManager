@@ -142,8 +142,6 @@ namespace Desktop.UI.Payroll.Views.Contracts {
             AdvancesFormView form = new AdvancesFormView(out Advance advance, Bufor.AdvancesBufor);
             form.ShowDialog();
 
-            Bufor.AdvancesBufor.TransactionBufor.Add(advance);
-
             await InitAdvances();
 
             List<Advance> updatedAdvances = Contract.Advances.ToList();
